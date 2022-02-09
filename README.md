@@ -3,4 +3,4 @@
 
 
 interstellar-book
-central hub for mdbook documentation about Interstellar documentation
+central hub for mdbook documentation about Interstellar 
