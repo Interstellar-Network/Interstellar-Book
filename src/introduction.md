@@ -2,6 +2,17 @@
 
 ![Interstellar logo](./fig/Interstellar-White-Text.png)
 
+<picture>
+  <source 
+    srcset="fig/Interstellar-White-Text.png" 
+    media="(prefers-color-scheme: dark)">
+  <img src="fig/Interstellar-Black-Text.png">
+</picture>
+
+
+
+
+
 # Introduction
 “The blockchain ecosystem needs an easy to use interface with hardware wallet security to reach the mass market.”
  
