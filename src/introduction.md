@@ -18,7 +18,12 @@ Interstellar is a novel non-custodial peace of mind mobile wallet with a hardwar
 
 ![Grant-Scheme-White (1)](https://user-images.githubusercontent.com/4605611/145108720-becb76be-6c16-46c8-af69-7e953e5a166d.png#gh-dark-mode-only)
 
-
+<picture>
+  <source 
+    srcset="https://user-images.githubusercontent.com/4605611/145108720-becb76be-6c16-46c8-af69-7e953e5a166d.png" 
+    media="(prefers-color-scheme: dark)">
+  <img src="https://user-images.githubusercontent.com/4605611/145108818-6f8b6158-6c27-4f0d-a104-9d2469c73636.png">
+</picture>
 
 
 ![Grant-Scheme-Black (3)](https://user-images.githubusercontent.com/4605611/145108818-6f8b6158-6c27-4f0d-a104-9d2469c73636.png#gh-light-mode-only)
