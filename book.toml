@@ -1,5 +1,5 @@
 [book]
-authors = [Interstellar]
+authors = ["Interstellar"]
 language = "en"
 multilingual = false
 src = "src"
