@@ -1,7 +1,4 @@
 
-
-![Interstellar logo](./fig/Interstellar-White-Text.png)
-
 <picture>
   <source 
     srcset="fig/Interstellar-White-Text.png" 
