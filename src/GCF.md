@@ -1,5 +1,5 @@
-#GCF intoduction
+# intoduction to Garbled Circuit Factory GCF
 
 
 
-#GCF API
+# GCF API
