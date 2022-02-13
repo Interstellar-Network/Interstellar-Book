@@ -35,7 +35,7 @@ jobs:
           url: 'https://literate-meme-94522a36.pages.github.io/'
           # optional:
           honorRobotExclusions: false
-          ignorePatterns: 'google'
+          ignorePatterns: 'github,google'
           recursiveLinks: true # Check all URLs on all reachable pages (could take a while)
           
       - name: Get the result
