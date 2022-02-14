@@ -1,4 +1,4 @@
 # Summary
 
-- [Introduction](./introduction.md)
+[Introduction](./introduction.md)
 - [Garbled Circuit Factory- GCF](./GCF.md)
