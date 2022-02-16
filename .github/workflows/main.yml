@@ -32,7 +32,7 @@ jobs:
         uses: celinekurpershoek/link-checker@v1.0.1
         with:
           # Required:
-          url: 'https://literate-meme-94522a36.pages.github.io/'
+          url: 'http://interstellar-network.github.io/Interstellar-Book/'
           # optional:
           honorRobotExclusions: false
           ignorePatterns: 'github,google'
