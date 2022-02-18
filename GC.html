@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="expanded "><a href=".GC.html" class="active"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li></ol>
+                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="expanded "><a href="GC.html" class="active"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,6 +149,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#garbled-circuit-overview" id="garbled-circuit-overview">Garbled Circuit Overview</a></h1>
+<h2><a class="header" href="#basic-garbled-circuit-structure-overview" id="basic-garbled-circuit-structure-overview">Basic Garbled Circuit structure overview</a></h2>
+<p>A garbled circuit is a cryptographic obfuscation technique and a cryptographic algorithm that ensures computation privacy i.e. manages the protection of a boolean circuit that can be executed without leaking information. Neither the semantics of boolean operators (AND, OR, XOR, etc.) that make up the circuit nor the semantics of inputs and outputs of the circuit will be revealed to the attackers through reverse-engineering or brute force attacks.</p>
+<p><img src="./fig/Garbled_Circuit.jpg" alt="GC" /></p>
+<ul>
+<li>Inputs and outputs are Garbled Values i.e. 128 bits token indistinguishable from random with a secret semantic value of 0 or 1 only known by the nodes</li>
+<li>Each boolean operator is implemented in the circuit by an encrypted truth table, decrypted by its respective Garbled Values inputs.</li>
+</ul>
+<p><a href="https://www.cs.fsu.edu/%7Etvhoang/thesis.pdf">Foundation of Garbled Circuits, Viet Tung Hoang, B.S.</a></p>
 
                     </main>
 
