@@ -32,7 +32,7 @@ jobs:
         uses: celinekurpershoek/link-checker@v1.0.1
         with:
           # Required:
-          url: 'https://special-fiesta-07cf3762.pages.github.io/'
+          url: 'https://book.interstellar.gg'
           # optional:
           honorRobotExclusions: false
           ignorePatterns: 'github,google'
