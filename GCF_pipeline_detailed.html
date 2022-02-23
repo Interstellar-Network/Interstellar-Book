@@ -151,12 +151,12 @@
                         <h1><a class="header" href="#detailed-pipeline-for-display-circuits" id="detailed-pipeline-for-display-circuits">Detailed Pipeline for Display Circuits</a></h1>
 <h2><a class="header" href="#pipeline" id="pipeline">Pipeline</a></h2>
 <p>Overview : </p>
-<p>[1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]
-[2] Verilog  → .blif : combine all Verilog(xorexpand+rndswitch+segment2pixel) using Yosys
-[3] .blif → .blif.blif : optimization /synthesis : using ABC
-[4] Parsing .blif → .skcd : using internal code
-[5] Garbling .skcd → .garbled : using JustGarble
-[6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit</p>
+<p>[1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]</p>
+<p>[2] Verilog  → .blif : combine all Verilog(xorexpand+rndswitch+segment2pixel) using Yosys</p>
+<p>[3] .blif → .blif.blif : optimization /synthesis : using ABC</p>
+<p>[4] Parsing .blif → .skcd : using internal code</p>
+<p>[5] Garbling .skcd → .garbled : using JustGarble</p>
+<p>[6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit</p>
 <p>NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
 <p><img src="./fig/pipeline_detailed_display.svg" alt="GCF detailed" /></p>
 <h3><a class="header" href="#1-generate-segment2pixelv" id="1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
