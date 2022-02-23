@@ -6,6 +6,9 @@ A garbled circuit is a cryptographic obfuscation technique and a cryptographic a
 
 ![GC](./fig/Garbled_Circuit.jpg)
 
+
+![test](./fig/GCFpipeline.png)
+
 - Inputs and outputs are Garbled Values i.e. 128 bits token indistinguishable from random with a secret semantic value of 0 or 1 only known by the nodes
 - Each boolean operator is implemented in the circuit by an encrypted truth table, decrypted by its respective Garbled Values inputs.
 
