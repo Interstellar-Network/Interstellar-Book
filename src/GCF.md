@@ -6,9 +6,10 @@ Following is a high level overview of the genric pipeline used to generate GC.
 
 <img src="fig/GCFpipeline.png">
 
+
+https://github.com/Interstellar-Network/Interstellar-Book/blob/master/src/fig/GCF_pipeline.drawio.png
+
 ![PIPELINEHL](./fig/GCF_pipelineHL.svg)
 
-![TEST](./fig/GCF_pipeline.drwaio.png)
 
-![TEST2](./fig/Garbled_Circuit.jpg)
 
