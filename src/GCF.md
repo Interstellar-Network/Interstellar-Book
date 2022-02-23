@@ -4,6 +4,7 @@ The Garble Circuit Factory is the module in charge of building the Garbled Circu
 
 Following is a high level overview of the genric pipeline used to generate GC.
 
+
 ![PIPELINEHL](./fig/GCF_pipelineHL.svg)
-![TEST](./fig/GCF_piplineHL.png)
+![TEST](./fig/GCF_pipelineHL.png)
 
