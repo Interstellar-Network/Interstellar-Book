@@ -2,7 +2,7 @@
 
 [Introduction](./introduction.md)
 
-[Milestone 1](.M1.md)
+[Milestone 1](./M1.md)
 
 [Garbled Circuit Factory- GCF](./GCF.md)
 - [Garbled Circuit Overview](./GC.md)
