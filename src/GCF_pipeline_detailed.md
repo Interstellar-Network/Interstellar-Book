@@ -5,18 +5,20 @@
 Overview : 
 
 [1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]
+
 [2] Verilog  → .blif : combine all Verilog(xorexpand+rndswitch+segment2pixel) using Yosys
+
 [3] .blif → .blif.blif : optimization /synthesis : using ABC
+
 [4] Parsing .blif → .skcd : using internal code
+
 [5] Garbling .skcd → .garbled : using JustGarble
+
 [6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit
 
 NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
 
 ![GCF detailed](./fig/pipeline_detailed_display.svg)
-
-
-
 
 
 
