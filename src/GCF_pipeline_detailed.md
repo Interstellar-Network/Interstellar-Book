@@ -39,7 +39,8 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
 If there is no cached .skcd for the step [1], one is generated cf CircuitDisplayGenerator::GenerateDisplay
 
 The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :
-'''C++
+
+```cpp
 if (is_message) {
     YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
                                 MESSAGE_SEGMENT2PIXELS_V ".blif");
@@ -65,38 +66,12 @@ if (is_message) {
   Skcd skcd = Blif2Skcd(is_message);
   skcd_cache_->Set(hash_segment2pixels, skcd);
   return skcd;
-'''
+
+```
 
 
 
 
-
-
-if (is_message) {
-    YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
-                                MESSAGE_SEGMENT2PIXELS_V ".blif");
-  } else {
-    YosysHelper::CompileVerilog(PINPAD_SEGMENT2PIXELS_V,
-                                PINPAD_SEGMENT2PIXELS_V ".blif");
-  }
- 
-  GenerateDefineVerilog(is_message, msgsize, nb_segments, circuit_display_size);
- 
-  CompileVerilogHelpers(is_message);
- 
-  ConcatBlifs(is_message);
- 
-  RunAbc(is_message);
- 
-  // when segment2pixels cache is disabled, nothing to do, we can return
-  if (!allow_cache) {
-    return Blif2Skcd(is_message);
-  }
- 
-  // segment2pixels enabled: we need to store the new entry into the SkcdCache
-  Skcd skcd = Blif2Skcd(is_message);
-  skcd_cache_->Set(hash_segment2pixels, skcd);
-  return skcd;
 
 
 
