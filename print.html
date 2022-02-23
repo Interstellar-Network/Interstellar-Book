@@ -254,47 +254,34 @@ E.g. 2-4 digits in the center of the “message window”, and 10 digits vertica
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done	</p>
 <h3><a class="header" href="#234-generate-skcd" id="234-generate-skcd">[2][3][4] Generate .skcd</a></h3>
 <p>If there is no cached .skcd for the step [1], one is generated cf CircuitDisplayGenerator::GenerateDisplay</p>
-<p>The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :
-'''C++
-if (is_message) {
-YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
-MESSAGE_SEGMENT2PIXELS_V &quot;.blif&quot;);
-} else {
-YosysHelper::CompileVerilog(PINPAD_SEGMENT2PIXELS_V,
-PINPAD_SEGMENT2PIXELS_V &quot;.blif&quot;);
-}</p>
-<p>GenerateDefineVerilog(is_message, msgsize, nb_segments, circuit_display_size);</p>
-<p>CompileVerilogHelpers(is_message);</p>
-<p>ConcatBlifs(is_message);</p>
-<p>RunAbc(is_message);</p>
-<p>// when segment2pixels cache is disabled, nothing to do, we can return
-if (!allow_cache) {
-return Blif2Skcd(is_message);
-}</p>
-<p>// segment2pixels enabled: we need to store the new entry into the SkcdCache
-Skcd skcd = Blif2Skcd(is_message);
-skcd_cache_-&gt;Set(hash_segment2pixels, skcd);
-return skcd;
-'''</p>
-<p>if (is_message) {
-YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
-MESSAGE_SEGMENT2PIXELS_V &quot;.blif&quot;);
-} else {
-YosysHelper::CompileVerilog(PINPAD_SEGMENT2PIXELS_V,
-PINPAD_SEGMENT2PIXELS_V &quot;.blif&quot;);
-}</p>
-<p>GenerateDefineVerilog(is_message, msgsize, nb_segments, circuit_display_size);</p>
-<p>CompileVerilogHelpers(is_message);</p>
-<p>ConcatBlifs(is_message);</p>
-<p>RunAbc(is_message);</p>
-<p>// when segment2pixels cache is disabled, nothing to do, we can return
-if (!allow_cache) {
-return Blif2Skcd(is_message);
-}</p>
-<p>// segment2pixels enabled: we need to store the new entry into the SkcdCache
-Skcd skcd = Blif2Skcd(is_message);
-skcd_cache_-&gt;Set(hash_segment2pixels, skcd);
-return skcd;</p>
+<p>The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :</p>
+<pre><code class="language-cpp">if (is_message) {
+    YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
+                                MESSAGE_SEGMENT2PIXELS_V &quot;.blif&quot;);
+  } else {
+    YosysHelper::CompileVerilog(PINPAD_SEGMENT2PIXELS_V,
+                                PINPAD_SEGMENT2PIXELS_V &quot;.blif&quot;);
+  }
+
+  GenerateDefineVerilog(is_message, msgsize, nb_segments, circuit_display_size);
+
+  CompileVerilogHelpers(is_message);
+
+  ConcatBlifs(is_message);
+
+  RunAbc(is_message);
+
+  // when segment2pixels cache is disabled, nothing to do, we can return
+  if (!allow_cache) {
+    return Blif2Skcd(is_message);
+  }
+
+  // segment2pixels enabled: we need to store the new entry into the SkcdCache
+  Skcd skcd = Blif2Skcd(is_message);
+  skcd_cache_-&gt;Set(hash_segment2pixels, skcd);
+  return skcd;
+
+</code></pre>
 <h3><a class="header" href="#56-garbling" id="56-garbling">[5][6] Garbling</a></h3>
 <p>Technically garbling + “stripping” (i.e. generating the “pre-packmsg”).
 This is at this step that the pinpad/OTP randomness is introduced, i.e. the .skcd generated at the previous step CAN/SHOULD be reused (and it is) all the time (i.e. it is always reused, except when changing size or resolution).</p>
