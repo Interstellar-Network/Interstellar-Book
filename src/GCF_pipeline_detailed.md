@@ -6,7 +6,7 @@ Overview :
 
 [1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]
 
-[2] Verilog  → .blif : combine all Verilog(xorexpand+rndswitch+segment2pixel) using Yosys
+[2] Verilog  → .blif : combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys
 
 [3] .blif → .blif.blif : optimization /synthesis : using ABC
 
@@ -18,14 +18,14 @@ Overview :
 
 NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
 
-![GCF detailed](./fig/pipeline_detailed_display.svg)
+![GCF detailed](./fig/InterstellarDetailedPipeline.svg)
 
 
 
 
 ### [1] Generate “segment2pixel.v”
 
-Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (xorexpand+rndswitch+segment2pixel) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
+Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 	This allows to cache the resulting .skcd of the whole pipeline (cf CircuitDisplayGenerator::GenerateDisplay) using “segment2pixel.v” content as cache key.
 
 TODO clarify
