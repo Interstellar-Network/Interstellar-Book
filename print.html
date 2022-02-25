@@ -290,7 +290,7 @@ The Device then combines the “packmsg” and the “stripped circuits” and p
 <p>Regarding Transaction Validation displays, sending the circuits ahead of time is no mandatory (i.e. the generation is fast enough, and the size small enough to be able to get them on the spot even on a mobile) although this feature can be used in some specific cases and for other use cases.</p>
 <h2 id="circuit-pipeline-api"><a class="header" href="#circuit-pipeline-api">Circuit Pipeline API</a></h2>
 <p>We have chosen a  GRPC implementation mainly because  there is no no_std HTTP2 client in Rust.</p>
-<p>There are indeed a few no_std Protobuf libs out there (eg https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/README.md#using-prost-in-a-no_std-crate and https://github.com/tafia/quick-protobuf), but this is only half the required parts.</p>
+<p>There are indeed a few no_std Protobuf libs out there <a href="https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/READMEmd#using-prost-in-a-no_std-crate">especially in the tokio framework</a> and also <a href="https://github.com/tafia/quick-protobuf">this one</a>, but this is only half the required parts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-cicuit-factory-api"><a class="header" href="#garbled-cicuit-factory-api">Garbled Cicuit Factory API</a></h1>
 <p>This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.</p>
 
