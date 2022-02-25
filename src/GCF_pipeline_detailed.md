@@ -1,8 +1,8 @@
 # Detailed Pipeline for Display Circuits
 
-This is the explanation of the detailed pipeleine for the Transaction Validation screen display generation use case
+This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.
 
-
+It illustrated the way GCF can be used with substrate OCWs for a specific type of circuits. 
 
 ## Pipeline
 
