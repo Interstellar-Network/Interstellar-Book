@@ -95,7 +95,8 @@ Regarding Transaction Validation displays, sending the circuits ahead of time is
 
 ## Circuit Pipeline API
 
-We have chosen a  GRPC implementation because  is no no_std HTTP2 client in Rust
+We have chosen a  GRPC implementation mainly because  there is no no_std HTTP2 client in Rust.
+
 There are indeed a few no_std Protobuf libs out there (eg https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/README.md#using-prost-in-a-no_std-crate and https://github.com/tafia/quick-protobuf), but this is only half the required parts.
 
 
