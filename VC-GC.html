@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction</title>
+        <title>Garled Circuit and Visual Cryptography Display</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html" class="active">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">Milestone 1</a></li><li class="chapter-item expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">2.</strong> Garled Circuit and Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">3.</strong> Detailed Pipeline for display circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">4.</strong> Garbled Circuit Factory API</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">Milestone 1</a></li><li class="chapter-item expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html" class="active"><strong aria-hidden="true">2.</strong> Garled Circuit and Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">3.</strong> Detailed Pipeline for display circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">4.</strong> Garbled Circuit Factory API</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,79 +134,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <picture>
-  <source 
-    srcset="fig/Interstellar-White-Text.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="fig/Interstellar-Black-Text.png">
-</picture>
-<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>“The blockchain ecosystem needs an easy to use interface with hardware wallet security to reach the mass market.”</p>
-<p>The main pain points of non-custodial wallet solutions still are:</p>
-<ul>
-<li><strong>User experience</strong>  <a href="https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e">Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?</a></li>
-<li><strong>Security</strong> <a href="https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7">Are cryptocurrency wallets more at risk than ever?</a> </li>
-</ul>
-<blockquote>
-<p>We think that current wallet solutions slow down the DeFi adoption.</p>
-</blockquote>
-<p>Interstellar is a novel non-custodial peace of mind mobile wallet with a hardware security level. Based on a Substrate blockchain and SubstraTEE/IntegriTEE workers.</p>
-<p><strong>We can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain</strong></p>
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145108720-becb76be-6c16-46c8-af69-7e953e5a166d.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145108818-6f8b6158-6c27-4f0d-a104-9d2469c73636.png">
-</picture>
-<p><strong>Thanks to Trusted User Interface TUI on mobile and Trusted Execution Environment on both mobile and blockchain nodes</strong></p>
-<p>Because TUI is not yet avalaible on all mobile devices we use a Garbled Circuit/Visual Cryptography scheme which provides an alternative that will be complementary down the road to mitigate potential flaws in TUI.</p>
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png">
-</picture>
-<!-- ![Iphone-Android-TUI-White (1)](https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png#gh-dark-mode-only)
-
-![Iphone-Android-TUI-Black (1)](https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png#gh-light-mode-only) -->
-<h4 id="features"><a class="header" href="#features">Features:</a></h4>
-<ul>
-<li>
-<p><strong>Hardware security Level</strong> - TEE on nodes and mobiles (incl. TUI), garbled circuits and visual cryptography secure interface</p>
-</li>
-<li>
-<p><strong>Just download an app</strong> - no registration, PIN, password, passphrase, private key or any secret to store or remember</p>
-</li>
-<li>
-<p><strong>Multichain Wallet</strong> - securely store and interact with native cryptocurrency coins and tokens from multiple blockchains</p>
-</li>
-<li>
-<p><strong>Confirm a transaction with ONLY ONE SCREEN</strong> - no SMS to wait for, no additional 2FA app to use, no QR code to scan</p>
-</li>
-<li>
-<p><strong>Up to 1,000,000 tps</strong> - no tps limit due to slow consensus, thanks to IntegriTEE layer 2 based on hardware enclave technology </p>
-</li>
-<li>
-<p><strong>Social Recovery Service</strong> - leverages the existing Substrate pallet and a novel decentralized autonomous recovery service </p>
-</li>
-</ul>
-<blockquote>
-<p>We hope that we will be able to provide a response to the related RFP in the following phases</p>
-</blockquote>
-<ul>
-<li><strong>Features to securely send coins with social network messages (even to persons with no-wallet)</strong> - explained in <a href="https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e">Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?</a> </li>
-</ul>
-<h4 id="our-solution-is-designed-to-support-blockchain-and-defi-mass-market-adoption-with"><a class="header" href="#our-solution-is-designed-to-support-blockchain-and-defi-mass-market-adoption-with">Our solution is designed to support blockchain and DeFi mass market adoption with:</a></h4>
-<ul>
-<li><strong>A decentralized key &amp; asset management service</strong> where the user’s privates keys and signature programs are stored and executed in TEE nodes</li>
-<li><strong>A decentralized Trusted Transaction Validation protocol</strong> that leverages TEE and TUI features on mobile, combined with One Time Garbled Circuits and Visual Cryptography to provide a <strong>Trusted Authentication and Trusted UI layer</strong> on user devices</li>
-</ul>
+                        <h1 id="garbled-circuit---visual-cryptography-screen"><a class="header" href="#garbled-circuit---visual-cryptography-screen">Garbled Circuit - Visual Cryptography Screen</a></h1>
+<p><img src="./fig/InterstellarGC-VC.png" alt="GC-VC" /></p>
+<p><img src="./fig/Visual_crypto_animation_demo.gif" alt="VC demo" /></p>
+<p>We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.
+Those visual cryptography shares do not superpose on the device screen but only in the user's eye. Thanks to the human Persistence of Vision ability: your eye and brain retain a visual impression for about 1/30 of a second (the exact time depends on the brightness of the image). This ensures that an attacker won't be able to obtain the secret information (transaction message, one time code and random keypad topology) with a simple screenshot, or quickly enough to build and execute a fake User Interface. This scheme can resist current banking trojans with overlay capabilities but not targeted attacks. However, it makes a fake UI attack, complexe and resource intensive enough to enable us to detect it during the transaction validation session. This is the way we aim at resisting potential targeted attacks. Thanks to our proof of history of legitimate computation scheme, (roadmap/research in progress), based on a specific reusable Garbled Circuit evaluation.</p>
+<p>Although we started by implementing a working solution that outputs visual cryptography shares we realized that it was a bit disturbing for the user and that a pure visual cryptography scheme is not crucial for our overall security model. We then decided to provide a more friendly solution for the user that is also more efficient especially regarding Garbled Circuit size.</p>
+<p>Although our circuits still display screens at a pixel level to change fonts, characters sizes and more, let's go back to old fashioned displays to explain it.</p>
+<p><img src="./fig/GatesSegment.jpg" alt="GatesSegment" /></p>
+<p><img src="./fig/Wallet-Superposition-Black-Background-Demo.png" alt="walletdemo" /></p>
+<p>Transaction validation screen simulations based on PsychoJS library -  PsychoPy (github.com)</p>
+<p>At a later stage, we aim at reusing our pixel based and/or  segment-based visual cryptography to increase the complexity level of potential attacks and enable video recording proof scheme without disturbing the smooth user experience. Research lead is to leverage SRAM framebuffer speed 10-30x vs. DRAM to force the attacker to miss frames with a saturated GPU command queue filled with decoy and VC frames on high frequency displays.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="M1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="prev" href="GC.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="GCF_pipeline_detailed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -215,7 +162,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="M1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="prev" href="GC.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="GCF_pipeline_detailed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

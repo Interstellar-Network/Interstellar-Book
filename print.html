@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">Milestone 1</a></li><li class="chapter-item expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">2.</strong> Detailed Pipeline for display circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">3.</strong> Garbled Circuit Factory API</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">Milestone 1</a></li><li class="chapter-item expanded affix "><a href="GCF.html">Garbled Circuit Factory- GCF</a></li><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">2.</strong> Garled Circuit and Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">3.</strong> Detailed Pipeline for display circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">4.</strong> Garbled Circuit Factory API</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -216,6 +216,17 @@
 <li>Each boolean operator is implemented in the circuit by an encrypted truth table, decrypted by its respective Garbled Values inputs.</li>
 </ul>
 <p><a href="https://www.cs.fsu.edu/%7Etvhoang/thesis.pdf">Foundation of Garbled Circuits, Viet Tung Hoang, B.S.</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-circuit---visual-cryptography-screen"><a class="header" href="#garbled-circuit---visual-cryptography-screen">Garbled Circuit - Visual Cryptography Screen</a></h1>
+<p><img src="./fig/InterstellarGC-VC.png" alt="GC-VC" /></p>
+<p><img src="./fig/Visual_crypto_animation_demo.gif" alt="VC demo" /></p>
+<p>We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.
+Those visual cryptography shares do not superpose on the device screen but only in the user's eye. Thanks to the human Persistence of Vision ability: your eye and brain retain a visual impression for about 1/30 of a second (the exact time depends on the brightness of the image). This ensures that an attacker won't be able to obtain the secret information (transaction message, one time code and random keypad topology) with a simple screenshot, or quickly enough to build and execute a fake User Interface. This scheme can resist current banking trojans with overlay capabilities but not targeted attacks. However, it makes a fake UI attack, complexe and resource intensive enough to enable us to detect it during the transaction validation session. This is the way we aim at resisting potential targeted attacks. Thanks to our proof of history of legitimate computation scheme, (roadmap/research in progress), based on a specific reusable Garbled Circuit evaluation.</p>
+<p>Although we started by implementing a working solution that outputs visual cryptography shares we realized that it was a bit disturbing for the user and that a pure visual cryptography scheme is not crucial for our overall security model. We then decided to provide a more friendly solution for the user that is also more efficient especially regarding Garbled Circuit size.</p>
+<p>Although our circuits still display screens at a pixel level to change fonts, characters sizes and more, let's go back to old fashioned displays to explain it.</p>
+<p><img src="./fig/GatesSegment.jpg" alt="GatesSegment" /></p>
+<p><img src="./fig/Wallet-Superposition-Black-Background-Demo.png" alt="walletdemo" /></p>
+<p>Transaction validation screen simulations based on PsychoJS library -  PsychoPy (github.com)</p>
+<p>At a later stage, we aim at reusing our pixel based and/or  segment-based visual cryptography to increase the complexity level of potential attacks and enable video recording proof scheme without disturbing the smooth user experience. Research lead is to leverage SRAM framebuffer speed 10-30x vs. DRAM to force the attacker to miss frames with a saturated GPU command queue filled with decoy and VC frames on high frequency displays.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="detailed-pipeline-for-display-circuits"><a class="header" href="#detailed-pipeline-for-display-circuits">Detailed Pipeline for Display Circuits</a></h1>
 <p>This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.</p>
 <p>It illustrated the way GCF can be used with substrate OCWs for a specific type of circuits. </p>
