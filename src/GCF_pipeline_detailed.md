@@ -6,6 +6,14 @@ It illustrated the way GCF can be used with substrate OCWs for a specific type o
 
 ## Pipeline
 
+
+NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
+
+
+**On the following schema cached information is representd with doted line**
+
+![GCF detailed](./fig/InterstellarDetailedPipeline.svg)
+
 Overview : 
 
 [1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]
@@ -19,12 +27,6 @@ Overview :
 [5] Garbling .skcd → .garbled : using JustGarble
 
 [6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit
-
-NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
-**On the following schema cached information is representd with doted line**
-
-![GCF detailed](./fig/InterstellarDetailedPipeline.svg)
-
 
 
 ### [1] Generate “segment2pixel.v”
