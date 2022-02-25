@@ -22,7 +22,7 @@ Although our circuits still display screens at a pixel level to change fonts, ch
 
 
 
-[Transaction validation screen simulations](https://www.interstellar.gg/simulation) based on PsychoJS library -  PsychoPy (github.com)
+[Transaction validation screen simulations](https://www.interstellar.gg/simulation) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs)
 
 
 At a later stage, we aim at reusing our pixel based and/or  [segment-based visual cryptography](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.84.7421&rep=rep1&type=pdf) to increase the complexity level of potential attacks and enable video recording proof scheme without disturbing the smooth user experience. Research lead is to leverage SRAM framebuffer speed 10-30x vs. DRAM to force the attacker to miss frames with a saturated GPU command queue filled with decoy and VC frames on high frequency displays.
