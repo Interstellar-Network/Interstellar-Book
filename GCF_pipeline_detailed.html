@@ -138,6 +138,9 @@
 <p>This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.</p>
 <p>It illustrated the way GCF can be used with substrate OCWs for a specific type of circuits. </p>
 <h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
+<p>NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
+<p><strong>On the following schema cached information is representd with doted line</strong></p>
+<p><img src="./fig/InterstellarDetailedPipeline.svg" alt="GCF detailed" /></p>
 <p>Overview : </p>
 <p>[1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]</p>
 <p>[2] Verilog  → .blif : combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys</p>
@@ -145,9 +148,6 @@
 <p>[4] Parsing .blif → .skcd : using internal code</p>
 <p>[5] Garbling .skcd → .garbled : using JustGarble</p>
 <p>[6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit</p>
-<p>NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
-<strong>On the following schema cached information is representd with doted line</strong></p>
-<p><img src="./fig/InterstellarDetailedPipeline.svg" alt="GCF detailed" /></p>
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
 <p>Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 This allows to cache the resulting .skcd of the whole pipeline (cf CircuitDisplayGenerator::GenerateDisplay) using “segment2pixel.v” content as cache key.</p>
