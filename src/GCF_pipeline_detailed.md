@@ -2,7 +2,7 @@
 
 This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.
 
-It illustrated the way GCF can be used with substrate OCWs for a specific type of circuits. 
+It illustrates the way GCF can be used with substrate OCWs for a specific type of circuits. 
 
 ## Pipeline
 
