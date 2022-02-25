@@ -10,9 +10,9 @@ It illustrates the way GCF can be used with substrate OCWs for a specific type o
 NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
 
 
-**On the following schema cached information is represented with doted line**
+**On the following schema, cached information/files is represented with doted line**
 
-> **red arrow represent the command to lauch circuit(s) generation from OCW GCF manager**
+> **The red arrow represents the command to lauch circuit(s) generation pipeline from OCW GCF manager**
 
 
 
