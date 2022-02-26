@@ -21,7 +21,7 @@ Although we started by implementing a working solution that outputs visual crypt
 Although our circuits still display screens at a pixel level to change fonts, characters sizes and more, let's go back to old fashioned displays to explain it.
 
 
-![GatesSegment](./fig/GatesSegment.jpg)
+![GatesSegment](./fig/GatesSegmentBlack.jpg)
 
 
 ![walletdemo](./fig/Wallet-Superposition-Black-Background-Demo.png)
