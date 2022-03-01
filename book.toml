@@ -48,8 +48,8 @@ turn-off = false
 [output.html]
 default-theme = "navy"
 git-repository-url = ""
-additional-css = ["theme/pagetoc.css","theme/solarized-dark.css"]
-additional-js  = ["theme/pagetoc.js","theme/solarized-dark.js" ]
+additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
+additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
 
 
 
