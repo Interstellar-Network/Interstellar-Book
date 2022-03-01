@@ -52,6 +52,12 @@ additional-js  = ["theme/pagetoc.js"]
 
 default-theme = "navy"
 
+# here is a must to load ace editor in mdbook
+[output.html]
+[output.html.playground]
+editable        = true
+
+
 [output.theme-ace]
 theme-white     = "dawn"
 theme-dark      = "tomorrow_night"
