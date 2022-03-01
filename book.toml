@@ -67,6 +67,6 @@ editable        = true
 theme-white     = "dawn"
 #theme-dark      = "tomorrow_night_bright"
 #theme-dark      = "solarized-dark"
-theme-dark      = "one-dark"
+theme-dark      = "chaos"
 
 below-build-dir = true
