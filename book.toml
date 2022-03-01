@@ -50,7 +50,9 @@ theme          = "theme" # this is the default if not explicitly set
 additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
 
+default-theme = "navy"
 
-
-
-#default-theme = "navy"
+[output.theme-ace]
+theme-white     = "dawn"
+theme-dark      = "tomorrow_night"
+below-build-dir = true
