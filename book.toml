@@ -48,7 +48,7 @@ turn-off = false
 
 theme          = "theme" # this is the default if not explicitly set
 
-additional-css = ["theme/reference.css", "theme/pagetoc.css"]
+additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
 
 
