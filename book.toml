@@ -59,5 +59,6 @@ editable        = true
 
 [output.theme-ace]
 theme-white     = "dawn"
-theme-dark      = "tomorrow_night"
+#theme-dark      = "tomorrow_night"
+theme-dark      = "solarized-dark"
 below-build-dir = true

@@ -54,7 +54,7 @@ If there is no cached .skcd for the step [1], one is generated cf CircuitDisplay
 
 The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :
 
-```cpp
+```rust
 if (is_message) {
     YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
                                 MESSAGE_SEGMENT2PIXELS_V ".blif");
