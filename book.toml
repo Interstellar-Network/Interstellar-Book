@@ -3,6 +3,7 @@ authors = ["Interstellar"]
 language = "en"
 multilingual = false
 src = "src"
+title = "Interstellar Book"
 
 [preprocessor.theme]
 pagetoc        = true
@@ -45,18 +46,16 @@ turn-off = false
 
 
 [output.html]
-
-#theme          = "theme" # this is the default if not explicitly set
-
+default-theme = "navy"
+git-repository-url = ""
 additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
 
 
+[output.html.fold]
+enable = false
+level = 1
 
-
-
-
-default-theme = "navy"
 
 # here is a must to load ace editor in mdbook
 [output.html.playground]
@@ -65,8 +64,8 @@ editable        = true
 
 [output.theme-ace]
 theme-white     = "dawn"
-#theme-dark      = "tomorrow_night_bright"
-theme-dark      = "solarized-dark"
+theme-dark      = "tomorrow_night_bright"
+#theme-dark      = "solarized-dark"
 #theme-dark      = "pastel_on_dark"
 
 below-build-dir = true
