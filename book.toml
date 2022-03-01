@@ -48,14 +48,12 @@ turn-off = false
 
 theme          = "theme" # this is the default if not explicitly set
 
--additional-css = ["theme/reference.css"]
 
-+additional-css = ["theme/reference.css", "theme/pagetoc.css"]
-+additional-js  = ["theme/pagetoc.js"]
 
-+[preprocessor.theme]
-+pagetoc       = true
-+sidebar-width = "240px"
+additional-css = ["theme/reference.css", "theme/pagetoc.css"]
+additional-js  = ["theme/pagetoc.js"]
+
+
 
 
 
