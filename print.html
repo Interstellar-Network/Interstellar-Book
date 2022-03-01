@@ -301,6 +301,8 @@ The Device then combines the “packmsg” and the “stripped circuits” and p
 <h2 id="circuit-pipeline-api"><a class="header" href="#circuit-pipeline-api">Circuit Pipeline API</a></h2>
 <p>We have chosen a  GRPC implementation mainly because  there is no no_std HTTP2 client in Rust, although there are a some no_std Protobuf libs out there <a href="https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/README.md#using-prost-in-a-no_std-crate">in the tokio framework</a> and also <a href="https://github.com/tafia/quick-protobuf">this one</a>, but this is only half the required parts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-cicuit-factory-api"><a class="header" href="#garbled-cicuit-factory-api">Garbled Cicuit Factory API</a></h1>
+<h2 id="flowchart-and-main-components"><a class="header" href="#flowchart-and-main-components">flowchart and main components</a></h2>
+<h2 id="apis"><a class="header" href="#apis">APIs</a></h2>
 <p>This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.</p>
 <p>TEST/CHECK rust code display with ace theme</p>
 <pre><pre class="playground"><code class="language-rust">use tonic::transport::Server;
