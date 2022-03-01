@@ -69,4 +69,4 @@ theme-white     = "dawn"
 #theme-dark      = "solarized-dark"
 theme-dark      = "pastel_on_dark"
 
-below-build-dir = false
+below-build-dir = true
