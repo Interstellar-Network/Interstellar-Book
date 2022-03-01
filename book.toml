@@ -46,7 +46,7 @@ turn-off = false
 
 [output.html]
 
-theme          = "theme" # this is the default if not explicitly set
+#theme          = "theme" # this is the default if not explicitly set
 
 additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
@@ -66,5 +66,7 @@ editable        = true
 [output.theme-ace]
 theme-white     = "dawn"
 #theme-dark      = "tomorrow_night_bright"
-theme-dark      = "solarized-dark"
+#theme-dark      = "solarized-dark"
+theme-dark      = "one-dark"
+
 below-build-dir = true
