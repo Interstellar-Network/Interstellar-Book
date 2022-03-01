@@ -263,10 +263,7 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
 <h3 id="234-generate-skcd"><a class="header" href="#234-generate-skcd">[2][3][4] Generate .skcd</a></h3>
 <p>If there is no cached .skcd for the step [1], one is generated cf CircuitDisplayGenerator::GenerateDisplay</p>
 <p>The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>if (is_message) {
+<pre><code class="language-cpp">if (is_message) {
     YosysHelper::CompileVerilog(MESSAGE_SEGMENT2PIXELS_V,
                                 MESSAGE_SEGMENT2PIXELS_V &quot;.blif&quot;);
   } else {
@@ -292,8 +289,7 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
   skcd_cache_-&gt;Set(hash_segment2pixels, skcd);
   return skcd;
 
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h3 id="56-garbling"><a class="header" href="#56-garbling">[5][6] Garbling</a></h3>
 <p>Technically garbling + “stripping” (i.e. generating the “pre-packmsg”).
 This is at this step that the pinpad/OTP randomness is introduced, i.e. the .skcd generated at the previous step CAN/SHOULD be reused (and it is) all the time (i.e. it is always reused, except when changing size or resolution).</p>
