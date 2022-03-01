@@ -2,10 +2,18 @@
 /* Globals */
 
 :root {
-    --sidebar-width: 300px;
+    --sidebar-width: 140px;
     --page-padding: 15px;
-    --content-max-width: 750px;
-    --menu-bar-height: 50px;
+    --content-max-width: 82%;
+    --menu-bar-height: 40px;
+    --pagetoc-width: 13%;
+    --pagetoc-fontsize: 14.5px;
+}
+
+@media only screen and (max-width:1439px) {
+ :root{
+    --content-max-width: 98%;
+  }
 }
 
 /* Themes */
@@ -67,7 +75,7 @@
 
     --links: #2b79a2;
 
-    --inline-code-color: #c5c8c6;
+    --inline-code-color: #c5c8c6;;
 
     --theme-popup-bg: #141617;
     --theme-popup-border: #43484d;
@@ -105,9 +113,9 @@
     --icons: #747474;
     --icons-hover: #000000;
 
-    --links: #20609f;
+    --links: #1f1fff;
 
-    --inline-code-color: #301900;
+    --inline-code-color: #F42C4C;
 
     --theme-popup-bg: #fafafa;
     --theme-popup-border: #cccccc;
@@ -147,7 +155,7 @@
 
     --links: #2b79a2;
 
-    --inline-code-color: #c5c8c6;
+    --inline-code-color: #c5c8c6;;
 
     --theme-popup-bg: #161923;
     --theme-popup-border: #737480;
@@ -228,7 +236,7 @@
 
         --links: #2b79a2;
 
-        --inline-code-color: #c5c8c6;
+        --inline-code-color: #c5c8c6;;
 
         --theme-popup-bg: #141617;
         --theme-popup-border: #43484d;

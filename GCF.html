@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/pagetoc.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -134,6 +135,9 @@
 
                 <div id="content" class="content">
                     <main>
+                        <!-- Page table of contents -->
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+
                         <h1 id="intoduction-to-garbled-circuit-factory-gcf"><a class="header" href="#intoduction-to-garbled-circuit-factory-gcf">Intoduction to Garbled Circuit Factory (GCF)</a></h1>
 <p>The Garble Circuit Factory is the module in charge of building the Garbled Circuits (GC) used by Interstellar infrastructure.</p>
 <p>Following is a high level overview of the genric pipeline used to generate GC.</p>
@@ -176,5 +180,6 @@
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="theme/pagetoc.js"></script>
     </body>
 </html>
