@@ -302,6 +302,40 @@ The Device then combines the “packmsg” and the “stripped circuits” and p
 <p>We have chosen a  GRPC implementation mainly because  there is no no_std HTTP2 client in Rust, although there are a some no_std Protobuf libs out there <a href="https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/README.md#using-prost-in-a-no_std-crate">in the tokio framework</a> and also <a href="https://github.com/tafia/quick-protobuf">this one</a>, but this is only half the required parts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-cicuit-factory-api"><a class="header" href="#garbled-cicuit-factory-api">Garbled Cicuit Factory API</a></h1>
 <p>This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.</p>
+<p>TEST/CHECK rust code display with ace theme</p>
+<pre><pre class="playground"><code class="language-rust">use tonic::transport::Server;
+
+mod circuits_routes;
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    // TODO tracing
+    // tracing_subscriber::fmt::init();
+
+    // TODO configurable port
+    let addr = &quot;127.0.0.1:3000&quot;.parse().unwrap();
+
+    let circuits_api = circuits_routes::CircuitsServerImpl::default();
+    let circuits_api =
+        circuits_routes::interstellarpbapicircuits::circuits_api_server::CircuitsApiServer::new(
+            circuits_api,
+        );
+    // let greeter = InterstellarCircuitsApiClient::new(greeter);
+    let circuits_api = tonic_web::config()
+        .allow_origins(vec![&quot;127.0.0.1&quot;])
+        .enable(circuits_api);
+
+    println!(&quot;GreeterServer listening on {}&quot;, addr);
+
+    Server::builder()
+        .accept_http1(true)
+        .add_service(circuits_api)
+        .serve(addr)
+        .await?;
+
+    Ok(())
+}
+</code></pre></pre>
 
                     </main>
 
