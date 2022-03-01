@@ -3,5 +3,11 @@ authors = ["Interstellar"]
 language = "en"
 multilingual = false
 src = "src"
+
+[preprocessor.theme]
+pagetoc        = true
+
 [output.html]
+additional-css = ["theme/pagetoc.css"]
+additional-js  = ["theme/pagetoc.js"]
 default-theme = "navy"
