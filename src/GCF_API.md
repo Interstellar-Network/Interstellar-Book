@@ -1,9 +1,9 @@
 # Garbled Cicuit Factory API
 
 
-## flowchart and main components
+## Flowchart and  substrate GCF pallets
 
-
+![FC GCF pallets](./fig/GCF-substrate.svg)
 
 
 
