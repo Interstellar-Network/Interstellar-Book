@@ -19,13 +19,13 @@ page-padding             = "15px"
 mobile-content-max-width = "98%"
 
 # layout
-content-padding           = "0 10px"
-content-main-margin-left  = "2%"
-content-main-margin-right = "2%"
-nav-chapters-max-width    = "auto"
-nav-chapters-min-width    = "auto"
-chapter-line-height       = "2em"
-section-line-height       = "1.5em"
+#content-padding           = "0 10px"
+#content-main-margin-left  = "2%"
+#content-main-margin-right = "2%"
+#nav-chapters-max-width    = "auto"
+#nav-chapters-min-width    = "auto"
+#chapter-line-height       = "2em"
+#section-line-height       = "1.5em"
 
 # modify some fontsizes
 #root-font-size    = "70%"    # control the main font-size
@@ -54,7 +54,7 @@ additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
 
 
 [output.html.fold]
-enable = false
+enable = true
 level = 1
 
 
