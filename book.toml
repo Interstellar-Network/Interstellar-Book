@@ -28,18 +28,18 @@ chapter-line-height       = "2em"
 section-line-height       = "1.5em"
 
 # modify some fontsizes
-root-font-size    = "70%"    # control the main font-size
-body-font-size    = "1.5rem"
-code-font-size    = "0.9em"
+#root-font-size    = "70%"    # control the main font-size
+#body-font-size    = "1.5rem"
+#code-font-size    = "0.9em"
 #sidebar-font-size = "1em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
-coal-inline-code-color  = "#ffb454"
-light-inline-code-color = "#F42C4C"
-navy-inline-code-color  = "#ffb454"
-rust-inline-code-color  = "#F42C4C"
-light-links             = "#1f1fff"
-rust-links              = "#1f1fff"
+#coal-inline-code-color  = "#ffb454"
+#light-inline-code-color = "#F42C4C"
+#navy-inline-code-color  = "#ffb454"
+#rust-inline-code-color  = "#F42C4C"
+#light-links             = "#1f1fff"
+#rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
 turn-off = false
