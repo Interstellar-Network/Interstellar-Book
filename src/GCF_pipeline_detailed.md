@@ -12,7 +12,7 @@ NOTE: the file types are mentioned for clarity and to allow matching with callin
 
 **On the following schema, cached files are represented with red doted line**
 
-> **The red arrow represents the command to lauch circuit(s) generation pipeline from OCW GCF**
+> **The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF**
 
 
 
