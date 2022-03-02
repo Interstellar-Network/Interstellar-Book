@@ -22,7 +22,7 @@ Although our circuits still display screens at a pixel level to change fonts, ch
 
 ![GatesSegment](./fig/GatesSegmentBlack.png)
 
-Garbled Circuit will randomly output 1/n segments/sub segments per frames, with n > 2
+The Garbled Circuit will randomly output 1/n segments/sub segments per frames, with n > 2
 
 ![walletdemo](./fig/Wallet-Superposition-Black-Background-Demo.png)
 
