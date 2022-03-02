@@ -31,7 +31,7 @@ section-line-height       = "1.5em"
 root-font-size    = "70%"    # control the main font-size
 body-font-size    = "1.5rem"
 code-font-size    = "0.9em"
-sidebar-font-size = "1em"    # sidebar = toc on the left
+#sidebar-font-size = "1em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
 coal-inline-code-color  = "#ffb454"
