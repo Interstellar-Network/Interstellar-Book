@@ -1,4 +1,4 @@
-# Detailed Pipeline for Display Circuits
+# Detailed Pipeline for Display Circuits Production
 
 This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.
 
