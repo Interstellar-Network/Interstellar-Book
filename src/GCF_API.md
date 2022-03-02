@@ -3,7 +3,7 @@
 
 ## Flowchart and  substrate GCF pallets
 
-![FC GCF pallets](./fig/GCF-substrate.svg)
+![FC GCF pallets](./fig/GCF-Substrate.svg)
 
 
 
