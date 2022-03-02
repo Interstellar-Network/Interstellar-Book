@@ -6,7 +6,7 @@
 
 ![VC demo](./fig/Visual_crypto_animation_demo.gif)
 
-
+## Main principles
 We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.
 
 Those visual cryptography shares do not superpose on the device screen but only in the user's eye. Thanks to the human Persistence of Vision ability: your eye and brain retain a visual impression for about 1/30 of a second (the exact time depends on the brightness of the image). 
@@ -17,12 +17,12 @@ However, it makes a fake UI attack, complexe and resource intensive enough to en
 
 Although we started by implementing a working solution that outputs visual cryptography shares we realized that it was a bit disturbing for the user and that a pure visual cryptography scheme is not crucial for our overall security model. We then decided to provide a more friendly solution for the user that is also more efficient especially regarding Garbled Circuit size.
 
-
+## Explanation
 Although our circuits still display screens at a pixel level to change fonts, characters sizes and more, let's go back to old fashioned displays to explain it.
-
 
 ![GatesSegment](./fig/GatesSegmentBlack.png)
 
+Garbled Circuit will randomly output 1/n segments/sub segments per frames, with n > 2
 
 ![walletdemo](./fig/Wallet-Superposition-Black-Background-Demo.png)
 

@@ -20,17 +20,17 @@ NOTE: the file types are mentioned for clarity and to allow matching with callin
 
 Overview : 
 
-[1] Generate “segment2pixel.v” using internal code [using e.g. 7segs.png]
+`[1] Generate~` “segment2pixel.v” using internal code [using e.g. 7segs.png]
 
-[2] Verilog  → .blif : combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys
+` [2] Verilog  → .blif `: combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys
 
-[3] .blif → .blif.blif : optimization /synthesis : using ABC
+`[3] .blif → .blif.blif `: optimization /synthesis : using ABC
 
-[4] Parsing .blif → .skcd : using internal code
+`[4] Parsing .blif → .skcd `: using internal code
 
-[5] Garbling .skcd → .garbled : using JustGarble
+`[5] Garbling .skcd → .garbled`: using JustGarble
 
-[6] Finalize/Serialize .garbled → .pgarbled : Using internal code; allows for parallel eval of a Garbled Circuit
+`[6] Finalize/Serialize .garbled → .pgarbled`: Using internal code; allows for parallel eval of a Garbled Circuit
 
 
 ### [1] Generate “segment2pixel.v”
