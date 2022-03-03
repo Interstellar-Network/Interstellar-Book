@@ -3,9 +3,9 @@ authors = ["Interstellar"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Interstellar Book"
+title = "The Interstellar Book"
 
-#[preprocessor.theme]
+[preprocessor.theme]
 #pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
@@ -28,10 +28,10 @@ title = "Interstellar Book"
 #section-line-height       = "1.5em"
 
 # modify some fontsizes
-#root-font-size    = "70%"    # control the main font-size
+root-font-size    = "50%"    # control the main font-size
 #body-font-size    = "1.5rem"
 #code-font-size    = "0.9em"
-#sidebar-font-size = "1em"    # sidebar = toc on the left
+sidebar-font-size = "0.4em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
 #coal-inline-code-color  = "#ffb454"
@@ -59,14 +59,14 @@ default-theme = "navy"
 
 
 # here is a must to load ace editor in mdbook
-#[output.html.playground]
-#editable        = true
+[output.html.playground]
+editable        = true
 
 
-#[output.theme-ace]
-#theme-white     = "dawn"
+[output.theme-ace]
+theme-white     = "dawn"
 ##theme-dark      = "tomorrow_night_bright"
 #theme-dark      = "solarized_dark"
 #theme-dark      = "pastel_on_dark"
 
-#below-build-dir = true
+below-build-dir = true
