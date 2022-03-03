@@ -47,9 +47,9 @@ turn-off = false
 
 [output.html]
 default-theme = "navy"
-git-repository-url = ""
-additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
-additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
+#git-repository-url = ""
+#additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
+#additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
 
 
 
@@ -59,14 +59,14 @@ level = 1
 
 
 # here is a must to load ace editor in mdbook
-[output.html.playground]
-editable        = true
+#[output.html.playground]
+#editable        = true
 
 
-[output.theme-ace]
-theme-white     = "dawn"
-#theme-dark      = "tomorrow_night_bright"
-theme-dark      = "solarized_dark"
+#[output.theme-ace]
+#theme-white     = "dawn"
+##theme-dark      = "tomorrow_night_bright"
+#theme-dark      = "solarized_dark"
 #theme-dark      = "pastel_on_dark"
 
-below-build-dir = true
+#below-build-dir = true
