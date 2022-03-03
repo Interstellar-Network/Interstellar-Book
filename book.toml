@@ -6,7 +6,7 @@ src = "src"
 title = "Interstellar Book"
 
 [preprocessor.theme]
-pagetoc        = true
+pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
@@ -42,7 +42,7 @@ mobile-content-max-width = "98%"
 #rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
-turn-off = false
+turn-off = true
 
 
 [output.html]
@@ -60,7 +60,7 @@ level = 1
 
 # here is a must to load ace editor in mdbook
 [output.html.playground]
-editable        = true
+editable        = false
 
 
 [output.theme-ace]
