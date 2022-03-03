@@ -299,11 +299,11 @@ The Device then combines the “packmsg” and the “stripped circuits” and p
 <p>Regarding Transaction Validation displays, sending the circuits ahead of time is no mandatory (i.e. the generation is fast enough, and the size small enough to be able to get them on the spot even on a mobile) although this feature can be used in some specific cases and for other use cases.</p>
 <h2 id="circuit-pipeline-api"><a class="header" href="#circuit-pipeline-api">Circuit Pipeline API</a></h2>
 <p>We have chosen a  GRPC implementation mainly because  there is no no_std HTTP2 client in Rust, although there are a some no_std Protobuf libs out there <a href="https://github.com/tokio-rs/prost/blob/978fb03f05f9927b43d6d402044f9fb41a9addb3/README.md#using-prost-in-a-no_std-crate">in the tokio framework</a> and also <a href="https://github.com/tafia/quick-protobuf">this one</a>, but this is only half the required parts.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-cicuit-factory-api"><a class="header" href="#garbled-cicuit-factory-api">Garbled Cicuit Factory API</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-cicuit-factory-apis"><a class="header" href="#garbled-cicuit-factory-apis">Garbled Cicuit Factory APIs</a></h1>
 <h2 id="flowchart-and--substrate-gcf-pallets"><a class="header" href="#flowchart-and--substrate-gcf-pallets">Flowchart and  substrate GCF pallets</a></h2>
 <p><img src="./fig/GCF-Substrate.svg" alt="FC GCF pallets" /></p>
 <h2 id="apis"><a class="header" href="#apis">APIs</a></h2>
-<p>This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.</p>
+<p>This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.</p>
 <h3 id="launh-circuit-production-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-production-from-ocw-on-gcf-external-service">Launh circuit production from OCW on GCF (external service)</a></h3>
 <p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17">api_circuits/src/circuit_routes.rs:17</a></p>
 <p><code>Request</code>   : start the circuit(s) generation</p>
