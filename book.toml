@@ -5,8 +5,8 @@ multilingual = false
 src = "src"
 title = "The Interstellar Book"
 
-[preprocessor.theme]
-pagetoc        = false
+#[preprocessor.theme]
+#pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
@@ -43,7 +43,7 @@ pagetoc        = false
 #rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
-turn-off = false
+#turn-off = false
 
 
 [output.html]
