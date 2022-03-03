@@ -8,46 +8,52 @@
 
 
 
-
 ## APIs
 This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.
 
+- Launh circuit production from OCW on GCF (external service)
+
+    -  `generate_circuit`: [api_circuits/src/circuit_routes.rs:17](https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17)
+
+        Request:    **start the circuit(s) generation**
+
+        Response:   **get ipfs hash/cid**
+
+        Status:
 
 
 
-
-TEST/CHECK rust code display with ace theme
 ```rust,editable
-use tonic::transport::Server;
+use tonic::{Request, Response, Status};
 
-mod circuits_routes;
+use interstellarpbapicircuits::circuits_api_server::CircuitsApi;
+use interstellarpbapicircuits::circuits_api_server::CircuitsApiServer;
+use interstellarpbapicircuits::CircuitReply;
+use interstellarpbapicircuits::Empty;
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // TODO tracing
-    // tracing_subscriber::fmt::init();
+pub mod interstellarpbapicircuits {
+    tonic::include_proto!("interstellarpbapicircuits");
+}
 
-    // TODO configurable port
-    let addr = "127.0.0.1:3000".parse().unwrap();
+#[derive(Default)]
+pub struct CircuitsServerImpl {}
 
-    let circuits_api = circuits_routes::CircuitsServerImpl::default();
-    let circuits_api =
-        circuits_routes::interstellarpbapicircuits::circuits_api_server::CircuitsApiServer::new(
-            circuits_api,
-        );
-    // let greeter = InterstellarCircuitsApiClient::new(greeter);
-    let circuits_api = tonic_web::config()
-        .allow_origins(vec!["127.0.0.1"])
-        .enable(circuits_api);
+#[tonic::async_trait]
+impl CircuitsApi for CircuitsServerImpl {
+    async fn generate_circuit(
+        &self,
+        request: Request<Empty>,
+    ) -> Result<Response<CircuitReply>, Status> {
+        println!("Got a request from {:?}", request.remote_addr());
 
-    println!("GreeterServer listening on {}", addr);
+        // TODO call the C++ wrapper
+        // TODO store into IPFS
+        let ipfs_hash = "123456";
 
-    Server::builder()
-        .accept_http1(true)
-        .add_service(circuits_api)
-        .serve(addr)
-        .await?;
-
-    Ok(())
+        let reply = CircuitReply {
+            hash: format!("Hello {}!", ipfs_hash),
+        };
+        Ok(Response::new(reply))
+    }
 }
 ```
