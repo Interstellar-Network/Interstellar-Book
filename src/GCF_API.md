@@ -1,4 +1,5 @@
-# Garbled Cicuit Factory API
+# Garbled Cicuit Factory APIs
+
 
 
 ## Flowchart and  substrate GCF pallets
@@ -7,9 +8,8 @@
 
 
 
-
 ## APIs
-This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.
+This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.
 
 ### Launh circuit production from OCW on GCF (external service)
 
