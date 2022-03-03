@@ -60,7 +60,7 @@ level = 1
 
 # here is a must to load ace editor in mdbook
 [output.html.playground]
-editable        = false
+editable        = true
 
 
 [output.theme-ace]
