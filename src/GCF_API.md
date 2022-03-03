@@ -11,15 +11,15 @@
 ## APIs
 This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.
 
-- Launh circuit production from OCW on GCF (external service)
+- **Launh circuit production from OCW on GCF (external service)**
 
     -  `generate_circuit`: [api_circuits/src/circuit_routes.rs:17](https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17)
 
-        Request:    **start the circuit(s) generation**
+        **Request**:    start the circuit(s) generation
 
-        Response:   **get ipfs hash/cid**
+        **Response**:   get hash/cid of the circuit on ipfs
 
-        Status:
+        **Status**:
 
 
 
