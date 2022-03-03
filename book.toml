@@ -6,7 +6,7 @@ src = "src"
 title = "The Interstellar Book"
 
 [preprocessor.theme]
-#pagetoc        = false
+pagetoc        = true
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
@@ -14,7 +14,7 @@ title = "The Interstellar Book"
 #content-max-width        = "82%"
 #pagetoc-fontsize         = "14.5px"
 #sidebar-width            = "300px"
-#menu-bar-height          = "40px"   # memu-bar = the bar on the top
+menu-bar-height          = "40px"   # memu-bar = the bar on the top
 #page-padding             = "15px"
 #mobile-content-max-width = "98%"
 
@@ -28,10 +28,10 @@ title = "The Interstellar Book"
 #section-line-height       = "1.5em"
 
 # modify some fontsizes
-root-font-size    = "70%"    # control the main font-size
+root-font-size    = "60%"    # control the main font-size
 #body-font-size    = "1.5rem"
 #code-font-size    = "0.9em"
-sidebar-font-size = "0.9em"    # sidebar = toc on the left
+sidebar-font-size = "0.85em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
 #coal-inline-code-color  = "#ffb454"
@@ -48,8 +48,8 @@ sidebar-font-size = "0.9em"    # sidebar = toc on the left
 [output.html]
 default-theme = "navy"
 #git-repository-url = ""
-#additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
-#additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
+additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
+additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
 
 
 
@@ -64,7 +64,7 @@ editable        = true
 
 
 [output.theme-ace]
-theme-white     = "dawn"
+#theme-white     = "dawn"
 ##theme-dark      = "tomorrow_night_bright"
 theme-dark      = "solarized_dark"
 #theme-dark      = "pastel_on_dark"
