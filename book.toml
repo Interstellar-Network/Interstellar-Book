@@ -6,7 +6,7 @@ src = "src"
 title = "The Interstellar Book"
 
 [preprocessor.theme]
-pagetoc        = true
+pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
