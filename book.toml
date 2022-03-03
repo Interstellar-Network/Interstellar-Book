@@ -43,7 +43,7 @@ sidebar-font-size = "0.80em"    # sidebar = toc on the left
 #rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
-turn-off = true
+turn-off = false
 
 
 [output.html]
