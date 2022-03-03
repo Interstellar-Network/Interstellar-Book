@@ -29,6 +29,7 @@ pagetoc        = false
 
 # modify some fontsizes
 root-font-size    = "60%"    # control the main font-size
+body-font-size    = "1rem"
 #body-font-size    = "1.5rem"
 #code-font-size    = "0.9em"
 sidebar-font-size = "0.80em"    # sidebar = toc on the left
