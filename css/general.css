@@ -4,7 +4,7 @@
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
-    font-size: 60%;
+    font-size: 62.5%;
 }
 
 html {
@@ -12,11 +12,12 @@ html {
     color: var(--fg);
     background-color: var(--bg);
     text-size-adjust: none;
+    -webkit-text-size-adjust: none;
 }
 
 body {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.6rem;
     overflow-x: hidden;
 }
 
@@ -174,4 +175,8 @@ blockquote {
     color: var(--sidebar-fg);
     margin: 5px 0px;
     font-weight: bold;
+}
+
+.result-no-output {
+    font-style: italic;
 }
