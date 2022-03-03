@@ -49,8 +49,8 @@ turn-off = false
 [output.html]
 default-theme = "navy"
 #git-repository-url = ""
-additional-css = ["theme/pagetoc.css"] 
-additional-js  = ["theme/pagetoc.js"]
+#additional-css = ["theme/pagetoc.css"] 
+#additional-js  = ["theme/pagetoc.js"]
 
 
 
