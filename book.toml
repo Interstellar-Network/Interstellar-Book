@@ -10,13 +10,13 @@ pagetoc        = true
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
-#pagetoc-width            = "13%"
-#content-max-width        = "82%"
-#pagetoc-fontsize         = "14.5px"
-#sidebar-width            = "300px"
+pagetoc-width            = "12%"
+content-max-width        = "82%"
+pagetoc-fontsize         = "13.5px"
+sidebar-width            = "300px"
 menu-bar-height          = "40px"   # memu-bar = the bar on the top
-#page-padding             = "15px"
-#mobile-content-max-width = "98%"
+page-padding             = "15px"
+mobile-content-max-width = "98%"
 
 # layout
 #content-padding           = "0 10px"
@@ -28,10 +28,10 @@ menu-bar-height          = "40px"   # memu-bar = the bar on the top
 #section-line-height       = "1.5em"
 
 # modify some fontsizes
-root-font-size    = "60%"    # control the main font-size
+root-font-size    = "65%"    # control the main font-size
 #body-font-size    = "1.5rem"
 #code-font-size    = "0.9em"
-sidebar-font-size = "0.85em"    # sidebar = toc on the left
+sidebar-font-size = "0.88em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
 #coal-inline-code-color  = "#ffb454"

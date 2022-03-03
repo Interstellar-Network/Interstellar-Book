@@ -17,7 +17,7 @@ This is a list of APIs used in substrate framework to pilot the generation of th
 
 
 TEST/CHECK rust code display with ace theme
-```rust
+```rust,editable
 use tonic::transport::Server;
 
 mod circuits_routes;
