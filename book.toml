@@ -6,7 +6,7 @@ src = "src"
 title = "The Interstellar Book"
 
 [preprocessor.theme]
-pagetoc        = false
+pagetoc        = true
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
@@ -65,8 +65,8 @@ editable        = true
 
 [output.theme-ace]
 theme-white     = "dawn"
-##theme-dark      = "tomorrow_night_bright"
-theme-dark      = "solarized_dark"
+theme-dark      = "tomorrow_night_bright"
+#theme-dark      = "solarized_dark"
 #theme-dark      = "pastel_on_dark"
 
 below-build-dir = true
