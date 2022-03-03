@@ -5,8 +5,8 @@ multilingual = false
 src = "src"
 title = "Interstellar Book"
 
-[preprocessor.theme]
-pagetoc        = false
+#[preprocessor.theme]
+#pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
@@ -42,7 +42,7 @@ pagetoc        = false
 #rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
-turn-off = true
+#turn-off = true
 
 
 [output.html]
@@ -53,9 +53,9 @@ default-theme = "navy"
 
 
 
-[output.html.fold]
-enable = true
-level = 1
+#[output.html.fold]
+#enable = true
+#level = 1
 
 
 # here is a must to load ace editor in mdbook
