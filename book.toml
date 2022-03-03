@@ -42,14 +42,14 @@ sidebar-font-size = "0.88em"    # sidebar = toc on the left
 #rust-links              = "#1f1fff"
 
 # if true, never read and touch the files in theme dir
-#turn-off = true
+turn-off = true
 
 
 [output.html]
 default-theme = "navy"
 #git-repository-url = ""
-#additional-css = ["theme/pagetoc.css","theme/solarized_dark.css"]
-#additional-js  = ["theme/pagetoc.js","theme/solarized_dark.js" ]
+additional-css = ["theme/pagetoc.css"] # previous try "theme/solarized_dark.css"]
+additional-js  = ["theme/pagetoc.js"]  #"theme/solarized_dark.js" ]
 
 
 
