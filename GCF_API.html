@@ -139,19 +139,14 @@
 <p><img src="./fig/GCF-Substrate.svg" alt="FC GCF pallets" /></p>
 <h2 id="apis"><a class="header" href="#apis">APIs</a></h2>
 <p>This is a list of APIs used in substrate framework to pilot the generation of the Garbled Circuits needed by the Interstellar infrsstructure.</p>
-<ul>
-<li>
-<p><strong>Launh circuit production from OCW on GCF (external service)</strong></p>
-<ul>
-<li>
+<h3 id="launh-circuit-production-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-production-from-ocw-on-gcf-external-service">Launh circuit production from OCW on GCF (external service)</a></h3>
 <p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17">api_circuits/src/circuit_routes.rs:17</a></p>
-<p><strong>Request</strong>:    start the circuit(s) generation</p>
-<p><strong>Response</strong>:   get hash/cid of the circuit on ipfs</p>
-<p><strong>Status</strong>:</p>
-</li>
-</ul>
-</li>
-</ul>
+<pre><code>    **Request**:    start the circuit(s) generation
+
+    **Response**:   get hash/cid of the circuit on ipfs
+
+    **Status**:
+</code></pre>
 <p>source: circuit_route.rs</p>
 <pre><pre class="playground"><code class="language-rust editable">use tonic::{Request, Response, Status};
 
