@@ -10,13 +10,13 @@ pagetoc        = false
 
 # some variables related (defined in theme/css/variables.css)
 # `content-max-width` + `pagetoc-width` = 95% seems the best
-pagetoc-width            = "13%"
-content-max-width        = "82%"
-pagetoc-fontsize         = "14.5px"
-sidebar-width            = "300px"
-menu-bar-height          = "40px"   # memu-bar = the bar on the top
-page-padding             = "15px"
-mobile-content-max-width = "98%"
+#pagetoc-width            = "13%"
+#content-max-width        = "82%"
+#pagetoc-fontsize         = "14.5px"
+#sidebar-width            = "300px"
+#menu-bar-height          = "40px"   # memu-bar = the bar on the top
+#page-padding             = "15px"
+#mobile-content-max-width = "98%"
 
 # layout
 #content-padding           = "0 10px"
