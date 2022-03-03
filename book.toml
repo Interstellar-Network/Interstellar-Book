@@ -28,11 +28,11 @@ pagetoc        = false
 #section-line-height       = "1.5em"
 
 # modify some fontsizes
-root-font-size    = "60%"    # control the main font-size
-body-font-size    = "1rem"
+#root-font-size    = "60%"    # control the main font-size
+#body-font-size    = "1rem"
 #body-font-size    = "1.5rem"
 #code-font-size    = "0.9em"
-sidebar-font-size = "0.80em"    # sidebar = toc on the left
+#sidebar-font-size = "0.80em"    # sidebar = toc on the left
 
 # modify some colors under ayu/coal/light/navy/rust theme
 #coal-inline-code-color  = "#ffb454"
@@ -48,15 +48,10 @@ turn-off = false
 
 [output.html]
 default-theme = "navy"
-#git-repository-url = ""
+
 #additional-css = ["theme/pagetoc.css"] 
 #additional-js  = ["theme/pagetoc.js"]
 
-
-
-#[output.html.fold]
-#enable = true
-#level = 1
 
 
 # here is a must to load ace editor in mdbook
