@@ -16,7 +16,7 @@ NOTE: the file types are mentioned for clarity and to allow matching with callin
 
 
 
-![GCF detailed](./fig/InterstellarDetailedPipeline.svg)
+![GCF detailed](./fig/InterstellarDetailedPipeline.BW.svg)
 
 Overview : 
 
