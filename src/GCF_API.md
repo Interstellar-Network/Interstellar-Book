@@ -2,7 +2,7 @@
 
 Description of the APIs called from substrate modules to manage circuits production. Those APis are pretty generic and can be adapted to different types of circuit production.
 
-> [IPFS](https://ipfs.io/) is used by the external GCF service for configuration files and the storage of produced garbled circuits. Although, for now only ipfs hash/cid are used in substrate modules. At a later stage we could include substrate  ipfs solutions like [OCW ipfs](https://rs-ipfs.github.io/offchain-ipfs-manual/) for other use case e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be loaded from ipfs to be evaluated within a pallet module to manage SMPC protocols.
+> [IPFS](https://ipfs.io/) is used by the external GCF service for the storage of both configuration files and produced garbled circuits. Although, for now only ipfs hash/cid are used in substrate modules. At a later stage we could include substrate  ipfs solutions like [OCW ipfs](https://rs-ipfs.github.io/offchain-ipfs-manual/) for other use case e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be loaded from ipfs to be evaluated within a pallet module to manage SMPC protocols.
 
 ## Flowchart and  substrate GCF pallets
 
