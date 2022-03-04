@@ -1,11 +1,12 @@
 # Garbled Cicuit Factory APIs
 
+Description of the APIs called from substrate modules to manage circuits production. Those APis are pretty generic and can be adapted to different types of circuit production.
 
+> for now only ipfs hash/cid are used in substrate module. At a later stage we could include ipfs read functions to manage other use case e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be read on ipfs to be evaluated with a pallet module.
 
 ## Flowchart and  substrate GCF pallets
 
 ![FC GCF pallets](./fig/GCF-Substrate.svg)
-
 
 
 ## APIs
@@ -13,13 +14,13 @@ This is a list of the APIs used in substrate framework to pilot the generation o
 
 ### Launh circuit production from OCW on GCF (external service)
 
- `generate_circuit`: [api_circuits/src/circuit_routes.rs:17](https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17)
+`generate_circuit`: [api_circuits/src/circuit_routes.rs:17](https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17)
 
-`Request`   : start the circuit(s) generation
+`Request`   : start the circuit(s) generation with hash/cid  of master files + parameter related to circuit production e.g size/resolution of display circuits
 
 `Response`  : get hash/cid of the circuit on ipfs
 
-`Status`    :
+`Status`    : circuit production state
 
 
 
