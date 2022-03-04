@@ -9,7 +9,7 @@ Description of the APIs called from substrate modules to manage circuits product
 ![FC GCF pallets](./fig/GCF-Substrate.svg)
 
 
-## APIs
+## GCF APIs
 This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.
 
 ### Launh circuit production from OCW on GCF (external service)
