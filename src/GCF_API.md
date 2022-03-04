@@ -2,7 +2,7 @@
 
 Description of the APIs called from substrate modules to manage circuits production. Those APis are pretty generic and can be adapted to different types of circuit production.
 
-> for now only ipfs hash/cid are used in substrate module. At a later stage we could include ipfs read functions to manage other use case e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be read on ipfs to be evaluated with a pallet module.
+> for now only ipfs hash/cid are used in substrate module. At a later stage we could include ipfs solutions in substrate like [OCW ipfs](https://rs-ipfs.github.io/offchain-ipfs-manual/) for other use case e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be loaded from ipfs to be evaluated within a pallet module to manage SMPC protocols.
 
 ## Flowchart and  substrate GCF pallets
 
