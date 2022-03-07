@@ -12,7 +12,7 @@
 
 .ayu {
     /*--bg: hsl(210, 25%, 8%);*/
-    /* full balck background */
+    /* full black background */
     --bg: hsl(0, 0%, 0%);
     --fg: #c5c5c5;
 
@@ -134,7 +134,7 @@
 
 .navy {
     /*--bg: hsl(210, 23%, 11%);*/
-    /* full balck background */
+    /* full black background */
     --bg: hsl(0, 0%, 0%); 
     --fg: #bcbdd0;
 
@@ -218,7 +218,7 @@
     .light.no-js {
         
         /*--bg: hsl(200, 7%, 8%);*/
-        /* full balck background */
+        /* full bLack background */
         --bg: hsl(0, 0%, 0%);
         --fg: #98a3ad;
 
