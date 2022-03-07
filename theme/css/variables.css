@@ -133,7 +133,9 @@
 }
 
 .navy {
-    --bg: hsl(226, 23%, 11%);
+    /*--bg: hsl(210, 23%, 11%);*/
+    /* full balck background */
+    --bg: hsl(0, 0%, 0%); 
     --fg: #bcbdd0;
 
     --sidebar-bg: #282d3f;
@@ -214,7 +216,10 @@
 
 @media (prefers-color-scheme: dark) {
     .light.no-js {
-        --bg: hsl(200, 7%, 8%);
+        
+        /*--bg: hsl(200, 7%, 8%);*/
+        /* full balck background */
+        --bg: hsl(0, 0%, 0%);
         --fg: #98a3ad;
 
         --sidebar-bg: #292c2f;
