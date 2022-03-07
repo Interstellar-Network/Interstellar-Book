@@ -260,7 +260,7 @@ However, it makes a fake UI attack, complexe and resource intensive enough to en
 <p>7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
 <p>Then the generation of <code>segment2pixel.v</code> VHDL file</p>
-<p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
+<p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
 <p>A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done</p>
