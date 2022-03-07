@@ -45,7 +45,7 @@ This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipel
 
 Then the generation of `segment2pixel.v` VHDL file
 
-`Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
+`Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:232](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
 
 A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
