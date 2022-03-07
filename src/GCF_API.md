@@ -6,7 +6,8 @@ Description of the APIs called from substrate modules to manage circuits product
 
 ## Flowchart and  substrate GCF pallets
 
-![FC GCF pallets](./fig/GCF-Substrate.svg)
+
+![GCF Flowchart Substrate Pallets](./fig/GCF-Flowchart-Substrate-Pallets.svg)
 
 
 ## GCF APIs

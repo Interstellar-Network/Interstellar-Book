@@ -24,26 +24,13 @@ Interstellar is a novel non-custodial peace of mind mobile wallet with a hardwar
 
 **We can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain**
 
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145108720-becb76be-6c16-46c8-af69-7e953e5a166d.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145108818-6f8b6158-6c27-4f0d-a104-9d2469c73636.png">
-</picture>
-
-
+![Hardware Mobile Blockchain Overview](./fig/Hardware-Mobile-Blockchain-Overview.png)
 
 **Thanks to Trusted User Interface TUI on mobile and Trusted Execution Environment on both mobile and blockchain nodes**
 
 Because TUI is not yet avalaible on all mobile devices we use a Garbled Circuit/Visual Cryptography scheme which provides an alternative that will be complementary down the road to mitigate potential flaws in TUI.
 
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png">
-</picture>
-
+![IPhone Android TUI Overview](./fig/IPhone-Android-TUI-Overview.png)
 
 <!-- ![Iphone-Android-TUI-White (1)](https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png#gh-dark-mode-only)
 

@@ -15,8 +15,8 @@ NOTE: the file types are mentioned for clarity and to allow matching with callin
 > **The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF**
 
 
+![GC Pipeline Detailed](./fig/GC-Pipeline-Detailed.svg)
 
-![GCF detailed](./fig/InterstellarDetailedPipeline.BW.svg)
 
 Overview : 
 
