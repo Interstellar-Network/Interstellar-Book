@@ -10,7 +10,11 @@
 /* Themes */
 
 .ayu {
-    --bg: hsl(210, 25%, 8%);
+
+   /*--bg: hsl(210, 25%, 8%);*/
+    /* full black */
+    --bg: hsl(0, 0%, 0%);
+
     --fg: #c5c5c5;
 
     --sidebar-bg: #14191f;
