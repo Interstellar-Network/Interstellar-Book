@@ -1,7 +1,7 @@
 
 # Garbled Circuit - Visual Cryptography Screen
 
-![GC-VC](./fig/Visual-Cryptography-Technical-Overview.png)
+![GC-VC](./fig/Visual-Cryptography-Technical-Overview.jpg)
 
 
 ![VC demo](./fig/Visual_crypto_animation_demo.gif)
