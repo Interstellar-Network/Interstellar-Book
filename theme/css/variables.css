@@ -1,3 +1,4 @@
+
 /* Globals */
 
 :root {
@@ -10,11 +11,9 @@
 /* Themes */
 
 .ayu {
-
-   /*--bg: hsl(210, 25%, 8%);*/
-    /* full black */
-    --bg: hsl(0, 0%, 0%);
-
+    /*--bg: hsl(210, 25%, 8%);*/
+    /* full balck background */
+    -bg: hsl(0, 0%, 0%);
     --fg: #c5c5c5;
 
     --sidebar-bg: #14191f;
@@ -215,10 +214,7 @@
 
 @media (prefers-color-scheme: dark) {
     .light.no-js {
-        /*--bg: hsl(200, 7%, 8%);*/
-        /* full black background */
-        --bg: hsl(0, 0%, 0%);
-         
+        --bg: hsl(200, 7%, 8%);
         --fg: #98a3ad;
 
         --sidebar-bg: #292c2f;
