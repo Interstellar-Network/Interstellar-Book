@@ -62,7 +62,6 @@ Because TUI is not yet avalaible on all mobile devices we use a Garbled Circuit/
 
 - **Up to 1,000,000 tps** - no tps limit due to slow consensus, thanks to IntegriTEE layer 2 based on hardware enclave technology 
 - **Social Recovery Service** - leverages the existing Substrate pallet and a novel decentralized autonomous recovery service 
-> We hope that we will be able to provide a response to the related RFP in the following phases
 - **Features to securely send coins with social network messages (even to persons with no-wallet)** - explained in [Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e) 
 
 
