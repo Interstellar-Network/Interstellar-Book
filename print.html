@@ -153,20 +153,10 @@
 </blockquote>
 <p>Interstellar is a novel non-custodial peace of mind mobile wallet with a hardware security level. Based on a Substrate blockchain and SubstraTEE/IntegriTEE workers.</p>
 <p><strong>We can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain</strong></p>
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145108720-becb76be-6c16-46c8-af69-7e953e5a166d.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145108818-6f8b6158-6c27-4f0d-a104-9d2469c73636.png">
-</picture>
+<p><img src="./fig/Hardware-Mobile-Blockchain-Overview.png" alt="Hardware Mobile Blockchain Overview" /></p>
 <p><strong>Thanks to Trusted User Interface TUI on mobile and Trusted Execution Environment on both mobile and blockchain nodes</strong></p>
 <p>Because TUI is not yet avalaible on all mobile devices we use a Garbled Circuit/Visual Cryptography scheme which provides an alternative that will be complementary down the road to mitigate potential flaws in TUI.</p>
-<picture>
-  <source 
-    srcset="https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png">
-</picture>
+<p><img src="./fig/IPhone-Android-TUI-Overview.png" alt="IPhone Android TUI Overview" /></p>
 <!-- ![Iphone-Android-TUI-White (1)](https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png#gh-dark-mode-only)
 
 ![Iphone-Android-TUI-Black (1)](https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png#gh-light-mode-only) -->
@@ -210,18 +200,18 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="intoduction-to-garbled-circuit-factory-gcf"><a class="header" href="#intoduction-to-garbled-circuit-factory-gcf">Intoduction to Garbled Circuit Factory (GCF)</a></h1>
 <p>The Garble Circuit Factory is the module in charge of building the Garbled Circuits (GC) used by the Interstellar infrastructure.</p>
 <p>Following is a high level overview of the generic pipeline used to generate GC.</p>
-<p><img src="./fig/GCF_pipeline.BW.svg" alt="PIPELINEHL" /></p>
+<p><img src="./fig/GC-Pipeline-Overview.svg" alt="GC Pipeline Overview" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-circuit-overview"><a class="header" href="#garbled-circuit-overview">Garbled Circuit Overview</a></h1>
 <h2 id="basic-garbled-circuit-structure-overview"><a class="header" href="#basic-garbled-circuit-structure-overview">Basic Garbled Circuit structure overview</a></h2>
 <p>A garbled circuit is a cryptographic obfuscation technique and a cryptographic algorithm that ensures computation privacy i.e. manages the protection of a boolean circuit that can be executed without leaking information. Neither the semantics of boolean operators (AND, OR, XOR, etc.) that make up the circuit nor the semantics of inputs and outputs of the circuit will be revealed to the attackers through reverse-engineering or brute force attacks.</p>
-<p><img src="./fig/Garbled_Circuit.jpg" alt="GC" /></p>
+<p><img src="./fig/GC-Structure-Overview.png" alt="GC Structure Overview" /></p>
 <ul>
 <li>Inputs and outputs are Garbled Values i.e. 128 bits token indistinguishable from random with a secret semantic value of 0 or 1 only known by the nodes</li>
 <li>Each boolean operator is implemented in the circuit by an encrypted truth table, decrypted by its respective Garbled Values inputs.</li>
 </ul>
 <p><a href="https://www.cs.fsu.edu/%7Etvhoang/thesis.pdf">Foundation of Garbled Circuits, Viet Tung Hoang, B.S.</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="garbled-circuit---visual-cryptography-screen"><a class="header" href="#garbled-circuit---visual-cryptography-screen">Garbled Circuit - Visual Cryptography Screen</a></h1>
-<p><img src="./fig/Visual-Cryptography-Technical-Overview.jpg" alt="GC-VC" /></p>
+<p><img src="./fig/Visual-Cryptography-Technical-Overview.png" alt="Visual Cryptography Technical Overview" /></p>
 <p><img src="./fig/Visual_crypto_animation_demo.gif" alt="VC demo" /></p>
 <h2 id="main-principles"><a class="header" href="#main-principles">Main principles</a></h2>
 <p>We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.</p>
@@ -246,7 +236,7 @@ However, it makes a fake UI attack, complexe and resource intensive enough to en
 <blockquote>
 <p><strong>The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF</strong></p>
 </blockquote>
-<p><img src="./fig/InterstellarDetailedPipeline.BW.svg" alt="GCF detailed" /></p>
+<p><img src="./fig/GC-Pipeline-Detailed.svg" alt="GC Pipeline Detailed" /></p>
 <p>Overview : </p>
 <p><code>[1] Generate~</code> “segment2pixel.v” using internal code [using e.g. 7segs.png]</p>
 <p><code>[2] Verilog  → .blif</code>: combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys</p>
@@ -405,7 +395,7 @@ and we use tokio/tonic also compliant with HTTP1 to comunicate with OCWs</p>
 <p><a href="https://ipfs.io/">IPFS</a> is used by the external GCF service for the storage of both configuration files and produced garbled circuits. Although, for now only ipfs hash/cid are used in the GCF substrate modules. At a later stage we could include substrate ipfs solutions like <a href="https://rs-ipfs.github.io/offchain-ipfs-manual/">OCW ipfs</a> to deal with other use cases e.g Secure Multi Party Computation. In that case pre-computed Garbled Circuit could be loaded from ipfs to be evaluated within a pallet module to manage an SMPC protocol with others parties.</p>
 </blockquote>
 <h2 id="flowchart-and--substrate-gcf-pallets"><a class="header" href="#flowchart-and--substrate-gcf-pallets">Flowchart and  substrate GCF pallets</a></h2>
-<p><img src="./fig/GCF-Substrate.svg" alt="FC GCF pallets" /></p>
+<p><img src="./fig/GCF-Flowchart-Substrate-Pallets.svg" alt="GCF Flowchart Substrate Pallets" /></p>
 <h2 id="gcf-apis"><a class="header" href="#gcf-apis">GCF APIs</a></h2>
 <p>This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.</p>
 <h3 id="launh-circuit-production-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-production-from-ocw-on-gcf-external-service">Launh circuit production from OCW on GCF (external service)</a></h3>
