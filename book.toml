@@ -48,7 +48,7 @@ title = "The Interstellar Book"
 
 [output.html]
 default-theme = "navy"
-
+preferred-dark-theme = "navy"
 #additional-css = ["theme/pagetoc.css"] 
 #additional-js  = ["theme/pagetoc.js"]
 
