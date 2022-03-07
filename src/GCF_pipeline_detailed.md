@@ -181,10 +181,12 @@ void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
 
 ### [5][6] Garbling
 
-Pretty straitforward call to lib_garble library 
+Pretty straitforward call to `lib_garble` library
+
 `ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/initial/src/justgarble/garble_helper.cpp#L16)
 
 >This part is related to the management of display circuit OTP related to M3
+
 Technically garbling + “stripping” (i.e. generating the “pre-packmsg”).
 This is at this step that the pinpad/OTP randomness is introduced, i.e. the .skcd generated at the previous step CAN/SHOULD be reused (and it is) all the time (i.e. it is always reused, except when changing size or resolution).
 
