@@ -144,40 +144,58 @@
 <h2 id="gcf-apis"><a class="header" href="#gcf-apis">GCF APIs</a></h2>
 <p>This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.</p>
 <h3 id="launh-circuit-production-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-production-from-ocw-on-gcf-external-service">Launh circuit production from OCW on GCF (external service)</a></h3>
-<p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L17">api_circuits/src/circuit_routes.rs:17</a></p>
+<p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L57">api_circuits/src/circuit_routes.rs:57</a></p>
 <p><code>Request</code>   : start the circuit(s) generation with hash/cid  of master files + parameter related to circuit production e.g size/resolution of display circuits</p>
 <p><code>Response</code>  : get hash/cid of the circuit on ipfs</p>
 <p><code>Status</code>    : circuit production state</p>
 <p>circuit_route.rs</p>
-<pre><pre class="playground"><code class="language-rust editable">use tonic::{Request, Response, Status};
-
-use interstellarpbapicircuits::circuits_api_server::CircuitsApi;
-use interstellarpbapicircuits::circuits_api_server::CircuitsApiServer;
-use interstellarpbapicircuits::CircuitReply;
-use interstellarpbapicircuits::Empty;
-
-pub mod interstellarpbapicircuits {
-    tonic::include_proto!(&quot;interstellarpbapicircuits&quot;);
-}
-
-#[derive(Default)]
-pub struct CircuitsServerImpl {}
-
-#[tonic::async_trait]
-impl CircuitsApi for CircuitsServerImpl {
-    async fn generate_circuit(
+<pre><pre class="playground"><code class="language-rust editable">#[tonic::async_trait]
+impl SkcdApi for SkcdApiServerImpl {
+    async fn generate_skcd_display(
         &amp;self,
-        request: Request&lt;Empty&gt;,
-    ) -&gt; Result&lt;Response&lt;CircuitReply&gt;, Status&gt; {
+        request: Request&lt;SkcdDisplayRequest&gt;,
+    ) -&gt; Result&lt;Response&lt;SkcdDisplayReply&gt;, Status&gt; {
         println!(&quot;Got a request from {:?}&quot;, request.remote_addr());
+        let width = request.get_ref().width;
+        let height = request.get_ref().height;
 
-        // TODO call the C++ wrapper
-        // TODO store into IPFS
-        let ipfs_hash = &quot;123456&quot;;
+        // TODO class member/Trait for &quot;lib_circuits_wrapper::ffi::new_circuit_gen_wrapper()&quot;
+        // TODO cleanup; remove clone(), etc
+        let lib_circuits_wrapper = tokio::task::spawn_blocking(move || {
+            let tmp_dir = Builder::new().prefix(&quot;example&quot;).tempdir().unwrap();
 
-        let reply = CircuitReply {
-            hash: format!(&quot;Hello {}!&quot;, ipfs_hash),
+            let file_path = tmp_dir.path().join(&quot;output.skcd.pb.bin&quot;);
+            let mut tmp_file = File::create(file_path.clone()).unwrap();
+
+            let wrapper = lib_circuits_wrapper::ffi::new_circuit_gen_wrapper();
+
+            // TODO make the C++ API return a buffer?
+            wrapper.GenerateDisplaySkcd(file_path.as_os_str().to_str().unwrap(), width, height);
+
+            //`Result::unwrap()` on an `Err` value: Os { code: 9, kind: Uncategorized, message: &quot;Bad file descriptor&quot; }', src/circuits_routes.rs:81:47
+            // let mut buf = String::new();
+            // tmp_file.read_to_string(&amp;mut buf).unwrap();
+            // buf.clone()
+
+            // Error { kind: InvalidData, message: &quot;stream did not contain valid UTF-8&quot; }', src/circuits_routes.rs:86:52
+            // let contents =
+            //     std::fs::read_to_string(file_path).expect(&quot;Something went wrong reading the file&quot;);
+            let contents = std::fs::read(file_path).expect(&quot;Something went wrong reading the file&quot;);
+
+            contents
+        })
+        .await
+        .unwrap();
+
+        let data = Cursor::new(lib_circuits_wrapper);
+
+        // TODO error handling, or at least logging
+        let ipfs_result = self.ipfs_client().add(data).await.unwrap();
+
+        let reply = SkcdDisplayReply {
+            hash: format!(&quot;{}&quot;, ipfs_result.hash),
         };
+
         Ok(Response::new(reply))
     }
 }
