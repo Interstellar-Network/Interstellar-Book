@@ -39,9 +39,108 @@ Note : this is the only file in the pipeline that needs to be regenerated when c
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
-7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
+
 
 `Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
+
+7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
+
+```cpp,etitable
+Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
+    : _width(width), _height(height) {
+  auto png_img = cimg_library::CImg<unsigned char>();
+  png_img.load_png(
+      (boost::filesystem::path(interstellar::data_dir) / "7segs.png").c_str());
+
+  // TODO resize to match desired final size in the display
+  // keep the .png aspect ratio!
+  // "Method of interpolation:
+  //   -1 = no interpolation: raw memory resizing.
+  //   0 = no interpolation: additional space is filled according to
+  //   boundary_conditions. 1 = nearest-neighbor interpolation. 2 = moving
+  //   average interpolation. 3 = linear interpolation. 4 = grid interpolation.
+  //   5 = cubic interpolation.
+  //   6 = lanczos interpolation."
+  float png_aspect_ratio = static_cast<float>(png_img.width()) /
+                           static_cast<float>(png_img.height());
+  // TODO dynamic; eg based on how many we want to draw, and their desired size
+  uint32_t png_desired_width =
+      _width / 5;  // a fifth of the width looks pretty nice
+  uint32_t png_desired_height =
+      static_cast<float>(png_desired_width) / png_aspect_ratio;
+  png_img.resize(
+      /* size_x */ png_desired_width,
+      /* size_y = -100 */ png_desired_height,
+      /* size_z = -100 */ -100,
+      /* size_c = -100 */ -100,
+      /* 	interpolation_type = 1 */ 1,
+      /* boundary_conditions = 0 */ 0,
+      /* centering_x = 0 */ 0,
+      /* centering_y = 0 */ 0,
+      /* centering_z = 0 */ 0,
+      /* centering_c = 0 */ 0);
+
+  assert(ImgListUniqueColors(png_img).size() == 7 &&
+         "Something went wrong? Should probably only have found 7 segments");
+
+  // Prepare the display with the desired dimensions
+  // MUST use ctor with "value" else
+  // "Warning
+  //       The allocated pixel buffer is not filled with a default value, and is
+  //       likely to contain garbage values. In order to initialize pixel values
+  //       during construction (e.g. with 0), use constructor CImg(unsigned
+  //       int,unsigned int,unsigned int,unsigned int,T) instead."
+  auto display_img = cimg_library::CImg<uint8_t>(
+      /* size_x */ _width,
+      /* size_y */ _height,
+      /* size_z */ 1,
+      /* size_c = spectrum = nb of channels */ 4,
+      /* value */ 0);
+  assert(display_img.width() == static_cast<int32_t>(_width) &&
+         display_img.height() == static_cast<int32_t>(_height) &&
+         "wrong dimensions!");
+
+  // Construct the final display by assembling the .png
+  // TODO move that into helper function that draw several digits where desired
+  auto horizontal_margin = (display_img.width() * 0.05);
+  auto offset_height = (display_img.height() - png_img.height()) / 2;
+  // NOTE: we use opacity to convert "unique in segs.png" to "globally unique"
+  // we could do it differently(i.e. more robustly) but this works just fine for
+  // now
+  // technically this limits to 255 segments in the final image b/c of opacity =
+  // ALPHA channel and that is [0-255] but this is more than we need for now
+  display_img.draw_image(
+      /* x0 */ (display_img.width() / 2) - png_img.width() - horizontal_margin,
+      /* y0 */ offset_height,
+      /* z0 */ 0,
+      /* c0 */ 0,
+      /* sprite */ png_img,
+      /* opacity */ 1.0f);
+  display_img.draw_image(
+      /* x0 */ (display_img.width() / 2) + horizontal_margin,
+      /* y0 */ offset_height,
+      /* z0 */ 0,
+      /* c0 */ 0,
+      /* sprite */ png_img,
+      /* opacity */ 0.99f);
+
+  std::unordered_map<ColorRGBA, uint32_t, absl::Hash<ColorRGBA>>
+      map_color_to_seg_id = ImgListUniqueColors(display_img);
+  _nb_segments = map_color_to_seg_id.size();
+  assert(_nb_segments == ImgListUniqueColors(png_img).size() * 2 &&
+         "Something went wrong? Should probably only have found 7*2 segments");
+
+  // TODO add a flag/option to control this; only useful for dev/debug
+  auto bitmap_png = "bitmap.png";
+  display_img.save_png(bitmap_png);
+  LOG(INFO) << "saved : " << std::filesystem::current_path() / bitmap_png;
+
+  // now prepare the final "bitmap"
+  // i.e. replace each color pixel by its corresponding segment ID
+  _bitmap_seg_ids_rle =
+      ImgReplaceBitmapSegIDs(display_img, map_color_to_seg_id);
+}
+```
 
 Then the generation of `segment2pixel.v` VHDL file
 
