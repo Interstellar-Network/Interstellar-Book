@@ -138,7 +138,9 @@
 <p>This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.</p>
 <p>It illustrates the way Garbled Circuit Factory can be used with substrate OCWs for the production of the display garbled circuits used by Interstellar.</p>
 <h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
-<p>NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
+<blockquote>
+<p>The file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
+</blockquote>
 <p><strong>On the following schema, cached files are represented with red doted line</strong></p>
 <blockquote>
 <p><strong>The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF</strong></p>
@@ -154,15 +156,13 @@
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
 <blockquote>
 <p>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
+The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
-<p>7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
+<p>7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
 <blockquote>
-<ul>
-<li>We can use other files like 14segs.png to handle segment based visual cryptography down the road</li>
-</ul>
+<p>We can use other files like 14segs.png to handle segment based visual cryptography down the road</p>
 </blockquote>
 <pre><code class="language-cpp editable">Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
     : _width(width), _height(height) {
