@@ -247,8 +247,103 @@ However, it makes a fake UI attack, complexe and resource intensive enough to en
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
 <p>Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
-<p>7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
+<p>7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
+<pre><code class="language-cpp etitable">Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
+    : _width(width), _height(height) {
+  auto png_img = cimg_library::CImg&lt;unsigned char&gt;();
+  png_img.load_png(
+      (boost::filesystem::path(interstellar::data_dir) / &quot;7segs.png&quot;).c_str());
+
+  // TODO resize to match desired final size in the display
+  // keep the .png aspect ratio!
+  // &quot;Method of interpolation:
+  //   -1 = no interpolation: raw memory resizing.
+  //   0 = no interpolation: additional space is filled according to
+  //   boundary_conditions. 1 = nearest-neighbor interpolation. 2 = moving
+  //   average interpolation. 3 = linear interpolation. 4 = grid interpolation.
+  //   5 = cubic interpolation.
+  //   6 = lanczos interpolation.&quot;
+  float png_aspect_ratio = static_cast&lt;float&gt;(png_img.width()) /
+                           static_cast&lt;float&gt;(png_img.height());
+  // TODO dynamic; eg based on how many we want to draw, and their desired size
+  uint32_t png_desired_width =
+      _width / 5;  // a fifth of the width looks pretty nice
+  uint32_t png_desired_height =
+      static_cast&lt;float&gt;(png_desired_width) / png_aspect_ratio;
+  png_img.resize(
+      /* size_x */ png_desired_width,
+      /* size_y = -100 */ png_desired_height,
+      /* size_z = -100 */ -100,
+      /* size_c = -100 */ -100,
+      /* 	interpolation_type = 1 */ 1,
+      /* boundary_conditions = 0 */ 0,
+      /* centering_x = 0 */ 0,
+      /* centering_y = 0 */ 0,
+      /* centering_z = 0 */ 0,
+      /* centering_c = 0 */ 0);
+
+  assert(ImgListUniqueColors(png_img).size() == 7 &amp;&amp;
+         &quot;Something went wrong? Should probably only have found 7 segments&quot;);
+
+  // Prepare the display with the desired dimensions
+  // MUST use ctor with &quot;value&quot; else
+  // &quot;Warning
+  //       The allocated pixel buffer is not filled with a default value, and is
+  //       likely to contain garbage values. In order to initialize pixel values
+  //       during construction (e.g. with 0), use constructor CImg(unsigned
+  //       int,unsigned int,unsigned int,unsigned int,T) instead.&quot;
+  auto display_img = cimg_library::CImg&lt;uint8_t&gt;(
+      /* size_x */ _width,
+      /* size_y */ _height,
+      /* size_z */ 1,
+      /* size_c = spectrum = nb of channels */ 4,
+      /* value */ 0);
+  assert(display_img.width() == static_cast&lt;int32_t&gt;(_width) &amp;&amp;
+         display_img.height() == static_cast&lt;int32_t&gt;(_height) &amp;&amp;
+         &quot;wrong dimensions!&quot;);
+
+  // Construct the final display by assembling the .png
+  // TODO move that into helper function that draw several digits where desired
+  auto horizontal_margin = (display_img.width() * 0.05);
+  auto offset_height = (display_img.height() - png_img.height()) / 2;
+  // NOTE: we use opacity to convert &quot;unique in segs.png&quot; to &quot;globally unique&quot;
+  // we could do it differently(i.e. more robustly) but this works just fine for
+  // now
+  // technically this limits to 255 segments in the final image b/c of opacity =
+  // ALPHA channel and that is [0-255] but this is more than we need for now
+  display_img.draw_image(
+      /* x0 */ (display_img.width() / 2) - png_img.width() - horizontal_margin,
+      /* y0 */ offset_height,
+      /* z0 */ 0,
+      /* c0 */ 0,
+      /* sprite */ png_img,
+      /* opacity */ 1.0f);
+  display_img.draw_image(
+      /* x0 */ (display_img.width() / 2) + horizontal_margin,
+      /* y0 */ offset_height,
+      /* z0 */ 0,
+      /* c0 */ 0,
+      /* sprite */ png_img,
+      /* opacity */ 0.99f);
+
+  std::unordered_map&lt;ColorRGBA, uint32_t, absl::Hash&lt;ColorRGBA&gt;&gt;
+      map_color_to_seg_id = ImgListUniqueColors(display_img);
+  _nb_segments = map_color_to_seg_id.size();
+  assert(_nb_segments == ImgListUniqueColors(png_img).size() * 2 &amp;&amp;
+         &quot;Something went wrong? Should probably only have found 7*2 segments&quot;);
+
+  // TODO add a flag/option to control this; only useful for dev/debug
+  auto bitmap_png = &quot;bitmap.png&quot;;
+  display_img.save_png(bitmap_png);
+  LOG(INFO) &lt;&lt; &quot;saved : &quot; &lt;&lt; std::filesystem::current_path() / bitmap_png;
+
+  // now prepare the final &quot;bitmap&quot;
+  // i.e. replace each color pixel by its corresponding segment ID
+  _bitmap_seg_ids_rle =
+      ImgReplaceBitmapSegIDs(display_img, map_color_to_seg_id);
+}
+</code></pre>
 <p>Then the generation of <code>segment2pixel.v</code> VHDL file</p>
 <p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
 <p>A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
