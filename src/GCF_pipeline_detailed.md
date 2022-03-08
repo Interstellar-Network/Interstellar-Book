@@ -35,9 +35,9 @@ Overview :
 
 ### [1] Generate “segment2pixel.v”
 
-This is the core verilog file of our diaplay circuit*
 
-> * This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
+
+> This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
 The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
