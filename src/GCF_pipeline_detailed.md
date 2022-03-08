@@ -150,7 +150,7 @@ A “bitmap” is generated with the correct number of digits at the correct pos
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done
 
-```cpp, editable
+```cpp,editable
 std::string Segments2Pixels::GenerateVerilog() {
   std::string verilog_buf;
   unsigned int nb_inputs = _nb_segments - 1,
