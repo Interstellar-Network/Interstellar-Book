@@ -7,12 +7,12 @@ It illustrates the way Garbled Circuit Factory can be used with substrate OCWs f
 ## Pipeline
 
 
-NOTE: the file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
+>The file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.
 
 
 **On the following schema, cached files are represented with red doted line**
 
-> **The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF**
+>**The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF**
 
 
 ![GC Pipeline Detailed](./fig/GC-Pipeline-Detailed.svg)
@@ -35,10 +35,8 @@ Overview :
 
 ### [1] Generate “segment2pixel.v”
 
-
-
-> This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
+>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
+The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
@@ -46,9 +44,9 @@ This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipel
 
 `Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
 
-7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
+7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
 
->* We can use other files like 14segs.png to handle segment based visual cryptography down the road
+>We can use other files like 14segs.png to handle segment based visual cryptography down the road
 
 ```cpp,editable
 Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
