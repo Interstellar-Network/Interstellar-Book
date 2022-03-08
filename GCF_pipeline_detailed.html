@@ -152,11 +152,22 @@
 <p><code>[5] Garbling .skcd → .garbled</code>: using JustGarble</p>
 <p><code>[6] Finalize/Serialize .garbled → .pgarbled</code>: Using internal code; allows for parallel eval of a Garbled Circuit</p>
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
-<p>Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
+<p>This is the core verilog file of our diaplay circuit*</p>
+<blockquote>
+<ul>
+<li>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
+The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</li>
+</ul>
+</blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
 <p>7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
-<pre><code class="language-cpp etitable">Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
+<blockquote>
+<ul>
+<li>We can use other files like 14segs.png to handle segment based visual cryptography down the road</li>
+</ul>
+</blockquote>
+<pre><code class="language-cpp editable">Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
     : _width(width), _height(height) {
   auto png_img = cimg_library::CImg&lt;unsigned char&gt;();
   png_img.load_png(
@@ -251,7 +262,7 @@
       ImgReplaceBitmapSegIDs(display_img, map_color_to_seg_id);
 }
 </code></pre>
-<p>Then the generation of <code>segment2pixel.v</code> VHDL file</p>
+<p>Then <code>segment2pixel.v</code> VHDL file is generated:</p>
 <p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
 <p>A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
@@ -320,9 +331,6 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
   return verilog_buf;
 }
 </code></pre>
-<blockquote>
-<p>We can use other files like 14segs.png to handle segment based visual cryptography down the road</p>
-</blockquote>
 <h3 id="234-generate-skcd"><a class="header" href="#234-generate-skcd">[2][3][4] Generate .skcd</a></h3>
 <p>The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :</p>
 <p><code>CircuitPipeline::GenerateSkcd</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/circuit_lib.cpp#L19">lib_circuits/src/circuit_lib.cpp:19</a></p>
