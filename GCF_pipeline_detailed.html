@@ -152,12 +152,9 @@
 <p><code>[5] Garbling .skcd → .garbled</code>: using JustGarble</p>
 <p><code>[6] Finalize/Serialize .garbled → .pgarbled</code>: Using internal code; allows for parallel eval of a Garbled Circuit</p>
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
-<p>This is the core verilog file of our diaplay circuit*</p>
 <blockquote>
-<ul>
-<li>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</li>
-</ul>
+<p>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
+The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
