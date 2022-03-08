@@ -35,7 +35,10 @@ Overview :
 
 ### [1] Generate “segment2pixel.v”
 
-Note : this is the only file in the pipeline that needs to be regenerated when changing size/resolution. The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
+This is the core verilog file of our diaplay circuit*
+
+> * This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
+The rest (displaymain+xorexpand+rndswitch) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
@@ -45,7 +48,9 @@ This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipel
 
 7segs.png (or other*) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
 
-```cpp,etitable
+>* We can use other files like 14segs.png to handle segment based visual cryptography down the road
+
+```cpp,editable
 Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
     : _width(width), _height(height) {
   auto png_img = cimg_library::CImg<unsigned char>();
@@ -142,7 +147,7 @@ Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
 }
 ```
 
-Then the generation of `segment2pixel.v` VHDL file
+Then `segment2pixel.v` VHDL file is generated:
 
 `Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:232](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
 
@@ -215,7 +220,7 @@ std::string Segments2Pixels::GenerateVerilog() {
   return verilog_buf;
 }
 ```
-> We can use other files like 14segs.png to handle segment based visual cryptography down the road
+
 
 
 ### [2][3][4] Generate .skcd
