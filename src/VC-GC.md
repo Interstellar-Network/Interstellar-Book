@@ -32,8 +32,6 @@ However, it makes a fake UI attack, complexe and resource intensive enough to en
 This is the way we aim at resisting potential targeted attacks. Thanks to our proof of history of legitimate computation scheme, (roadmap/research in progress), based on a specific reusable Garbled Circuit evaluation.
 
 
-
-
 ## Explanation
 
 > We started by implementing a working solution that outputs visual cryptography shares. We then realized that it was a bit disturbing for the user and that a pure visual cryptography scheme is not crucial for our overall security model. We then decided to provide a more friendly solution for the user that is also more efficient especially regarding Garbled Circuit size.
