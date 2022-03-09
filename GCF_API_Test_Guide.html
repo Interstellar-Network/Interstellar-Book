@@ -135,19 +135,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="gcf-apis-testing-guide"><a class="header" href="#gcf-apis-testing-guide">GCF APIs Testing Guide</a></h1>
-<p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
-<p>Required the installation of go (to use go-ipfs) and ipfs</p>
-<h2 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">prerequisites (Go and IPFS)</a></h2>
+<p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.
+Required the installation of go (to use go-ipfs) and ipfs</p>
+<h2 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">Prerequisites (Go and IPFS)</a></h2>
 <h3 id="install-go"><a class="header" href="#install-go">Install Go:</a></h3>
 <ul>
-<li>
-<p>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></p>
-</li>
-<li>
-<p>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #</p>
-</li>
+<li>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></li>
+<li>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #
+you can replace the tar file with its last version in the following command.</li>
 </ul>
-<p>you can replace the tar file with its last version in the following command.</p>
 <pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 </code></pre>
 <p>check version</p>
@@ -170,7 +166,7 @@ sudo bash install.sh
 <p>check ipfs</p>
 <pre><code class="language-sh">ipfs --version
 </code></pre>
-<p>set env var path and launch the ipfs deamon</p>
+<p>Set env var path and launch the ipfs deamon</p>
 <pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
@@ -221,8 +217,10 @@ Daemon is ready
 }
 </code></pre>
 <h2 id="test-repositories"><a class="header" href="#test-repositories">Test repositories</a></h2>
-<p><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></p>
-<p><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs</a></p>
+<ul>
+<li><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></li>
+<li><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs</a></li>
+</ul>
 
                     </main>
 
