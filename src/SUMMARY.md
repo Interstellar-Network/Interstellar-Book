@@ -9,3 +9,4 @@
     - [Visual Cryptography Display](./VC-GC.md)
     - [Detailed Pipeline for Display Circuits](./GCF_pipeline_detailed.md)
     - [Garbled Circuit Factory API](./GCF_API.md)
+        - [GCF APIs Testing Guide](./GCF_API_Test_Guide.md)
