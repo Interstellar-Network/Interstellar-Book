@@ -1,17 +1,10 @@
 # GCF APIs Testing Guide
-
-
 this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.
-
 Required the installation of go (to use go-ipfs) and ipfs
-
-## prerequisites (Go and IPFS)
-
+## Prerequisites (Go and IPFS)
 ### Install Go:
 - Install Go with download of the [last version](https://go.dev/doc/install)
-
 - Installing Go on Ubuntu 20.04 with version `go1.17.8.linux-amd64` #
-
 you can replace the tar file with its last version in the following command.
 ```sh
 wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
@@ -20,8 +13,6 @@ check version
 ```,sh,editable
 go version
 ```
-
-
 ### Install IPFS
 - [IPFS Desktop Install](https://github.com/ipfs/ipfs-desktop#install)
         - that way the full IPFS env is set up; alternatively you can just install go-ipfs
@@ -42,9 +33,7 @@ check ipfs
 ```sh
 ipfs --version
 ```
-
-set env var path and launch the ipfs deamon
-
+Set env var path and launch the ipfs deamon
 ```sh
 GO_IPFS_PATH=/usr/local/bin/ipfs
 
@@ -52,7 +41,6 @@ IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
 ```
-
 deamon launch
 ```sh
 Initializing daemon...
@@ -98,12 +86,6 @@ json config:
     ]
 }
 ```
-
 ## Test repositories
-
-
-[Circuit APIs](https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
-
-
-[Garble APIs](https://github.com/Interstellar-Network/api_garble/tree/main/tests)
-
+- [Circuit APIs](https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
+- [Garble APIs](https://github.com/Interstellar-Network/api_garble/tree/main/tests)
