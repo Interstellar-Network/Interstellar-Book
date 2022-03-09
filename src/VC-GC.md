@@ -52,12 +52,12 @@ The Garbled Circuit will randomly output each:
 
 of a frame with a probability of 1/n ( n > 2)
 
-### Display example:
+### Display example
 ![walletdemo](./fig/Wallet-Superposition-Black-Background-Demo.png)
 
 ### Simulations
 To fine tune the design of our circuits and provide realistic look and feel of the solution, we designed the following
-[Transaction validation screen simulations](https://www.interstellar.gg/simulation) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs)
+[Transaction validation screen simulations](https://www.interstellar.gg/simulation) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs) and [PsychoPy neuroscience/psychophysic tools](https://www.psychopy.org/)
 
 ### Future plans
 At a later stage, we aim at reusing our pixel based and/or  [segment-based visual cryptography](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.84.7421&rep=rep1&type=pdf) to increase the complexity level of potential attacks and enable video recording proof scheme without disturbing the smooth user experience. 
