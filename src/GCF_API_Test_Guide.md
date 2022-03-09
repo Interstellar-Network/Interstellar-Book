@@ -64,8 +64,6 @@ WebUI: http://127.0.0.1:45167/webui
 Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 ```
-
-json config:
 ```json
 
 {
@@ -101,3 +99,47 @@ json config:
 
 - [Circuit APIs](https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
 - [Garble APIs](https://github.com/Interstellar-Network/api_garble/tree/main/tests)
+
+
+Just note mode: need cosmetic update
+First Compile lib_circuit and lib_garble in deps of the respective repos
+
+
+mkdir build
+cd build
+cmake .. (first time only)
+cmake --build .
+
+check cmake version > 3.22
+
+
+to update it on Ubuntu 
+
+Check your current version with:
+
+cmake --version
+Uninstall it with:
+
+sudo apt remove cmake
+Visit https://cmake.org/download/ and download the latest bash script.
+
+In my case cmake-3.6.2-Linux-x86_64.sh is sufficient.
+Copy the script to /opt/.
+
+Make the script executable:
+
+chmod +x /opt/cmake-3.*your_version*.sh
+Change to desired installation directory (to /opt/ for example)
+
+As of cmake 3.10.2 the installer no longer seems to install to /opt by default
+Run:
+
+sudo bash /opt/cmake-3.*your_version*.sh
+You will need to press y twice.
+
+The script installs the binary to /opt/cmake-3.*your_version* so in order to get the cmake command, make a symbolic link:
+
+sudo ln -s /opt/cmake-3.*your_version*/bin/* /usr/local/bin
+Test your results with:
+
+cmake --version
