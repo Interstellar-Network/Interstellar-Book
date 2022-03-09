@@ -198,17 +198,25 @@
 <h2 id="testing-guide"><a class="header" href="#testing-guide">Testing Guide</a></h2>
 <p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
 <p>Required the installation of go (to use go-ipfs) and ipfs</p>
-<h3 id="prerequisites"><a class="header" href="#prerequisites">prerequisites</a></h3>
-<p>Install go; eg https://go.dev/doc/install</p>
-<p>Installing Go on Ubuntu 20.04 #</p>
+<h3 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">prerequisites (go and ipfs)</a></h3>
+<h4 id="install-go"><a class="header" href="#install-go">Install go:</a></h4>
+<ul>
+<li>
+<p>Install go with download of the <a href="https://go.dev/doc/install">last version</a></p>
+</li>
+<li>
+<p>Installing go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #</p>
+</li>
+</ul>
+<p>you can replace tar file with its last version.</p>
 <pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 </code></pre>
 <p>check version</p>
 <pre><code class="language- sh editable">go version
 </code></pre>
-<p>Install IPFS</p>
+<h4 id="install-ipfs"><a class="header" href="#install-ipfs">Install ipfs</a></h4>
 <ul>
-<li>eg https://github.com/ipfs/ipfs-desktop#install
+<li>https://github.com/ipfs/ipfs-desktop#install
 - that way the full IPFS env is set up; alternatively you can just install go-ipfs</li>
 <li>ALTERNATIVE https://docs.ipfs.io/install/command-line/#official-distributions</li>
 </ul>
@@ -221,10 +229,9 @@
 sudo bash install.sh
 </code></pre>
 <p>check ipfs</p>
-<pre><code class="language-sh editable">ipfs --version
+<pre><code class="language-sh">ipfs --version
 </code></pre>
-<p>set env var path
-and launch the ipfs deamon</p>
+<p>set env var path and launch the ipfs deamon</p>
 <pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
