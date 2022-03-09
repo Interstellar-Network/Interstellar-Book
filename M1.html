@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html" class="active">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory API</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html" class="active">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">1.4.1.</strong> GCF APIs Testing Guide</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -135,100 +135,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="m1-delivery"><a class="header" href="#m1-delivery">M1 Delivery</a></h1>
+<h2 id="garbled-circuit-factory-gcf-and-display-circuit-overview"><a class="header" href="#garbled-circuit-factory-gcf-and-display-circuit-overview">Garbled Circuit Factory (GCF) and Display Circuit overview</a></h2>
+<h3 id="gcf-overview"><a class="header" href="#gcf-overview">GCF Overview</a></h3>
+<p><a href="https://book.interstellar.gg/GCF.html">GCF generic pipeline</a></p>
+<h3 id="garbled-circuit-gc-overview"><a class="header" href="#garbled-circuit-gc-overview">Garbled Circuit GC Overview</a></h3>
+<p><a href="https://book.interstellar.gg/GC.html">Basic GC structure</a></p>
+<h3 id="display-circuit-overview"><a class="header" href="#display-circuit-overview">Display Circuit overview</a></h3>
+<p><a href="https://book.interstellar.gg/VC-GC.html">Visual Cryptography display principles</a></p>
 <h2 id="code-documentation"><a class="header" href="#code-documentation">Code documentation</a></h2>
-<h3 id="detailed-gcf-pipeline-for-production-of-the-display-circuits-"><a class="header" href="#detailed-gcf-pipeline-for-production-of-the-display-circuits-">Detailed GCF Pipeline for production of the Display Circuits :</a></h3>
-<p><a href="https://book.interstellar.gg/GCF_pipeline_detailed.html">GCF pipeline</a></p>
-<h3 id="gcf-apis-for-gcf-ocws"><a class="header" href="#gcf-apis-for-gcf-ocws">GCF APIs for GCF OCWs:</a></h3>
-<p><a href="https://book.interstellar.gg/GCF_API.html">GCF APIs</a></p>
+<h3 id="gcf-pipeline"><a class="header" href="#gcf-pipeline">GCF Pipeline:</a></h3>
+<p><a href="https://book.interstellar.gg/GCF_pipeline_detailed.html">GCF detailed pipeline for the production of display circuits</a></p>
+<h3 id="gcf-apis"><a class="header" href="#gcf-apis">GCF APIs:</a></h3>
+<p><a href="https://book.interstellar.gg/GCF_API.html">GCF APIs for GCF OCWs</a></p>
 <h2 id="testing-guide"><a class="header" href="#testing-guide">Testing Guide</a></h2>
-<p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
-<p>Required the installation of go (to use go-ipfs) and ipfs</p>
-<h3 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">prerequisites (Go and IPFS)</a></h3>
-<h4 id="install-go"><a class="header" href="#install-go">Install Go:</a></h4>
-<ul>
-<li>
-<p>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></p>
-</li>
-<li>
-<p>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #</p>
-</li>
-</ul>
-<p>you can replace the tar file with its last version in the following command.</p>
-<pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-</code></pre>
-<p>check version</p>
-<pre><code class="language- sh editable">go version
-</code></pre>
-<h4 id="install-ipfs"><a class="header" href="#install-ipfs">Install IPFS</a></h4>
-<ul>
-<li><a href="https://github.com/ipfs/ipfs-desktop#install">IPFS Desktop Install</a>
-- that way the full IPFS env is set up; alternatively you can just install go-ipfs</li>
-<li><a href="https://docs.ipfs.io/install/command-line/#official-distributions">IPFS with go-ipfs client Install</a></li>
-</ul>
-<p>Installing ipfs on linux (whithout desktop):</p>
-<pre><code class="language-sh">wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
-</code></pre>
-<pre><code class="language-sh">tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz
-</code></pre>
-<pre><code class="language- sh">cd go-ipfs
-sudo bash install.sh
-</code></pre>
-<p>check ipfs</p>
-<pre><code class="language-sh">ipfs --version
-</code></pre>
-<p>set env var path and launch the ipfs deamon</p>
-<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
-
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
-</code></pre>
-<p>deamon launch</p>
-<pre><code class="language-sh">Initializing daemon...
-go-ipfs version: 0.12.0
-Repo version: 12
-System version: amd64/linux
-Golang version: go1.16.12
-Swarm listening on /ip4/127.0.0.1/tcp/40319
-Swarm listening on /p2p-circuit
-Swarm announcing /ip4/127.0.0.1/tcp/40319
-API server listening on /ip4/127.0.0.1/tcp/45167
-WebUI: http://127.0.0.1:45167/webui
-Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
-Daemon is ready
-</code></pre>
-<p>json config:</p>
-<pre><code class="language-json">{
-    &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
-    &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
-    &quot;Addresses&quot;: [
-    &quot;/ip4/127.0.0.1/tcp/40319/p2p/12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;
-    ],
-    &quot;AgentVersion&quot;: &quot;go-ipfs/0.12.0/&quot;,
-    &quot;ProtocolVersion&quot;: &quot;ipfs/0.1.0&quot;,
-    &quot;Protocols&quot;: [
-            &quot;/floodsub/1.0.0&quot;,
-            &quot;/ipfs/bitswap&quot;,
-            &quot;/ipfs/bitswap/1.0.0&quot;,
-            &quot;/ipfs/bitswap/1.1.0&quot;,
-            &quot;/ipfs/bitswap/1.2.0&quot;,
-            &quot;/ipfs/id/1.0.0&quot;,
-            &quot;/ipfs/id/push/1.0.0&quot;,
-            &quot;/ipfs/lan/kad/1.0.0&quot;,
-            &quot;/ipfs/ping/1.0.0&quot;,
-            &quot;/libp2p/autonat/1.0.0&quot;,
-            &quot;/libp2p/circuit/relay/0.1.0&quot;,
-            &quot;/libp2p/circuit/relay/0.2.0/stop&quot; ,
-            &quot;/meshsub/1.0.0&quot;,
-            &quot;/meshsub/1.1.0&quot;,
-            &quot;/p2p/id/delta/1.0.0&quot;,
-            &quot;/x/&quot;
-    ]
-}
-</code></pre>
-<h3 id="test-repositories"><a class="header" href="#test-repositories">Test repositories</a></h3>
-<p><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></p>
-<p><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs</a></p>
+<p><a href="https://book.interstellar.gg/GCF_API_Test_Guide.html">GCF APIs Testing Guide</a></p>
 <h2 id="docker-demo"><a class="header" href="#docker-demo">Docker demo</a></h2>
 <h2 id="article"><a class="header" href="#article">Article</a></h2>
 

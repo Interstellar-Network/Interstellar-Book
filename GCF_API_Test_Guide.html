@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - Interstellar Book</title>
+        <title>GCF APIs Testing Guide - Interstellar Book</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">1.4.1.</strong> GCF APIs Testing Guide</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html" class="active"><strong aria-hidden="true">1.4.1.</strong> GCF APIs Testing Guide</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,67 +134,102 @@
 
                 <div id="content" class="content">
                     <main>
-                        <picture>
-  <source 
-    srcset="fig/Interstellar-White-Text.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="fig/Interstellar-Black-Text.png">
-</picture>
-<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>“The blockchain ecosystem needs an easy to use interface with hardware wallet security to reach the mass market.”</p>
-<p>The main pain points of non-custodial wallet solutions still are:</p>
+                        <h1 id="gcf-apis-testing-guide"><a class="header" href="#gcf-apis-testing-guide">GCF APIs Testing Guide</a></h1>
+<p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
+<p>Required the installation of go (to use go-ipfs) and ipfs</p>
+<h2 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">prerequisites (Go and IPFS)</a></h2>
+<h3 id="install-go"><a class="header" href="#install-go">Install Go:</a></h3>
 <ul>
-<li><strong>User experience</strong>  <a href="https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e">Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?</a></li>
-<li><strong>Security</strong> <a href="https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7">Are cryptocurrency wallets more at risk than ever?</a> </li>
+<li>
+<p>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></p>
+</li>
+<li>
+<p>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #</p>
+</li>
 </ul>
-<blockquote>
-<p>We think that current wallet solutions slow down the DeFi adoption.</p>
-</blockquote>
-<p>Interstellar is a novel non-custodial peace of mind mobile wallet with a hardware security level. Based on a Substrate blockchain and SubstraTEE/IntegriTEE workers.</p>
-<p><strong>We can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain</strong></p>
-<p><img src="./fig/Hardware-Mobile-Blockchain-Overview.png" alt="Hardware Mobile Blockchain Overview" /></p>
-<p><strong>Thanks to Trusted User Interface TUI on mobile and Trusted Execution Environment on both mobile and blockchain nodes</strong></p>
-<p>Because TUI is not yet avalaible on all mobile devices we use a Garbled Circuit/Visual Cryptography scheme which provides an alternative that will be complementary down the road to mitigate potential flaws in TUI.</p>
-<p><img src="./fig/IPhone-Android-TUI-Overview.png" alt="IPhone Android TUI Overview" /></p>
-<!-- ![Iphone-Android-TUI-White (1)](https://user-images.githubusercontent.com/4605611/145201585-5d106219-e51e-44d3-8c1b-95fe99e71455.png#gh-dark-mode-only)
+<p>you can replace the tar file with its last version in the following command.</p>
+<pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+</code></pre>
+<p>check version</p>
+<pre><code class="language- sh editable">go version
+</code></pre>
+<h3 id="install-ipfs"><a class="header" href="#install-ipfs">Install IPFS</a></h3>
+<ul>
+<li><a href="https://github.com/ipfs/ipfs-desktop#install">IPFS Desktop Install</a>
+- that way the full IPFS env is set up; alternatively you can just install go-ipfs</li>
+<li><a href="https://docs.ipfs.io/install/command-line/#official-distributions">IPFS with go-ipfs client Install</a></li>
+</ul>
+<p>Installing ipfs on linux (whithout desktop):</p>
+<pre><code class="language-sh">wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
+</code></pre>
+<pre><code class="language-sh">tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz
+</code></pre>
+<pre><code class="language- sh">cd go-ipfs
+sudo bash install.sh
+</code></pre>
+<p>check ipfs</p>
+<pre><code class="language-sh">ipfs --version
+</code></pre>
+<p>set env var path and launch the ipfs deamon</p>
+<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
-![Iphone-Android-TUI-Black (1)](https://user-images.githubusercontent.com/4605611/145201886-30bafb07-fc1c-4dc0-acf9-f0e9f163fa66.png#gh-light-mode-only) -->
-<h4 id="features"><a class="header" href="#features">Features:</a></h4>
-<ul>
-<li>
-<p><strong>Hardware security Level</strong> - TEE on nodes and mobiles (incl. TUI), garbled circuits and visual cryptography secure interface</p>
-</li>
-<li>
-<p><strong>Just download an app</strong> - no registration, PIN, password, passphrase, private key or any secret to store or remember</p>
-</li>
-<li>
-<p><strong>Multichain Wallet</strong> - securely store and interact with native cryptocurrency coins and tokens from multiple blockchains</p>
-</li>
-<li>
-<p><strong>Confirm a transaction with ONLY ONE SCREEN</strong> - no SMS to wait for, no additional 2FA app to use, no QR code to scan</p>
-</li>
-<li>
-<p><strong>Up to 1,000,000 tps</strong> - no tps limit due to slow consensus, thanks to IntegriTEE layer 2 based on hardware enclave technology </p>
-</li>
-<li>
-<p><strong>Social Recovery Service</strong> - leverages the existing Substrate pallet and a novel decentralized autonomous recovery service </p>
-</li>
-<li>
-<p><strong>Features to securely send coins with social network messages (even to persons with no-wallet)</strong> - explained in <a href="https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e">Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?</a> </p>
-</li>
-</ul>
-<h4 id="our-solution-is-designed-to-support-blockchain-and-defi-mass-market-adoption-with"><a class="header" href="#our-solution-is-designed-to-support-blockchain-and-defi-mass-market-adoption-with">Our solution is designed to support blockchain and DeFi mass market adoption with:</a></h4>
-<ul>
-<li><strong>A decentralized key &amp; asset management service</strong> where the user’s privates keys and signature programs are stored and executed in TEE nodes</li>
-<li><strong>A decentralized Trusted Transaction Validation protocol</strong> that leverages TEE and TUI features on mobile, combined with One Time Garbled Circuits and Visual Cryptography to provide a <strong>Trusted Authentication and Trusted UI layer</strong> on user devices</li>
-</ul>
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+</code></pre>
+<p>deamon launch</p>
+<pre><code class="language-sh">Initializing daemon...
+go-ipfs version: 0.12.0
+Repo version: 12
+System version: amd64/linux
+Golang version: go1.16.12
+Swarm listening on /ip4/127.0.0.1/tcp/40319
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/40319
+API server listening on /ip4/127.0.0.1/tcp/45167
+WebUI: http://127.0.0.1:45167/webui
+Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
+Daemon is ready
+</code></pre>
+<p>json config:</p>
+<pre><code class="language-json">{
+    &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
+    &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
+    &quot;Addresses&quot;: [
+    &quot;/ip4/127.0.0.1/tcp/40319/p2p/12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;
+    ],
+    &quot;AgentVersion&quot;: &quot;go-ipfs/0.12.0/&quot;,
+    &quot;ProtocolVersion&quot;: &quot;ipfs/0.1.0&quot;,
+    &quot;Protocols&quot;: [
+            &quot;/floodsub/1.0.0&quot;,
+            &quot;/ipfs/bitswap&quot;,
+            &quot;/ipfs/bitswap/1.0.0&quot;,
+            &quot;/ipfs/bitswap/1.1.0&quot;,
+            &quot;/ipfs/bitswap/1.2.0&quot;,
+            &quot;/ipfs/id/1.0.0&quot;,
+            &quot;/ipfs/id/push/1.0.0&quot;,
+            &quot;/ipfs/lan/kad/1.0.0&quot;,
+            &quot;/ipfs/ping/1.0.0&quot;,
+            &quot;/libp2p/autonat/1.0.0&quot;,
+            &quot;/libp2p/circuit/relay/0.1.0&quot;,
+            &quot;/libp2p/circuit/relay/0.2.0/stop&quot; ,
+            &quot;/meshsub/1.0.0&quot;,
+            &quot;/meshsub/1.1.0&quot;,
+            &quot;/p2p/id/delta/1.0.0&quot;,
+            &quot;/x/&quot;
+    ]
+}
+</code></pre>
+<h2 id="test-repositories"><a class="header" href="#test-repositories">Test repositories</a></h2>
+<p><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></p>
+<p><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="M1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="GCF_API.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -202,8 +237,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="M1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="GCF_API.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 
