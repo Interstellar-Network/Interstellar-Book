@@ -201,7 +201,7 @@
 <h3 id="prerequisites"><a class="header" href="#prerequisites">prerequisites</a></h3>
 <p>Install go; eg https://go.dev/doc/install</p>
 <p>Installing Go on Ubuntu 20.04 #</p>
-<pre><code class="language-sh editable">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+<pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 </code></pre>
 <p>check version</p>
 <pre><code class="language- sh editable">go version
@@ -213,11 +213,11 @@
 <li>ALTERNATIVE https://docs.ipfs.io/install/command-line/#official-distributions</li>
 </ul>
 <p>On linux:</p>
-<pre><code class="language-sh editable">wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
+<pre><code class="language-sh">wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
 </code></pre>
-<pre><code class="language-sh editable">tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz
+<pre><code class="language-sh">tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz
 </code></pre>
-<pre><code class="language- sh editable">cd go-ipfs
+<pre><code class="language- sh">cd go-ipfs
 sudo bash install.sh
 </code></pre>
 <p>check ipfs</p>
@@ -225,14 +225,14 @@ sudo bash install.sh
 </code></pre>
 <p>set env var path
 and launch the ipfs deamon</p>
-<pre><code class="language-sh editable">GO_IPFS_PATH=/usr/local/bin/ipfs
+<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
 </code></pre>
 <p>deamon launch</p>
-<pre><code class="language-sh editable">Initializing daemon...
+<pre><code class="language-sh">Initializing daemon...
 go-ipfs version: 0.12.0
 Repo version: 12
 System version: amd64/linux
@@ -246,7 +246,7 @@ Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 </code></pre>
 <p>json:</p>
-<pre><code class="language-json  editable">{
+<pre><code class="language-json">{
     &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
     &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
     &quot;Addresses&quot;: [
@@ -274,10 +274,10 @@ Daemon is ready
     ]
 }
 </code></pre>
-<h3 id="test-of-circuit-apis"><a class="header" href="#test-of-circuit-apis">Test of circuit APIs</a></h3>
-<p><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Test the Circuit APIs</a></p>
+<h3 id="test-of-circuit-apis-repositories"><a class="header" href="#test-of-circuit-apis-repositories">Test of circuit APIs repositories</a></h3>
+<p><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs test repo</a></p>
 <h4 id="test-of-garble-apis"><a class="header" href="#test-of-garble-apis">Test of Garble APIs</a></h4>
-<p><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Test Garble APIs</a></p>
+<p><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs test repo</a></p>
 <h2 id="docker-demo"><a class="header" href="#docker-demo">Docker demo</a></h2>
 <h2 id="article"><a class="header" href="#article">Article</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="intoduction-to-garbled-circuit-factory-gcf"><a class="header" href="#intoduction-to-garbled-circuit-factory-gcf">Intoduction to Garbled Circuit Factory (GCF)</a></h1>
