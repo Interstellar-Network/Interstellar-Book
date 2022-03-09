@@ -1,15 +1,24 @@
 
 # Garbled Circuit - Visual Cryptography Screen
 
+
+## Garbled Circuits output frames
 ![Visual Cryptography Technical Overview](./fig/Visual-Cryptography-Technical-Overview.png)
 
+Those frames superspose on retinal eyes leveraging persistence of vision
 
+## Visual Cryptography
 ![VC demo](./fig/Visual_crypto_animation_demo.gif)
 
 ## Main principles
+
 We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.
 
 Those visual cryptography shares do not superpose on the device screen but only in the user's eye. Thanks to the human Persistence of Vision ability: your eye and brain retain a visual impression for about 1/30 of a second (the exact time depends on the brightness of the image). 
+
+
+The garbled circuit execution will manage the display of consecutive random frames. The result is that the execution of the circuit will not leak any secret information (passwords, on-time confirmation codes or pin pad/keyboard topologies) to attackers. 
+
 
 This ensures that an attacker won't be able to obtain the secret information (transaction message, one time code and random keypad topology) with a simple screenshot, or quickly enough to build and execute a fake User Interface. This scheme can resist current banking trojans with overlay capabilities but not targeted attacks. 
 However, it makes a fake UI attack, complexe and resource intensive enough to enable us to detect it during the transaction validation session. This is the way we aim at resisting potential targeted attacks. Thanks to our proof of history of legitimate computation scheme, (roadmap/research in progress), based on a specific reusable Garbled Circuit evaluation.
@@ -22,7 +31,13 @@ Although our circuits still display screens at a pixel level to change fonts, ch
 
 ![GatesSegment](./fig/GatesSegmentBlack.png)
 
-The Garbled Circuit will randomly output 1/n segments/sub segments per frames, with n > 2
+The Garbled Circuit will randomly output each: 
+- pixels
+- segments/sub segments
+- any group of pixels
+- or single pixel
+
+of a frame with a probability of 1/n ( n > 2)
 
 ![walletdemo](./fig/Wallet-Superposition-Black-Background-Demo.png)
 
