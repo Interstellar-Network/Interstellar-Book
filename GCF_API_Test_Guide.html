@@ -160,7 +160,57 @@
 <p>e.g for Circuit API test</p>
 <pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests
 </code></pre>
-<p>then launch <code>cargo test</code> that will run the unit tests</p>
+<p>Set env var path and launch the ipfs deamon</p>
+<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
+
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+</code></pre>
+<p>deamon launch</p>
+<pre><code class="language-sh">Initializing daemon...
+go-ipfs version: 0.12.0
+Repo version: 12
+System version: amd64/linux
+Golang version: go1.16.12
+Swarm listening on /ip4/127.0.0.1/tcp/40319
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/40319
+API server listening on /ip4/127.0.0.1/tcp/45167
+WebUI: http://127.0.0.1:45167/webui
+Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
+Daemon is ready
+</code></pre>
+<pre><code class="language-json">
+{
+    &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
+    &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
+    &quot;Addresses&quot;: [
+    &quot;/ip4/127.0.0.1/tcp/40319/p2p/12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;
+    ],
+    &quot;AgentVersion&quot;: &quot;go-ipfs/0.12.0/&quot;,
+    &quot;ProtocolVersion&quot;: &quot;ipfs/0.1.0&quot;,
+    &quot;Protocols&quot;: [
+            &quot;/floodsub/1.0.0&quot;,
+            &quot;/ipfs/bitswap&quot;,
+            &quot;/ipfs/bitswap/1.0.0&quot;,
+            &quot;/ipfs/bitswap/1.1.0&quot;,
+            &quot;/ipfs/bitswap/1.2.0&quot;,
+            &quot;/ipfs/id/1.0.0&quot;,
+            &quot;/ipfs/id/push/1.0.0&quot;,
+            &quot;/ipfs/lan/kad/1.0.0&quot;,
+            &quot;/ipfs/ping/1.0.0&quot;,
+            &quot;/libp2p/autonat/1.0.0&quot;,
+            &quot;/libp2p/circuit/relay/0.1.0&quot;,
+            &quot;/libp2p/circuit/relay/0.2.0/stop&quot; ,
+            &quot;/meshsub/1.0.0&quot;,
+            &quot;/meshsub/1.1.0&quot;,
+            &quot;/p2p/id/delta/1.0.0&quot;,
+            &quot;/x/&quot;
+    ]
+}
+</code></pre>
+<p>Then launch <code>cargo test</code> that will run the all the unit tests</p>
 
                     </main>
 
