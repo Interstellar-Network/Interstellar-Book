@@ -30,7 +30,7 @@ e.g for Circuit API test
 ```sh
 git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests
 ```
-then launch `cargo test`
+then launch `cargo test` that will run the unit tests
 
 
 
