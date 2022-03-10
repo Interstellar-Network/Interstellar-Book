@@ -5,7 +5,7 @@ This is the test units related to the gRPC APIs call to the GCF external service
 
 ## Prerequisites
 
-The following software/libs are required to compile and run the 
+The following software/libs are required to compile and run the unit tests
 - go
 - ipfs
 - cmake >= 3.22
@@ -30,6 +30,8 @@ e.g for Circuit API test
 ```sh
 git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests
 ```
+
+### Launch ipfs deamon
 Set env var path and launch the ipfs deamon
 ```sh
 GO_IPFS_PATH=/usr/local/bin/ipfs
@@ -54,7 +56,6 @@ Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 ```
 ```json
-
 {
     "ID": "12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F",
     "PublicKey": "CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU",
@@ -83,8 +84,9 @@ Daemon is ready
     ]
 }
 ```
+### Launch the respectives unit tests
 
-Then launch `cargo test` that will run the all the unit tests
+ `cargo test` in  `api_circuits` and `api_garble` repositories will run their respective unit tests
 
 
 
