@@ -686,32 +686,55 @@ Daemon is ready
 <li><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></li>
 <li><a href="https://github.com/Interstellar-Network/api_garble/tree/main/tests">Garble APIs</a></li>
 </ul>
-<p>Just note mode: need cosmetic update
-First Compile lib_circuit and lib_garble in deps of the respective repos</p>
-<p>mkdir build
+<p>First clome the repositories with --recursive</p>
+<p>example for Circuit API test</p>
+<pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
+</code></pre>
+<p>Them </p>
+<p>First Compile lib_circuit and lib_garble libraries in deps of the respective repos</p>
+<p>Check your that your current cmake version is at least 3.22:</p>
+<pre><code class="language-sh">cmake --version
+</code></pre>
+<p>if not install cmake</p>
+<p>then</p>
+<pre><code class="language-sh">mkdir build
 cd build
 cmake .. (first time only)
-cmake --build .</p>
-<p>check cmake version &gt; 3.22</p>
-<p>to update it on Ubuntu </p>
-<p>Check your current version with:</p>
-<p>cmake --version
-Uninstall it with:</p>
-<p>sudo apt remove cmake
-Visit https://cmake.org/download/ and download the latest bash script.</p>
-<p>In my case cmake-3.6.2-Linux-x86_64.sh is sufficient.
-Copy the script to /opt/.</p>
-<p>Make the script executable:</p>
-<p>chmod +x /opt/cmake-3.<em>your_version</em>.sh
-Change to desired installation directory (to /opt/ for example)</p>
-<p>As of cmake 3.10.2 the installer no longer seems to install to /opt by default
-Run:</p>
-<p>sudo bash /opt/cmake-3.<em>your_version</em>.sh
-You will need to press y twice.</p>
-<p>The script installs the binary to /opt/cmake-3.<em>your_version</em> so in order to get the cmake command, make a symbolic link:</p>
-<p>sudo ln -s /opt/cmake-3.<em>your_version</em>/bin/* /usr/local/bin
-Test your results with:</p>
-<p>cmake --version</p>
+cmake --build .
+</code></pre>
+<h3 id="update-cmake-on-ubuntu-if--322"><a class="header" href="#update-cmake-on-ubuntu-if--322">Update cmake on Ubuntu if &lt; 3.22</a></h3>
+<p>to update it on Ubuntu</p>
+<p>Uninstall it with:</p>
+<pre><code class="language-sh">sudo apt remove cmake
+</code></pre>
+<p>Install build tools and libraries that CMake depends on:</p>
+<pre><code class="language-sh">sudo apt-get install build-essential libssl-dev
+</code></pre>
+<p>Go to the temp directory:</p>
+<pre><code class="language-sh">cd /tmp
+</code></pre>
+<p>get the last version ex:</p>
+<pre><code class="language-sh">wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3-linux-x86_64.tar.gz
+</code></pre>
+<p>Visit https://cmake.org/download/ and download the latest tar.gz</p>
+<p>Once the tar.gz file is downloaded, enter the following command to extract it:</p>
+<pre><code class="language-sh">tar -zxvf cmake-3.22.3-linux-x86_64.tar.gz
+</code></pre>
+<p>Then move to the extracted folder as follows:</p>
+<pre><code class="language-sh">$ cd cmake-3.22.3
+</code></pre>
+<p>Finally, run the following commands to compile and install CMake:</p>
+<pre><code class="language-sh">./bootstrap
+</code></pre>
+<p>You can now make it using the following command:</p>
+<pre><code class="language-sh">$ make
+</code></pre>
+<p>And then install it as follows:</p>
+<pre><code class="language-sh">sudo make install
+</code></pre>
+<p>check the version</p>
+<pre><code class="language-sh">cmake --version
+</code></pre>
 
                     </main>
 
