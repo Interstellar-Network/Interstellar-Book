@@ -14,7 +14,7 @@ wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz
 
 check version
 
-```,sh,editable
+```,sh
 go version
 ```
 
