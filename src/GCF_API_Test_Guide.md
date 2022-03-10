@@ -163,7 +163,7 @@ tar -zxvf cmake-3.22.3-linux-x86_64.tar.gz
 Then move to the extracted folder as follows:
 
 ```sh
-$ cd cmake-3.22.3
+$ cd cmake-3.22.3-linux-x86_64
 ```
 Finally, run the following commands to compile and install CMake:
 ```sh
