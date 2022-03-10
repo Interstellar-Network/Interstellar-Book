@@ -17,7 +17,7 @@ The following software/libs are required to compile and run the unit tests
 - tk8.6-dev
 - liboost-filesystem-dev
 
- [Prerequiste Install if needed](./prerequiste_update.md)
+ [Prerequiste Install if needed](./prerequiste_install.md)
 
 ## Repositories
 

@@ -152,10 +152,10 @@ cmake --version
 ```sh
 wget https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip
 apt-get install unzip
-sudo Zip Zip file.zip -d /usr/local/bin
+sudo Zip ninja-linux.zip -d /usr/local/bin
 sudo chmod +x /usr/local/bin/ninja
 ```
-## add with the following list
+## add the following list of software/libs
 
 with `sudo apt-get install`
 
