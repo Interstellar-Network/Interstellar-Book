@@ -158,12 +158,12 @@ Visit https://cmake.org/download/ and download the latest tar.gz
 
 Once the tar.gz file is downloaded, enter the following command to extract it:
 ```sh
-tar -zxvf cmake-3.22.3-linux-x86_64.tar.gz
+tar -zxvf cmake-3.22.3.tar.gz
 ```
 Then move to the extracted folder as follows:
 
 ```sh
-cd cmake-3.22.3-linux-x86_64
+cd cmake-3.22.3
 ```
 Finally, run the following commands to compile and install CMake:
 ```sh
