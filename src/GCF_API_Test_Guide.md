@@ -3,7 +3,7 @@
 this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.
 Required the installation of go (to use go-ipfs) and ipfs
 
-## Prerequisites (Go and IPFS)
+## Prerequisites (Go and IPFS and Cmake >= 3.22)
 
 ### Install Go:
 
@@ -94,6 +94,12 @@ Daemon is ready
     ]
 }
 ```
+Check your that your current cmake version is at least 3.22:
+```sh
+cmake --version
+```
+if not [update cmake](./cmake_update.md)
+
 
 ## Test repositories
 
@@ -107,20 +113,6 @@ example for Circuit API test
 git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
 ```
 
-Them 
-
-First Compile lib_circuit and lib_garble libraries in deps of the respective repos
-
-
-
-Check your that your current cmake version is at least 3.22:
-```sh
-cmake --version
-```
-if not install cmake
-
-then
-
 ```sh
 mkdir build
 cd build
@@ -132,52 +124,3 @@ cmake --build .
 
 
 
-### Update cmake on Ubuntu if < 3.22
-to update it on Ubuntu
-
-
-Uninstall it with:
-```sh
-sudo apt remove cmake
-```
-
-Install build tools and libraries that CMake depends on:
-```sh
-sudo apt-get install build-essential libssl-dev
-```
-Go to the temp directory:
-```sh
-cd /tmp
-```
-
-get the last version ex:
-```sh
-wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
-```
-Visit https://cmake.org/download/ and download the latest tar.gz
-
-Once the tar.gz file is downloaded, enter the following command to extract it:
-```sh
-tar -zxvf cmake-3.22.3.tar.gz
-```
-Then move to the extracted folder as follows:
-
-```sh
-cd cmake-3.22.3
-```
-Finally, run the following commands to compile and install CMake:
-```sh
-./bootstrap
-```
-You can now make it using the following command:
-```sh
-make
-```
-And then install it as follows:
-```sh
-sudo make install
-```
-check the version
-```sh
-cmake --version
-```
