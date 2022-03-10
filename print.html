@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">1.4.1.</strong> GCF APIs Testing Guide</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="M1.html">M1 Delivery</a></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">1.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">1.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">1.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">1.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">1.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">1.4.1.</strong> GCF APIs Testing Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href=".cmake_update.html"><strong aria-hidden="true">1.4.1.1.</strong> Update cmake on Ubuntu</a></li></ol></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -602,7 +602,7 @@ impl SkcdApi for SkcdApiServerImpl {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="gcf-apis-testing-guide"><a class="header" href="#gcf-apis-testing-guide">GCF APIs Testing Guide</a></h1>
 <p>this is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.
 Required the installation of go (to use go-ipfs) and ipfs</p>
-<h2 id="prerequisites-go-and-ipfs"><a class="header" href="#prerequisites-go-and-ipfs">Prerequisites (Go and IPFS)</a></h2>
+<h2 id="prerequisites-go-and-ipfs-and-cmake--322"><a class="header" href="#prerequisites-go-and-ipfs-and-cmake--322">Prerequisites (Go and IPFS and Cmake &gt;= 3.22)</a></h2>
 <h3 id="install-go"><a class="header" href="#install-go">Install Go:</a></h3>
 <ul>
 <li>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></li>
@@ -681,6 +681,10 @@ Daemon is ready
     ]
 }
 </code></pre>
+<p>Check your that your current cmake version is at least 3.22:</p>
+<pre><code class="language-sh">cmake --version
+</code></pre>
+<p>if not <a href="./cmake_update.html">update cmake</a></p>
 <h2 id="test-repositories"><a class="header" href="#test-repositories">Test repositories</a></h2>
 <ul>
 <li><a href="https://github.com/Interstellar-Network/api_circuits/tree/main/tests">Circuit APIs</a></li>
@@ -690,51 +694,12 @@ Daemon is ready
 <p>example for Circuit API test</p>
 <pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
 </code></pre>
-<p>Them </p>
-<p>First Compile lib_circuit and lib_garble libraries in deps of the respective repos</p>
-<p>Check your that your current cmake version is at least 3.22:</p>
-<pre><code class="language-sh">cmake --version
-</code></pre>
-<p>if not install cmake</p>
-<p>then</p>
 <pre><code class="language-sh">mkdir build
 cd build
 cmake .. (first time only)
 cmake --build .
 </code></pre>
-<h3 id="update-cmake-on-ubuntu-if--322"><a class="header" href="#update-cmake-on-ubuntu-if--322">Update cmake on Ubuntu if &lt; 3.22</a></h3>
-<p>to update it on Ubuntu</p>
-<p>Uninstall it with:</p>
-<pre><code class="language-sh">sudo apt remove cmake
-</code></pre>
-<p>Install build tools and libraries that CMake depends on:</p>
-<pre><code class="language-sh">sudo apt-get install build-essential libssl-dev
-</code></pre>
-<p>Go to the temp directory:</p>
-<pre><code class="language-sh">cd /tmp
-</code></pre>
-<p>get the last version ex:</p>
-<pre><code class="language-sh">wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
-</code></pre>
-<p>Visit https://cmake.org/download/ and download the latest tar.gz</p>
-<p>Once the tar.gz file is downloaded, enter the following command to extract it:</p>
-<pre><code class="language-sh">tar -zxvf cmake-3.22.3.tar.gz
-</code></pre>
-<p>Then move to the extracted folder as follows:</p>
-<pre><code class="language-sh">cd cmake-3.22.3
-</code></pre>
-<p>Finally, run the following commands to compile and install CMake:</p>
-<pre><code class="language-sh">./bootstrap
-</code></pre>
-<p>You can now make it using the following command:</p>
-<pre><code class="language-sh">make
-</code></pre>
-<p>And then install it as follows:</p>
-<pre><code class="language-sh">sudo make install
-</code></pre>
-<p>check the version</p>
-<pre><code class="language-sh">cmake --version
-</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="update-cmake-on-ubuntu"><a class="header" href="#update-cmake-on-ubuntu">Update cmake on Ubuntu</a></h1>
 
                     </main>
 
