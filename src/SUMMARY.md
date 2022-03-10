@@ -10,4 +10,4 @@
     - [Detailed Pipeline for Display Circuits](./GCF_pipeline_detailed.md)
     - [Garbled Circuit Factory APIs](./GCF_API.md)
         - [GCF APIs Testing Guide](./GCF_API_Test_Guide.md)
-            - [Update cmake](./cmake_update.md)
+            - [Update cmake](./prerequisite.md)
