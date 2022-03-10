@@ -100,46 +100,84 @@ Daemon is ready
 - [Circuit APIs](https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
 - [Garble APIs](https://github.com/Interstellar-Network/api_garble/tree/main/tests)
 
+First clome the repositories with --recursive
 
-Just note mode: need cosmetic update
-First Compile lib_circuit and lib_garble in deps of the respective repos
+example for Circuit API test
+```sh
+git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests)
+```
+
+Them 
+
+First Compile lib_circuit and lib_garble libraries in deps of the respective repos
 
 
+
+Check your that your current cmake version is at least 3.22:
+```sh
+cmake --version
+```
+if not install cmake
+
+then
+
+```sh
 mkdir build
 cd build
 cmake .. (first time only)
 cmake --build .
+````
 
-check cmake version > 3.22
 
 
-to update it on Ubuntu 
 
-Check your current version with:
 
-cmake --version
+### Update cmake on Ubuntu if < 3.22
+to update it on Ubuntu
+
+
 Uninstall it with:
-
+```sh
 sudo apt remove cmake
-Visit https://cmake.org/download/ and download the latest bash script.
+```
 
-In my case cmake-3.6.2-Linux-x86_64.sh is sufficient.
-Copy the script to /opt/.
+Install build tools and libraries that CMake depends on:
+```sh
+sudo apt-get install build-essential libssl-dev
+```
+Go to the temp directory:
+```sh
+cd /tmp
+```
 
-Make the script executable:
+get the last version ex:
+```sh
+wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3-linux-x86_64.tar.gz
+```
+Visit https://cmake.org/download/ and download the latest tar.gz
 
-chmod +x /opt/cmake-3.*your_version*.sh
-Change to desired installation directory (to /opt/ for example)
+Once the tar.gz file is downloaded, enter the following command to extract it:
+```sh
+tar -zxvf cmake-3.22.3-linux-x86_64.tar.gz
+```
+Then move to the extracted folder as follows:
 
-As of cmake 3.10.2 the installer no longer seems to install to /opt by default
-Run:
-
-sudo bash /opt/cmake-3.*your_version*.sh
-You will need to press y twice.
-
-The script installs the binary to /opt/cmake-3.*your_version* so in order to get the cmake command, make a symbolic link:
-
-sudo ln -s /opt/cmake-3.*your_version*/bin/* /usr/local/bin
-Test your results with:
-
+```sh
+$ cd cmake-3.22.3
+```
+Finally, run the following commands to compile and install CMake:
+```sh
+./bootstrap
+```
+You can now make it using the following command:
+```sh
+$ make
+```
+And then install it as follows:
+```sh
+sudo make install
+```
+check the version
+```sh
 cmake --version
+```
