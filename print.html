@@ -202,6 +202,9 @@
 <li><a href="https://book.interstellar.gg/GCF_API.html">GCF APIs for GCF OCWs</a></li>
 </ul>
 <h2 id="testing-guide"><a class="header" href="#testing-guide">Testing Guide</a></h2>
+<blockquote>
+<p>Following is a testing guide and tutorial to launch unit tests related to M1 milestone. It also includes the prerequiste i.e additional software and libraries that need to be installed in order to run the unit tests without the M1 docker.</p>
+</blockquote>
 <p><a href="https://book.interstellar.gg/GCF_API_Test_Guide.html">GCF APIs Testing Guide</a></p>
 <p>CLIs to test <code>lib_circuit</code> and <code>lib_garble</code> C++ libraries linked with the GCF external service gRPC server:</p>
 <ul>
@@ -212,9 +215,9 @@
 <p>not explicity required for this milestone but potentially useful for fine tuning generic circuit designs</p>
 </blockquote>
 <h2 id="docker-demo"><a class="header" href="#docker-demo">Docker demo</a></h2>
-<p>Link</p>
+<p>Link to docker demo and unit test</p>
 <h2 id="article"><a class="header" href="#article">Article</a></h2>
-<p>Link</p>
+<p>Link to medium article (will be avalaible soon) on this book</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="intoduction-to-garbled-circuit-factory-gcf"><a class="header" href="#intoduction-to-garbled-circuit-factory-gcf">Intoduction to Garbled Circuit Factory (GCF)</a></h1>
 <p>The Garble Circuit Factory is the module in charge of building the Garbled Circuits (GC) used by the Interstellar infrastructure.</p>
 <p>Following is a high level overview of the generic pipeline used to generate GC.</p>
@@ -602,7 +605,7 @@ impl SkcdApi for SkcdApiServerImpl {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="gcf-apis-testing-guide"><a class="header" href="#gcf-apis-testing-guide">GCF APIs Testing Guide</a></h1>
 <p>This is the test units related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
-<p>The following software/libs are required to compile and run the </p>
+<p>The following software/libs are required to compile and run the unit tests</p>
 <ul>
 <li>go</li>
 <li>ipfs</li>
@@ -625,6 +628,7 @@ impl SkcdApi for SkcdApiServerImpl {
 <p>e.g for Circuit API test</p>
 <pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_circuits/tree/main/tests
 </code></pre>
+<h3 id="launch-ipfs-deamon"><a class="header" href="#launch-ipfs-deamon">Launch ipfs deamon</a></h3>
 <p>Set env var path and launch the ipfs deamon</p>
 <pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
@@ -646,8 +650,7 @@ WebUI: http://127.0.0.1:45167/webui
 Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 </code></pre>
-<pre><code class="language-json">
-{
+<pre><code class="language-json">{
     &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
     &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
     &quot;Addresses&quot;: [
@@ -675,7 +678,8 @@ Daemon is ready
     ]
 }
 </code></pre>
-<p>Then launch <code>cargo test</code> that will run the all the unit tests</p>
+<h3 id="launch-the-respectives-unit-tests"><a class="header" href="#launch-the-respectives-unit-tests">Launch the respectives unit tests</a></h3>
+<p><code>cargo test</code> in  <code>api_circuits</code> and <code>api_garble</code> repositories will run their respective unit tests</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="prerequisite-installation"><a class="header" href="#prerequisite-installation">Prerequisite Installation</a></h1>
 <h2 id="install-go"><a class="header" href="#install-go">Install Go:</a></h2>
 <ul>
