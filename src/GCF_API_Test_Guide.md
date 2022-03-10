@@ -152,7 +152,7 @@ cd /tmp
 
 get the last version ex:
 ```sh
-wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3-linux-x86_64.tar.gz
+wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
 ```
 Visit https://cmake.org/download/ and download the latest tar.gz
 
