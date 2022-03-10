@@ -171,7 +171,7 @@ Finally, run the following commands to compile and install CMake:
 ```
 You can now make it using the following command:
 ```sh
-$ make
+make
 ```
 And then install it as follows:
 ```sh
