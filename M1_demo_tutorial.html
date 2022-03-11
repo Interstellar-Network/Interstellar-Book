@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="M1.html"><strong aria-hidden="true">1.</strong> M1 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M1_DockerDemo_tutorial.html" class="active"><strong aria-hidden="true">1.1.</strong> M1 Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">2.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">2.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">2.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">2.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">2.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">2.4.1.</strong> GCF APIs Testing Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prerequisite_install.html"><strong aria-hidden="true">2.4.1.1.</strong> Prerequiste Install</a></li></ol></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="M1.html"><strong aria-hidden="true">1.</strong> M1 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M1_demo_tutorial.html" class="active"><strong aria-hidden="true">1.1.</strong> M1 Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">2.</strong> Garbled Circuit Factory- GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">2.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">2.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">2.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">2.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">2.4.1.</strong> GCF APIs Testing Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prerequisite_install.html"><strong aria-hidden="true">2.4.1.1.</strong> Prerequiste Install</a></li></ol></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,7 +134,113 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="m1-demo-tutorial"><a class="header" href="#m1-demo-tutorial">M1 Demo Tutorial</a></h1>
+                        <h1 id="m1-docker-demo-tutorial"><a class="header" href="#m1-docker-demo-tutorial">M1 Docker Demo Tutorial</a></h1>
+<h2 id="set-up-demo"><a class="header" href="#set-up-demo">Set-up Demo</a></h2>
+<h3 id="launch-ipfs-deamon"><a class="header" href="#launch-ipfs-deamon">Launch ipfs deamon</a></h3>
+<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
+
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
+</code></pre>
+<pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+</code></pre>
+<pre><code class="language-sh">Initializing daemon...
+go-ipfs version: 0.11.0
+Repo version: 11
+System version: amd64/linux
+Golang version: go1.16.12
+Swarm listening on /ip4/127.0.0.1/tcp/46507
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/46507
+API server listening on /ip4/0.0.0.0/tcp/5001
+WebUI: http://0.0.0.0:5001/webui
+Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/38297
+Daemon is ready
+</code></pre>
+<h3 id="launch-dockers"><a class="header" href="#launch-dockers">Launch dockers:</a></h3>
+<h4 id="launch-api_circuit-docker"><a class="header" href="#launch-api_circuit-docker">Launch api_circuit docker</a></h4>
+<pre><code class="language-sh">docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_circuits:milestone1 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
+</code></pre>
+<h4 id="launch-api_garble-docker"><a class="header" href="#launch-api_garble-docker">Launch api_garble docker</a></h4>
+<pre><code class="language-sh">docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_garble:milestone1 /usr/local/bin/api_garble --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
+</code></pre>
+<h3 id="launch-substrate-demo-chain-with-ocw"><a class="header" href="#launch-substrate-demo-chain-with-ocw">Launch substrate demo chain with OCW</a></h3>
+<pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp
+</code></pre>
+<blockquote>
+<p>Important: the node log will display some results i.e cid that you will have to copy paste to perform the demo</p>
+</blockquote>
+<h3 id="launch-a-generic-substrate-fromt-end"><a class="header" href="#launch-a-generic-substrate-fromt-end">Launch a generic Substrate Fromt-end</a></h3>
+<pre><code class="language-sh">Yarn start
+</code></pre>
+<h2 id="demo-overview"><a class="header" href="#demo-overview">Demo overview</a></h2>
+<blockquote>
+<p>To avoid any ambiguities regarding the state of the pallet (for demo/eample purpose only - not production ready)</p>
+</blockquote>
+<p>We named the two OCW pallets we interact with:</p>
+<ul>
+<li>ocwExample (to manage configuration/generation of logical circuit file)</li>
+<li>ocwDemo (to manage garbled circuit production)</li>
+</ul>
+<h3 id="1-write-a-verilog-masterconfig-filev-in-ipfs-and-get-its-verilogcid"><a class="header" href="#1-write-a-verilog-masterconfig-filev-in-ipfs-and-get-its-verilogcid">1. write a verilog master/config file.v in IPFS and get its <code>VerilogCid</code></a></h3>
+<p><code>GCF: can be set-up</code> for production <strong>with verilog master file</strong></p>
+<h3 id="2-signed-extrinsic-with-verilogcid-of-master-fileconfig-filev-to-ocwexample-pallet"><a class="header" href="#2-signed-extrinsic-with-verilogcid-of-master-fileconfig-filev-to-ocwexample-pallet">2. signed extrinsic with <code>VerilogCid</code> of master File/config file.v to <code>ocwExample</code> pallet</a></h3>
+<p><code>Request-&gt;GCF</code>: <strong>OCW launch  the generation of the logical circuit file in GCF</strong></p>
+<p><code>Response&lt;-GCF</code>: <strong>OCW get the  <code>skcdCid</code> of the generated logical circui (.skcd)</strong></p>
+<p><code>GCF: GC production ready</code> for the production of Garbled Circuits: 
+<strong>OCW is configured with verilog master file</strong></p>
+<blockquote>
+<p>skcd file is cached in the production pipeline</p>
+</blockquote>
+<h3 id="3-signed-extrinsic-with-skcdcid-to-ocwdemo-pallet"><a class="header" href="#3-signed-extrinsic-with-skcdcid-to-ocwdemo-pallet">3. signed extrinsic with <code>skcdCid</code> to <code>ocwDemo</code> pallet</a></h3>
+<p><code>Request-&gt;GCF</code>: <strong>OCW launch  the generation garbled circuit file(s) in GCF</strong></p>
+<p><code>Response&lt;-GCF</code>: <strong>OCW get the <code>gcCid</code> of the generated Garbled Circuit (ready to be evaluated)</strong></p>
+<h2 id="step-1-upload-masterconfig-verilog-v-file-write-in-ipfs"><a class="header" href="#step-1-upload-masterconfig-verilog-v-file-write-in-ipfs">Step 1: Upload Master/Config verilog (.v) file/ write in IPFS</a></h2>
+<pre><code class="language-sh">curl -X POST -F file=@/REPLACEME/PATH/verilogFileExample.v &quot;http://127.0.0.1:5001/api/v0/add?progress=true&quot;
+</code></pre>
+<blockquote>
+<p>Get the VerilogCid to use with pallet interactor</p>
+</blockquote>
+<p>Files example to add:
+very simple adder circuit</p>
+<p>adder.v</p>
+<pre><code class="language-verilog editable">// https://www.geeksforgeeks.org/full-adder-using-verilog-hdl/
+
+// Code your design : Full Adder
+module full_add(a,b,cin,sum,cout);
+  input a,b,cin;
+  output sum,cout;
+  wire x,y,z;
+
+// instantiate building blocks of full adder
+  half_add h1(.a(a),.b(b),.s(x),.c(y));
+  half_add h2(.a(x),.b(cin),.s(sum),.c(z));
+  or o1(cout,y,z);
+endmodule : full_add
+
+// code your half adder design
+module half_add(a,b,s,c);
+  input a,b;
+  output s,c;
+
+// gate level design of half adder
+  xor x1(s,a,b);
+  and a1(c,a,b);
+endmodule :half_add
+</code></pre>
+<h2 id="interact-with-substrate-front-end"><a class="header" href="#interact-with-substrate-front-end">Interact with Substrate Front End</a></h2>
+<p>We use Pallet Interactor to pilot the configuration and generation management of the circuits with GCF</p>
+<h2 id="step-2-submit-verilogcid-with-pallet-interactor"><a class="header" href="#step-2-submit-verilogcid-with-pallet-interactor">Step 2: Submit <code>VerilogCid</code> with pallet Interactor</a></h2>
+<h4 id="21-go-to-ocwexample-pallet-and--and-input-the-verilogcid-you-got-at-step-1"><a class="header" href="#21-go-to-ocwexample-pallet-and--and-input-the-verilogcid-you-got-at-step-1">2.1 Go to <code>ocwExample</code> pallet and  and input the <code>VerilogCid</code> you got at step 1.</a></h4>
+<p>We use this pallet to submit the master file config file example.</p>
+<p><img src="./fig/ocwExample.png" alt="ocwExample" /></p>
+<p>GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid to the pallet.</p>
+<h4 id="22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node"><a class="header" href="#22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node">2.2 copy paste the skcdCid that appear in the log of the node</a></h4>
+<h2 id="step-3-submit-skcdcid-with--pallet-interactor"><a class="header" href="#step-3-submit-skcdcid-with--pallet-interactor">Step 3: Submit <code>skcdCid</code> with  pallet Interactor</a></h2>
+<p>we use this pallet to submit the cid of the logical_file.skcd</p>
+<h4 id="31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22"><a class="header" href="#31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22">3.1 Go to <code>ocwDemo</code> pallet and input the <code>skcdCid</code> you got at step 2.2</a></h4>
+<p><img src="./fig/ocwDemo.png" alt="ocwDemo" /></p>
+<h3 id="step-32-garbled-circuit-cid-appear-in-node-log"><a class="header" href="#step-32-garbled-circuit-cid-appear-in-node-log">Step 3.2 Garbled Circuit cid appear in node log</a></h3>
 
                     </main>
 
