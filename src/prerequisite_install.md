@@ -4,7 +4,7 @@
 
 ## Install Go:
 
-- Install Go with download of the [last version](https://go.dev/doc/install)
+- Install Go with download of the [lastest version](https://go.dev/doc/install)
 - Installing Go on Ubuntu 20.04 with version `go1.17.8.linux-amd64` #
 you can replace the tar file with its last version in the following command.
 
@@ -23,7 +23,7 @@ go version
         - that way the full IPFS env is set up; alternatively you can just install go-ipfs
 - [IPFS with go-ipfs client Install](https://docs.ipfs.io/install/command-line/#official-distributions)
 
-Installing ipfs on linux (whithout desktop):
+Installing ipfs on linux (without desktop):
 ```sh
 wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
 ```
@@ -43,10 +43,16 @@ Set env var path and launch the ipfs deamon
 GO_IPFS_PATH=/usr/local/bin/ipfs
 
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
 ```
-deamon launch
+>"if you intend to use Docker you SHOULD be sure it is reachable by the containers
+eg /ip4/0.0.0.0/tcp/5001"
+
+
+deamon launch:
+> wait for "Initializing daemon..." and "ID": "12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F","
+
 ```sh
 Initializing daemon...
 go-ipfs version: 0.12.0
@@ -62,7 +68,6 @@ Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 ```
 ```json
-
 {
     "ID": "12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F",
     "PublicKey": "CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU",
@@ -102,47 +107,13 @@ if not:
 
 [download binaries](https://cmake.org/download/)
 
-Or install on Ubuntu from source package:
-Uninstall it with:
 ```sh
-sudo apt remove cmake
-```
-Install build tools and libraries that CMake depends on:
-```sh
-sudo apt-get install build-essential libssl-dev
-```
-Go to the temp directory:
-```sh
-cd /tmp
+wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3-linux-x86_64.sh
+chmod +x cmake-3.22.3-linux-x86_64.sh
+sudo mkdir /opt/cmake-3.22/
+sudo ./cmake-3.22.3-linux-x86_64.sh --skip-license --prefix=/opt/cmake-3.22/
 ```
 
-get the last version ex:
-```sh
-wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
-```
-Visit https://cmake.org/download/ and download the latest tar.gz
-
-Once the tar.gz file is downloaded, enter the following command to extract it:
-```sh
-tar -zxvf cmake-3.22.3.tar.gz
-```
-Then move to the extracted folder as follows:
-
-```sh
-cd cmake-3.22.3
-```
-Finally, run the following commands to compile and install CMake:
-```sh
-./bootstrap
-```
-You can now make it using the following command:
-```sh
-make
-```
-And then install it as follows:
-```sh
-sudo make install
-```
 check the version
 ```sh
 cmake --version
