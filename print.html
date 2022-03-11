@@ -341,7 +341,7 @@ endmodule :half_add
 <p>we use this pallet to submit the cid of the logical_file.skcd</p>
 <h4 id="31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22"><a class="header" href="#31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22">3.1 Go to <code>ocwDemo</code> pallet and input the <code>skcdCid</code> you got at step 2.2</a></h4>
 <p><img src="./fig/ocwDemo.png" alt="ocwDemo" /></p>
-<h3 id="step-32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw"><a class="header" href="#step-32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw">Step 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw)</a></h3>
+<h4 id="32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw"><a class="header" href="#32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw">3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw)</a></h4>
 <pre><code class="language-sh">2022-03-11 18:38:36 [ocw] Hello from pallet-ocw.    
 2022-03-11 18:38:36 [ocw] encode_body2: [51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68]    
 2022-03-11 18:38:36 [ocw] sending body b64: AAAAADAKLlFtWjlVSmJyYVpUam5rQ1l5N0ZUWldEYWl2MnM2cVdUemZGTmhGTGdISlJmdWg=    
@@ -682,46 +682,32 @@ and we use tokio/tonic also compliant with HTTP1 to comunicate with OCWs</p>
 <p><img src="./fig/GCF-Flowchart-Substrate-Pallets.svg" alt="GCF Flowchart Substrate Pallets" /></p>
 <h2 id="gcf-apis"><a class="header" href="#gcf-apis">GCF APIs</a></h2>
 <p>This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.</p>
-<h3 id="launh-circuit-production-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-production-from-ocw-on-gcf-external-service">Launh circuit production from OCW on GCF (external service)</a></h3>
-<p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L57">api_circuits/src/circuit_routes.rs:57</a></p>
+<h3 id="launh-circuit-generation-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-generation-from-ocw-on-gcf-external-service">Launh circuit generation from OCW on GCF (external service)</a></h3>
+<p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L61">api_circuits/src/circuit_routes.rs:61</a></p>
 <p><code>Request</code>   : start the circuit(s) generation with hash/cid  of master files + parameter related to circuit production e.g size/resolution of display circuits</p>
 <p><code>Response</code>  : get hash/cid of the circuit on ipfs</p>
 <p><code>Status</code>    : circuit production state</p>
-<p>circuit_route.rs</p>
+<p>circuit_route.rs - generation of  display circuit</p>
 <pre><pre class="playground"><code class="language-rust editable">#[tonic::async_trait]
 impl SkcdApi for SkcdApiServerImpl {
     async fn generate_skcd_display(
         &amp;self,
         request: Request&lt;SkcdDisplayRequest&gt;,
     ) -&gt; Result&lt;Response&lt;SkcdDisplayReply&gt;, Status&gt; {
-        println!(&quot;Got a request from {:?}&quot;, request.remote_addr());
+        log::info!(
+            &quot;generate_skcd_display request from {:?}&quot;,
+            request.remote_addr()
+        );
         let width = request.get_ref().width;
         let height = request.get_ref().height;
 
         // TODO class member/Trait for &quot;lib_circuits_wrapper::ffi::new_circuit_gen_wrapper()&quot;
-        // TODO cleanup; remove clone(), etc
         let lib_circuits_wrapper = tokio::task::spawn_blocking(move || {
-            let tmp_dir = Builder::new().prefix(&quot;example&quot;).tempdir().unwrap();
-
-            let file_path = tmp_dir.path().join(&quot;output.skcd.pb.bin&quot;);
-            let mut tmp_file = File::create(file_path.clone()).unwrap();
-
             let wrapper = lib_circuits_wrapper::ffi::new_circuit_gen_wrapper();
 
-            // TODO make the C++ API return a buffer?
-            wrapper.GenerateDisplaySkcd(file_path.as_os_str().to_str().unwrap(), width, height);
+            let skcd_pb_buf = wrapper.GenerateDisplaySkcd(width, height);
 
-            //`Result::unwrap()` on an `Err` value: Os { code: 9, kind: Uncategorized, message: &quot;Bad file descriptor&quot; }', src/circuits_routes.rs:81:47
-            // let mut buf = String::new();
-            // tmp_file.read_to_string(&amp;mut buf).unwrap();
-            // buf.clone()
-
-            // Error { kind: InvalidData, message: &quot;stream did not contain valid UTF-8&quot; }', src/circuits_routes.rs:86:52
-            // let contents =
-            //     std::fs::read_to_string(file_path).expect(&quot;Something went wrong reading the file&quot;);
-            let contents = std::fs::read(file_path).expect(&quot;Something went wrong reading the file&quot;);
-
-            contents
+            skcd_pb_buf
         })
         .await
         .unwrap();
@@ -732,7 +718,72 @@ impl SkcdApi for SkcdApiServerImpl {
         let ipfs_result = self.ipfs_client().add(data).await.unwrap();
 
         let reply = SkcdDisplayReply {
-            hash: format!(&quot;{}&quot;, ipfs_result.hash),
+            skcd_cid: format!(&quot;{}&quot;, ipfs_result.hash),
+        };
+
+        Ok(Response::new(reply))
+    }
+</code></pre></pre>
+<p>For generic circuits:</p>
+<pre><pre class="playground"><code class="language-rust editable">async fn generate_skcd_generic_from_ipfs(
+        &amp;self,
+        request: Request&lt;SkcdGenericFromIpfsRequest&gt;,
+    ) -&gt; Result&lt;Response&lt;SkcdGenericFromIpfsReply&gt;, Status&gt; {
+        log::info!(
+            &quot;generate_skcd_generic_from_ipfs request from {:?}&quot;,
+            request.remote_addr()
+        );
+
+        let verilog_cid = &amp;request.get_ref().verilog_cid;
+
+        // get the Verilog (.v) from IPFS
+        // DO NOT use dag_get if the file was &quot;add&quot;
+        // The returned bytes would be eg
+        // {&quot;Data&quot;:{&quot;/&quot;:{&quot;bytes&quot;:&quot;CAISjgQvL....ZfYWRkGI4E&quot;}},&quot;Links&quot;:[]}
+        // let verilog_buf = self
+        //     .ipfs_client()
+        //     .dag_get(&amp;verilog_cid)
+        //     .map_ok(|chunk| chunk.to_vec())
+        //     .try_concat()
+        //     .await
+        //     .unwrap();
+        let verilog_buf = self
+            .ipfs_client()
+            .cat(&amp;verilog_cid)
+            .map_ok(|chunk| chunk.to_vec())
+            .try_concat()
+            .await
+            .unwrap();
+
+        // write the buffer to a file in /tmp
+        // yosys/abc REQUIRE file b/c they are basically cli
+        // so either write it on Rust side, or send as std::string to C++ and write it there
+        let tmp_dir = Builder::new()
+            .prefix(&quot;interstellar-circuit_routes-generate_skcd_generic_from_ipfs&quot;)
+            .tempdir()
+            .unwrap();
+        let verilog_file_path = tmp_dir.path().join(&quot;input.v&quot;);
+        std::fs::write(&amp;verilog_file_path, verilog_buf).expect(&quot;could not write&quot;);
+
+        // TODO class member/Trait for &quot;lib_circuits_wrapper::ffi::new_circuit_gen_wrapper()&quot;
+        let lib_circuits_wrapper = tokio::task::spawn_blocking(move || {
+            let wrapper = lib_circuits_wrapper::ffi::new_circuit_gen_wrapper();
+
+            let skcd_pb_buf =
+                wrapper.GenerateGenericSkcd(verilog_file_path.as_os_str().to_str().unwrap());
+
+            skcd_pb_buf
+        })
+        .await
+        .unwrap();
+
+        let data = Cursor::new(lib_circuits_wrapper);
+
+        // TODO error handling, or at least logging
+        let ipfs_result = self.ipfs_client().add(data).await.unwrap();
+
+        let reply = SkcdGenericFromIpfsReply {
+            skcd_cid: format!(&quot;{}&quot;, ipfs_result.hash),
         };
 
         Ok(Response::new(reply))
