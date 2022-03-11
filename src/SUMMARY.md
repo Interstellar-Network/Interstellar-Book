@@ -3,7 +3,7 @@
 [Introduction](./introduction.md)
 
 - [M1 Delivery](./M1.md)
-    - [M1 Demo Tutorial](./M1_demo_tutorial.md)
+    - [M1 Docker Demo Tutorial](./M1_demo_tutorial.md)
 
 
 - [Garbled Circuit Factory- GCF](./GCF.md)
