@@ -4,6 +4,9 @@
 ### Launch ipfs deamon
 
 ```sh
+GO_IPFS_PATH=/usr/local/bin/ipfs
+
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
 ```
 ```
@@ -94,14 +97,13 @@ We named the two OCW pallets we interact with:
 
 ## Step 1: Upload Master/Config verilog (.v) file/ write in IPFS
 
-```sh
-curl -X POST -F file=@/REPLACEME/PATH/lib_circuits/data/verilog/adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
-```
 
+```sh
+curl -X POST -F file=@/REPLACEME/PATH/verilogFileExample.v "http://127.0.0.1:5001/api/v0/add?progress=true"
+```
 > Get the VerilogCid to use with pallet interactor
 
-
-Files example:
+Files example to add:
 very simple adder circuit
 
 adder.v
