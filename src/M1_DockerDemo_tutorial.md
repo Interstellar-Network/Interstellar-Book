@@ -101,7 +101,6 @@ curl -X POST -F file=@/REPLACEME/PATH/lib_circuits/data/verilog/adder.v "http://
 > Get the VerilogCid to use with pallet interactor
 
 
-
 Files example:
 very simple adder circuit
 
