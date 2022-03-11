@@ -235,12 +235,38 @@ endmodule :half_add
 <p>We use this pallet to submit the master file config file example.</p>
 <p><img src="./fig/ocwExample.png" alt="ocwExample" /></p>
 <p>GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid to the pallet.</p>
-<h4 id="22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node"><a class="header" href="#22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node">2.2 copy paste the skcdCid that appear in the log of the node</a></h4>
+<h4 id="22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node-example-hello-from-pallet-ocw"><a class="header" href="#22-copy-paste-the-skcdcid-that-appear-in-the-log-of-the-node-example-hello-from-pallet-ocw">2.2 copy paste the skcdCid that appear in the log of the node ([example] Hello from pallet-ocw)</a></h4>
+<p>2022-03-11 18:38:35 💤 Idle (0 peers), best: #12141 (0x61dd…ab06), finalized #12139 (0xe4bf…9f35), ⬇ 0 ⬆ 0<br />
+2022-03-11 18:38:36 🙌 Starting consensus session on top of parent 0x61dd629bedb966389196018cf2cafacd9d529ec26d304545b283454e6d2dab06<br />
+2022-03-11 18:38:36 🎁 Prepared block for proposing at 12142 [hash: 0xa463c744bce8948476af640d07031460646d1b48c8823e5ba4618da5be72175b; parent_hash: 0x61dd…ab06; extrinsics (1): [0x3f1f…b797]]<br />
+2022-03-11 18:38:36 🔖 Pre-sealed block for proposal at 12142. Hash now 0xa72ffa4ced99481ebeeae2a14668ac719669d694a1e5fcfbf6a68fd64b909501, previously 0xa463c744bce8948476af640d07031460646d1b48c8823e5ba4618da5be72175b.<br />
+2022-03-11 18:38:36 ✨ Imported #12142 (0xa72f…9501)<br />
+2022-03-11 18:38:36 [example] Hello from pallet-ocw.<br />
+2022-03-11 18:38:36 [example] sending body b64: AAAAADAKLlFtWExtUWJwZkRkWjRZc0ZBS2tzOXFQcUtiNVRaWlN3VG81RTd6SHhqUTFBNUc=<br />
+2022-03-11 18:38:36 [example] status code: 200<br />
+2022-03-11 18:38:36 [example] header: content-type application/grpc-web+proto<br />
+2022-03-11 18:38:36 [example] header: transfer-encoding chunked<br />
+2022-03-11 18:38:36 [example] header: date Fri, 11 Mar 2022 17:38:36 GMT<br />
+2022-03-11 18:38:36 [example] Got gRPC trailers: grpc-status:0</p>
+<p>2022-03-11 18:38:36 [example] Got IPFS hash: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh<br />
+2022-03-11 18:38:36 [example] fetch_n_parse: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh<br />
+2022-03-11 18:38:36 [example] FINAL got result IPFS hash : [b8, 51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68] </p>
 <h2 id="step-3-submit-skcdcid-with--pallet-interactor"><a class="header" href="#step-3-submit-skcdcid-with--pallet-interactor">Step 3: Submit <code>skcdCid</code> with  pallet Interactor</a></h2>
 <p>we use this pallet to submit the cid of the logical_file.skcd</p>
 <h4 id="31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22"><a class="header" href="#31-go-to-ocwdemo-pallet-and-input-the-skcdcid-you-got-at-step-22">3.1 Go to <code>ocwDemo</code> pallet and input the <code>skcdCid</code> you got at step 2.2</a></h4>
 <p><img src="./fig/ocwDemo.png" alt="ocwDemo" /></p>
-<h3 id="step-32-garbled-circuit-cid-appear-in-node-log"><a class="header" href="#step-32-garbled-circuit-cid-appear-in-node-log">Step 3.2 Garbled Circuit cid appear in node log</a></h3>
+<h3 id="step-32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw"><a class="header" href="#step-32-garbled-circuit-cid-appear-in-node-log-ocw-hello-from-pallet-ocw">Step 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw)</a></h3>
+<p>2022-03-11 18:38:36 [ocw] Hello from pallet-ocw.<br />
+2022-03-11 18:38:36 [ocw] encode_body2: [51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68]<br />
+2022-03-11 18:38:36 [ocw] sending body b64: AAAAADAKLlFtWjlVSmJyYVpUam5rQ1l5N0ZUWldEYWl2MnM2cVdUemZGTmhGTGdISlJmdWg=<br />
+2022-03-11 18:38:36 [ocw] status code: 200<br />
+2022-03-11 18:38:36 [ocw] header: content-type application/grpc-web+proto<br />
+2022-03-11 18:38:36 [ocw] header: transfer-encoding chunked<br />
+2022-03-11 18:38:36 [ocw] header: date Fri, 11 Mar 2022 17:38:36 GMT<br />
+2022-03-11 18:38:36 [ocw] Got gRPC trailers: grpc-status:0</p>
+<p>2022-03-11 18:38:36 [ocw] Got IPFS hash: QmPUDRnaJG6wp22hMALAWKpyAwTZDts3vCZJmHZWWkXZJj<br />
+2022-03-11 18:38:36 [ocw] fetch_n_parse: QmPUDRnaJG6wp22hMALAWKpyAwTZDts3vCZJmHZWWkXZJj<br />
+2022-03-11 18:38:36 [ocw] FINAL got result IPFS hash : [b8, 51, 6d, 50, 55, 44, 52, 6e, 61, 4a, 47, 36, 77, 70, 32, 32, 68, 4d, 41, 4c, 41, 57, 4b, 70, 79, 41, 77, 54, 5a, 44, 74, 73, 33, 76, 43, 5a, 4a, 6d, 48, 5a, 57, 57, 6b, 58, 5a, 4a, 6a]</p>
 
                     </main>
 
