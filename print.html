@@ -801,7 +801,7 @@ Daemon is ready
 <div style="break-before: page; page-break-before: always;"></div><h1 id="prerequisite-installation"><a class="header" href="#prerequisite-installation">Prerequisite Installation</a></h1>
 <h2 id="install-go"><a class="header" href="#install-go">Install Go:</a></h2>
 <ul>
-<li>Install Go with download of the <a href="https://go.dev/doc/install">last version</a></li>
+<li>Install Go with download of the <a href="https://go.dev/doc/install">lastest version</a></li>
 <li>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #
 you can replace the tar file with its last version in the following command.</li>
 </ul>
@@ -816,7 +816,7 @@ you can replace the tar file with its last version in the following command.</li
 - that way the full IPFS env is set up; alternatively you can just install go-ipfs</li>
 <li><a href="https://docs.ipfs.io/install/command-line/#official-distributions">IPFS with go-ipfs client Install</a></li>
 </ul>
-<p>Installing ipfs on linux (whithout desktop):</p>
+<p>Installing ipfs on linux (without desktop):</p>
 <pre><code class="language-sh">wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz
 </code></pre>
 <pre><code class="language-sh">tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz
@@ -831,10 +831,17 @@ sudo bash install.sh
 <pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
 
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/127.0.0.1/tcp/5001
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
 </code></pre>
-<p>deamon launch</p>
+<blockquote>
+<p>&quot;if you intend to use Docker you SHOULD be sure it is reachable by the containers
+eg /ip4/0.0.0.0/tcp/5001&quot;</p>
+</blockquote>
+<p>deamon launch:</p>
+<blockquote>
+<p>wait for &quot;Initializing daemon...&quot; and &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,&quot;</p>
+</blockquote>
 <pre><code class="language-sh">Initializing daemon...
 go-ipfs version: 0.12.0
 Repo version: 12
@@ -848,8 +855,7 @@ WebUI: http://127.0.0.1:45167/webui
 Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/34533
 Daemon is ready
 </code></pre>
-<pre><code class="language-json">
-{
+<pre><code class="language-json">{
     &quot;ID&quot;: &quot;12D3KooWKDUcaDuzxqQeSvpwtE8kQKAGNFA1BdmNECk47iYMRA6F&quot;,
     &quot;PublicKey&quot;: &quot;CAESIIuk1CX4SOWG29N7DxhOuFYpzX0KUgsLi6EWVNnoylMU&quot;,
     &quot;Addresses&quot;: [
@@ -884,34 +890,10 @@ Daemon is ready
 <p>if not:
 <a href="https://cmake.org/install/">check install</a></p>
 <p><a href="https://cmake.org/download/">download binaries</a></p>
-<p>Or install on Ubuntu from source package:
-Uninstall it with:</p>
-<pre><code class="language-sh">sudo apt remove cmake
-</code></pre>
-<p>Install build tools and libraries that CMake depends on:</p>
-<pre><code class="language-sh">sudo apt-get install build-essential libssl-dev
-</code></pre>
-<p>Go to the temp directory:</p>
-<pre><code class="language-sh">cd /tmp
-</code></pre>
-<p>get the last version ex:</p>
-<pre><code class="language-sh">wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
-</code></pre>
-<p>Visit https://cmake.org/download/ and download the latest tar.gz</p>
-<p>Once the tar.gz file is downloaded, enter the following command to extract it:</p>
-<pre><code class="language-sh">tar -zxvf cmake-3.22.3.tar.gz
-</code></pre>
-<p>Then move to the extracted folder as follows:</p>
-<pre><code class="language-sh">cd cmake-3.22.3
-</code></pre>
-<p>Finally, run the following commands to compile and install CMake:</p>
-<pre><code class="language-sh">./bootstrap
-</code></pre>
-<p>You can now make it using the following command:</p>
-<pre><code class="language-sh">make
-</code></pre>
-<p>And then install it as follows:</p>
-<pre><code class="language-sh">sudo make install
+<pre><code class="language-sh">wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3-linux-x86_64.sh
+chmod +x cmake-3.22.3-linux-x86_64.sh
+sudo mkdir /opt/cmake-3.22/
+sudo ./cmake-3.22.3-linux-x86_64.sh --skip-license --prefix=/opt/cmake-3.22/
 </code></pre>
 <p>check the version</p>
 <pre><code class="language-sh">cmake --version
