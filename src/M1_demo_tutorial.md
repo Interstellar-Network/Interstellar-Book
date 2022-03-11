@@ -177,7 +177,7 @@ we use this pallet to submit the cid of the logical_file.skcd
 ![ocwDemo](./fig/ocwDemo.png)
 
 
-### Step 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw)
+#### 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw)
 ```sh   
 2022-03-11 18:38:36 [ocw] Hello from pallet-ocw.    
 2022-03-11 18:38:36 [ocw] encode_body2: [51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68]    
