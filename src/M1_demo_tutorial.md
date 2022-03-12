@@ -75,7 +75,7 @@ In this demo, we want to demonstrate how OCW pallets can interact with the Garbl
 To avoid any ambiguities regarding the pallets delivered for this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:
 
 - ocwExample: to provide an example of how we can configure the GCF with a simple verilog file that will be used as a master file for production.
-- ocwDemo: to demomstrate how we can launch and manage the production of the garbled circuits in the GCF.
+- ocwDemo: to demomstrate how we can launch the production of the garbled circuits in the GCF.
 
 
 ## Demo overview:
