@@ -49,8 +49,10 @@ docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,deb
 
 ### Launch substrate demo chain with OCW
 
-
-
+```
+git clone git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
+```
+build the substrate chain....
 
 ```sh
 RUST_LOG="warn,info" cargo run -- --dev --tmp
@@ -65,23 +67,25 @@ Yarn start
 ```
 
 
-## Demo overview
+## Demo purpose
 
-> To avoid any ambiguities regarding the state of the pallet (for demo/eample purpose only - not production ready)
 
-We named the two OCW pallets we interact with:
+In this demo, we want to demonstrate how OCW pallets can interact with the Garbled Circuit Factory to pilot the mass production of garbled circuits.
 
-- ocwExample (to manage configuration/generation of logical circuit file)
-- ocwDemo (to manage garbled circuit production)
+To avoid any ambiguities regarding the pallets delivered on this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:
 
+- ocwExample: to provide an example of how we can configure the GCF with a simple verilog file that will be used as a master file for production.
+- ocwDemo: to demomstrate how we can launch and manage the production of the garbled circuits in the GCF.
+
+## Demo overview:
 
 ### 1. write a verilog master/config file.v in IPFS and get its `VerilogCid`
 `GCF: can be set-up` for production **with verilog master file**
 
-### 2. signed extrinsic with `VerilogCid` of master File/config file.v to `ocwExample` pallet
+### 2. signed extrinsic with `VerilogCid` of master/config file.v to `ocwExample` pallet
 `Request->GCF`: **OCW launch  the generation of the logical circuit file in GCF**
 
-`Response<-GCF`: **OCW get the  `skcdCid` of the generated logical circui (.skcd)**
+`Response<-GCF`: **OCW get the  `skcdCid` of the generated logical circuit (.skcd)**
 
 `GCF: GC production ready` for the production of Garbled Circuits: 
 **OCW is configured with verilog master file**
@@ -89,22 +93,15 @@ We named the two OCW pallets we interact with:
 >skcd file is cached in the production pipeline
 
 ### 3. signed extrinsic with `skcdCid` to `ocwDemo` pallet
-`Request->GCF`: **OCW launch  the generation garbled circuit file(s) in GCF**
+`Request->GCF`: **OCW launch  the generation of the garbled circuit files in GCF**
 
-`Response<-GCF`: **OCW get the `gcCid` of the generated Garbled Circuit (ready to be evaluated)**
-
-
-
-## Step 1: Upload Master/Config verilog (.v) file/ write in IPFS
+`Response<-GCF`: **OCW get the `gcCid` of the generated garbled circuits (ready to be evaluated)**
 
 
-```sh
-curl -X POST -F file=@/REPLACEME/PATH/verilogFileExample.v "http://127.0.0.1:5001/api/v0/add?progress=true"
-```
-> Get the VerilogCid to use with pallet interactor
 
-Files example to add:
-very simple adder circuit
+## Step 1: add the master/config verilogfile.v in IPFS
+
+As an example, we provide a very simple adder circuit:
 
 adder.v
 ```verilog,editable
@@ -133,23 +130,29 @@ module half_add(a,b,s,c);
 endmodule :half_add
 ```
 
+
+```sh
+curl -X POST -F file=@/adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
+```
+> Gopy its hash `VerilogCid` to use it with the pallet interactor
+
+
 ## Interact with Substrate Front End
 
 We use Pallet Interactor to pilot the configuration and generation management of the circuits with GCF
-
 
 
 ## Step 2: Submit `VerilogCid` with pallet Interactor
 
 #### 2.1 Go to `ocwExample` pallet and  and input the `VerilogCid` you got at step 1.
 
-We use this pallet to submit the master file config file example.
+We use this pallet to submit the master/config  file example.
 
 ![ocwExample](./fig/ocwExample.png)
 
-GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid to the pallet.
+GCF will generate the related skcd logical circuit file,  add it in IPFS and send back its hash i.e skcdCid to the `ocwExample` pallet.
 
-#### 2.2 The skcdCid should appear in the log of the node ([example] Hello from pallet-ocw)
+#### 2.2 The skcdCid of the master file should appear in the log of the node ([example] Hello from pallet-ocw)
 
 ```sh
 2022-03-11 18:38:35 💤 Idle (0 peers), best: #12141 (0x61dd…ab06), finalized #12139 (0xe4bf…9f35), ⬇ 0 ⬆ 0    
@@ -171,14 +174,15 @@ GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid 
 ```
 
 #### 2.3 copy the skcdCid in the log
-The skcdCid is displayed in the log after [example] Got IPFS hash:
+The `skcdCid` is displayed in the logs after [example] Got IPFS hash:
+
 it's value for this example is: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh
 
 
 
 ## Step 3: Submit `skcdCid` with  pallet Interactor
 
-We use this pallet to submit the cid of the logical_file.skcd
+We want to submit the cid of the skcd file to the pallet that will manage the production of garbled circuits.
 
 #### 3.1 Go to `ocwDemo` pallet and input the `skcdCid` copied (step 2.3)
 
@@ -186,9 +190,12 @@ We use this pallet to submit the cid of the logical_file.skcd
 ![ocwDemo](./fig/ocwDemo.png)
 
 
-The ocwDemo now will work with this logoical circuit file  to produce garbled circuits.
+The ocwDemo now will use with this logical circuit file  to produce garbled circuits.
 
-#### 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw) 
+#### 3.2 The Garbled Circuits cids appear in node log ([ocw] Hello from pallet-ocw) 
+
+The garbled circuits cids produced by the GCF are received by the `ocwDemo` pallet.
+
 
 ```sh, editable   
 2022-03-11 18:38:36 [ocw] Hello from pallet-ocw.    
