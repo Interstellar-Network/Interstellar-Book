@@ -262,7 +262,7 @@ Daemon is ready
 </code></pre>
 <h2 id="demo-purpose"><a class="header" href="#demo-purpose">Demo purpose</a></h2>
 <p>In this demo, we want to demonstrate how OCW pallets can interact with the Garbled Circuit Factory to pilot the mass production of garbled circuits.</p>
-<p>To avoid any ambiguities regarding the pallets delivered on this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:</p>
+<p>To avoid any ambiguities regarding the pallets delivered for this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:</p>
 <ul>
 <li>ocwExample: to provide an example of how we can configure the GCF with a simple verilog file that will be used as a master file for production.</li>
 <li>ocwDemo: to demomstrate how we can launch and manage the production of the garbled circuits in the GCF.</li>
@@ -281,6 +281,9 @@ Daemon is ready
 <h3 id="3-signed-extrinsic-with-skcdcid-to-ocwdemo-pallet"><a class="header" href="#3-signed-extrinsic-with-skcdcid-to-ocwdemo-pallet">3. signed extrinsic with <code>skcdCid</code> to <code>ocwDemo</code> pallet</a></h3>
 <p><code>Request-&gt;GCF</code>: <strong>OCW launch  the generation of the garbled circuit files in GCF</strong></p>
 <p><code>Response&lt;-GCF</code>: <strong>OCW get the <code>gcCid</code> of the generated garbled circuits (ready to be evaluated)</strong></p>
+<blockquote>
+<p>As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit production manualy using Pallet Interactor.</p>
+</blockquote>
 <h2 id="step-1-add-the-masterconfig-verilogfilev-in-ipfs"><a class="header" href="#step-1-add-the-masterconfig-verilogfilev-in-ipfs">Step 1: add the master/config verilogfile.v in IPFS</a></h2>
 <p>As an example, we provide a very simple adder circuit:</p>
 <p>adder.v</p>
