@@ -72,10 +72,11 @@ Yarn start
 
 In this demo, we want to demonstrate how OCW pallets can interact with the Garbled Circuit Factory to pilot the mass production of garbled circuits.
 
-To avoid any ambiguities regarding the pallets delivered on this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:
+To avoid any ambiguities regarding the pallets delivered for this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:
 
 - ocwExample: to provide an example of how we can configure the GCF with a simple verilog file that will be used as a master file for production.
 - ocwDemo: to demomstrate how we can launch and manage the production of the garbled circuits in the GCF.
+
 
 ## Demo overview:
 
@@ -97,7 +98,7 @@ To avoid any ambiguities regarding the pallets delivered on this milestone (for 
 
 `Response<-GCF`: **OCW get the `gcCid` of the generated garbled circuits (ready to be evaluated)**
 
-
+> As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit production manualy using Pallet Interactor.
 
 ## Step 1: add the master/config verilogfile.v in IPFS
 
