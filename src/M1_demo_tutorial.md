@@ -149,7 +149,7 @@ We use this pallet to submit the master file config file example.
 
 GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid to the pallet.
 
-#### 2.2 The skcdCid should appear in the log of the node ([example] Hello from pallet-ocw) but also in the Front End Event List.
+#### 2.2 The skcdCid should appear in the log of the node ([example] Hello from pallet-ocw)
 
 ```sh
 2022-03-11 18:38:35 💤 Idle (0 peers), best: #12141 (0x61dd…ab06), finalized #12139 (0xe4bf…9f35), ⬇ 0 ⬆ 0    
@@ -170,25 +170,23 @@ GCF will generate the logical_file.skcd store it in IPFS and send  back skcdCid 
 2022-03-11 18:38:36 [example] FINAL got result IPFS hash : [b8, 51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68] 
 ```
 
+#### 2.3 copy the skcdCid in the log
+The skcdCid is displayed in the log after [example] Got IPFS hash:
+it's value for this example is: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh
+
+
+
 ## Step 3: Submit `skcdCid` with  pallet Interactor
 
-we use this pallet to submit the cid of the logical_file.skcd
+We use this pallet to submit the cid of the logical_file.skcd
 
-#### 3.1 Go to `ocwDemo` pallet and input the `skcdCid` 
+#### 3.1 Go to `ocwDemo` pallet and input the `skcdCid` copied (step 2.3)
 
 
-You can copy paste the SkcdCid from the Events List
+![ocwDemo](./fig/ocwDemo.png)
 
-In this example: 
-ocwExample:NewSkcdIpfsCid
-["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",...
 
-![ocwDemo](./fig/FrontEnd-step2-3.png)
-
-Once submitted the event: ocwDemo:NewSkcdIpfsCid
-["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"..
-will pop-up in the eEvent list.
-The ocwDemo will work with this logoical circuit file  to produce garbled circuits.
+The ocwDemo now will work with this logoical circuit file  to produce garbled circuits.
 
 #### 3.2 Garbled Circuit cid appear in node log ([ocw] Hello from pallet-ocw) 
 
