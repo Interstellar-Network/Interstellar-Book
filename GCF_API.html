@@ -145,10 +145,11 @@
 <p>This is a list of the APIs used in substrate framework to pilot the generation of the Garbled Circuits required  by the Interstellar infrastructure.</p>
 <h3 id="launh-circuit-generation-from-ocw-on-gcf-external-service"><a class="header" href="#launh-circuit-generation-from-ocw-on-gcf-external-service">Launh circuit generation from OCW on GCF (external service)</a></h3>
 <p><code>generate_circuit</code>: <a href="https://github.com/Interstellar-Network/api_circuits/blob/main/src/circuits_routes.rs#L61">api_circuits/src/circuit_routes.rs:61</a></p>
+<p><code>generate_garble</code> : <a href="https://github.com/Interstellar-Network/api_garble/blob/main/src/garble_routes.rs#L68">api_garble/src/garble_routes,rs:68</a></p>
 <p><code>Request</code>   : start the circuit(s) generation with hash/cid  of master files + parameter related to circuit production e.g size/resolution of display circuits</p>
 <p><code>Response</code>  : get hash/cid of the circuit on ipfs</p>
 <p><code>Status</code>    : circuit production state</p>
-<p>circuit_route.rs - generation of  display circuit</p>
+<h4 id="circuit_routers---generation-of--display-circuit"><a class="header" href="#circuit_routers---generation-of--display-circuit">circuit_route.rs - generation of  display circuit</a></h4>
 <pre><pre class="playground"><code class="language-rust editable">#[tonic::async_trait]
 impl SkcdApi for SkcdApiServerImpl {
     async fn generate_skcd_display(
@@ -185,7 +186,7 @@ impl SkcdApi for SkcdApiServerImpl {
         Ok(Response::new(reply))
     }
 </code></pre></pre>
-<p>For generic circuits:</p>
+<h4 id="generation-of-generic-circuits"><a class="header" href="#generation-of-generic-circuits">generation of generic circuits:</a></h4>
 <pre><pre class="playground"><code class="language-rust editable">async fn generate_skcd_generic_from_ipfs(
         &amp;self,
         request: Request&lt;SkcdGenericFromIpfsRequest&gt;,
@@ -245,6 +246,71 @@ impl SkcdApi for SkcdApiServerImpl {
 
         let reply = SkcdGenericFromIpfsReply {
             skcd_cid: format!(&quot;{}&quot;, ipfs_result.hash),
+        };
+
+        Ok(Response::new(reply))
+    }
+}
+</code></pre></pre>
+<h4 id="generation-of-garbled-circuits"><a class="header" href="#generation-of-garbled-circuits">Generation of garbled circuits</a></h4>
+<p>garble_route.rs</p>
+<pre><pre class="playground"><code class="language-rust editable">#[tonic::async_trait]
+impl GarbleApi for GarbleApiServerImpl {
+    async fn garble_ipfs(
+        &amp;self,
+        request: Request&lt;GarbleIpfsRequest&gt;,
+    ) -&gt; Result&lt;Response&lt;GarbleIpfsReply&gt;, Status&gt; {
+        log::info!(&quot;Got a request from {:?}&quot;, request.remote_addr());
+        let skcd_cid = &amp;request.get_ref().skcd_cid;
+
+        // get the (.skcd) from IPFS
+        // DO NOT use dag_get if the file was &quot;add&quot;
+        // The returned bytes would be eg
+        // {&quot;Data&quot;:{&quot;/&quot;:{&quot;bytes&quot;:&quot;CAISjgQvL....ZfYWRkGI4E&quot;}},&quot;Links&quot;:[]}
+        // let skcd_buf = self
+        //     .ipfs_client()
+        //     .dag_get(&amp;skcd_cid)
+        //     .map_ok(|chunk| chunk.to_vec())
+        //     .try_concat()
+        //     .await
+        //     .unwrap();
+        let skcd_buf = self
+            .ipfs_client()
+            .cat(&amp;skcd_cid)
+            .map_ok(|chunk| chunk.to_vec())
+            .try_concat()
+            .await
+            .unwrap();
+
+        let tmp_dir = Builder::new()
+            .prefix(&quot;interstellar-garble_routes-garble_ipfs&quot;)
+            .tempdir()
+            .unwrap();
+
+        // write the data from IPFS to a temp file
+        let skcd_input_path = tmp_dir.path().join(&quot;input.skcd.pb.bin&quot;);
+        std::fs::write(&amp;skcd_input_path, skcd_buf).expect(&quot;could not write to skcd_input_path&quot;);
+
+        // TODO class member/Trait for &quot;lib_garble_wrapper::ffi::new_garble_wrapper()&quot;
+        let lib_garble_wrapper = tokio::task::spawn_blocking(move || {
+            let wrapper = lib_garble_wrapper::ffi::new_garble_wrapper();
+
+            // TODO make the C++ API return a buffer?
+            let buf: Vec&lt;u8&gt; =
+                wrapper.GarbleSkcdToBuffer(skcd_input_path.as_os_str().to_str().unwrap());
+
+            buf
+        })
+        .await
+        .unwrap();
+
+        let data = Cursor::new(lib_garble_wrapper);
+
+        // TODO error handling, or at least logging
+        let ipfs_result = self.ipfs_client().add(data).await.unwrap();
+
+        let reply = GarbleIpfsReply {
+            pgarbled_cid: format!(&quot;{}&quot;, ipfs_result.hash),
         };
 
         Ok(Response::new(reply))
