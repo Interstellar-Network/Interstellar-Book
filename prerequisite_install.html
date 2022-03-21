@@ -241,16 +241,17 @@ sudo Zip ninja-linux.zip -d /usr/local/bin
 sudo chmod +x /usr/local/bin/ninja
 </code></pre>
 <h2 id="add-the-following-list-of-softwarelibs"><a class="header" href="#add-the-following-list-of-softwarelibs">add the following list of software/libs</a></h2>
-<p>with <code>sudo apt-get install</code></p>
-<ul>
-<li>bison</li>
-<li>libreadline-dev</li>
-<li>libtcl-dev</li>
-<li>libtcl</li>
-<li>tcl8.6-dev</li>
-<li>tk8.6-dev</li>
-<li>liboost-filesystem-dev</li>
-</ul>
+<pre><code class="language-sh">apt-get install -y \
+    bison \
+    flex \
+    libreadline-dev \
+    libtcl \
+    tcl8.6-dev \
+    tcl-dev \
+    tk8.6-dev \
+    tk-dev \
+    libboost-filesystem-dev \
+</code></pre>
 
                     </main>
 
