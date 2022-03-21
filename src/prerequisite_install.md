@@ -126,7 +126,7 @@ apt-get install unzip
 sudo Zip ninja-linux.zip -d /usr/local/bin
 sudo chmod +x /usr/local/bin/ninja
 ```
-## add the following list of software/libs
+## Add the following list of software/libs
 
 ```sh
 apt-get install -y \
