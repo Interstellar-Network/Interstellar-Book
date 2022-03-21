@@ -128,15 +128,21 @@ sudo chmod +x /usr/local/bin/ninja
 ```
 ## add the following list of software/libs
 
-with `sudo apt-get install`
+```sh
+apt-get install -y \
+    bison \
+    flex \
+    libreadline-dev \
+    libtcl \
+    tcl8.6-dev \
+    tcl-dev \
+    tk8.6-dev \
+    tk-dev \
+    libboost-filesystem-dev \
+```
 
-- bison
-- libreadline-dev
-- libtcl-dev
-- libtcl
-- tcl8.6-dev
-- tk8.6-dev
-- liboost-filesystem-dev
+
+
 
 
 
