@@ -195,7 +195,7 @@ GCF will generate the related skcd logical circuit file,  add it in IPFS and sen
 2022-03-11 18:38:36 [example] FINAL got result IPFS hash : [b8, 51, 6d, 5a, 39, 55, 4a, 62, 72, 61, 5a, 54, 6a, 6e, 6b, 43, 59, 79, 37, 46, 54, 5a, 57, 44, 61, 69, 76, 32, 73, 36, 71, 57, 54, 7a, 66, 46, 4e, 68, 46, 4c, 67, 48, 4a, 52, 66, 75, 68] 
 ```
 
-#### 2.3 copy the skcdCid in the log
+#### 2.3 Copy the skcdCid in the log
 The `skcdCid` is displayed in the logs after [example] Got IPFS hash:
 
 it's value for this example is: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh
