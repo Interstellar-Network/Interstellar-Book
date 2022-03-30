@@ -133,7 +133,7 @@ endmodule :half_add
 
 
 ```sh
-curl -X POST -F file=@/adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
+curl -X POST -F file=@adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
 ```
 > Gopy its hash `VerilogCid` to use it with the pallet interactor
 
