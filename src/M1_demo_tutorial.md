@@ -142,7 +142,7 @@ endmodule :half_add
 ```
 create a file `adder.v` eg
 - use your editor of choice eg `code adder.v` or `nano adder.v` etc
-- copy paste the content below
+- copy paste the content above
 
 then
 
