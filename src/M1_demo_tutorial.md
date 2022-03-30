@@ -170,9 +170,12 @@ We use Pallet Interactor to pilot the configuration and generation management of
 
 We use this pallet to submit the master/config  file example.
 
+> please use the signed button
+
 ![ocwExample](./fig/ocwExample.png)
 
 GCF will generate the related skcd logical circuit file,  add it in IPFS and send back its hash i.e skcdCid to the `ocwExample` pallet.
+
 
 #### 2.2 The skcdCid of the master file should appear in the log of the node ([example] Hello from pallet-ocw)
 
@@ -204,13 +207,15 @@ it's value for this example is: QmZ9UJbraZTjnkCYy7FTZWDaiv2s6qWTzfFNhFLgHJRfuh
 
 ## Step 3: Submit `skcdCid` with  pallet Interactor
 
+
+
 We want to submit the cid of the skcd file to the pallet that will manage the production of garbled circuits.
 
 #### 3.1 Go to `ocwDemo` pallet and input the `skcdCid` copied (step 2.3)
 
+> please use the signed button
 
 ![ocwDemo](./fig/ocwDemo.png)
-
 
 The ocwDemo now will use with this logical circuit file  to produce garbled circuits.
 
