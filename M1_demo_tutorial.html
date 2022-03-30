@@ -165,7 +165,10 @@ Daemon is ready
 <pre><code class="language-sh">docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_garble:milestone1 /usr/local/bin/api_garble --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
 </code></pre>
 <h3 id="launch-substrate-demo-chain-with-ocw"><a class="header" href="#launch-substrate-demo-chain-with-ocw">Launch substrate demo chain with OCW</a></h3>
-<pre><code>git clone git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
+<pre><code>git clone --branch=interstellar --recursive git@github.com:Interstellar-Network/subs trate-offchain-worker-demo.git
+</code></pre>
+<p>then</p>
+<pre><code>cd substrate-offchain-worker-demo 
 </code></pre>
 <p>build the substrate chain....</p>
 <pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp
@@ -174,8 +177,11 @@ Daemon is ready
 <p>Important: the node log will display some results i.e cid that you will have to copy paste to perform the demo</p>
 </blockquote>
 <h3 id="launch-a-generic-substrate-fromt-end"><a class="header" href="#launch-a-generic-substrate-fromt-end">Launch a generic Substrate Fromt-end</a></h3>
+<p>Use the following <a href="https://github.com/substrate-developer-hub/substrate-front-end-template#installation">substrate link</a> for installation
+then use</p>
 <pre><code class="language-sh">Yarn start
 </code></pre>
+<p>to connect a locally running node</p>
 <h2 id="demo-purpose"><a class="header" href="#demo-purpose">Demo purpose</a></h2>
 <p>In this demo, we want to demonstrate how OCW pallets can interact with the Garbled Circuit Factory to pilot the mass production of garbled circuits.</p>
 <p>To avoid any ambiguities regarding the pallets delivered for this milestone (for demo/example purpose only), we named the two OCW pallets we interact with:</p>
@@ -227,11 +233,19 @@ module half_add(a,b,s,c);
   and a1(c,a,b);
 endmodule :half_add
 </code></pre>
+<p>create a file <code>adder.v</code> eg</p>
+<ul>
+<li>use your editor of choice eg <code>code adder.v</code> or <code>nano adder.v</code> etc</li>
+<li>copy paste the content below</li>
+</ul>
+<p>then</p>
 <pre><code class="language-sh">curl -X POST -F file=@adder.v &quot;http://127.0.0.1:5001/api/v0/add?progress=true&quot;
 </code></pre>
-<blockquote>
-<p>Gopy its hash <code>VerilogCid</code> to use it with the pallet interactor</p>
-</blockquote>
+<p>The command result is:
+{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Bytes&quot;:527}
+{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Hash&quot;:&quot;QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx&quot;,&quot;Size&quot;:&quot;538&quot;}</p>
+<p><img src="./fig/curladderresult.png" alt="curl add adder result" /></p>
+<p>the &quot;hash&quot; ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the the 'VerilogCid' field in the pallet interactor </p>
 <h2 id="interact-with-substrate-front-end"><a class="header" href="#interact-with-substrate-front-end">Interact with Substrate Front End</a></h2>
 <p>We use Pallet Interactor to pilot the configuration and generation management of the circuits with GCF</p>
 <h2 id="step-2-submit-verilogcid-with-pallet-interactor"><a class="header" href="#step-2-submit-verilogcid-with-pallet-interactor">Step 2: Submit <code>VerilogCid</code> with pallet Interactor</a></h2>
