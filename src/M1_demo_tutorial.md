@@ -49,9 +49,16 @@ docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,deb
 
 ### Launch substrate demo chain with OCW
 
+
 ```
-git clone git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
+git clone --branch=interstellar --recursive git@github.com:Interstellar-Network/subs trate-offchain-worker-demo.git
 ```
+then
+```
+cd substrate-offchain-worker-demo 
+````
+
+
 build the substrate chain....
 
 ```sh
@@ -62,9 +69,12 @@ RUST_LOG="warn,info" cargo run -- --dev --tmp
 
 ### Launch a generic Substrate Fromt-end
 
+Use the following [substrate link](https://github.com/substrate-developer-hub/substrate-front-end-template#installation) for installation
+then use
 ```sh
 Yarn start
 ```
+to connect a locally running node
 
 
 ## Demo purpose
@@ -130,13 +140,22 @@ module half_add(a,b,s,c);
   and a1(c,a,b);
 endmodule :half_add
 ```
+create a file `adder.v` eg
+- use your editor of choice eg `code adder.v` or `nano adder.v` etc
+- copy paste the content below
 
+then
 
 ```sh
 curl -X POST -F file=@adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
 ```
-> Gopy its hash `VerilogCid` to use it with the pallet interactor
+The command result is:
+{"Name":"adder.v","Bytes":527}
+{"Name":"adder.v","Hash":"QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx","Size":"538"}
 
+![curl add adder result](./fig/curladderresult.png)
+
+the "hash" ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the the 'VerilogCid' field in the pallet interactor 
 
 ## Interact with Substrate Front End
 
