@@ -150,12 +150,14 @@ then
 curl -X POST -F file=@adder.v "http://127.0.0.1:5001/api/v0/add?progress=true"
 ```
 The command result is:
+```
 {"Name":"adder.v","Bytes":527}
 {"Name":"adder.v","Hash":"QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx","Size":"538"}
+```
 
 ![curl add adder result](./fig/curladderresult.png)
 
-the "hash" ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the the 'VerilogCid' field in the pallet interactor 
+the "hash" ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the 'VerilogCid' field in the pallet interactor 
 
 ## Interact with Substrate Front End
 
