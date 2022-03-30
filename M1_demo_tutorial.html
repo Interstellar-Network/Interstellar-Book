@@ -241,11 +241,12 @@ endmodule :half_add
 <p>then</p>
 <pre><code class="language-sh">curl -X POST -F file=@adder.v &quot;http://127.0.0.1:5001/api/v0/add?progress=true&quot;
 </code></pre>
-<p>The command result is:
-{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Bytes&quot;:527}
-{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Hash&quot;:&quot;QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx&quot;,&quot;Size&quot;:&quot;538&quot;}</p>
+<p>The command result is:</p>
+<pre><code>{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Bytes&quot;:527}
+{&quot;Name&quot;:&quot;adder.v&quot;,&quot;Hash&quot;:&quot;QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx&quot;,&quot;Size&quot;:&quot;538&quot;}
+</code></pre>
 <p><img src="./fig/curladderresult.png" alt="curl add adder result" /></p>
-<p>the &quot;hash&quot; ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the the 'VerilogCid' field in the pallet interactor </p>
+<p>the &quot;hash&quot; ie QmYAFySLrUXwf4wVb7QGMxA7nXAoueXtQCYpyReFp5NKsx is the  value expected for the 'VerilogCid' field in the pallet interactor </p>
 <h2 id="interact-with-substrate-front-end"><a class="header" href="#interact-with-substrate-front-end">Interact with Substrate Front End</a></h2>
 <p>We use Pallet Interactor to pilot the configuration and generation management of the circuits with GCF</p>
 <h2 id="step-2-submit-verilogcid-with-pallet-interactor"><a class="header" href="#step-2-submit-verilogcid-with-pallet-interactor">Step 2: Submit <code>VerilogCid</code> with pallet Interactor</a></h2>
