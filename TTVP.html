@@ -136,12 +136,12 @@
                     <main>
                         <h1 id="trusted-transaction-validation-protocol"><a class="header" href="#trusted-transaction-validation-protocol">Trusted Transaction Validation Protocol</a></h1>
 <h2 id="trusted-transaction-validation-protocol-architecture-overview"><a class="header" href="#trusted-transaction-validation-protocol-architecture-overview">Trusted Transaction Validation Protocol architecture overview</a></h2>
-<p>This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules.</p>
+<p>This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules (briefly described)</p>
 <p><img src="./fig/TTV_overview_dark.svg" alt="TTVP overview" /></p>
 <h2 id="high-level-components-of-interstellar-blockchain"><a class="header" href="#high-level-components-of-interstellar-blockchain">High level components of Interstellar blockchain</a></h2>
 <p>Those modules are based on Parity Substrate nodes and IntegriTEE workers.</p>
 <h3 id="transaction-screen-management"><a class="header" href="#transaction-screen-management">Transaction Screen Management</a></h3>
-<p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes. Thanks to persistence of vision.</p>
+<p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.</p>
 <h3 id="mobile-key-management"><a class="header" href="#mobile-key-management">Mobile Key Management</a></h3>
 <p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
 This mobile Private key and Garbled Circuits are securely tied with the wallet private keys associated with the user's assets and managed in the blockchain hardware enclave TEE nodes. In order to prevent potential attacks on hardware enclaves, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.</p>
