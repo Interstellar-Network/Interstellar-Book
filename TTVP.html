@@ -135,13 +135,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="trusted-transaction-validation-protocol"><a class="header" href="#trusted-transaction-validation-protocol">Trusted Transaction Validation Protocol</a></h1>
+<p>The purpose of the Trusted Transaction Validation Protocol is to provide a decentralized feature managed by a blockchain to authenticate and validate a transaction in a higly secure but frictionless way.</p>
 <h2 id="trusted-transaction-validation-protocol-architecture---ttvp"><a class="header" href="#trusted-transaction-validation-protocol-architecture---ttvp">Trusted Transaction Validation Protocol architecture - TTVP</a></h2>
 <p>The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. It also includes future roadmap modules (briefly described)</p>
 <p><img src="./fig/TTV_overview_dark.svg" alt="TTVP overview" /></p>
 <h2 id="high-level-components-related-to-ttvp-in-interstellar-blockchain"><a class="header" href="#high-level-components-related-to-ttvp-in-interstellar-blockchain">High level components related to TTVP in Interstellar blockchain</a></h2>
 <p>Those modules are based on Parity Substrate nodes and IntegriTEE workers.</p>
 <h3 id="secure-ui-layer---transaction-screen-management"><a class="header" href="#secure-ui-layer---transaction-screen-management">Secure UI Layer - Transaction Screen Management</a></h3>
-<p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.</p>
+<p>The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.</p>
 <h3 id="mobile-trusted-authentication---mobile-key-management"><a class="header" href="#mobile-trusted-authentication---mobile-key-management">Mobile Trusted Authentication - Mobile Key Management</a></h3>
 <p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
 The public Key is sent to the nodes and managed in the Mobile TEE registry (described below)</p>
