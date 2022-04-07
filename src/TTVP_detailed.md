@@ -2,7 +2,7 @@
 
 
 
-## Transaction modules and flowchart
+## Transaction validation management modules and flowchart
 
 ![Transaction Validation Module](./fig/Transaction_Validation_Module.svg)
 
