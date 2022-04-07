@@ -1,13 +1,13 @@
 # Trusted Transaction Validation Protocol
 
 
-## Trusted Transaction Validation Protocol architecture overview
+## Trusted Transaction Validation Protocol architecture - TTVP
 
-This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules (briefly described)
+The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. It also includes future roadmap modules (briefly described)
 
 ![TTVP overview](./fig/TTV_overview_dark.svg)
 
-## High level components of Interstellar blockchain
+## High level components related to TTVP in Interstellar blockchain
 
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
@@ -42,4 +42,4 @@ Each user has a unique typing pattern for a sequence of digits on a keypad. If a
 [TOUCH DYNAMICS BIOMETRICS TO ENHANCE AUTHENTICATION ON MOBILE DEVICES](https://www.research.manchester.ac.uk/portal/files/159168194/FULL_TEXT.PDF)
 
 #### Ongoing Research (roadmap)
-Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers. (cf `Malware Detection` module in mobile)
+Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers. (cf `Malware Detection` module in the mobile device)
