@@ -17,12 +17,14 @@ The transaction screen is managed with Garbled Circuits that are computed on TEE
 
 ### Mobile Trusted Authentication - Mobile Key Management
 A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
+The public Key is sent to the nodes and managed in the Mobile TEE registry (described below)
+
+Actually we replace the wallet private keys by a TEE protected mobile private key. This protected key act as a proxy to all the keys owned by the user.
+
+> It is securely tied to the user account. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Trusted Keys and Asset Management & Signers` module.
 
 
-> This mobile Private key and Garbled Circuits are securely tied with the wallet private keys associated with the user's assets and managed in the blockchain hardware enclave TEE nodes. in `Trusted Keys and Asset Management & Signers` module.
-
-
-In order to prevent potential attacks on hardware enclaves, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.
+In order to prevent potential attacks on hardware enclaves down the road, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.
 
  
 ### Mobile TEE registry pallet
