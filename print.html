@@ -1049,27 +1049,25 @@ sudo chmod +x /usr/local/bin/ninja
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-docker-demo-tutorial"><a class="header" href="#m2-docker-demo-tutorial">M2 Docker Demo Tutorial</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol"><a class="header" href="#trusted-transaction-validation-protocol">Trusted Transaction Validation Protocol</a></h1>
 <h2 id="trusted-transaction-validation-protocol-architecture-overview"><a class="header" href="#trusted-transaction-validation-protocol-architecture-overview">Trusted Transaction Validation Protocol architecture overview</a></h2>
-<p>This schema shows the main component of Interstellar blockchain including the modules related to Transaction Validation.
-The following schema also includes future roadmap modules.</p>
+<p>This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules.</p>
 <p><img src="./fig/TTV_overview_dark.svg" alt="TTVP overview" /></p>
 <h2 id="high-level-components-of-interstellar-blockchain"><a class="header" href="#high-level-components-of-interstellar-blockchain">High level components of Interstellar blockchain</a></h2>
-<p>Those modules are based on Parity Substrate nodes and IntegriTEE workers. The following schema also includes future roadmap modules.</p>
+<p>Those modules are based on Parity Substrate nodes and IntegriTEE workers.</p>
+<h3 id="transaction-screen-management"><a class="header" href="#transaction-screen-management">Transaction Screen Management</a></h3>
+<p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes. Thanks to persistence of vision.</p>
 <h3 id="mobile-key-management"><a class="header" href="#mobile-key-management">Mobile Key Management</a></h3>
 <p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
-This mobile Private key and a set of Garbled Circuits are securely tied with the wallet private keys associated with the user's assets and managed in the blockchain hardware enclave TEE nodes. To prevent potential attacks on hardware enclaves on nodes, we will also use Multi Party Computation and especially Threshold Signature Scheme.</p>
-<h3 id="transaction-screen-management"><a class="header" href="#transaction-screen-management">Transaction Screen Management</a></h3>
-<p>The transaction screen is managed with Garbled Circuits that are pre-computed on TEE nodes and provisioned on the mobile by the nodes from time to time. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes (thanks to persistence of vision)</p>
+This mobile Private key and Garbled Circuits are securely tied with the wallet private keys associated with the user's assets and managed in the blockchain hardware enclave TEE nodes. In order to prevent potential attacks on hardware enclaves, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.</p>
 <h4 id="mobile-tee-registry-pallet"><a class="header" href="#mobile-tee-registry-pallet">Mobile TEE registry pallet</a></h4>
-<p>This is the module for the management of private keys on the devices that will be used for unsigned transaction extrinsic with signed option i.e. verification of message signatures with mobile public keys. This pallet will also register all information related to TEE, security and identification of mobile devices when available. It includes the following  key and ID Attestation and other hardware protected  features like  Protected confirmation mobile app signing, etc...</p>
+<p>This is the module for the management of private keys on the devices that will be used for unsigned transaction extrinsic with signed option i.e. verification of message signatures with mobile public keys. This pallet will also register all information related to TEE, security and identification of mobile devices when available. It includes the following  key and ID Attestation and other hardware protected  features like  <a href="https://source.android.com/security/protected-confirmation">Protected confirmation</a> mobile app signing, etc...</p>
 <h3 id="attestation-management-roadmap"><a class="header" href="#attestation-management-roadmap">Attestation management (roadmap)</a></h3>
-<p>Key and ID Attestation  |  Android Open Source Project, 
-Verifying hardware-backed key pairs with Key Attestation (android.com)
-java - How to check whether Android phone supports TEE? - Stack Overflow</p>
+<p><a href="https://source.android.com/security/keystore/attestation">Key and ID Attestation  |  Android Open source project</a></p>
+<p><a href="https://stackoverflow.com/questions/61225795/how-to-check-whether-android-phone-supports-tee/64422042#64422042">How to check whether Android phone supports TEE- Stack Overflow</a></p>
 <h3 id="behavioral-biometric-roadmap"><a class="header" href="#behavioral-biometric-roadmap">Behavioral Biometric (roadmap)</a></h3>
-<p>Each user has a unique typing pattern for a sequence of digits on a keypad. If a bad actor tries to replicate this pattern, it will be detected with a 98% success rate. This feature will be managed by TEE nodes with Machine Learnings classification models based on secret touch screen position inputs received by the nodes and their related authenticated timestamps.
-USING USERS' TOUCH DYNAMICS BIOMETRICS TO ENHANCE AUTHENTICATION ON MOBILE DEVICES
-2.2.1.4. Ongoing Research (roadmap)
-Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers.</p>
+<p>Each user has a unique typing pattern for a sequence of digits on a keypad. If a bad actor tries to replicate this pattern, it will be detected with a 98% success rate. This feature will be managed by TEE nodes with Machine Learnings classification models based on secret touch screen position inputs received by the nodes and their related authenticated timestamps.</p>
+<p><a href="https://www.research.manchester.ac.uk/portal/files/159168194/FULL_TEXT.PDF">TOUCH DYNAMICS BIOMETRICS TO ENHANCE AUTHENTICATION ON MOBILE DEVICES</a></p>
+<h3 id="ongoing-research-roadmap"><a class="header" href="#ongoing-research-roadmap">Ongoing Research (roadmap)</a></h3>
+<p>Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-authentification-and-ui-layer"><a class="header" href="#trusted-authentification-and-ui-layer">Trusted Authentification and UI Layer</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol-detailed"><a class="header" href="#trusted-transaction-validation-protocol-detailed">Trusted Transaction Validation Protocol Detailed</a></h1>
 <h2 id="transaction-validation-management-modules-and-flowchart"><a class="header" href="#transaction-validation-management-modules-and-flowchart">Transaction validation management modules and flowchart</a></h2>
