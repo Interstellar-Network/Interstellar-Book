@@ -143,11 +143,13 @@
 <h3 id="secure-ui-layer---transaction-screen-management"><a class="header" href="#secure-ui-layer---transaction-screen-management">Secure UI Layer - Transaction Screen Management</a></h3>
 <p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.</p>
 <h3 id="mobile-trusted-authentication---mobile-key-management"><a class="header" href="#mobile-trusted-authentication---mobile-key-management">Mobile Trusted Authentication - Mobile Key Management</a></h3>
-<p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).</p>
+<p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
+The public Key is sent to the nodes and managed in the Mobile TEE registry (described below)</p>
+<p>Actually we replace the wallet private keys by a TEE protected mobile private key. This protected key act as a proxy to all the keys owned by the user.</p>
 <blockquote>
-<p>This mobile Private key and Garbled Circuits are securely tied with the wallet private keys associated with the user's assets and managed in the blockchain hardware enclave TEE nodes. in <code>Trusted Keys and Asset Management &amp; Signers</code> module.</p>
+<p>It is securely tied to the user account. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in <code>Trusted Keys and Asset Management &amp; Signers</code> module.</p>
 </blockquote>
-<p>In order to prevent potential attacks on hardware enclaves, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.</p>
+<p>In order to prevent potential attacks on hardware enclaves down the road, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.</p>
 <h3 id="mobile-tee-registry-pallet"><a class="header" href="#mobile-tee-registry-pallet">Mobile TEE registry pallet</a></h3>
 <p>This is the module for the management of private keys on the devices that will be used for unsigned transaction extrinsic with signed option i.e. verification of message signatures with mobile public keys. This pallet will also register all information related to TEE, security and identification of mobile devices when available. It includes the following  key and ID Attestation and other hardware protected  features like  <a href="https://source.android.com/security/protected-confirmation">Protected confirmation</a> mobile app signing, etc...</p>
 <h4 id="attestation-management-roadmap"><a class="header" href="#attestation-management-roadmap">Attestation management (roadmap)</a></h4>
