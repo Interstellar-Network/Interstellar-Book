@@ -1,5 +1,6 @@
 # Trusted Transaction Validation Protocol
 
+The purpose of the Trusted Transaction Validation Protocol is to provide a decentralized feature managed by a blockchain to authenticate and validate a transaction in a higly secure but frictionless way.
 
 ## Trusted Transaction Validation Protocol architecture - TTVP
 
@@ -12,7 +13,7 @@ The following schema shows the main components of Interstellar blockchain includ
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
 ### Secure UI Layer - Transaction Screen Management
-The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.
+The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.
 
 
 ### Mobile Trusted Authentication - Mobile Key Management
