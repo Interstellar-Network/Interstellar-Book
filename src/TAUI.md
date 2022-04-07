@@ -14,7 +14,7 @@ Following a schema illustrating how the trusted authentication and transaction v
 For each transaction to validate, a one time program i.e garbled circuit is received and executed by the garbled circuit evaluator on the mobile.
 
 ## 2 User input
-Then the user input on the randomized keyboard the one time code he see on the screen.
+Then the user inputs on the randomized keyboard the one time code he see on the screen.
 
 ## 3 Signature of user input 
 Fingerprint and/or facial recognization trigger the signature
