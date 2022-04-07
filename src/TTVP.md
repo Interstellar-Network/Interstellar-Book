@@ -6,7 +6,7 @@
 This schema shows the main component of Interstellar blockchain including the modules related to Transaction Validation.
 The following schema also includes future roadmap modules.
 
-[TTVP overview](./TTV_overview_dark.svg)
+![TTVP overview](./fig/TTV_overview_dark.svg)
 
 ## High level components of Interstellar blockchain
 

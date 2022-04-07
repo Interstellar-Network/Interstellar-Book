@@ -1,6 +1,6 @@
 # Trusted Transaction Validation Protocol Detailed
 
-[Transaction Validation Module](./fig/Transaction_Validation_Module.svg)
+![Transaction Validation Module](./fig/Transaction_Validation_Module.svg)
 
 
 
