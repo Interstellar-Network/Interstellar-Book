@@ -1048,10 +1048,10 @@ sudo chmod +x /usr/local/bin/ninja
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-delivery"><a class="header" href="#m2-delivery">M2 Delivery</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-docker-demo-tutorial"><a class="header" href="#m2-docker-demo-tutorial">M2 Docker Demo Tutorial</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol"><a class="header" href="#trusted-transaction-validation-protocol">Trusted Transaction Validation Protocol</a></h1>
-<h2 id="trusted-transaction-validation-protocol-architecture-overview"><a class="header" href="#trusted-transaction-validation-protocol-architecture-overview">Trusted Transaction Validation Protocol architecture overview</a></h2>
-<p>This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules (briefly described)</p>
+<h2 id="trusted-transaction-validation-protocol-architecture---ttvp"><a class="header" href="#trusted-transaction-validation-protocol-architecture---ttvp">Trusted Transaction Validation Protocol architecture - TTVP</a></h2>
+<p>The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. It also includes future roadmap modules (briefly described)</p>
 <p><img src="./fig/TTV_overview_dark.svg" alt="TTVP overview" /></p>
-<h2 id="high-level-components-of-interstellar-blockchain"><a class="header" href="#high-level-components-of-interstellar-blockchain">High level components of Interstellar blockchain</a></h2>
+<h2 id="high-level-components-related-to-ttvp-in-interstellar-blockchain"><a class="header" href="#high-level-components-related-to-ttvp-in-interstellar-blockchain">High level components related to TTVP in Interstellar blockchain</a></h2>
 <p>Those modules are based on Parity Substrate nodes and IntegriTEE workers.</p>
 <h3 id="secure-ui-layer---transaction-screen-management"><a class="header" href="#secure-ui-layer---transaction-screen-management">Secure UI Layer - Transaction Screen Management</a></h3>
 <p>The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.</p>
@@ -1070,7 +1070,7 @@ sudo chmod +x /usr/local/bin/ninja
 <p>Each user has a unique typing pattern for a sequence of digits on a keypad. If a bad actor tries to replicate this pattern, it will be detected with a 98% success rate. This feature will be managed by TEE nodes with Machine Learnings classification models based on secret touch screen position inputs received by the nodes and their related authenticated timestamps.</p>
 <p><a href="https://www.research.manchester.ac.uk/portal/files/159168194/FULL_TEXT.PDF">TOUCH DYNAMICS BIOMETRICS TO ENHANCE AUTHENTICATION ON MOBILE DEVICES</a></p>
 <h4 id="ongoing-research-roadmap"><a class="header" href="#ongoing-research-roadmap">Ongoing Research (roadmap)</a></h4>
-<p>Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers. (cf <code>Malware Detection</code> module in mobile)</p>
+<p>Garbled circuits to generate proof of history of legitimate computation schemes to detect malware attacks to compromise the UI i.e. the building and execution of a fake User Interface by the attackers. (cf <code>Malware Detection</code> module in the mobile device)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-authentification-and-ui-layer"><a class="header" href="#trusted-authentification-and-ui-layer">Trusted Authentification and UI Layer</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol-detailed"><a class="header" href="#trusted-transaction-validation-protocol-detailed">Trusted Transaction Validation Protocol Detailed</a></h1>
 <h2 id="transaction-validation-management-modules-and-flowchart"><a class="header" href="#transaction-validation-management-modules-and-flowchart">Transaction validation management modules and flowchart</a></h2>
