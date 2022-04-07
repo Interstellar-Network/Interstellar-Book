@@ -3,7 +3,7 @@
 
 ## Trusted Transaction Validation Protocol architecture overview
 
-This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules.
+This following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol.It also includes future roadmap modules (briefly described)
 
 ![TTVP overview](./fig/TTV_overview_dark.svg)
 
@@ -12,7 +12,7 @@ This following schema shows the main components of Interstellar blockchain inclu
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
 ### Transaction Screen Management
-The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes. Thanks to persistence of vision.
+The transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.
 
 
 ### Mobile Key Management
