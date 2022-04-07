@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Visual Cryptography Display - Interstellar Book</title>
+        <title>TTVP detailed - Interstellar Book</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="M1.html"><strong aria-hidden="true">1.</strong> M1 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M1_demo_tutorial.html"><strong aria-hidden="true">1.1.</strong> M1 Docker Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">2.</strong> Garbled Circuit Factory - GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">2.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html" class="active"><strong aria-hidden="true">2.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">2.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">2.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">2.4.1.</strong> GCF APIs Testing Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prerequisite_install.html"><strong aria-hidden="true">2.4.1.1.</strong> Prerequiste Install</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="M2.html"><strong aria-hidden="true">3.</strong> M2 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M2_demo_tutorial.html"><strong aria-hidden="true">3.1.</strong> M2 Docker Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="TTVP.html"><strong aria-hidden="true">4.</strong> Trusted Transaction Validation Protocol - TTVP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TAUI.html"><strong aria-hidden="true">4.1.</strong> Trusted Authentication &amp; UI Layer</a></li><li class="chapter-item expanded "><a href="TTVP_detailed.html"><strong aria-hidden="true">4.2.</strong> TTVP detailed</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="M1.html"><strong aria-hidden="true">1.</strong> M1 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M1_demo_tutorial.html"><strong aria-hidden="true">1.1.</strong> M1 Docker Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="GCF.html"><strong aria-hidden="true">2.</strong> Garbled Circuit Factory - GCF</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GC.html"><strong aria-hidden="true">2.1.</strong> Garbled Circuit Overview</a></li><li class="chapter-item expanded "><a href="VC-GC.html"><strong aria-hidden="true">2.2.</strong> Visual Cryptography Display</a></li><li class="chapter-item expanded "><a href="GCF_pipeline_detailed.html"><strong aria-hidden="true">2.3.</strong> Detailed Pipeline for Display Circuits</a></li><li class="chapter-item expanded "><a href="GCF_API.html"><strong aria-hidden="true">2.4.</strong> Garbled Circuit Factory APIs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="GCF_API_Test_Guide.html"><strong aria-hidden="true">2.4.1.</strong> GCF APIs Testing Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="prerequisite_install.html"><strong aria-hidden="true">2.4.1.1.</strong> Prerequiste Install</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="M2.html"><strong aria-hidden="true">3.</strong> M2 Delivery</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="M2_demo_tutorial.html"><strong aria-hidden="true">3.1.</strong> M2 Docker Demo Tutorial</a></li></ol></li><li class="chapter-item expanded "><a href="TTVP.html"><strong aria-hidden="true">4.</strong> Trusted Transaction Validation Protocol - TTVP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="TAUI.html"><strong aria-hidden="true">4.1.</strong> Trusted Authentication &amp; UI Layer</a></li><li class="chapter-item expanded "><a href="TTVP_detailed.html" class="active"><strong aria-hidden="true">4.2.</strong> TTVP detailed</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,59 +134,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="garbled-circuit--visual-cryptography-screen"><a class="header" href="#garbled-circuit--visual-cryptography-screen">Garbled Circuit &amp; Visual Cryptography Screen</a></h1>
-<h2 id="garbled-circuits-output-frames"><a class="header" href="#garbled-circuits-output-frames">Garbled Circuits output frames</a></h2>
-<p><img src="./fig/Visual-Cryptography-Technical-Overview.png" alt="Visual Cryptography Technical Overview" /></p>
-<p>Those frames superspose on retinal eyes leveraging persistence of vision</p>
-<h2 id="visual-cryptography"><a class="header" href="#visual-cryptography">Visual Cryptography</a></h2>
-<p><img src="./fig/Visual_crypto_animation_demo.gif" alt="VC demo" /></p>
-<h2 id="main-principles"><a class="header" href="#main-principles">Main principles</a></h2>
-<p>We use a pre-computed One-Time Garbled Circuit to generate and output Visual Cryptography Shares at 60–120 frames/second on the device framebuffer.</p>
-<p>Those visual cryptography shares do not superpose on the device screen but only in the user's eye. Thanks to the human Persistence of Vision ability: your eye and brain retain a visual impression for about 1/30 of a second (the exact time depends on the brightness of the image). </p>
-<h2 id="security-consideration"><a class="header" href="#security-consideration">Security consideration</a></h2>
-<p>The garbled circuit execution will manage the display of consecutive random frames. The result is that the execution of the circuit will not leak any secret information (passwords, on-time  codes or pin pad/keyboard topologies) securely embeded in the circuit. </p>
-<p>This ensures that an attacker won't be able to obtain this secret information</p>
-<ul>
-<li>during the garbled circuit execution</li>
-<li>neither with a simple screenshot, thanks to visual cryptography and persistence of vision</li>
-</ul>
-<p>As a consequence, it prevent the attacker to build and execute a fake User Interface quickly enough during the display session.
-This scheme can resist current banking trojans with overlay capabilities but not targeted attacks.</p>
-<p>However, it makes a fake UI attack, complexe and resource intensive enough to enable us to detect it during the transaction validation session. </p>
-<p>This is the way we aim at resisting potential targeted attacks. Thanks to our proof of history of legitimate computation scheme, (roadmap/research in progress), based on a specific reusable Garbled Circuit evaluation.</p>
-<h2 id="explanation"><a class="header" href="#explanation">Explanation</a></h2>
-<blockquote>
-<p>We started by implementing a working solution that outputs visual cryptography shares. We then realized that it was a bit disturbing for the user and that a pure visual cryptography scheme is not crucial for our overall security model. We then decided to provide a more friendly solution for the user that is also more efficient especially regarding Garbled Circuit size.</p>
-</blockquote>
-<p>Although our circuits display screens at a pixel level to manage any type of images, fonts types, characters sizes and more. We decided to switch on a slightly different solution.</p>
-<p>Let's go back to an old fashioned displays to explain it.</p>
-<p><img src="./fig/GatesSegmentBlack.png" alt="GatesSegment" /></p>
-<p>The Garbled Circuit can randomly output each:</p>
-<ul>
-<li>segments/sub segments</li>
-<li>any group of pixels</li>
-<li>or even single pixel</li>
-</ul>
-<p>of a frame with a probability of 1/n ( n &gt; 2)</p>
-<h3 id="display-example"><a class="header" href="#display-example">Display example</a></h3>
-<p><img src="./fig/Wallet-Superposition-Black-Background-Demo.png" alt="walletdemo" /></p>
-<h3 id="simulations"><a class="header" href="#simulations">Simulations</a></h3>
-<p>To fine tune the design of our circuits and provide realistic look and feel of the solution, we designed the following
-<a href="https://www.interstellar.gg/simulation">Transaction validation screen simulations</a> based on <a href="https://github.com/psychopy/psychojs">PsychoJS library -  PsychoPy (github.com)</a> and <a href="https://www.psychopy.org/">PsychoPy neuroscience/psychophysic tools</a></p>
-<h3 id="future-plans"><a class="header" href="#future-plans">Future plans</a></h3>
-<p>At a later stage, we aim at reusing our pixel based visual cryptography implementation and/or <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.84.7421&amp;rep=rep1&amp;type=pdf">segment-based visual cryptography</a> to increase the complexity level of potential attacks and enable video recording proof scheme without disturbing the smooth user experience. </p>
-<h3 id="research-lead"><a class="header" href="#research-lead">Research Lead</a></h3>
-<p>Research lead is to leverage SRAM framebuffer speed 10-30x vs. DRAM to force the attacker to miss frames with a saturated GPU command queue filled with decoy and VC frames on high frequency displays.</p>
+                        <h1 id="trusted-transaction-validation-protocol-detailed"><a class="header" href="#trusted-transaction-validation-protocol-detailed">Trusted Transaction Validation Protocol Detailed</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="GC.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="TAUI.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="GCF_pipeline_detailed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -194,11 +149,8 @@ This scheme can resist current banking trojans with overlay capabilities but not
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="GC.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="TAUI.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="GCF_pipeline_detailed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
