@@ -17,6 +17,6 @@
 - [M2 Delivery](./M2.md)
     - [M2 Docker Demo Tutorial](./M2_demo_tutorial.md)
 
-- [Trusted Transaction Validation Protocol - TTVP](./TTVP.md)
+- [Trusted Transaction Validation Protocol](./TTVP.md)
     - [Trusted Authentication & UI Layer](./TAUI.md)
     - [TTVP detailed](./TTVP_detailed.md)
