@@ -2,22 +2,30 @@
 
 [Introduction](./introduction.md)
 
-- [M1 Delivery](./M1.md)
-    - [M1 Docker Demo Tutorial](./M1_demo_tutorial.md)
-
-- [M2 Delivery](./M2.md)
-    - [M2 Docker Demo Tutorial](./M2_demo_tutorial.md)
-
 
 - [Garbled Circuit Factory - GCF](./GCF.md)
     - [Garbled Circuit Overview](./GC.md)
     - [Visual Cryptography Display](./VC-GC.md)
     - [Detailed Pipeline for Display Circuits](./GCF_pipeline_detailed.md)
     - [Garbled Circuit Factory APIs](./GCF_API.md)
-        - [GCF APIs Testing Guide](./GCF_API_Test_Guide.md)
-            - [Prerequiste Install](./prerequisite_install.md)
-
+        
 
 - [Trusted Transaction Validation Protocol](./TTVP.md)
     - [Trusted Authentication & UI Layer](./TAUI.md)
     - [TTVP detailed](./TTVP_detailed.md)
+
+
+- [Testing](./Testing.md)
+
+    - [Runtime prerequisite](./runtime_prerequisite.md)
+    - [compilation prerequisite](./compilation_prerequisite.md)
+
+    - [M1 Delivery](./M1.md)
+        - [M1 Docker Demo Tutorial](./M1_demo_tutorial.md)
+
+    - [M2 Delivery](./M2.md)
+        - [M2 Docker Demo Tutorial](./M2_demo_tutorial.md)
+
+    - [GCF APIs Testing Guide](./GCF_API_Test_Guide.md)
+
+   
