@@ -192,14 +192,17 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m1-delivery"><a class="header" href="#m1-delivery">M1 Delivery</a></h1>
 <h2 id="garbled-circuit-factory-gcf-and-circuit-types-overview"><a class="header" href="#garbled-circuit-factory-gcf-and-circuit-types-overview">Garbled Circuit Factory (GCF) and Circuit types overview</a></h2>
 <ul>
-<li><a href="https://book.interstellar.gg/GCF.html">GCF generic pipeline for Garbled Circuit (GC) production</a></li>
-<li><a href="https://book.interstellar.gg/GC.html">Basic GC structure</a></li>
-<li><a href="https://book.interstellar.gg/VC-GC.html">Visual Cryptography display principles</a></li>
+<li><a href="./GCF.html">GCF generic pipeline for Garbled Circuit (GC) production</a>
+<ul>
+<li><a href="./GC.html">Basic GC structure</a></li>
+<li><a href="./VC-GC.html">Visual Cryptography display principles</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="code-documentation"><a class="header" href="#code-documentation">Code documentation</a></h2>
 <ul>
-<li><a href="https://book.interstellar.gg/GCF_pipeline_detailed.html">GCF detailed pipeline for the production of display circuits</a></li>
-<li><a href="https://book.interstellar.gg/GCF_API.html">GCF APIs for GCF OCWs</a></li>
+<li><a href="./GCF_pipeline_detailed.html">GCF detailed pipeline for the production of display circuits</a></li>
+<li><a href="./GCF_API.html">GCF APIs for GCF OCWs</a></li>
 </ul>
 <h2 id="testing-guide"><a class="header" href="#testing-guide">Testing Guide</a></h2>
 <blockquote>
@@ -386,6 +389,47 @@ endmodule :half_add
 2022-03-11 18:38:36 [ocw] FINAL got result IPFS hash : [b8, 51, 6d, 50, 55, 44, 52, 6e, 61, 4a, 47, 36, 77, 70, 32, 32, 68, 4d, 41, 4c, 41, 57, 4b, 70, 79, 41, 77, 54, 5a, 44, 74, 73, 33, 76, 43, 5a, 4a, 6d, 48, 5a, 57, 57, 6b, 58, 5a, 4a, 6a]   
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-delivery"><a class="header" href="#m2-delivery">M2 Delivery</a></h1>
+<p>Unless you are already familliar with Interstellar technology please have a look at Garbled Circuit Factory and Trusted Transaction Validation protocol overviews</p>
+<h2 id="garbled-circuit-factory-gcf-overview"><a class="header" href="#garbled-circuit-factory-gcf-overview">Garbled Circuit Factory (GCF) overview</a></h2>
+<ul>
+<li><a href="./GCF.html">GCF generic pipeline for Garbled Circuit (GC) production</a>
+<ul>
+<li><a href="./GC.html">Basic GC structure</a></li>
+<li><a href="./VC-GC.html">Visual Cryptography display principles</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="trusted-transaction-validation-protocol-ttvp-overview"><a class="header" href="#trusted-transaction-validation-protocol-ttvp-overview">Trusted Transaction Validation Protocol (TTVP) overview</a></h2>
+<ul>
+<li><a href="./TTVP.html">Trusted Transaction Validation Protocol</a>
+<ul>
+<li><a href="./TAUI.html">Trusted Authentication &amp; UI Layer</a></li>
+<li><a href="./TTVP_detailed.html">TTVP detailed</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="code-documentation-1"><a class="header" href="#code-documentation-1">Code documentation</a></h2>
+<ul>
+<li><a href="./GCF_pipeline_detailed.html">GCF detailed pipeline for the production of display circuits</a></li>
+<li><a href="./GCF_API.html">GCF APIs for GCF OCWs</a></li>
+</ul>
+<h2 id="testing-guide-1"><a class="header" href="#testing-guide-1">Testing Guide</a></h2>
+<blockquote>
+<p>Following is a testing guide and tutorial to launch tests related to M1 milestone Mostly integration test. It also includes the prerequiste i.e additional software and libraries that need to be installed in order to run the unit tests without the M1 docker.</p>
+</blockquote>
+<p><a href="https://book.interstellar.gg/GCF_API_Test_Guide.html">GCF APIs Testing Guide</a></p>
+<p>CLIs to test <code>lib_circuit</code> and <code>lib_garble</code> C++ libraries linked with the GCF external service gRPC server:</p>
+<ul>
+<li><a href="https://github.com/Interstellar-Network/lib_circuits/tree/main/tests">lib_circuit test CLIs</a></li>
+<li><a href="https://github.com/Interstellar-Network/lib_garble/tree/main/tests">lib_garble test CLIs</a></li>
+</ul>
+<blockquote>
+<p>not explicity required for this milestone but potentially useful for fine tuning generic circuit designs</p>
+</blockquote>
+<h2 id="docker-demo-tutorial-1"><a class="header" href="#docker-demo-tutorial-1">Docker demo tutorial</a></h2>
+<p><a href="./M1_demo_tutorial.html">Demo tutorial</a></p>
+<h2 id="article-1"><a class="header" href="#article-1">Article</a></h2>
+<p>Link to medium article (will be avalaible soon) on this book</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-docker-demo-tutorial"><a class="header" href="#m2-docker-demo-tutorial">M2 Docker Demo Tutorial</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="intoduction-to-garbled-circuit-factory-gcf"><a class="header" href="#intoduction-to-garbled-circuit-factory-gcf">Intoduction to Garbled Circuit Factory (GCF)</a></h1>
 <p>The Garble Circuit Factory is the module in charge of building the Garbled Circuits (GC) used by the Interstellar infrastructure.</p>
