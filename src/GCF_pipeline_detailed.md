@@ -42,7 +42,7 @@ This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipel
 
 
 
-`Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
+`Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp)
 
 7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
 
@@ -147,7 +147,7 @@ Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
 
 Then `segment2pixel.v` VHDL file is generated:
 
-`Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:232](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137)
+`Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:232](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp#L137)
 
 A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
@@ -225,7 +225,7 @@ std::string Segments2Pixels::GenerateVerilog() {
 
 The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :
 
-`CircuitPipeline::GenerateSkcd`: [lib_circuits/src/circuit_lib.cpp:19](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/circuit_lib.cpp#L19)
+`CircuitPipeline::GenerateSkcd`: [lib_circuits/src/circuit_lib.cpp:19](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/circuit_lib.cpp#L19)
 
 ```cpp, editable
 void GenerateSkcd(boost::filesystem::path skcd_output_path,
@@ -258,7 +258,7 @@ void GenerateSkcd(boost::filesystem::path skcd_output_path,
 ```
 
 If there is no cached .skcd for the step [1], one is generated with 
-`CircuitPipeline::GenerateDisplaySkcd`: [lib_circuits/src/circuit_lib.cpp:56](https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/circuit_lib.cpp#L56)
+`CircuitPipeline::GenerateDisplaySkcd`: [lib_circuits/src/circuit_lib.cpp:56](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/circuit_lib.cpp#L56)
 
 ```cpp, editable
 void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
@@ -285,7 +285,7 @@ void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
 
 Pretty straitforward call to `lib_garble` library
 
-`ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/initial/src/justgarble/garble_helper.cpp#L16)
+`ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/main/src/justgarble/garble_helper.cpp#L16)
 
 >This part is related to the management of display circuit OTP related to M3
 
