@@ -270,7 +270,7 @@ This scheme can resist current banking trojans with overlay capabilities but not
 The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
-<p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
+<p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
 <p>7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
 <blockquote>
 <p>We can use other files like 14segs.png to handle segment based visual cryptography down the road</p>
@@ -371,7 +371,7 @@ The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/
 }
 </code></pre>
 <p>Then <code>segment2pixel.v</code> VHDL file is generated:</p>
-<p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
+<p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
 <p>A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done</p>
@@ -441,7 +441,7 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
 </code></pre>
 <h3 id="234-generate-skcd"><a class="header" href="#234-generate-skcd">[2][3][4] Generate .skcd</a></h3>
 <p>The big steps are self-explanatory (pretty much just calling ABC or Yosys, and handling/parsing the results or errors; most of the business logic is in step [1]) :</p>
-<p><code>CircuitPipeline::GenerateSkcd</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/circuit_lib.cpp#L19">lib_circuits/src/circuit_lib.cpp:19</a></p>
+<p><code>CircuitPipeline::GenerateSkcd</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/circuit_lib.cpp#L19">lib_circuits/src/circuit_lib.cpp:19</a></p>
 <pre><code class="language-cpp  editable">void GenerateSkcd(boost::filesystem::path skcd_output_path,
                   const std::vector&lt;std::string_view&gt; &amp;verilog_inputs_paths,
                   const utils::TempDir &amp;tmp_dir) {
@@ -471,7 +471,7 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
 }
 </code></pre>
 <p>If there is no cached .skcd for the step [1], one is generated with 
-<code>CircuitPipeline::GenerateDisplaySkcd</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/initial/src/circuit_lib.cpp#L56">lib_circuits/src/circuit_lib.cpp:56</a></p>
+<code>CircuitPipeline::GenerateDisplaySkcd</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/circuit_lib.cpp#L56">lib_circuits/src/circuit_lib.cpp:56</a></p>
 <pre><code class="language-cpp  editable">void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
                          u_int32_t width, u_int32_t height) {
   auto tmp_dir = utils::TempDir();
@@ -493,7 +493,7 @@ If there is an in-memory .skcd cached for this particular “segment2pixel.v” 
 </code></pre>
 <h3 id="56-garbling"><a class="header" href="#56-garbling">[5][6] Garbling</a></h3>
 <p>Pretty straitforward call to <code>lib_garble</code> library</p>
-<p><code>ParallelGarbledCircuit GarbleSkcd</code>: <a href="https://github.com/Interstellar-Network/lib_garble/blob/initial/src/justgarble/garble_helper.cpp#L16">lib_garble/src/justgarble/garble_helper.cpp:16</a></p>
+<p><code>ParallelGarbledCircuit GarbleSkcd</code>: <a href="https://github.com/Interstellar-Network/lib_garble/blob/main/src/justgarble/garble_helper.cpp#L16">lib_garble/src/justgarble/garble_helper.cpp:16</a></p>
 <blockquote>
 <p>This part is related to the management of display circuit OTP related to M3</p>
 </blockquote>
