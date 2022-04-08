@@ -285,7 +285,7 @@ void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
 
 Pretty straitforward call to `lib_garble` library
 
-`ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/main/src/justgarble/garble_helper.cpp#L16)
+`ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/main/src/parallel_garbled_circuit/parallel_garbled_circuit.cpp)
 
 >This part is related to the management of display circuit OTP related to M3
 
