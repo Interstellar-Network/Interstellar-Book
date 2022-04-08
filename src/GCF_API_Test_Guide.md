@@ -14,7 +14,7 @@ On this respect one generic very simple adder circuit is use as an example, as w
 
 
 ## Prerequisites
- [Prerequiste](./prerequisite_install.md)
+ [Prerequiste](./compilation prerequisite.md)
 
 ## Repositories
 

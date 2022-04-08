@@ -1,5 +1,10 @@
 # M1 Docker Demo Tutorial
 
+## Check prerquiste
+
+[runtime prerequiste](./runtime_prerequisite.md)
+
+
 ## Set-up Demo
 ### Launch ipfs deamon
 
