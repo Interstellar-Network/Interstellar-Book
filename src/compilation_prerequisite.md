@@ -1,6 +1,14 @@
 # Prerequisite installation for compilation
 
 
+## Install Go
+
+[Go installation](https://go.dev/dl/)
+
+## Install IPFS
+
+[IPFS Installation](https://docs.ipfs.io/install/)
+
 ## Update cmake  if < 3.22
 
 Check your that your current cmake version is at least 3.22:
