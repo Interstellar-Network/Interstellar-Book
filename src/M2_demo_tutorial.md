@@ -92,12 +92,12 @@ In this demo, we want to demonstrate:
 - How ocwCircuits and ocwGarble pallets can manage the production of the display garbled circuits. 
 - How the Transaction Validation Protocol TTVP pallet will confirm transactions based on those circuit evaluations/execution.
 
-- `ocwCircuit`: manage the generation of the logical display circuit in `skcd format` used to configure garbled circuit production.
+- `ocwCircuits`: manage the generation of the logical display circuit in `skcd format` used to configure the garbled circuit production.
 > the generation of this configuartion display circuit use a Master File VHDL packages (pre-configured for that demo).
 
 - `ocwGarble`: can generate for each transaction a randomized display garbled circuit (with random Keypad and one time code) with a customized message based on transaction parameters information.
 
-- `GCevaluator`: Evaluate the garbled circuit/display message and one time code.
+- `GCevaluator`: Evaluate the garbled circuit/display message and get the one time code to verify
 
 - `TTVP`: check that the one time code is correct
 
@@ -106,14 +106,15 @@ In this demo, we want to demonstrate:
 
 ## Demo overview:
 
-### 1. Generate with `ocwCircuit` the configuration display circuit (in skcd format) for display garbled circuit production
->
+### 1. Generate with `ocwCircuits` pallet the configuration display circuit 
+> This step will generate a logical circuit in skcd format cached in memory in the production pipeline
 
-### 2. Generate with a randomized display garble circuit with transaction message and one time code
 
-> skcd file is cached in the production pipeline
+### 2. Generate with `ocwGarble` pallet a randomized display garble circuit 
 
-> we produce the but do not use the random keypad on this demo
+> This step will use skcd cached file and input parameter to generate a randomized garbled circuit customized with transaction parameter
+> in this demo we do not use yet, other circuit customization parameters like screen resolution, etc..
+
 
 ### 3. Evaluation of the display garbled circuit with `GCevaluator`and get One time code
 
@@ -123,12 +124,10 @@ In this demo, we want to demonstrate:
 
 ## Interact with Substrate Front End
 
-> As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit production manualy using Pallet Interactor.
-
-We use Pallet Interactor to pilot the configuration and generation of the circuits with GCF
+> As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit generation manualy using Pallet Interactor.
 
 
-## 1. Generate with `ocwCircuit` the configuration display circuit 
+## 1. Generate with `ocwCircuits` the configuration display circuit 
 
 ### 1.1  Select ocwCircuit pallet and submitConfigDisplaySigned extrinsic
 
@@ -155,26 +154,35 @@ We use Pallet Interactor to pilot the configuration and generation of the circui
 ![garble select](./fig/1ocwGarbleSelect.png)
 
 
-### 2.2 Paste the ipfs hash/cid of the skcd file (logical configuration circuit)
+### 2.2 Input skcdCid and Transaction message
 
 ![garble input 2 ](./fig/2ocwGarbleInput.png)
 
+#### 2.2.1 Paste the ipfs hash/cid of step 1.3 in field skcdCid
 
 
+
+#### 2.2.2 Input the message in field txMsg
 
 
 ![garble input 3 ](./fig/3ocwGarbleInput.png)
 
+> the skcd cid is still in Events, blue dot in this example
+#### 2.2.3 Sign the transaction
 
-### 2.3 Sign the transaction
-
-### 2.4 Copy paste the hash of the  NewGarbledIpfsCid i.e generated display garbled circuit (ready to be avaluated)
+#### 2.2.4 garbled circuit cid appear in Events
 
 ![garble result ](./fig/4ocwGarbleResult.png)
 
-> You can specify any type of tx message
+> the generated garbled circuit cid `NewGarbledIpfsCid`will then appear in Events (underlined in red line in this screenshot example)
+
+### 2.3 Copy paste the hash of the generated display garbled circuit (ready to be avaluated)
+
+
+
+> coment: You can specify any type of transaction message
 not especially tied to a wallet transaction
-can be used for any sensitive operation that need a confirmtion
+It can be used for any sensitive operation that need a highly secure confirmtion
 
 ![garble result ex ](./fig/5ocwGarbleResult.png)
 
