@@ -173,10 +173,10 @@ Daemon is ready
 <pre><code>cd substrate-offchain-worker-demo 
 </code></pre>
 <p>build the substrate chain....</p>
-<pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp
+<pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp --enable-offchain-indexing=1
 </code></pre>
 <blockquote>
-<p>Important: the node log will display some results i.e cid that you will have to copy paste to perform the demo</p>
+<p>IMPORTANT: you MUST use --enable-offchain-indexing=1 else it will always do nothing and show &quot;[ocw-garble] nothing to do, returning...&quot; and &quot;[ocw-circuits] nothing to do, returning...&quot; in the logs</p>
 </blockquote>
 <h3 id="launch-a-generic-substrate-fromt-end"><a class="header" href="#launch-a-generic-substrate-fromt-end">Launch a generic Substrate Fromt-end</a></h3>
 <p>Use the following <a href="https://github.com/substrate-developer-hub/substrate-front-end-template#installation">substrate link</a> for installation
@@ -223,9 +223,12 @@ in this demo we do not use yet, other circuit customization parameters like scre
 </blockquote>
 <h3 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code">3. Evaluation of the display garbled circuit with <code>GCevaluator</code>and get One time code</a></h3>
 <h3 id="4-check-one-time-code-with-ttvp-pallet"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet">4. Check one time code with <code>TTVP pallet</code></a></h3>
-<h2 id="interact-with-substrate-front-end"><a class="header" href="#interact-with-substrate-front-end">Interact with Substrate Front End</a></h2>
+<h1 id="start-demo"><a class="header" href="#start-demo">Start Demo</a></h1>
 <blockquote>
-<p>As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit generation manualy using Pallet Interactor.</p>
+<p>IMPORTANT: When intracting with pallets you MUST use the Signed button in blue to sign all the transaction, not SUDO, neither Unsigned</p>
+</blockquote>
+<blockquote>
+<p>step 1,2 &amp; 4 use pallet interactor in Substrate Front End</p>
 </blockquote>
 <h2 id="1-generate-with-ocwcircuits-the-configuration-display-circuit"><a class="header" href="#1-generate-with-ocwcircuits-the-configuration-display-circuit">1. Generate with <code>ocwCircuits</code> the configuration display circuit</a></h2>
 <h3 id="11--select-ocwcircuit-pallet-and-submitconfigdisplaysigned-extrinsic"><a class="header" href="#11--select-ocwcircuit-pallet-and-submitconfigdisplaysigned-extrinsic">1.1  Select ocwCircuit pallet and submitConfigDisplaySigned extrinsic</a></h3>
