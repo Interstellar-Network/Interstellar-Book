@@ -69,9 +69,9 @@ cd substrate-offchain-worker-demo
 build the substrate chain....
 
 ```sh
-RUST_LOG="warn,info" cargo run -- --dev --tmp
+RUST_LOG="warn,info" cargo run -- --dev --tmp --enable-offchain-indexing=1
 ```
-> Important: the node log will display some results i.e cid that you will have to copy paste to perform the demo
+> IMPORTANT: you MUST use --enable-offchain-indexing=1 else it will always do nothing and show "[ocw-garble] nothing to do, returning..." and "[ocw-circuits] nothing to do, returning..." in the logs
 
 
 ### Launch a generic Substrate Fromt-end
@@ -122,10 +122,11 @@ In this demo, we want to demonstrate:
 
 
 
-## Interact with Substrate Front End
+# Start Demo
 
-> As the purpose of the demo is to illustrate the interaction between the OCWs and the GCF, we will lauch the garbled circuit generation manualy using Pallet Interactor.
+> IMPORTANT: When intracting with pallets you MUST use the Signed button in blue to sign all the transaction, not SUDO, neither Unsigned
 
+> step 1,2 & 4 use pallet interactor in Substrate Front End
 
 ## 1. Generate with `ocwCircuits` the configuration display circuit 
 
