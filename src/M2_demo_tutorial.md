@@ -124,7 +124,7 @@ In this demo, we want to demonstrate:
 
 # Start Demo
 
-> IMPORTANT: When intracting with pallets you MUST use the Signed button in blue to sign all the transaction, not SUDO, neither Unsigned
+> IMPORTANT: When intracting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
 
 > step 1,2 & 4 use pallet interactor in Substrate Front End
 
