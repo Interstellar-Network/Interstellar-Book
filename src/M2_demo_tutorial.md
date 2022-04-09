@@ -130,7 +130,7 @@ In this demo, we want to demonstrate:
 
 ## 1. Generate with `ocwCircuits` the configuration display circuit 
 
-### 1.1  Select ocwCircuit pallet and submitConfigDisplaySigned extrinsic
+### 1.1  Select ocwCircuits pallet and submitConfigDisplaySigned extrinsic
 
 ![circuit select](./fig/1ocwCircuitSelect.png)
 
