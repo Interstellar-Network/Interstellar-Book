@@ -84,7 +84,7 @@ Yarn start
 to connect a locally running node
 
 
-## Demo purpose
+## Demo purpose and used components
 
 
 In this demo, we want to demonstrate:
@@ -92,14 +92,14 @@ In this demo, we want to demonstrate:
 - How ocwCircuits and ocwGarble pallets can manage the production of the display garbled circuits. 
 - How the Transaction Validation Protocol TTVP pallet will confirm transactions based on those circuit evaluations/execution.
 
-- `ocwCircuits`: manage the generation of the logical display circuit in `skcd format` used to configure the garbled circuit production.
+`ocwCircuits`: manage the generation of the logical display circuit in `skcd format` used to configure the garbled circuit production.
 > the generation of this configuartion display circuit use a Master File VHDL packages (pre-configured for that demo).
 
-- `ocwGarble`: can generate for each transaction a randomized display garbled circuit (with random Keypad and one time code) with a customized message based on transaction parameters information.
+ `ocwGarble`: can generate for each transaction a randomized display garbled circuit (with random Keypad and one time code) with a customized message based on transaction parameters information.
 
-- `GCevaluator`: Evaluate the garbled circuit/display message and get the one time code to verify
+`GCevaluator`: Evaluate the garbled circuit/display message and get the one time code to verify
 
-- `TTVP`: check that the one time code is correct
+`TTVP`: check that the one time code is correct
 
 
 
@@ -140,7 +140,7 @@ In this demo, we want to demonstrate:
 
 ### 1.3 Copy the ipfs hash/cid of the generated skcd file 
 
-> it appear in Events (blue dot on this screenshot example)
+> it appears in Events (blue dot on this screenshot example)
 
 ![circuit sign](./fig/3ocwCircuitResult.png)
 
