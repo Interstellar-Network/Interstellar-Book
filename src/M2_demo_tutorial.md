@@ -12,11 +12,14 @@
 
 ```sh
 GO_IPFS_PATH=/usr/local/bin/ipfs
-
+```
+```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
+```
+```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
 ```
-```
+```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
 ```
 
@@ -42,7 +45,7 @@ Daemon is ready
 #### Launch api_circuit docker
 
 ```sh
-docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG="warn,info,debug" ghcr.io/interstellar-network/api_circuits:milestone1 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
+docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG="warn,info,debug" ghcr.io/interstellar-network/api_circuits:milestone2 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
 ```
 
 
@@ -50,7 +53,7 @@ docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG="warn,info,d
 #### Launch api_garble docker
 
 ```sh
-docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,debug" ghcr.io/interstellar-network/api_garble:milestone1 /usr/local/bin/api_garble --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
+docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,debug" ghcr.io/interstellar-network/api_garble:milestone2 /usr/local/bin/api_garble --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
 ```
 
 
@@ -58,7 +61,7 @@ docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,deb
 
 
 ```
-git clone --branch=interstellar --recursive git@github.com:Interstellar-Network/subs trate-offchain-worker-demo.git
+git clone --branch=interstellar-milestone2 --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
 ```
 then
 ```
