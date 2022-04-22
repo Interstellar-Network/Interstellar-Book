@@ -41,6 +41,114 @@ The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
 
+#### Segment to pixel use drawable functions to create the verilog circuit based on xsegment.png (configuration file)
+
+```cpp, editable
+namespace drawable {
+
+IDrawableSegmentedDigitRelCoordsLocal::IDrawableSegmentedDigitRelCoordsLocal(
+    DigitSegmentsType segments_type)
+    : segments_type_(segments_type),
+      nb_segments_per_digit_(GetDigitSegmentsTypeNbSegments(segments_type_)) {}
+
+DigitSegmentsType IDrawableSegmentedDigitRelCoordsLocal::GetType() const {
+  return segments_type_;
+}
+
+uint32_t IDrawableSegmentedDigitRelCoordsLocal::GetNbSegments() const {
+  return nb_segments_per_digit_;
+}
+
+template <typename DrawableWhereT>
+Drawable<DrawableWhereT>::Drawable(
+    DrawableWhereT&& where_to_draw,
+    const IDrawableSegmentedDigitRelCoordsLocal& what_to_draw)
+    : where_to_draw_(std::move(where_to_draw)), what_to_draw_(what_to_draw) {}
+
+template <typename DrawableWhereT>
+const IDrawableSegmentedDigitRelCoordsLocal& Drawable<DrawableWhereT>::What()
+    const {
+  return what_to_draw_;
+}
+
+template <typename DrawableWhereT>
+const DrawableWhereT& Drawable<DrawableWhereT>::Where() const {
+  return where_to_draw_;
+}
+
+/**
+ * NOTE: try NOT to make this part too Verilog-specific because that way we can
+ * write the output to a bitmap/png which is easier for dev/debug.
+ * Technically this COULD directly return a map of some sort:
+ * pixel(x1,y1) = segment0
+ * pixel(x2,y2) = segment1
+ * and assume the UNreturned pixel are background(ie NOT a SegmentID)
+ */
+template <typename DrawableWhereT>
+std::vector<SegmentID> Draw(
+    const std::vector<drawable::Drawable<DrawableWhereT>>& drawables,
+    u_int32_t width, u_int32_t height) {
+  std::vector<SegmentID> img_seg_ids;
+  img_seg_ids.reserve(width * height);
+
+  // CAREFUL: DO NOT switch the order else the final garbled outputs will be
+  // rotated 90 degrees. Not a catastrophe but not ideal.
+  for (uint32_t y = 0; y < height; ++y) {
+    for (uint32_t x = 0; x < width; ++x) {
+      drawable::Point2DRelative rel_coords_world(
+          static_cast<float>(x) / static_cast<float>(width),
+          static_cast<float>(y) / static_cast<float>(height));
+
+      // Find a drawable, if the rel_coords(ie the current pixel) is indeed on
+      // one else it means it is background
+      bool is_background = true;
+      uint32_t offset_nb_segments = 0;
+      for (const auto& drawable : drawables) {
+        if (drawable.Where().IsInBBox(rel_coords_world)) {
+          is_background = false;
+
+          auto rel_coords_local =
+              drawable.Where().GetRelCoordsLocalFromRelCoordsWorld(
+                  rel_coords_world);
+          auto local_seg_id = drawable.What().GetSegmentID(rel_coords_local);
+          if (local_seg_id != -1) {
+            // REALLY IMPORTANT
+            // MUST convert the local_seg_id(eg usually 0-6 for 7 segs)
+            // to a global one UNIQUE in the final bitmap
+            img_seg_ids.emplace_back(
+                SegmentID(offset_nb_segments + local_seg_id));
+          } else {
+            // background (in the current drawable)
+            img_seg_ids.emplace_back(-1);
+          }
+
+          // we COULD overwrite with another Drawable in case of overlap but
+          // what is the point; we might as well stop processing
+          break;
+        }
+
+        offset_nb_segments += drawable.What().GetNbSegments();
+      }
+
+      // background (in the global bitmap)
+      if (is_background) {
+        img_seg_ids.emplace_back(-1);
+      }
+    }
+  }
+
+  assert(img_seg_ids.size() == width * height && "Draw: missing pixels!");
+  return img_seg_ids;
+}
+
+// "explicit instantiation of all the types the template will be used with"
+template class Drawable<RelativeBBox>;
+template std::vector<SegmentID> Draw<RelativeBBox>(
+    const std::vector<drawable::Drawable<RelativeBBox>>& drawables,
+    u_int32_t width, u_int32_t height);
+
+}  //   namespace drawable
+````
 
 `Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp)
 
@@ -49,99 +157,51 @@ This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipel
 >We can use other files like 14segs.png to handle segment based visual cryptography down the road
 
 ```cpp,editable
-Segments2Pixels::Segments2Pixels(uint32_t width, uint32_t height)
-    : _width(width), _height(height) {
-  auto png_img = cimg_library::CImg<unsigned char>();
-  png_img.load_png(
-      (boost::filesystem::path(interstellar::data_dir) / "7segs.png").c_str());
+namespace interstellar {
 
-  // TODO resize to match desired final size in the display
-  // keep the .png aspect ratio!
-  // "Method of interpolation:
-  //   -1 = no interpolation: raw memory resizing.
-  //   0 = no interpolation: additional space is filled according to
-  //   boundary_conditions. 1 = nearest-neighbor interpolation. 2 = moving
-  //   average interpolation. 3 = linear interpolation. 4 = grid interpolation.
-  //   5 = cubic interpolation.
-  //   6 = lanczos interpolation."
-  float png_aspect_ratio = static_cast<float>(png_img.width()) /
-                           static_cast<float>(png_img.height());
-  // TODO dynamic; eg based on how many we want to draw, and their desired size
-  uint32_t png_desired_width =
-      _width / 5;  // a fifth of the width looks pretty nice
-  uint32_t png_desired_height =
-      static_cast<float>(png_desired_width) / png_aspect_ratio;
-  png_img.resize(
-      /* size_x */ png_desired_width,
-      /* size_y = -100 */ png_desired_height,
-      /* size_z = -100 */ -100,
-      /* size_c = -100 */ -100,
-      /* 	interpolation_type = 1 */ 1,
-      /* boundary_conditions = 0 */ 0,
-      /* centering_x = 0 */ 0,
-      /* centering_y = 0 */ 0,
-      /* centering_z = 0 */ 0,
-      /* centering_c = 0 */ 0);
+template <typename DrawableWhereT>
+Segments2Pixels<DrawableWhereT>::Segments2Pixels(
+    uint32_t width, uint32_t height,
+    const std::vector<drawable::Drawable<DrawableWhereT>>& drawables)
+    : width_(width), height_(height), drawables_(drawables) {
+  uint32_t nb_digits = drawables_.size();
 
-  assert(ImgListUniqueColors(png_img).size() == 7 &&
-         "Something went wrong? Should probably only have found 7 segments");
+  // CHECK drawables MUST NOT be empty
+  // We could return early instead of throwing but generating and then garbling
+  // a circuit with no input does not really make sense.
+  // Also it has never been tested so we would rather throw.
+  if (drawables_.empty()) {
+    throw std::logic_error("Segments2Pixels: drawables MUST NOT be empty");
+  }
 
-  // Prepare the display with the desired dimensions
-  // MUST use ctor with "value" else
-  // "Warning
-  //       The allocated pixel buffer is not filled with a default value, and is
-  //       likely to contain garbage values. In order to initialize pixel values
-  //       during construction (e.g. with 0), use constructor CImg(unsigned
-  //       int,unsigned int,unsigned int,unsigned int,T) instead."
-  auto display_img = cimg_library::CImg<uint8_t>(
-      /* size_x */ _width,
-      /* size_y */ _height,
-      /* size_z */ 1,
-      /* size_c = spectrum = nb of channels */ 4,
-      /* value */ 0);
-  assert(display_img.width() == static_cast<int32_t>(_width) &&
-         display_img.height() == static_cast<int32_t>(_height) &&
-         "wrong dimensions!");
+  // CHECK that all Drawable are the same class
+  drawable::DigitSegmentsType segments_type = drawables_[0].What().GetType();
+  uint32_t nb_segs_per_digit = drawables_[0].What().GetNbSegments();
+  for (const auto& drawable : drawables_) {
+    if (drawable.What().GetType() != segments_type) {
+      throw std::logic_error(
+          "Segments2Pixels: drawing different digits is not allowed");
+    }
+    nb_segments_ += drawable.What().GetNbSegments();
+  }
 
-  // Construct the final display by assembling the .png
-  // TODO move that into helper function that draw several digits where desired
-  auto horizontal_margin = (display_img.width() * 0.05);
-  auto offset_height = (display_img.height() - png_img.height()) / 2;
-  // NOTE: we use opacity to convert "unique in segs.png" to "globally unique"
-  // we could do it differently(i.e. more robustly) but this works just fine for
-  // now
-  // technically this limits to 255 segments in the final image b/c of opacity =
-  // ALPHA channel and that is [0-255] but this is more than we need for now
-  display_img.draw_image(
-      /* x0 */ (display_img.width() / 2) - png_img.width() - horizontal_margin,
-      /* y0 */ offset_height,
-      /* z0 */ 0,
-      /* c0 */ 0,
-      /* sprite */ png_img,
-      /* opacity */ 1.0f);
-  display_img.draw_image(
-      /* x0 */ (display_img.width() / 2) + horizontal_margin,
-      /* y0 */ offset_height,
-      /* z0 */ 0,
-      /* c0 */ 0,
-      /* sprite */ png_img,
-      /* opacity */ 0.99f);
+  assert(nb_segments_ == nb_digits * nb_segs_per_digit &&
+         "nb_segments mismatch!");
 
-  std::unordered_map<ColorRGBA, uint32_t, absl::Hash<ColorRGBA>>
-      map_color_to_seg_id = ImgListUniqueColors(display_img);
-  _nb_segments = map_color_to_seg_id.size();
-  assert(_nb_segments == ImgListUniqueColors(png_img).size() * 2 &&
-         "Something went wrong? Should probably only have found 7*2 segments");
-
-  // TODO add a flag/option to control this; only useful for dev/debug
-  auto bitmap_png = "bitmap.png";
-  display_img.save_png(bitmap_png);
-  LOG(INFO) << "saved : " << std::filesystem::current_path() / bitmap_png;
-
-  // now prepare the final "bitmap"
-  // i.e. replace each color pixel by its corresponding segment ID
-  _bitmap_seg_ids_rle =
-      ImgReplaceBitmapSegIDs(display_img, map_color_to_seg_id);
+  // RNDSIZE
+  // TODO Check
+  // Historically(before the support of variable otp_length), message had
+  // RNDSIZE=9, and pinpad RNDSIZE=16
+  // math.ceil(0.5 * math.sqrt(8 * otp_length * message_seg + 1) + 1)
+  auto rndsize = static_cast<unsigned int>(
+      std::max(std::ceil(0.5 * std::sqrt(8 * nb_segments_ + 1) + 1), 9.));
+  config_ = {{"WIDTH", width_},
+             {"HEIGHT", height_},
+             {"BITMAP_NB_SEGMENTS", nb_segments_},
+             {"RNDSIZE", rndsize},
+             {"NB_DIGITS", nb_digits},
+             {"NB_SEGS_PER_DIGIT", nb_segs_per_digit},
+             {"SEGMENTS_TYPE", static_cast<uint32_t>(segments_type)}};
 }
 ```
 
@@ -154,16 +214,26 @@ E.g. 2-4 digits in the center of the “message window”, and 10 digits vertica
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done
 
 ```cpp,editable
-std::string Segments2Pixels::GenerateVerilog() {
+template <typename DrawableWhereT>
+std::string Segments2Pixels<DrawableWhereT>::GenerateVerilog() const {
+  // Generate the complete bitmap, then compute the SegmentID for each pixel
+  // Previously it was done is the ctor then stored in class member but it is
+  // only used here so no point in doing that
+  std::vector<drawable::SegmentID> bitmap_seg_ids =
+      Draw(drawables_, width_, height_);
+
+  std::vector<utils::RLE_int8_t> bitmap_seg_ids_rle =
+      utils::compress_rle(bitmap_seg_ids);
+
   std::string verilog_buf;
-  unsigned int nb_inputs = _nb_segments - 1,
-               nb_outputs = (_width * _height) - 1;
+  unsigned int nb_inputs = nb_segments_ - 1,
+               nb_outputs = (width_ * height_) - 1;
 
   // without reserve : 1657472 - 1771623 (ns)
   // with reserve : 1250652 - 1356733 (ns)
   // Now in the .v, ranges are encoded as eg: assign p[75295:75287] = 0;
   // So we really do not need much memory.
-  unsigned int nb_pixels = _width * _height;
+  unsigned int nb_pixels = width_ * height_;
   size_t size_to_reserve =
       ((nb_pixels * strlen("assign p[000000] = s[0000];\n")) / 5) + 1000;
   verilog_buf.reserve(size_to_reserve);
@@ -180,11 +250,11 @@ std::string Segments2Pixels::GenerateVerilog() {
   verilog_buf +=
       fmt::format("output [{:d}:0] p;  // pixels output\n", nb_outputs);
 
-  // TODO proper values (decode RLE)
   // TODO use absl or fmtlib
   size_t pixels_counter = 0;
-  for (const auto& it : _bitmap_seg_ids_rle) {
-    // - OFF segment(seg_id==-1):   "assign p[10610:10609] = 0;"
+  for (const auto& it : bitmap_seg_ids_rle) {
+    // NOTE: bitmap_seg_ids_rle is RLE encoded
+    // - OFF segment(seg_id==-1):   "assign p[7680:0] = 0;"
     // - ON segment(eg seg_id=16):  "assign p[17855:17854] = s[16];"
     auto seg_id = it.value;
     auto len = it.size;
@@ -217,9 +287,41 @@ std::string Segments2Pixels::GenerateVerilog() {
 
   return verilog_buf;
 }
+
+/**
+ * display-main.v and others expect eg:
+ *
+  `define WIDTH 56
+  `define HEIGHT 24
+  `define RNDSIZE 9
+  `define BITMAP_NB_SEGMENTS 28
+ */
+template <typename DrawableWhereT>
+std::string Segments2Pixels<DrawableWhereT>::GetDefines() const {
+  auto verilog_defines = verilog::Defines();
+  // NOTE: probably NOT all the config keys are needed on the Verilog side
+  for (auto const& [key, val] : config_) {
+    verilog_defines.AddDefine(key, val);
+  }
+
+  return verilog_defines.GetDefinesVerilog();
+}
+
+/**
+ * We could DRY with GetDefines but most of the keys in config are NOT needed on
+ * the Verilog side.
+ */
+template <typename DrawableWhereT>
+const absl::flat_hash_map<std::string, uint32_t>&
+Segments2Pixels<DrawableWhereT>::GetConfig() const {
+  return config_;
+}
+
+// "explicit instantiation of all the types the template will be used with"
+template class Segments2Pixels<drawable::RelativeBBox>;
+
+}  // namespace interstellar
 ```
-
-
 
 ### [2][3][4] Generate .skcd
 
@@ -261,6 +363,7 @@ If there is no cached .skcd for the step [1], one is generated with
 `CircuitPipeline::GenerateDisplaySkcd`: [lib_circuits/src/circuit_lib.cpp:56](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/circuit_lib.cpp#L56)
 
 ```cpp, editable
+
 void GenerateDisplaySkcd(boost::filesystem::path skcd_output_path,
                          u_int32_t width, u_int32_t height) {
   auto tmp_dir = utils::TempDir();
