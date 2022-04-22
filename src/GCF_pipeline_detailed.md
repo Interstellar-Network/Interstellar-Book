@@ -41,7 +41,10 @@ The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
 
-#### Segment to pixel use drawable functions to create the verilog circuit based on xsegment.png (configuration file)
+#### Segment2pixel use drawable functions to create the verilog circuit based on 7(x)segs.png (configuration file)
+7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
+
+>We can use other files like 14segs.png to handle segment based visual cryptography down the road
 
 ```cpp, editable
 namespace drawable {
@@ -152,9 +155,7 @@ template std::vector<SegmentID> Draw<RelativeBBox>(
 
 `Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp)
 
-7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)
 
->We can use other files like 14segs.png to handle segment based visual cryptography down the road
 
 ```cpp,editable
 namespace interstellar {
