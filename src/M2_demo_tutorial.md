@@ -194,6 +194,18 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 
 ## 3. Evaluation of the display garbled circuit with `GCevaluator`and get One time code
 
+if the docker host can use X11: 
 
+```sh
+docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
+````
+
+else: 
+
+```sh
+docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
+```
+
+(il faut evidemment que les paths des commandes docker match ceux de ipfs cat)
 
 ## 4. Check one time code with `TTVP pallet`
