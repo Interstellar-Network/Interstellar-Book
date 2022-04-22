@@ -270,7 +270,11 @@ This scheme can resist current banking trojans with overlay capabilities but not
 The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
-<h4 id="segment-to-pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-xsegmentpng-configuration-file"><a class="header" href="#segment-to-pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-xsegmentpng-configuration-file">Segment to pixel use drawable functions to create the verilog circuit based on xsegment.png (configuration file)</a></h4>
+<h4 id="segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file"><a class="header" href="#segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file">Segment2pixel use drawable functions to create the verilog circuit based on 7(x)segs.png (configuration file)</a></h4>
+<p>7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
+<blockquote>
+<p>We can use other files like 14segs.png to handle segment based visual cryptography down the road</p>
+</blockquote>
 <pre><code class="language-cpp  editable">namespace drawable {
 
 IDrawableSegmentedDigitRelCoordsLocal::IDrawableSegmentedDigitRelCoordsLocal(
@@ -377,10 +381,6 @@ template std::vector&lt;SegmentID&gt; Draw&lt;RelativeBBox&gt;(
 }  //   namespace drawable
 </code></pre>
 <p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
-<p>7segs.png (or other) is parsed from an embedded resource into the executable, and prepared for later use (and some pre-computation is done based on the colors of the .png)</p>
-<blockquote>
-<p>We can use other files like 14segs.png to handle segment based visual cryptography down the road</p>
-</blockquote>
 <pre><code class="language-cpp editable">namespace interstellar {
 
 template &lt;typename DrawableWhereT&gt;
