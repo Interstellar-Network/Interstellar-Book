@@ -83,7 +83,7 @@ Use the following [substrate link](https://substrate-developer-hub.github.io/sub
 
 to connect to a locally running node
 
-> avoid some browser extension that could generate interfcae issues
+> avoid some browser extensions that could generate interface issues
 
 ## Demo purpose and used components
 
