@@ -61,7 +61,7 @@ docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,deb
 
 
 ```
-git clone --branch=interstellar-milestone2 --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
+git clone --branch=main --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
 ```
 then
 ```
@@ -79,13 +79,11 @@ RUST_LOG="warn,info" cargo run -- --dev --tmp --enable-offchain-indexing=1
 
 ### Launch a generic Substrate Fromt-end
 
-Use the following [substrate link](https://github.com/substrate-developer-hub/substrate-front-end-template#installation) for installation
-then use
-```sh
-Yarn start
-```
-to connect a locally running node
+Use the following [substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944) to launch substrate front end
 
+to connect to a locally running node
+
+> avoid some browser extension that could generate interfcae issues
 
 ## Demo purpose and used components
 
@@ -176,13 +174,26 @@ this circuit can display a transaction message with one time code and a random k
 > the skcd cid is still in Events, blue dot in this example
 #### 2.2.3 Sign the transaction
 
-#### 2.2.4 garbled circuit cid appear in Events
+#### 2.2.4 2 garbled circuit cids appear in Events
 
 ![garble result ](./fig/4ocwGarbleResult.png)
 
-> the generated garbled circuit cid `NewGarbledIpfsCid`will then appear in Events (underlined in red line in this screenshot example)
+> the 2 generated garbled circuit cids `NewGarbledIpfsCid`will then appear in Events (underlined in red line in this screenshot example)
 
-### 2.3 Copy paste the hash of the generated display garbled circuit (ready to be avaluated)
+
+
+
+
+### 2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)
+
+
+> first one is used to generate pgarble
+
+> second one is used to generate packmsg (ie)
+
+
+
+
 
 
 
@@ -192,7 +203,24 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 
 ![garble result ex ](./fig/5ocwGarbleResult.png)
 
-## 3. Evaluation of the display garbled circuit with `GCevaluator`and get One time code
+
+
+
+## 3. Evaluation of the display garbled circuit with `GCevaluator` to get the One time code to validate
+
+
+```sh
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmX9TgCtnAadSu1YDmut4DDfdYeRg3XWnoU4Tmg5mswRs8 > pgarbled.pb.bin
+
+
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmVHn9RZLHziVf1XGuUNNNLm23XgU5VgxSBR8tCVqQj9WH> packmsg.pb.bin
+
+
+./tests/cli_eval_stripped --pgarbled_input_path=pgarbled.pb.bin --packmsg_input_path=packmsg.pb.bin
+
+
+
+
 
 if the docker host can use X11: 
 
@@ -206,6 +234,6 @@ else:
 docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 ```
 
-(il faut evidemment que les paths des commandes docker match ceux de ipfs cat)
+> $(pwd)/data path must match ipfs cat cmd
 
 ## 4. Check one time code with `TTVP pallet`
