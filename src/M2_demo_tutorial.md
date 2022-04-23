@@ -11,7 +11,7 @@
 ### Launch ipfs deamon
 
 ```sh
-GO_IPFS_PATH=/usr/local/bin/ipfs
+export GO_IPFS_PATH=/usr/local/bin/ipfs
 ```
 ```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
@@ -69,7 +69,7 @@ cd substrate-offchain-worker-demo
 ````
 
 
-build the substrate chain....
+build and run the substrate chain....
 
 ```sh
 RUST_LOG="warn,info" cargo run -- --dev --tmp --enable-offchain-indexing=1
@@ -180,19 +180,12 @@ this circuit can display a transaction message with one time code and a random k
 
 > the 2 generated garbled circuit cids `NewGarbledIpfsCid`will then appear in Events (underlined in red line in this screenshot example)
 
+In this example: "QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww","QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx"
 
-
+> first one will be use match pgarbled.pb.bin & packmsg.pb.bin
 
 
 ### 2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)
-
-
-> first one is used to generate pgarble
-
-> second one is used to generate packmsg (ie)
-
-
-
 
 
 
@@ -208,19 +201,17 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 
 ## 3. Evaluation of the display garbled circuit with `GCevaluator` to get the One time code to validate
 
+With as example the previous copied cid we get pgarbled.pb.bin and packmsg.pb.bin to evaluate the garbled circuits with the Display Gc evaluator.
 
 ```sh
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmX9TgCtnAadSu1YDmut4DDfdYeRg3XWnoU4Tmg5mswRs8 > pgarbled.pb.bin
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww > pgarbled.pb.bin
+```
+```
+IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx > packmsg.pb.bin
+```
 
 
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmVHn9RZLHziVf1XGuUNNNLm23XgU5VgxSBR8tCVqQj9WH> packmsg.pb.bin
-
-
-./tests/cli_eval_stripped --pgarbled_input_path=pgarbled.pb.bin --packmsg_input_path=packmsg.pb.bin
-
-
-
-
+We can now launch the docker with the parameter below to perform the circuit evaluation
 
 if the docker host can use X11: 
 
@@ -228,12 +219,30 @@ if the docker host can use X11:
 docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 ````
 
+An X11 windows will pop-up
+
+![garble result X11 ](./fig/EvaluationResultX11.png)
+
+
 else: 
 
 ```sh
 docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 ```
-
 > $(pwd)/data path must match ipfs cat cmd
 
+
+a output_eval.png file will be genrerated by the evaluator
+
+```sh
+/tmp/evalcirc$ ls
+output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
+```
+
+
+
+
 ## 4. Check one time code with `TTVP pallet`
+
+
+
