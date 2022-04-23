@@ -61,7 +61,7 @@ docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG="warn,info,deb
 
 
 ```
-git clone --branch=main --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
+git clone --branch=master --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
 ```
 then
 ```
