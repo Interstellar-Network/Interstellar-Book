@@ -213,7 +213,10 @@ IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkd
 
 We can now launch the docker with the parameter below to perform the circuit evaluation
 
-if the docker host can use X11: 
+Previously, you can create a temporary folder that will be mounted and enable the docker to read the files
+> just pay attention that  $(pwd)/data path must match the previously created file *.pb.bin
+
+if the docker host can use X11 (i.e. WSL2 or VM):
 
 ```sh
 docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
@@ -229,7 +232,6 @@ else:
 ```sh
 docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 ```
-> $(pwd)/data path must match ipfs cat cmd
 
 
 a output_eval.png file will be genrerated by the evaluator
@@ -240,9 +242,13 @@ output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 ```
 
 
-
-
 ## 4. Check one time code with `TTVP pallet`
 
 
 
+![check OK ](./fig/txValOK.png)
+
+
+
+
+![check KO](./fig/txValKO.png)
