@@ -139,7 +139,7 @@
 <p><a href="./runtime_prerequisite.html">runtime prerequiste</a></p>
 <h2 id="set-up-demo"><a class="header" href="#set-up-demo">Set-up Demo</a></h2>
 <h3 id="launch-ipfs-deamon"><a class="header" href="#launch-ipfs-deamon">Launch ipfs deamon</a></h3>
-<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
+<pre><code class="language-sh">export GO_IPFS_PATH=/usr/local/bin/ipfs
 </code></pre>
 <pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
 </code></pre>
@@ -173,7 +173,7 @@ Daemon is ready
 <p>then</p>
 <pre><code>cd substrate-offchain-worker-demo 
 </code></pre>
-<p>build the substrate chain....</p>
+<p>build and run the substrate chain....</p>
 <pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp --enable-offchain-indexing=1
 </code></pre>
 <blockquote>
@@ -245,13 +245,11 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <blockquote>
 <p>the 2 generated garbled circuit cids <code>NewGarbledIpfsCid</code>will then appear in Events (underlined in red line in this screenshot example)</p>
 </blockquote>
+<p>In this example: &quot;QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww&quot;,&quot;QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx&quot;</p>
+<blockquote>
+<p>first one will be use match pgarbled.pb.bin &amp; packmsg.pb.bin</p>
+</blockquote>
 <h3 id="23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated"><a class="header" href="#23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated">2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)</a></h3>
-<blockquote>
-<p>first one is used to generate pgarble</p>
-</blockquote>
-<blockquote>
-<p>second one is used to generate packmsg (ie)</p>
-</blockquote>
 <blockquote>
 <p>coment: You can specify any type of transaction message
 not especially tied to a wallet transaction
@@ -259,29 +257,27 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 </blockquote>
 <p><img src="./fig/5ocwGarbleResult.png" alt="garble result ex " /></p>
 <h2 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate">3. Evaluation of the display garbled circuit with <code>GCevaluator</code> to get the One time code to validate</a></h2>
-<pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmX9TgCtnAadSu1YDmut4DDfdYeRg3XWnoU4Tmg5mswRs8 &gt; pgarbled.pb.bin
-
-
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmVHn9RZLHziVf1XGuUNNNLm23XgU5VgxSBR8tCVqQj9WH&gt; packmsg.pb.bin
-
-
-./tests/cli_eval_stripped --pgarbled_input_path=pgarbled.pb.bin --packmsg_input_path=packmsg.pb.bin
-
-
-
-
-
-if the docker host can use X11: 
-
-```sh
-docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
+<p>With as example the previous copied cid we get pgarbled.pb.bin and packmsg.pb.bin to evaluate the garbled circuits with the Display Gc evaluator.</p>
+<pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww &gt; pgarbled.pb.bin
 </code></pre>
+<pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx &gt; packmsg.pb.bin
+</code></pre>
+<p>We can now launch the docker with the parameter below to perform the circuit evaluation</p>
+<p>if the docker host can use X11: </p>
+<pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
+</code></pre>
+<p>An X11 windows will pop-up</p>
+<p><img src="./fig/EvaluationResultX11.png" alt="garble result X11 " /></p>
 <p>else: </p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 </code></pre>
 <blockquote>
 <p>$(pwd)/data path must match ipfs cat cmd</p>
 </blockquote>
+<p>a output_eval.png file will be genrerated by the evaluator</p>
+<pre><code class="language-sh">/tmp/evalcirc$ ls
+output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
+</code></pre>
 <h2 id="4-check-one-time-code-with-ttvp-pallet-1"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-1">4. Check one time code with <code>TTVP pallet</code></a></h2>
 
                     </main>
