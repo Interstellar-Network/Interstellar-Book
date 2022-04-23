@@ -1404,7 +1404,11 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 <pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx &gt; packmsg.pb.bin
 </code></pre>
 <p>We can now launch the docker with the parameter below to perform the circuit evaluation</p>
-<p>if the docker host can use X11: </p>
+<p>Previously, you can create a temporary folder that will be mounted and enable the docker to read the files</p>
+<blockquote>
+<p>just pay attention that  $(pwd)/data path must match the previously created file *.pb.bin</p>
+</blockquote>
+<p>if the docker host can use X11 (i.e. WSL2 or VM):</p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 </code></pre>
 <p>An X11 windows will pop-up</p>
@@ -1412,14 +1416,13 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 <p>else: </p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 </code></pre>
-<blockquote>
-<p>$(pwd)/data path must match ipfs cat cmd</p>
-</blockquote>
 <p>a output_eval.png file will be genrerated by the evaluator</p>
 <pre><code class="language-sh">/tmp/evalcirc$ ls
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 </code></pre>
 <h2 id="4-check-one-time-code-with-ttvp-pallet-1"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-1">4. Check one time code with <code>TTVP pallet</code></a></h2>
+<p><img src="./fig/txValOK.png" alt="check OK " /></p>
+<p><img src="./fig/txValKO.png" alt="check KO" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apis-testing-guide"><a class="header" href="#apis-testing-guide">APIs Testing Guide</a></h1>
 <p>This is the tests related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
 <p>Those tests included in the tests folders of the following repositories <code>api_circuit</code> and <code>api_garble</code> wil demonstrate respectively:</p>
