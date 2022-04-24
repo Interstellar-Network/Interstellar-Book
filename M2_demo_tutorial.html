@@ -240,9 +240,9 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <p>the skcd cid is still in Events, blue dot in this example</p>
 </blockquote>
 <h4 id="223-sign-the-transaction"><a class="header" href="#223-sign-the-transaction">2.2.3 Sign the transaction</a></h4>
-<h4 id="224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events"><a class="header" href="#224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events">2.2.4 One Time Code and the Two garbled circuit cids appear in Events</a></h4>
+<h4 id="224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events"><a class="header" href="#224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events">2.2.4 One Time Code and the two garbled circuit cids appear in Events</a></h4>
 <p><img src="./fig/4ocwGarbleResult.png" alt="garble result " /></p>
-<p>The random One Time Code used for transaction validation appears in Events in the <code>txValidationDEBUGNewDigitSet</code> field (underlined with a red line in this screenshot example)</p>
+<p>The random One Time Code used for transaction validation appear in Events in the <code>txValidationDEBUGNewDigitSet</code> field (underlined with a red line in this screenshot example)</p>
 <p>We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.</p>
 <p><img src="./fig/garble_log_OTC.png" alt="garble result ex " /></p>
 <blockquote>
@@ -254,6 +254,12 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin we will evaluated on the next step</p>
 </blockquote>
 <h3 id="23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated"><a class="header" href="#23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated">2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)</a></h3>
+<blockquote>
+<p>remark: actually the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.</p>
+</blockquote>
+<blockquote>
+<p>there is also another circuit that will display the random pinpad that we do not evaluate to make this demo more simple at this stage</p>
+</blockquote>
 <hr />
 <blockquote>
 <p>remark: you can specify any type of transaction message not especially tied to a wallet transaction. It can be used for any sensitive operation that need a highly secure confirmation</p>
