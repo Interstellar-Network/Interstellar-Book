@@ -228,7 +228,7 @@ in this demo we do not use yet, other circuit customization parameters like scre
 </blockquote>
 <p><img src="./fig/3ocwCircuitResult.png" alt="circuit sign" /></p>
 <h2 id="2-generate-with-ocwgarble-a-randomized-display-garble-circuit"><a class="header" href="#2-generate-with-ocwgarble-a-randomized-display-garble-circuit">2. Generate with <code>ocwGarble</code> a randomized display garble circuit</a></h2>
-<p>this circuit can display a transaction message with one time code and a random keypad</p>
+<p>This circuit can display a transaction message with one time code and a random keypad</p>
 <h3 id="21-select-ocwgarble-pallet-and-garbleandstripsigned-extrinsic"><a class="header" href="#21-select-ocwgarble-pallet-and-garbleandstripsigned-extrinsic">2.1 Select ocwGarble pallet and garbleAndStripSigned extrinsic</a></h3>
 <p><img src="./fig/1ocwGarbleSelect.png" alt="garble select" /></p>
 <h3 id="22-input-skcdcid-and-transaction-message"><a class="header" href="#22-input-skcdcid-and-transaction-message">2.2 Input skcdCid and Transaction message</a></h3>
@@ -248,22 +248,21 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <blockquote>
 <p>In this example the one time code value is 81 i.e.  0x0801 in Events and [8, 1] in api_garble logs.</p>
 </blockquote>
-<p>the 2 generated garbled circuit cids to evaluate  appears in Events <code>NewGarbledIpfsCid</code>  (also underlined with red line)</p>
+<p>The two generated garbled circuit cids to evaluate  appears in Events <code>NewGarbledIpfsCid</code>  (also underlined with red line)</p>
 <p>In this example, the two respectives cids value are &quot;QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww&quot;,&quot;QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx&quot;</p>
 <blockquote>
-<p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin</p>
+<p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin we will evaluated on the next step</p>
 </blockquote>
-<h3 id="23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated"><a class="header" href="#23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated">2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)</a></h3>
+<h3 id="23-copy-the-hashs-of-the-two-generated-display-garbled-circuit-ready-to-be-avaluated"><a class="header" href="#23-copy-the-hashs-of-the-two-generated-display-garbled-circuit-ready-to-be-avaluated">2.3 Copy the hashs of the two generated display garbled circuit (ready to be avaluated)</a></h3>
 <blockquote>
 <p>coment: You can specify any type of transaction message
 not especially tied to a wallet transaction
 It can be used for any sensitive operation that need a highly secure confirmation</p>
 </blockquote>
 <p><img src="./fig/5ocwGarbleResult.png" alt="garble result ex " /></p>
-<h2 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate">3. Evaluation of the display garbled circuit with <code>GCevaluator</code> to get the One time code to validate</a></h2>
+<h2 id="3-evaluation-of-the-display-garbled-circuits-with-gcevaluator-to-get-the-one-time-code-to-validate-and-check-the-transaction-message"><a class="header" href="#3-evaluation-of-the-display-garbled-circuits-with-gcevaluator-to-get-the-one-time-code-to-validate-and-check-the-transaction-message">3. Evaluation of the display garbled circuits with <code>GCevaluator</code> to get the One time code to validate and check the transaction message</a></h2>
 <p>First create a folder on which we will store the circuits. This folder will be mounted on the docker container to evaluate the two garbled circuits.</p>
-<p>ex: we create /tmp/evalcirc and then cd /tmp/evalcirc but you can chose a</p>
-<p>with the previous copied cids we create respectively the <code>pgarbled.pb.bin</code> and <code>packmsg.pb.bin</code> garbled circuits files in the folder below to evaluate them with the evaluator.</p>
+<p>with the previous copied cids we then create respectively the <code>pgarbled.pb.bin</code> and <code>packmsg.pb.bin</code> garbled circuits files in the folder previously created to evaluate them with the evaluator.</p>
 <pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww &gt; pgarbled.pb.bin
 </code></pre>
 <pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx &gt; packmsg.pb.bin
@@ -272,23 +271,29 @@ It can be used for any sensitive operation that need a highly secure confirmatio
 <p>if the docker host can use X11 (i.e. WSL2 or VM):</p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 </code></pre>
-<p>wait and an X11 windows will pop-up</p>
+<p>wait and an X11 windows will pop-up and display both the transaction message and the one time code</p>
 <p><img src="./fig/EvaluationResultX11.png" alt="garble result X11 " /></p>
-<p>We can check that it match both the inputed message displayed by the circuit and the random one time code to be validated: 81 in this example.</p>
+<p>We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: 81 in this example.</p>
 <p>else: </p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 </code></pre>
 <p>In this case an output_eval.png file will be genrerated by the evaluator</p>
+<blockquote>
+<p>/tmp/evalcirc is the folder previously created and mounted in the docker container</p>
+</blockquote>
 <pre><code class="language-sh">/tmp/evalcirc$ ls
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 </code></pre>
 <blockquote>
-<p>in this example /tmp/evalcirc is the folder mounted in the container</p>
+<p>comment: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
+As the purpose of the demo is only to demomstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual crytography frames.</p>
 </blockquote>
-<h2 id="4-check-one-time-code-with-ttvp-pallet-1"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-1">4. Check one time code with <code>TTVP pallet</code></a></h2>
-<p>submit the one time code to the pallet to validate it</p>
+<p>if you want to check what the final version look like use the following link: <a href="https://www.interstellar.gg/simulation">Transaction validation screen simulations</a></p>
+<h2 id="4-check-one-time-code-with-ttvp-pallet-ie-txvalidation"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-ie-txvalidation">4. Check one time code with <code>TTVP pallet</code> i.e. <code>txValidation</code></a></h2>
+<h3 id="41-select-txvalidation-pallet-and-checkinput-extrinsic"><a class="header" href="#41-select-txvalidation-pallet-and-checkinput-extrinsic">4.1 Select <code>txValidation</code> pallet and <code>checkInput</code> extrinsic</a></h3>
+<h3 id="42-submit-the-one-time-code-to-the-pallet-to-validate-it"><a class="header" href="#42-submit-the-one-time-code-to-the-pallet-to-validate-it">4.2 Submit the one time code to the pallet to validate it</a></h3>
 <p><img src="./fig/txValOK.png" alt="check OK" /></p>
-<p>we can also check a wrong code</p>
+<h3 id="43-we-can-also-check-the-pallet-with-a-wrong-code"><a class="header" href="#43-we-can-also-check-the-pallet-with-a-wrong-code">4.3 We can also check the pallet with a wrong code</a></h3>
 <p><img src="./fig/txValKO.png" alt="check KO" /></p>
 
                     </main>
