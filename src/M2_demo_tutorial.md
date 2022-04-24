@@ -174,12 +174,12 @@ This circuit can display a transaction message with one time code and a random k
 > the skcd cid is still in Events, blue dot in this example
 #### 2.2.3 Sign the transaction
 
-#### 2.2.4 One Time Code and the Two garbled circuit cids appear in Events
+#### 2.2.4 One Time Code and the two garbled circuit cids appear in Events
 
 ![garble result ](./fig/4ocwGarbleResult.png)
 
 
-The random One Time Code used for transaction validation appears in Events in the `txValidationDEBUGNewDigitSet` field (underlined with a red line in this screenshot example)
+The random One Time Code used for transaction validation appear in Events in the `txValidationDEBUGNewDigitSet` field (underlined with a red line in this screenshot example)
 
 We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.
 
@@ -197,7 +197,9 @@ In this example, the two respectives cids value are "QmcXBLtfPxWVPgfQm6tnzcBg7Kv
 
 ### 2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)
 
+>remark: actually the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.
 
+>there is also another circuit that will display the random pinpad that we do not evaluate to make this demo more simple at this stage
 
 
 
