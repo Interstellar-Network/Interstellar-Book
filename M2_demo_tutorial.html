@@ -253,27 +253,38 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <blockquote>
 <p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin we will evaluated on the next step</p>
 </blockquote>
-<h3 id="23-copy-the-hashs-of-the-two-generated-display-garbled-circuit-ready-to-be-avaluated"><a class="header" href="#23-copy-the-hashs-of-the-two-generated-display-garbled-circuit-ready-to-be-avaluated">2.3 Copy the hashs of the two generated display garbled circuit (ready to be avaluated)</a></h3>
+<h3 id="23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated"><a class="header" href="#23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated">2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)</a></h3>
+<hr />
 <blockquote>
-<p>coment: You can specify any type of transaction message
-not especially tied to a wallet transaction
-It can be used for any sensitive operation that need a highly secure confirmation</p>
+<p>remark: you can specify any type of transaction message not especially tied to a wallet transaction. It can be used for any sensitive operation that need a highly secure confirmation</p>
 </blockquote>
 <p><img src="./fig/5ocwGarbleResult.png" alt="garble result ex " /></p>
-<h2 id="3-evaluation-of-the-display-garbled-circuits-with-gcevaluator-to-get-the-one-time-code-to-validate-and-check-the-transaction-message"><a class="header" href="#3-evaluation-of-the-display-garbled-circuits-with-gcevaluator-to-get-the-one-time-code-to-validate-and-check-the-transaction-message">3. Evaluation of the display garbled circuits with <code>GCevaluator</code> to get the One time code to validate and check the transaction message</a></h2>
-<p>First create a folder on which we will store the circuits. This folder will be mounted on the docker container to evaluate the two garbled circuits.</p>
-<p>with the previous copied cids we then create respectively the <code>pgarbled.pb.bin</code> and <code>packmsg.pb.bin</code> garbled circuits files in the folder previously created to evaluate them with the evaluator.</p>
+<hr />
+<h2 id="3-evaluation-of-the-display-garbled-circuits-with-the-evaluator-program-provided-in-a-docker"><a class="header" href="#3-evaluation-of-the-display-garbled-circuits-with-the-evaluator-program-provided-in-a-docker">3. Evaluation of the display garbled circuits with the evaluator program (provided in a docker)</a></h2>
+<p>In this step we get the one time code to validate and check the transaction message</p>
+<h3 id="31-first-create-a-folder-on-which-we-will-store-the-circuits"><a class="header" href="#31-first-create-a-folder-on-which-we-will-store-the-circuits">3.1 First create a folder on which we will store the circuits</a></h3>
+<p>This folder will be mounted on the docker container to evaluate the two garbled circuits.</p>
+<p>example:</p>
+<pre><code class="language-sh">mkdir /tmp/evalcirc/
+</code></pre>
+<pre><code class="language-sh">cd /tmp/evalcirc/
+</code></pre>
+<blockquote>
+<p>you can use any directory name, just pay attention that path is consistent with the following docker path parameters in step 3.2</p>
+</blockquote>
+<h3 id="32-create-the-garbled-circuits-in-the-above-folder"><a class="header" href="#32-create-the-garbled-circuits-in-the-above-folder">3.2 Create the garbled circuits in the above folder</a></h3>
+<p>With the previously copied cids we then create respectively the <code>pgarbled.pb.bin</code> and <code>packmsg.pb.bin</code> garbled circuits files in the folder previously created to evaluate them with the evaluator.</p>
 <pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww &gt; pgarbled.pb.bin
 </code></pre>
 <pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx &gt; packmsg.pb.bin
 </code></pre>
+<h3 id="32-launch-the-evaluator-in-docker"><a class="header" href="#32-launch-the-evaluator-in-docker">3.2 Launch the evaluator in docker</a></h3>
 <p>We can now launch the docker with the parameter below to perform the circuit evaluation.</p>
 <p>if the docker host can use X11 (i.e. WSL2 or VM):</p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 </code></pre>
 <p>wait and an X11 windows will pop-up and display both the transaction message and the one time code</p>
 <p><img src="./fig/EvaluationResultX11.png" alt="garble result X11 " /></p>
-<p>We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: 81 in this example.</p>
 <p>else: </p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 </code></pre>
@@ -285,7 +296,11 @@ It can be used for any sensitive operation that need a highly secure confirmatio
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 </code></pre>
 <blockquote>
-<p>comment: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
+<p>We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: <code>81</code> in this example.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
 As the purpose of the demo is only to demomstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual crytography frames.</p>
 </blockquote>
 <p>if you want to check what the final version look like use the following link: <a href="https://www.interstellar.gg/simulation">Transaction validation screen simulations</a></p>
