@@ -174,15 +174,25 @@ this circuit can display a transaction message with one time code and a random k
 > the skcd cid is still in Events, blue dot in this example
 #### 2.2.3 Sign the transaction
 
-#### 2.2.4 2 garbled circuit cids appear in Events
+#### 2.2.4 One Time Code and the Two garbled circuit cids appear in Events
 
 ![garble result ](./fig/4ocwGarbleResult.png)
 
-> the 2 generated garbled circuit cids `NewGarbledIpfsCid`will then appear in Events (underlined in red line in this screenshot example)
 
-In this example: "QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww","QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx"
+The random One Time Code used for transaction validation appears in Events in the `txValidationDEBUGNewDigitSet` field (underlined with a red line in this screenshot example)
 
-> first one will be use match pgarbled.pb.bin & packmsg.pb.bin
+We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.
+
+![garble result ex ](./fig/garble_log_OTC.png)
+
+>In this example the one time code value is 81 i.e.  0x0801 in Events and [8, 1] in api_garble logs.
+
+
+the 2 generated garbled circuit cids to evaluate  appears in Events `NewGarbledIpfsCid`  (also underlined with red line)
+
+In this example, the two respectives cids value are "QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww","QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx"
+
+> matching respectively the pgarbled.pb.bin & packmsg.pb.bin
 
 
 ### 2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)
@@ -190,9 +200,12 @@ In this example: "QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww","QmYKMiVWKKG5a
 
 
 
+
+
+
 > coment: You can specify any type of transaction message
 not especially tied to a wallet transaction
-It can be used for any sensitive operation that need a highly secure confirmtion
+It can be used for any sensitive operation that need a highly secure confirmation
 
 ![garble result ex ](./fig/5ocwGarbleResult.png)
 
@@ -201,7 +214,13 @@ It can be used for any sensitive operation that need a highly secure confirmtion
 
 ## 3. Evaluation of the display garbled circuit with `GCevaluator` to get the One time code to validate
 
-With as example the previous copied cid we get pgarbled.pb.bin and packmsg.pb.bin to evaluate the garbled circuits with the Display Gc evaluator.
+
+First create a folder on which we will store the circuits. This folder will be mounted on the docker container to evaluate the two garbled circuits.
+
+ex: we create /tmp/evalcirc and then cd /tmp/evalcirc but you can chose a
+
+
+with the previous copied cids we create respectively the `pgarbled.pb.bin` and `packmsg.pb.bin` garbled circuits files in the folder below to evaluate them with the evaluator.
 
 ```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww > pgarbled.pb.bin
@@ -210,11 +229,8 @@ IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtH
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx > packmsg.pb.bin
 ```
 
+We can now launch the docker with the parameter below to perform the circuit evaluation.
 
-We can now launch the docker with the parameter below to perform the circuit evaluation
-
-Previously, you can create a temporary folder that will be mounted and enable the docker to read the files
-> just pay attention that  $(pwd)/data path must match the previously created file *.pb.bin
 
 if the docker host can use X11 (i.e. WSL2 or VM):
 
@@ -222,10 +238,12 @@ if the docker host can use X11 (i.e. WSL2 or VM):
 docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 ````
 
-An X11 windows will pop-up
+wait and an X11 windows will pop-up
 
 ![garble result X11 ](./fig/EvaluationResultX11.png)
 
+
+We can check that it match both the inputed message displayed by the circuit and the random one time code to be validated: 81 in this example.
 
 else: 
 
@@ -234,21 +252,22 @@ docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:mil
 ```
 
 
-a output_eval.png file will be genrerated by the evaluator
+In this case an output_eval.png file will be genrerated by the evaluator
 
 ```sh
 /tmp/evalcirc$ ls
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 ```
-
+> in this example /tmp/evalcirc is the folder mounted in the container
 
 ## 4. Check one time code with `TTVP pallet`
 
+submit the one time code to the pallet to validate it
 
 
-![check OK ](./fig/txValOK.png)
+![check OK](./fig/txValOK.png)
 
 
-
+we can also check a wrong code
 
 ![check KO](./fig/txValKO.png)
