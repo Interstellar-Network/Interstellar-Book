@@ -240,47 +240,55 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <p>the skcd cid is still in Events, blue dot in this example</p>
 </blockquote>
 <h4 id="223-sign-the-transaction"><a class="header" href="#223-sign-the-transaction">2.2.3 Sign the transaction</a></h4>
-<h4 id="224-2-garbled-circuit-cids-appear-in-events"><a class="header" href="#224-2-garbled-circuit-cids-appear-in-events">2.2.4 2 garbled circuit cids appear in Events</a></h4>
+<h4 id="224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events"><a class="header" href="#224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events">2.2.4 One Time Code and the Two garbled circuit cids appear in Events</a></h4>
 <p><img src="./fig/4ocwGarbleResult.png" alt="garble result " /></p>
+<p>The random One Time Code used for transaction validation appears in Events in the <code>txValidationDEBUGNewDigitSet</code> field (underlined with a red line in this screenshot example)</p>
+<p>We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.</p>
+<p><img src="./fig/garble_log_OTC.png" alt="garble result ex " /></p>
 <blockquote>
-<p>the 2 generated garbled circuit cids <code>NewGarbledIpfsCid</code>will then appear in Events (underlined in red line in this screenshot example)</p>
+<p>In this example the one time code value is 81 i.e.  0x0801 in Events and [8, 1] in api_garble logs.</p>
 </blockquote>
-<p>In this example: &quot;QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww&quot;,&quot;QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx&quot;</p>
+<p>the 2 generated garbled circuit cids to evaluate  appears in Events <code>NewGarbledIpfsCid</code>  (also underlined with red line)</p>
+<p>In this example, the two respectives cids value are &quot;QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww&quot;,&quot;QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx&quot;</p>
 <blockquote>
-<p>first one will be use match pgarbled.pb.bin &amp; packmsg.pb.bin</p>
+<p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin</p>
 </blockquote>
 <h3 id="23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated"><a class="header" href="#23-copy-paste-the-hashs-of-the-2-generated-display-garbled-circuit-ready-to-be-avaluated">2.3 Copy paste the hashs of the 2 generated display garbled circuit (ready to be avaluated)</a></h3>
 <blockquote>
 <p>coment: You can specify any type of transaction message
 not especially tied to a wallet transaction
-It can be used for any sensitive operation that need a highly secure confirmtion</p>
+It can be used for any sensitive operation that need a highly secure confirmation</p>
 </blockquote>
 <p><img src="./fig/5ocwGarbleResult.png" alt="garble result ex " /></p>
 <h2 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluator-to-get-the-one-time-code-to-validate">3. Evaluation of the display garbled circuit with <code>GCevaluator</code> to get the One time code to validate</a></h2>
-<p>With as example the previous copied cid we get pgarbled.pb.bin and packmsg.pb.bin to evaluate the garbled circuits with the Display Gc evaluator.</p>
+<p>First create a folder on which we will store the circuits. This folder will be mounted on the docker container to evaluate the two garbled circuits.</p>
+<p>ex: we create /tmp/evalcirc and then cd /tmp/evalcirc but you can chose a</p>
+<p>with the previous copied cids we create respectively the <code>pgarbled.pb.bin</code> and <code>packmsg.pb.bin</code> garbled circuits files in the folder below to evaluate them with the evaluator.</p>
 <pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww &gt; pgarbled.pb.bin
 </code></pre>
 <pre><code>IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx &gt; packmsg.pb.bin
 </code></pre>
-<p>We can now launch the docker with the parameter below to perform the circuit evaluation</p>
-<p>Previously, you can create a temporary folder that will be mounted and enable the docker to read the files</p>
-<blockquote>
-<p>just pay attention that  $(pwd)/data path must match the previously created file *.pb.bin</p>
-</blockquote>
+<p>We can now launch the docker with the parameter below to perform the circuit evaluation.</p>
 <p>if the docker host can use X11 (i.e. WSL2 or VM):</p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin
 </code></pre>
-<p>An X11 windows will pop-up</p>
+<p>wait and an X11 windows will pop-up</p>
 <p><img src="./fig/EvaluationResultX11.png" alt="garble result X11 " /></p>
+<p>We can check that it match both the inputed message displayed by the circuit and the random one time code to be validated: 81 in this example.</p>
 <p>else: </p>
 <pre><code class="language-sh">docker run -it --rm -v $(pwd):/data/ ghcr.io/interstellar-network/lib_garble:milestone2 --pgarbled_input_path=/data/pgarbled.pb.bin --packmsg_input_path=/data/packmsg.pb.bin --png_output_path=/data/output_eval.png
 </code></pre>
-<p>a output_eval.png file will be genrerated by the evaluator</p>
+<p>In this case an output_eval.png file will be genrerated by the evaluator</p>
 <pre><code class="language-sh">/tmp/evalcirc$ ls
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 </code></pre>
+<blockquote>
+<p>in this example /tmp/evalcirc is the folder mounted in the container</p>
+</blockquote>
 <h2 id="4-check-one-time-code-with-ttvp-pallet-1"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-1">4. Check one time code with <code>TTVP pallet</code></a></h2>
-<p><img src="./fig/txValOK.png" alt="check OK " /></p>
+<p>submit the one time code to the pallet to validate it</p>
+<p><img src="./fig/txValOK.png" alt="check OK" /></p>
+<p>we can also check a wrong code</p>
 <p><img src="./fig/txValKO.png" alt="check KO" /></p>
 
                     </main>
