@@ -272,8 +272,19 @@ if you want to check what the final version look like use the following link: [T
 ### 4.1 Select `txValidation` pallet and `checkInput` extrinsic
 
 
+
 ### 4.2 Submit the one time code to the pallet to validate it
 
+### 4.2.1 Paste the cid of the first garbled circuit generated in `ipfsCid` field 
+
+His value is `QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww` in our example. It match the garble circuit i.e. `pgarbled.pb.bin` file that embed the one time code
+
+
+### 4.2.2 Enter the code you read in the previous step in `inputDigits` field
+
+This is the two-digit code you read on the X11 pop-up or by displaying the `output_eval.png` image
+
+### 4.2.3 Sign
 
 ![check OK](./fig/txValOK.png)
 
