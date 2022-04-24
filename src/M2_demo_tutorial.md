@@ -195,29 +195,43 @@ In this example, the two respectives cids value are "QmcXBLtfPxWVPgfQm6tnzcBg7Kv
 > matching respectively the pgarbled.pb.bin & packmsg.pb.bin we will evaluated on the next step
 
 
-### 2.3 Copy the hashs of the two generated display garbled circuit (ready to be avaluated)
+### 2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)
 
 
 
 
 
+------------
 
-
-> coment: You can specify any type of transaction message
-not especially tied to a wallet transaction
-It can be used for any sensitive operation that need a highly secure confirmation
+> remark: you can specify any type of transaction message not especially tied to a wallet transaction. It can be used for any sensitive operation that need a highly secure confirmation
 
 ![garble result ex ](./fig/5ocwGarbleResult.png)
 
 
+------------
+
+## 3. Evaluation of the display garbled circuits with the evaluator program (provided in a docker)
+
+In this step we get the one time code to validate and check the transaction message
 
 
-## 3. Evaluation of the display garbled circuits with `GCevaluator` to get the One time code to validate and check the transaction message
 
+### 3.1 First create a folder on which we will store the circuits
 
-First create a folder on which we will store the circuits. This folder will be mounted on the docker container to evaluate the two garbled circuits.
+This folder will be mounted on the docker container to evaluate the two garbled circuits.
 
-with the previous copied cids we then create respectively the `pgarbled.pb.bin` and `packmsg.pb.bin` garbled circuits files in the folder previously created to evaluate them with the evaluator.
+example:
+```sh
+mkdir /tmp/evalcirc/
+```
+```sh
+cd /tmp/evalcirc/
+```
+> you can use any directory name, just pay attention that path is consistent with the following docker path parameters in step 3.2
+
+### 3.2 Create the garbled circuits in the above folder
+
+With the previously copied cids we then create respectively the `pgarbled.pb.bin` and `packmsg.pb.bin` garbled circuits files in the folder previously created to evaluate them with the evaluator.
 
 ```sh
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww > pgarbled.pb.bin
@@ -225,7 +239,7 @@ IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtH
 ```
 IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH cat QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx > packmsg.pb.bin
 ```
-
+### 3.2 Launch the evaluator in docker
 We can now launch the docker with the parameter below to perform the circuit evaluation.
 
 
@@ -238,10 +252,6 @@ docker run -it --rm -v $(pwd):/data/ -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY
 wait and an X11 windows will pop-up and display both the transaction message and the one time code
 
 ![garble result X11 ](./fig/EvaluationResultX11.png)
-
-
-
-We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: 81 in this example.
 
 else: 
 
@@ -258,7 +268,12 @@ In this case an output_eval.png file will be genrerated by the evaluator
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 ```
 
-> comment: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
+> We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: `81` in this example.
+
+--------
+
+
+> remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
 As the purpose of the demo is only to demomstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual crytography frames.
 
 if you want to check what the final version look like use the following link: [Transaction validation screen simulations](https://www.interstellar.gg/simulation)
