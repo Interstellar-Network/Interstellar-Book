@@ -117,9 +117,9 @@ In this demo, we want to demonstrate how:
 > in this demo we do not use yet, other circuit customization parameters like screen resolution, etc...
 
 
-### 3. Evaluation of the display garbled circuit with `GCevaluator`and get One time code
+### 3. Evaluation of the display garbled circuit with `Garbled Circuit evaluator` to display transaction message and one time code
 
-### 4. Check one time code with `TTVP pallet`
+### 4. Check one time code with `TTVP pallet` i.e txValidation
 
 
 
