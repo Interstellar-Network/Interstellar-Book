@@ -208,8 +208,8 @@ Daemon is ready
 <p>This step will use skcd cached file and input parameter to generate a randomized garbled circuit customized with transaction parameter
 in this demo we do not use yet, other circuit customization parameters like screen resolution, etc...</p>
 </blockquote>
-<h3 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code">3. Evaluation of the display garbled circuit with <code>GCevaluator</code>and get One time code</a></h3>
-<h3 id="4-check-one-time-code-with-ttvp-pallet"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet">4. Check one time code with <code>TTVP pallet</code></a></h3>
+<h3 id="3-evaluation-of-the-display-garbled-circuit-with-garbled-circuit-evaluator-to-display-transaction-message-and-one-time-code"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-garbled-circuit-evaluator-to-display-transaction-message-and-one-time-code">3. Evaluation of the display garbled circuit with <code>Garbled Circuit evaluator</code> to display transaction message and one time code</a></h3>
+<h3 id="4-check-one-time-code-with-ttvp-pallet-ie-txvalidation"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-ie-txvalidation">4. Check one time code with <code>TTVP pallet</code> i.e txValidation</a></h3>
 <h1 id="start-demo"><a class="header" href="#start-demo">Start Demo</a></h1>
 <blockquote>
 <p>IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned</p>
@@ -311,7 +311,7 @@ output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 As the purpose of the demo is only to demonstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual cryptography frames.</p>
 </blockquote>
 <p>if you want to check what the final version look like use the following link: <a href="https://www.interstellar.gg/simulation">Transaction validation screen simulations</a></p>
-<h2 id="4-check-one-time-code-with-ttvp-pallet-ie-txvalidation"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-ie-txvalidation">4. Check one time code with <code>TTVP pallet</code> i.e. <code>txValidation</code></a></h2>
+<h2 id="4-check-one-time-code-with-ttvp-pallet-ie-txvalidation-1"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-ie-txvalidation-1">4. Check one time code with <code>TTVP pallet</code> i.e. <code>txValidation</code></a></h2>
 <h3 id="41-select-txvalidation-pallet-and-checkinput-extrinsic"><a class="header" href="#41-select-txvalidation-pallet-and-checkinput-extrinsic">4.1 Select <code>txValidation</code> pallet and <code>checkInput</code> extrinsic</a></h3>
 <h3 id="42-submit-the-one-time-code-to-the-pallet-to-validate-it"><a class="header" href="#42-submit-the-one-time-code-to-the-pallet-to-validate-it">4.2 Submit the one time code to the pallet to validate it</a></h3>
 <h3 id="421-paste-the-cid-of-the-first-garbled-circuit-generated-in-ipfscid-field"><a class="header" href="#421-paste-the-cid-of-the-first-garbled-circuit-generated-in-ipfscid-field">4.2.1 Paste the cid of the first garbled circuit generated in <code>ipfsCid</code> field</a></h3>
