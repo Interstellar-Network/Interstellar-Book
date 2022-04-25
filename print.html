@@ -1302,6 +1302,10 @@ Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/38297
 Daemon is ready
 </code></pre>
 <h3 id="launch-dockers-1"><a class="header" href="#launch-dockers-1">Launch dockers:</a></h3>
+<blockquote>
+<p>--ipfs-server-multiaddr value depends on your own environment
+The example value should work with a standard docker installation.</p>
+</blockquote>
 <h4 id="launch-api_circuit-docker-1"><a class="header" href="#launch-api_circuit-docker-1">Launch api_circuit docker</a></h4>
 <pre><code class="language-sh">docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_circuits:milestone2 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
 </code></pre>
