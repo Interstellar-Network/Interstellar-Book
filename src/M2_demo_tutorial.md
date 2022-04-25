@@ -2,7 +2,7 @@
 
 
 
-## Check prerquiste
+## Check prerequiste
 
 [runtime prerequiste](./runtime_prerequisite.md)
 
@@ -94,7 +94,7 @@ In this demo, we want to demonstrate how:
 - the Transaction Validation Protocol TTVP pallet can confirm the transactions based on those circuit evaluations/executions
 
 `ocwCircuits`: can manage the generation of the logical display circuit in `skcd format` to configure the garbled circuit production.
-> the generation of this configuartion display circuit uses a Master File VHDL packages (pre-configured for that demo).
+> the generation of this configuration display circuit uses a Master File VHDL packages (pre-configured for that demo).
 
  `ocwGarble`: can generate for each transaction a randomized display garbled circuit (with random Keypad and one time code) with a customized message based on transaction parameters
 
@@ -114,7 +114,7 @@ In this demo, we want to demonstrate how:
 ### 2. Generate with `ocwGarble` pallet a randomized display garble circuit 
 
 > This step will use skcd cached file and input parameter to generate a randomized garbled circuit customized with transaction parameter
-> in this demo we do not use yet, other circuit customization parameters like screen resolution, etc..
+> in this demo we do not use yet, other circuit customization parameters like screen resolution, etc...
 
 
 ### 3. Evaluation of the display garbled circuit with `GCevaluator`and get One time code
@@ -125,7 +125,7 @@ In this demo, we want to demonstrate how:
 
 # Start Demo
 
-> IMPORTANT: when intracting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
+> IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
 
 > step 1,2 & 4 use pallet interactor in the Substrate Front End
 
@@ -181,25 +181,26 @@ This circuit can display a transaction message with one time code and a random k
 
 The random One Time Code used for transaction validation appear in Events in the `txValidationDEBUGNewDigitSet` field (underlined with a red line in this screenshot example)
 
-We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.
+We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it matches the event mentioned field below.
 
 ![garble result ex ](./fig/garble_log_OTC.png)
 
->In this example the one time code value is 81 i.e.  0x0801 in Events and [8, 1] in api_garble logs.
+In this example the one time code value is 81 i.e. 0x0801 in Events and [8, 1] in api_garble logs.
 
+> remark: it is important to mention that the number of digits used for transaction validation is not limited and can be easily configured (in upcoming TTVP APIs).
 
 The two generated garbled circuit cids to evaluate  appears in Events `NewGarbledIpfsCid`  (also underlined with red line)
 
 In this example, the two respectives cids value are "QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww","QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx"
 
-> matching respectively the pgarbled.pb.bin & packmsg.pb.bin we will evaluated on the next step
+> matching respectively the pgarbled.pb.bin & packmsg.pb.bin we will be evaluated on the next step
 
 
 ### 2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)
 
->remark: actually the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.
+>remark: actually, the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.
 
->there is also another circuit that will display the random pinpad that we do not evaluate to make this demo more simple at this stage
+>there is also another circuit that will display the random pinpad that we do not evaluate to make this demo simpler at this stage
 
 
 
@@ -270,13 +271,13 @@ In this case an output_eval.png file will be genrerated by the evaluator
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 ```
 
-> We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: `81` in this example.
+> We can check that it matches both the inputted message  and the random one time code (securely embedded in the circuit) to be validated: `81` in this example.
 
 --------
 
 
-> remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
-As the purpose of the demo is only to demomstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual crytography frames.
+> remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile (and delivered with the next M3 milestone).
+As the purpose of the demo is only to demonstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual cryptography frames.
 
 if you want to check what the final version look like use the following link: [Transaction validation screen simulations](https://www.interstellar.gg/simulation)
 
@@ -294,7 +295,7 @@ if you want to check what the final version look like use the following link: [T
 
 ### 4.2.1 Paste the cid of the first garbled circuit generated in `ipfsCid` field 
 
-His value is `QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww` in our example. It match the garble circuit i.e. `pgarbled.pb.bin` file that embed the one time code
+His value is `QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww` in our example. It matches the garble circuit i.e. `pgarbled.pb.bin` file that embed the one time code
 
 
 ### 4.2.2 Enter the code you read in the previous step in `inputDigits` field
