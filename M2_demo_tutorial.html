@@ -135,7 +135,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="m2-docker-demo-tutorial"><a class="header" href="#m2-docker-demo-tutorial">M2 Docker Demo Tutorial</a></h1>
-<h2 id="check-prerquiste"><a class="header" href="#check-prerquiste">Check prerquiste</a></h2>
+<h2 id="check-prerequiste"><a class="header" href="#check-prerequiste">Check prerequiste</a></h2>
 <p><a href="./runtime_prerequisite.html">runtime prerequiste</a></p>
 <h2 id="set-up-demo"><a class="header" href="#set-up-demo">Set-up Demo</a></h2>
 <h3 id="launch-ipfs-deamon"><a class="header" href="#launch-ipfs-deamon">Launch ipfs deamon</a></h3>
@@ -193,7 +193,7 @@ Daemon is ready
 </ul>
 <p><code>ocwCircuits</code>: can manage the generation of the logical display circuit in <code>skcd format</code> to configure the garbled circuit production.</p>
 <blockquote>
-<p>the generation of this configuartion display circuit uses a Master File VHDL packages (pre-configured for that demo).</p>
+<p>the generation of this configuration display circuit uses a Master File VHDL packages (pre-configured for that demo).</p>
 </blockquote>
 <p><code>ocwGarble</code>: can generate for each transaction a randomized display garbled circuit (with random Keypad and one time code) with a customized message based on transaction parameters</p>
 <p><code>GCevaluator</code>: evaluates the garbled circuit/display message and get the one time code to verify</p>
@@ -206,13 +206,13 @@ Daemon is ready
 <h3 id="2-generate-with-ocwgarble-pallet-a-randomized-display-garble-circuit"><a class="header" href="#2-generate-with-ocwgarble-pallet-a-randomized-display-garble-circuit">2. Generate with <code>ocwGarble</code> pallet a randomized display garble circuit</a></h3>
 <blockquote>
 <p>This step will use skcd cached file and input parameter to generate a randomized garbled circuit customized with transaction parameter
-in this demo we do not use yet, other circuit customization parameters like screen resolution, etc..</p>
+in this demo we do not use yet, other circuit customization parameters like screen resolution, etc...</p>
 </blockquote>
 <h3 id="3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code"><a class="header" href="#3-evaluation-of-the-display-garbled-circuit-with-gcevaluatorand-get-one-time-code">3. Evaluation of the display garbled circuit with <code>GCevaluator</code>and get One time code</a></h3>
 <h3 id="4-check-one-time-code-with-ttvp-pallet"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet">4. Check one time code with <code>TTVP pallet</code></a></h3>
 <h1 id="start-demo"><a class="header" href="#start-demo">Start Demo</a></h1>
 <blockquote>
-<p>IMPORTANT: when intracting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned</p>
+<p>IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned</p>
 </blockquote>
 <blockquote>
 <p>step 1,2 &amp; 4 use pallet interactor in the Substrate Front End</p>
@@ -243,22 +243,23 @@ in this demo we do not use yet, other circuit customization parameters like scre
 <h4 id="224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events"><a class="header" href="#224-one-time-code-and-the-two-garbled-circuit-cids-appear-in-events">2.2.4 One Time Code and the two garbled circuit cids appear in Events</a></h4>
 <p><img src="./fig/4ocwGarbleResult.png" alt="garble result " /></p>
 <p>The random One Time Code used for transaction validation appear in Events in the <code>txValidationDEBUGNewDigitSet</code> field (underlined with a red line in this screenshot example)</p>
-<p>We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it match the event mentioned field below.</p>
+<p>We can also check the random One Time Code securely embedded in the generated circuit in the api_garble logs and see that it matches the event mentioned field below.</p>
 <p><img src="./fig/garble_log_OTC.png" alt="garble result ex " /></p>
+<p>In this example the one time code value is 81 i.e. 0x0801 in Events and [8, 1] in api_garble logs.</p>
 <blockquote>
-<p>In this example the one time code value is 81 i.e.  0x0801 in Events and [8, 1] in api_garble logs.</p>
+<p>remark: it is important to mention that the number of digits used for transaction validation is not limited and can be easily configured (in upcoming TTVP APIs).</p>
 </blockquote>
 <p>The two generated garbled circuit cids to evaluate  appears in Events <code>NewGarbledIpfsCid</code>  (also underlined with red line)</p>
 <p>In this example, the two respectives cids value are &quot;QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww&quot;,&quot;QmYKMiVWKKG5aYnHKp8shSVGLKCejv2jYCePZ6skkdaVhx&quot;</p>
 <blockquote>
-<p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin we will evaluated on the next step</p>
+<p>matching respectively the pgarbled.pb.bin &amp; packmsg.pb.bin we will be evaluated on the next step</p>
 </blockquote>
 <h3 id="23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated"><a class="header" href="#23-copy-the-hashs-of-the-two-generated-display-garbled-circuits-ready-to-be-avaluated">2.3 Copy the hashs of the two generated display garbled circuits (ready to be avaluated)</a></h3>
 <blockquote>
-<p>remark: actually the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.</p>
+<p>remark: actually, the display circuit is composed of two subcircuits on for the display of transaction message and another which securely embed the one time code.</p>
 </blockquote>
 <blockquote>
-<p>there is also another circuit that will display the random pinpad that we do not evaluate to make this demo more simple at this stage</p>
+<p>there is also another circuit that will display the random pinpad that we do not evaluate to make this demo simpler at this stage</p>
 </blockquote>
 <hr />
 <blockquote>
@@ -302,19 +303,19 @@ in this demo we do not use yet, other circuit customization parameters like scre
 output_eval.png  packmsg.pb.bin  pgarbled.pb.bin
 </code></pre>
 <blockquote>
-<p>We can check that it match both the inputed message  and the random one time code (securely embedded in the circuit) to be validated: <code>81</code> in this example.</p>
+<p>We can check that it matches both the inputted message  and the random one time code (securely embedded in the circuit) to be validated: <code>81</code> in this example.</p>
 </blockquote>
 <hr />
 <blockquote>
-<p>remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile ( and delivered with the next M3 milestone).
-As the purpose of the demo is only to demomstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual crytography frames.</p>
+<p>remark: this specific garbled circuit evaluator does not reflect the look and feel of the final version that will be use on mobile (and delivered with the next M3 milestone).
+As the purpose of the demo is only to demonstrate a part of the Transaction validation protocol, this circuit resolution is minimal and does not manage the generation of the random visual cryptography frames.</p>
 </blockquote>
 <p>if you want to check what the final version look like use the following link: <a href="https://www.interstellar.gg/simulation">Transaction validation screen simulations</a></p>
 <h2 id="4-check-one-time-code-with-ttvp-pallet-ie-txvalidation"><a class="header" href="#4-check-one-time-code-with-ttvp-pallet-ie-txvalidation">4. Check one time code with <code>TTVP pallet</code> i.e. <code>txValidation</code></a></h2>
 <h3 id="41-select-txvalidation-pallet-and-checkinput-extrinsic"><a class="header" href="#41-select-txvalidation-pallet-and-checkinput-extrinsic">4.1 Select <code>txValidation</code> pallet and <code>checkInput</code> extrinsic</a></h3>
 <h3 id="42-submit-the-one-time-code-to-the-pallet-to-validate-it"><a class="header" href="#42-submit-the-one-time-code-to-the-pallet-to-validate-it">4.2 Submit the one time code to the pallet to validate it</a></h3>
 <h3 id="421-paste-the-cid-of-the-first-garbled-circuit-generated-in-ipfscid-field"><a class="header" href="#421-paste-the-cid-of-the-first-garbled-circuit-generated-in-ipfscid-field">4.2.1 Paste the cid of the first garbled circuit generated in <code>ipfsCid</code> field</a></h3>
-<p>His value is <code>QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww</code> in our example. It match the garble circuit i.e. <code>pgarbled.pb.bin</code> file that embed the one time code</p>
+<p>His value is <code>QmcXBLtfPxWVPgfQm6tnzcBg7KvzN7b9nNpVB4JPtHQEww</code> in our example. It matches the garble circuit i.e. <code>pgarbled.pb.bin</code> file that embed the one time code</p>
 <h3 id="422-enter-the-code-you-read-in-the-previous-step-in-inputdigits-field"><a class="header" href="#422-enter-the-code-you-read-in-the-previous-step-in-inputdigits-field">4.2.2 Enter the code you read in the previous step in <code>inputDigits</code> field</a></h3>
 <p>This is the two-digit code you read on the X11 pop-up or by displaying the <code>output_eval.png</code> image</p>
 <h3 id="423-sign"><a class="header" href="#423-sign">4.2.3 Sign</a></h3>
