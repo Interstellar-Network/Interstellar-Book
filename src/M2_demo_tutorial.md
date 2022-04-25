@@ -42,6 +42,9 @@ Daemon is ready
 
 ### Launch dockers:
 
+>--ipfs-server-multiaddr value depends on your own environment
+The example value should work with a standard docker installation.
+
 #### Launch api_circuit docker
 
 ```sh
