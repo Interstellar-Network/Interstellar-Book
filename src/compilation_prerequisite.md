@@ -1,10 +1,6 @@
 # Prerequisite installation for compilation
 
 
-## Install Go
-
-[Go installation](https://go.dev/dl/)
-
 ## Install IPFS
 
 [IPFS Installation](https://docs.ipfs.io/install/)

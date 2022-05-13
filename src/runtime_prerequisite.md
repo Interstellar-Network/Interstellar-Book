@@ -2,21 +2,6 @@
 # Prerequisite Installation for runtime
 
 
-## Install Go:
-
-- Install Go with download of the [lastest version](https://go.dev/doc/install)
-- Installing Go on Ubuntu 20.04 with version `go1.17.8.linux-amd64` #
-you can replace the tar file with its last version in the following command.
-
-```sh
-wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-```
-
-check version
-
-```,sh
-go version
-```
 
 ## Install IPFS
 - [IPFS Desktop Install](https://github.com/ipfs/ipfs-desktop#install)

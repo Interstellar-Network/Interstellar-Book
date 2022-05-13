@@ -33,14 +33,10 @@ Garble APIs
 git clone --recursive https://github.com/Interstellar-Network/api_garble.git
 ```
 
-### Launch ipfs deamon
-Set env var path and launch the ipfs deamon
-```sh
-GO_IPFS_PATH=/usr/local/bin/ipfs
+### export IPFS path
 
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001 (to work with docker)
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+```sh
+export GO_IPFS_PATH=/usr/local/bin/ipfs
 ```
 
 ### Launch the respectives  tests
