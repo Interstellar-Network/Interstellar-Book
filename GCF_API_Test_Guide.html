@@ -161,13 +161,8 @@ cf <a href="./GCF_pipeline_detailed.html">Detailed Pipeline for Display Circuits
 <p>Garble APIs</p>
 <pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_garble.git
 </code></pre>
-<h3 id="launch-ipfs-deamon"><a class="header" href="#launch-ipfs-deamon">Launch ipfs deamon</a></h3>
-<p>Set env var path and launch the ipfs deamon</p>
-<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
-
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001 (to work with docker)
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+<h3 id="export-ipfs-path"><a class="header" href="#export-ipfs-path">export IPFS path</a></h3>
+<pre><code class="language-sh">export GO_IPFS_PATH=/usr/local/bin/ipfs
 </code></pre>
 <h3 id="launch-the-respectives--tests"><a class="header" href="#launch-the-respectives--tests">Launch the respectives  tests</a></h3>
 <p><code>cargo test</code> in  <code>api_circuits</code> and <code>api_garble</code> repositories will run their respective tests</p>

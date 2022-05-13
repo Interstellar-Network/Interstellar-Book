@@ -918,17 +918,6 @@ We use extrinsic unsigned transactions with signed extensions to enable the veri
 <p><a href="./compilation_preequisite">Compilation prerequiste</a> when you need to build the executables from sources with dpendencies on lib_circuit &amp; lib_garbled libraries 
 ex: to run Cargo test for GCF APIs</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="prerequisite-installation-for-runtime"><a class="header" href="#prerequisite-installation-for-runtime">Prerequisite Installation for runtime</a></h1>
-<h2 id="install-go"><a class="header" href="#install-go">Install Go:</a></h2>
-<ul>
-<li>Install Go with download of the <a href="https://go.dev/doc/install">lastest version</a></li>
-<li>Installing Go on Ubuntu 20.04 with version <code>go1.17.8.linux-amd64</code> #
-you can replace the tar file with its last version in the following command.</li>
-</ul>
-<pre><code class="language-sh">wget -c https://dl.google.com/go/go1.17.8.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-</code></pre>
-<p>check version</p>
-<pre><code class="language- sh">go version
-</code></pre>
 <h2 id="install-ipfs"><a class="header" href="#install-ipfs">Install IPFS</a></h2>
 <ul>
 <li><a href="https://github.com/ipfs/ipfs-desktop#install">IPFS Desktop Install</a>
@@ -1003,8 +992,6 @@ Daemon is ready
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="prerequisite-installation-for-compilation"><a class="header" href="#prerequisite-installation-for-compilation">Prerequisite installation for compilation</a></h1>
-<h2 id="install-go-1"><a class="header" href="#install-go-1">Install Go</a></h2>
-<p><a href="https://go.dev/dl/">Go installation</a></p>
 <h2 id="install-ipfs-1"><a class="header" href="#install-ipfs-1">Install IPFS</a></h2>
 <p><a href="https://docs.ipfs.io/install/">IPFS Installation</a></p>
 <h2 id="update-cmake--if--322"><a class="header" href="#update-cmake--if--322">Update cmake  if &lt; 3.22</a></h2>
@@ -1266,14 +1253,14 @@ endmodule :half_add
 <li><a href="./GCF_pipeline_detailed.html">GCF detailed pipeline for the production of display circuits</a></li>
 <li><a href="./GCF_API.html">GCF APIs for GCF OCWs</a></li>
 </ul>
+<h2 id="docker-demo-tutorial-1"><a class="header" href="#docker-demo-tutorial-1">Docker demo tutorial</a></h2>
+<p><a href="./M2_demo_tutorial.html">Demo tutorial</a></p>
 <h2 id="testing-guide-1"><a class="header" href="#testing-guide-1">Testing Guide</a></h2>
 <blockquote>
 <p>Following is a testing guide and tutorial to launch tests related to M2 milestone Mostly integration test. It also includes the prerequiste i.e additional software and libraries that need to be installed in order to run the unit tests without the M2 dockers.</p>
 </blockquote>
 <p>(not required if already tested with M1 delivery)</p>
 <p><a href="https://book.interstellar.gg/GCF_API_Test_Guide.html">GCF APIs Testing Guide</a></p>
-<h2 id="docker-demo-tutorial-1"><a class="header" href="#docker-demo-tutorial-1">Docker demo tutorial</a></h2>
-<p><a href="./M2_demo_tutorial.html">Demo tutorial</a></p>
 <h2 id="article-1"><a class="header" href="#article-1">Article</a></h2>
 <p><a href="https://medium.com/@jlleleu/web3-foundation-and-interstellar-protocol-b4003a64e927">Draft Link to medium article: Web 3 Foundation and Interstellar Protocol</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-docker-demo-tutorial"><a class="header" href="#m2-docker-demo-tutorial">M2 Docker Demo Tutorial</a></h1>
@@ -1495,13 +1482,8 @@ cf <a href="./GCF_pipeline_detailed.html">Detailed Pipeline for Display Circuits
 <p>Garble APIs</p>
 <pre><code class="language-sh">git clone --recursive https://github.com/Interstellar-Network/api_garble.git
 </code></pre>
-<h3 id="launch-ipfs-deamon-2"><a class="header" href="#launch-ipfs-deamon-2">Launch ipfs deamon</a></h3>
-<p>Set env var path and launch the ipfs deamon</p>
-<pre><code class="language-sh">GO_IPFS_PATH=/usr/local/bin/ipfs
-
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001 (to work with docker)
-IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
+<h3 id="export-ipfs-path"><a class="header" href="#export-ipfs-path">export IPFS path</a></h3>
+<pre><code class="language-sh">export GO_IPFS_PATH=/usr/local/bin/ipfs
 </code></pre>
 <h3 id="launch-the-respectives--tests"><a class="header" href="#launch-the-respectives--tests">Launch the respectives  tests</a></h3>
 <p><code>cargo test</code> in  <code>api_circuits</code> and <code>api_garble</code> repositories will run their respective tests</p>
