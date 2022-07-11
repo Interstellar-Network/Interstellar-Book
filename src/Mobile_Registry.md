@@ -13,7 +13,7 @@ This pallet will also register all information related to TEE, security and iden
 
 
 
-![access keymaster](./fig/access_to_keymaster.png)
+![access keymaster](./fig/access-to-keymaster.png)
 
 
 
