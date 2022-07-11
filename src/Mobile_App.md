@@ -15,5 +15,5 @@ It also include an IPFS client to retrieve the cid of the [Visual Cryptography D
 
 The previous circuit is used to compose the[Trusted Authenticated User Interface](./TAUI.md) i.e `Secure UI Screen` that evaluates the circuit and render it to enable the user to confirm a transaction with a `one-time code`
 
-In order to do that this secure UI layer relies on a circuit evaluator and a renderer to display the result of its evaluation on the framebuffer.
+In order to do that this secure UI layer relies on a circuit evaluator and a renderer to display the result of its evaluation directly to the framebuffer.
 
