@@ -12,6 +12,11 @@ This pallet will also register all information related to TEE, security and iden
 [Hardware-backed Keystore](https://source.android.com/security/keystore)
 
 
+
+![access keymaster](./fig/access_to_keymaster.png)
+
+
+
 ## Attestation management
 
 [Key and ID Attestation | Android Open Source Project](https://source.android.com/security/keystore/attestation)
