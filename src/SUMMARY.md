@@ -19,7 +19,7 @@
 
 
 
--[Mobile Wallet App](./Mobile_App.md)
+- [Mobile Wallet App](./Mobile_App.md)
     - [TTVP Client](./TTVP_client.md)
     - [Hardware-backed Mobile Key](./HBMK.md)
 
