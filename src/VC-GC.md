@@ -1,5 +1,6 @@
 
-# Garbled Circuit & Visual Cryptography Screen
+# Visual Cryptography Display
+Garbled Circuit & Visual Cryptography Screen
 
 ## Garbled Circuits output frames
 
