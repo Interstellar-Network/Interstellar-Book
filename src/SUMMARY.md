@@ -17,7 +17,9 @@
 
 - [Mobile Registry](./Mobile_Registry.md)
 
-
+-[Mobile Wallet App](./Mobile_app.md)
+    - [TTVP Client](./TTVP_client.md)
+    - [Hardware-backed Mobile Key](./HBMK.md)
 
 - [Testing](./Testing.md)
 
