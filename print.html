@@ -919,9 +919,12 @@ We use extrinsic unsigned transactions with signed extensions to enable the veri
 <p>This hardware-backed mobile private key on the device is used with unsigned transaction extrinsic with signed option to enable the verification of the message signatures with mobile public keys registered in this module. (cf <a href="./TTVP.html">Trusted Transaction Validation Protocol</a>)</p>
 <p>This pallet also register and manage all information related to the mobile TEE, security and identification of mobile devices when available. It includes the following  <a href="./HBMK.html">key and ID Attestation</a> and other hardware protected  features like  <a href=".https://source.android.com/security/protected-confirmation">protected confirmation</a>, mobile app signing, etc...</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mobile-wallet-demo-app"><a class="header" href="#mobile-wallet-demo-app">Mobile Wallet Demo App</a></h1>
-<p>The mobile wallet demo app include mainly a <a href="./TTVP_client.html">Transaction Validation protocol client</a> that is securely linked with the blockchain through <a href="./Mobile_Registry.html">mobile registry</a></p>
-<p>It also include an IPFS client to retrieve the <a href="./VC-GC.html">Visual Cryptography Display</a> i.e the one-time <a href=",/GC.html">Garbled Circuits</a> program generated for each transaction  by the <a href="./GCF.html">Garbled Circuit Factory</a>.</p>
-<p>It is used to manage the <a href="./TAUI.html">Trusted Authentication User Interface</a> that evaluates the previous circuit to confirm a transaction.</p>
+<p>The mobile wallet demo app include mainly a <a href="./TTVP_client.html">Trusted Transaction Validation Protocol client</a> that is securely linked with the blockchain through <a href="./Mobile_Registry.html">mobile registry</a></p>
+<p><img src="./fig/App_architecture.svg" alt="App architecture" /></p>
+<p>This client is based on a substrate client on the mobile to connect to the blockchain substrate regsitry module/pallet through unsigned extrinsic with signed option and substarte events.</p>
+<p>It also include an IPFS client to retrieve the cid of the <a href="./VC-GC.html">Visual Cryptography Display</a> i.e the one-time <a href=",/GC.html">Garbled Circuit</a> program generated for each transaction  by the <a href="./GCF.html">Garbled Circuit Factory</a>.</p>
+<p>The previous circuit is used by the<a href="./TAUI.html">Trusted Authentication User Interface</a> that evaluates the previous circuit and render it to enable the user to confirm a transaction.</p>
+<p>In order to do that this secure UI layer relies on a circuit evaluator and a renderer to display the result of its evaluation on the framebuffer.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol-client"><a class="header" href="#trusted-transaction-validation-protocol-client">Trusted Transaction Validation Protocol client</a></h1>
 <p>This is the client software embedded in an app or browser that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
 (cf <a href="./TTVP.html">Tusted Transaction Validation Protocol</a>)</p>
@@ -1478,7 +1481,7 @@ As the purpose of the demo is only to demonstrate a part of the Transaction vali
 <h3 id="43-we-can-also-check-the-pallet-with-a-wrong-code"><a class="header" href="#43-we-can-also-check-the-pallet-with-a-wrong-code">4.3 We can also check the pallet with a wrong code</a></h3>
 <p><img src="./fig/txValKO.png" alt="check KO" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m3-delivery"><a class="header" href="#m3-delivery">M3 Delivery</a></h1>
-<p>Unless you are already familliar with Interstellar technology please have a look at Garbled Circuit Factory and Trusted Transaction Validation protocol overviews</p>
+<p>Unless you are already familliar with Interstellar technology please have a look at Garbled Circuit Factory </p>
 <h2 id="garbled-circuit-factory-gcf-overview-1"><a class="header" href="#garbled-circuit-factory-gcf-overview-1">Garbled Circuit Factory (GCF) overview</a></h2>
 <ul>
 <li><a href="./GCF.html">GCF generic pipeline for Garbled Circuit (GC) production</a>
@@ -1488,7 +1491,7 @@ As the purpose of the demo is only to demonstrate a part of the Transaction vali
 </ul>
 </li>
 </ul>
-<h2 id="trusted-transaction-validation-protocol-ttvp-overview-1"><a class="header" href="#trusted-transaction-validation-protocol-ttvp-overview-1">Trusted Transaction Validation Protocol (TTVP) overview</a></h2>
+<h2 id="updated-trusted-transaction-validation-protocol-ttvp-overview"><a class="header" href="#updated-trusted-transaction-validation-protocol-ttvp-overview">Updated Trusted Transaction Validation Protocol (TTVP) overview</a></h2>
 <ul>
 <li><a href="./TTVP.html">Trusted Transaction Validation Protocol</a>
 <ul>
@@ -1497,7 +1500,19 @@ As the purpose of the demo is only to demonstrate a part of the Transaction vali
 </ul>
 </li>
 </ul>
-<h2 id="mobile-registry"><a class="header" href="#mobile-registry">Mobile Registry</a></h2>
+<h2 id="mobile-tee-registry-1"><a class="header" href="#mobile-tee-registry-1">Mobile TEE Registry</a></h2>
+<ul>
+<li><a href="./Mobile_Registry.html">Mobile Registry</a></li>
+</ul>
+<h2 id="mobile-wallet-app-demo"><a class="header" href="#mobile-wallet-app-demo">Mobile Wallet App Demo</a></h2>
+<ul>
+<li><a href="./Mobile_App.html">Mobile Wallet App</a>
+<ul>
+<li><a href="./TTVP_client.html">TTVP Client</a></li>
+<li><a href="./HBMK.html">Hardware-backed Mobile Key</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="code-documentation-2"><a class="header" href="#code-documentation-2">Code documentation</a></h2>
 <h2 id="docker-demo-tutorial-2"><a class="header" href="#docker-demo-tutorial-2">Docker demo tutorial</a></h2>
 <p><a href="./M3_demo_tutorial.html">Demo tutorial</a></p>
