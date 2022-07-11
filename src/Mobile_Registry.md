@@ -7,5 +7,5 @@ When a TTVP Client/Wallet is created, a Public/Private key pair is generated in 
 
 This hardware-backed mobile private key on the device is used with unsigned transaction extrinsic with signed option to enable the verification of the message signatures with mobile public keys registered in this module. (cf [Trusted Transaction Validation Protocol](./TTVP.md))
 
-This pallet will also register and manage all information related to the mobile TEE, security and identification of mobile devices when available. It includes the following  [key and ID Attestation](./HBMK.md) and other hardware protected  features like  Protected confirmation mobile app signing, etc...
+This pallet will also register and manage all information related to the mobile TEE, security and identification of mobile devices when available. It includes the following  [key and ID Attestation](./HBMK.md) and other hardware protected  features like  [protected confirmation](.https://source.android.com/security/protected-confirmation), mobile app signing, etc...
 
