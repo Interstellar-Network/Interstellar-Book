@@ -13,7 +13,7 @@ The following schema shows the main components of Interstellar blockchain includ
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
 ### Secure UI Layer - Transaction Screen Management
-The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision.
+The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision. (cf [Visual Cryptography Display](./VC-GC.md) and [Trusted Authentication and UserInterface](./TAUI.md))
 
 
 ### Mobile Trusted Authentication - Mobile Key Management
@@ -29,7 +29,7 @@ In order to prevent potential attacks on hardware enclaves down the road, we wil
 
  
 ### Mobile TEE registry pallet
-This is the module for the management of private keys on the devices that will be used for unsigned transaction extrinsic with signed option i.e. verification of message signatures with mobile public keys. This pallet will also register all information related to TEE, security and identification of mobile devices when available. It includes the following  key and ID Attestation and other hardware protected  features like  [Protected confirmation](https://source.android.com/security/protected-confirmation) mobile app signing, etc...
+The [module](./Mobile_Registry.md) in charge of mobile device public key regsitration and management 
 
 #### Attestation management (roadmap)
 
