@@ -15,6 +15,10 @@
     - [TTVP detailed](./TTVP_detailed.md)
 
 
+- [Mobile Registry](./Mobile_Registry.md)
+
+
+
 - [Testing](./Testing.md)
 
     - [Runtime prerequisite](./runtime_prerequisite.md)
