@@ -135,10 +135,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="mobile-tee-registry"><a class="header" href="#mobile-tee-registry">Mobile TEE Registry</a></h1>
-<p>This is the module for the  Mobile Key Management</p>
-<p>A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).</p>
-<p>The management of private keys on the devices will be used for unsigned transaction extrinsic with signed option i.e. verification of message signatures with mobile public keys. (cf <a href="./TTVP.html">Trusted Transaction Validation Protocol</a>)</p>
-<p>This pallet will also register all information related to TEE, security and identification of mobile devices when available. It includes the following  <a href="./HBMK.html">key and ID Attestation</a> and other hardware protected  features like  Protected confirmation mobile app signing, etc...</p>
+<p>This is the module in charge of the mobile device public key registration and management in the blockchain substrate framework.</p>
+<p>When a TTVP Client/Wallet is created, a Public/Private key pair is generated in the mobile Hardware Enclave. The public key is send to this registry and the private key remain on the devices, not accessible by anyone, even when it is rooted. The signature of all messages to the blockchain is triggered with the user's biometrics (also managed with TEE).</p>
+<p>This hardware-backed mobile private key on the device is used with unsigned transaction extrinsic with signed option to enable the verification of the message signatures with mobile public keys registered in this module. (cf <a href="./TTVP.html">Trusted Transaction Validation Protocol</a>)</p>
+<p>This pallet will also register and manage all information related to the mobile TEE, security and identification of mobile devices when available. It includes the following  <a href="./HBMK.html">key and ID Attestation</a> and other hardware protected  features like  Protected confirmation mobile app signing, etc...</p>
 
                     </main>
 
