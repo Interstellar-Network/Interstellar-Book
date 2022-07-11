@@ -15,7 +15,7 @@
     - [TTVP detailed](./TTVP_detailed.md)
 
 
-- [Mobile Registry](./Mobile_Registry.md)
+- [Mobile Registry](./Mobile_registry.md)
 
 
 
