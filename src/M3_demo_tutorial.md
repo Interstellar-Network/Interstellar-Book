@@ -1,7 +1,14 @@
 # M3 Demo Tutorial
 
 
+
+## Check prerequiste
+
+[runtime prerequiste](./runtime_prerequisite.md)
+
+
 ## Set-up Demo
+
 ### Launch ipfs deamon
 
 ```sh
