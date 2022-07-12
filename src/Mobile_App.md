@@ -9,7 +9,7 @@ following are wallet screenshot of the main screens.
 
 ## Portfolio
 
-<img src="./fig/Wallet_Menu_Black_Border.png" alt="wallet menu" width="200"/>
+<img src="./fig/Wallet_Menu_Black_Border.png" alt="wallet menu" width="300"/>
 
 
-<img src="./fig/Wallet_Menu_White_Border.png" alt="wallet menu"  height="300"/>
+<img src="./fig/Wallet_Menu_White_Border.png" alt="wallet menu"  width="300"/>
