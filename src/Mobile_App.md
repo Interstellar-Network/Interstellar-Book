@@ -7,8 +7,30 @@ The mobile wallet demo app include mainly a [Trusted Transaction Validation Prot
 It also include a wallet UI to perform transactions.
 following are wallet screenshot of the main screens.
 
-## Portfolio
+## Portfolio Screens
 
 <img src="./fig/Wallet_Menu_Black_Border.png" alt="wallet menu" width="300"/>
 ..
 <img src="./fig/Wallet_Menu_White_Border.png" alt="wallet menu"  width="300"/>
+
+
+## Profile Screens
+
+<img src="./fig/Wallet_Profile_Black_Border.png" alt="wallet menu" width="300"/>
+..
+<img src="./fig/Wallet_Profile_White_Border.png" alt="wallet menu"  width="300"/>
+
+## Send Screens
+
+<img src="./fig/Wallet_Send_Tap_Black_Border.png" alt="wallet menu" width="300"/>
+..
+<img src="./fig/Wallet_Send_Tap_White_Border.png" alt="wallet menu"  width="300"/>
+
+<img src="./fig/Wallet_Send_Tap_Contact_Black_Border.png" alt="wallet menu" width="300"/>
+..
+<img src="./fig/Wallet_Send_Tap_Contact_White_Border.png" alt="wallet menu"  width="300"/>
+
+<img src="./fig/Wallet_Send_Black_Border.png" alt="wallet menu" width="300"/>
+..
+<img src="./fig/Wallet_Send_White_Border.png" alt="wallet menu"  width="300"/>
+
