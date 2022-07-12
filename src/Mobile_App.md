@@ -4,8 +4,8 @@
 The mobile wallet demo app include mainly a [Trusted Transaction Validation Protocol client](./TTVP_client.md) that is securely linked with the blockchain through [mobile registry](./Mobile_Registry.md)
 
 
-It also include a wallet UI to perform transactions.
-following are wallet screenshot of the main screens.
+It also includes a wallet UI to perform transactions,
+following are wallet screenshots of the main screens.
 
 ## Portfolio Screens
 
