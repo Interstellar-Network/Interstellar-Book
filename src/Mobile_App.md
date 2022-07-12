@@ -22,14 +22,18 @@ following are wallet screenshot of the main screens.
 
 ## Send Screens
 
+### Tap Currency
 <img src="./fig/Wallet_Send_Tap_Black_Border.png" alt="wallet menu" width="300"/>
 ..
 <img src="./fig/Wallet_Send_Tap_White_Border.png" alt="wallet menu"  width="300"/>
+
+### Tap Contact
 
 <img src="./fig/Wallet_Send_Tap_Contact_Black_Border.png" alt="wallet menu" width="300"/>
 ..
 <img src="./fig/Wallet_Send_Tap_Contact_White_Border.png" alt="wallet menu"  width="300"/>
 
+### Send
 <img src="./fig/Wallet_Send_Black_Border.png" alt="wallet menu" width="300"/>
 ..
 <img src="./fig/Wallet_Send_White_Border.png" alt="wallet menu"  width="300"/>
