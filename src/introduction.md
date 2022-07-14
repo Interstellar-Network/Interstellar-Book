@@ -24,7 +24,7 @@ Interstellar is a novel non-custodial peace of mind mobile wallet with a hardwar
 
 **We can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain**
 
-![Hardware Mobile Blockchain Overview](./fig/Hardware-Mobile-Blockchain-Overview.png)
+![Hardware Mobile Blockchain Overview](./fig/Hardware_Mobile_Blockchain_Overview.png)
 
 **Thanks to Trusted User Interface TUI on mobile and Trusted Execution Environment on both mobile and blockchain nodes**
 
