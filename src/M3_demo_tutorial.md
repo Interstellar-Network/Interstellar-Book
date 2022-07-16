@@ -92,4 +92,6 @@ to connect to a locally running node
 ## Demo purpose and used components
 
 
+## Send a Currency
 
+<img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>

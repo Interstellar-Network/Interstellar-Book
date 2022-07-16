@@ -38,3 +38,7 @@ following are wallet screenshots of the main screens.
 ..
 <img src="./fig/Wallet_Send_White_Border.png" alt="wallet menu"  width="300"/>
 
+## Send a Currency
+
+<img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
+
