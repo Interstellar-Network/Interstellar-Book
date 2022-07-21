@@ -1548,59 +1548,34 @@ As the purpose of the demo is only to demonstrate a part of the Transaction vali
 <h2 id="docker-demo-tutorial-2"><a class="header" href="#docker-demo-tutorial-2">Docker demo tutorial</a></h2>
 <p><a href="./M3_demo_tutorial.html">Demo tutorial</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m3-demo-tutorial"><a class="header" href="#m3-demo-tutorial">M3 Demo Tutorial</a></h1>
-<h2 id="check-prerequiste-1"><a class="header" href="#check-prerequiste-1">Check prerequiste</a></h2>
-<p><a href="./runtime_prerequisite.html">runtime prerequiste</a></p>
+<h2 id="prerequiste-docker-or-podman"><a class="header" href="#prerequiste-docker-or-podman">prerequiste docker or podman</a></h2>
+<p>install</p>
+<ul>
+<li>docker: https://docs.docker.com/engine/install/</li>
+</ul>
+<p>or </p>
+<ul>
+<li>podman: 
+https://podman.io/getting-started/installation.html</li>
+</ul>
+<p>then compose</p>
+<ul>
+<li>docker-compose: https://docs.docker.com/compose/install/</li>
+</ul>
+<p>or</p>
+<ul>
+<li>podman-compose: https://github.com/containers/podman-compose#podman-compose</li>
+</ul>
 <h2 id="set-up-demo-2"><a class="header" href="#set-up-demo-2">Set-up Demo</a></h2>
-<h3 id="launch-ipfs-deamon-2"><a class="header" href="#launch-ipfs-deamon-2">Launch ipfs deamon</a></h3>
-<pre><code class="language-sh">export GO_IPFS_PATH=/usr/local/bin/ipfs
+<p>Create a repository to add the docker compose configuration file: <a href="https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml">docker-compose.yml</a> in it</p>
+<p>Then start docker or podman</p>
+<pre><code>sudo service docker start
 </code></pre>
-<pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH init -p test
-</code></pre>
-<pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
-</code></pre>
-<pre><code class="language-sh">IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
-</code></pre>
-<pre><code class="language-sh">Initializing daemon...
-go-ipfs version: 0.11.0
-Repo version: 11
-System version: amd64/linux
-Golang version: go1.16.12
-Swarm listening on /ip4/127.0.0.1/tcp/46507
-Swarm listening on /p2p-circuit
-Swarm announcing /ip4/127.0.0.1/tcp/46507
-API server listening on /ip4/0.0.0.0/tcp/5001
-WebUI: http://0.0.0.0:5001/webui
-Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/38297
-Daemon is ready
-</code></pre>
-<h3 id="launch-dockers-2"><a class="header" href="#launch-dockers-2">Launch dockers:</a></h3>
-<blockquote>
-<p>--ipfs-server-multiaddr value depends on your own environment
-The example value should work with a standard docker installation.</p>
-</blockquote>
-<h4 id="launch-api_circuit-docker-2"><a class="header" href="#launch-api_circuit-docker-2">Launch api_circuit docker</a></h4>
-<pre><code class="language-sh">docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_circuits:milestone2 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
-</code></pre>
-<h4 id="launch-api_garble-docker-2"><a class="header" href="#launch-api_garble-docker-2">Launch api_garble docker</a></h4>
-<pre><code class="language-sh">docker run -it --name api_garble --rm -p 3001:3000 --env RUST_LOG=&quot;warn,info,debug&quot; ghcr.io/interstellar-network/api_garble:milestone2 /usr/local/bin/api_garble --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
-</code></pre>
-<h3 id="launch-substrate-demo-chain-with-ocw-2"><a class="header" href="#launch-substrate-demo-chain-with-ocw-2">Launch substrate demo chain with OCW</a></h3>
-<pre><code>git clone --branch=master --recursive git@github.com:Interstellar-Network/substrate-offchain-worker-demo.git
-</code></pre>
-<p>then</p>
-<pre><code>cd substrate-offchain-worker-demo 
-</code></pre>
-<p>build and run the substrate chain....</p>
-<pre><code class="language-sh">RUST_LOG=&quot;warn,info&quot; cargo run -- --dev --tmp --enable-offchain-indexing=1
+<p>and then launch the blockchain demo with <code>ipfs</code> and all api services i.e. <code>api_circuits</code> and <code>api_garble</code> with the following comands in the created repository</p>
+<pre><code>docker-compose down --timeout 1 &amp;&amp; docker-compose up --force-recreate
 </code></pre>
 <blockquote>
-<p>IMPORTANT: you MUST use --enable-offchain-indexing=1 else it will always do nothing and show &quot;[ocw-garble] nothing to do, returning...&quot; and &quot;[ocw-circuits] nothing to do, returning...&quot; in the logs</p>
-</blockquote>
-<h3 id="launch-a-generic-substrate-fromt-end-2"><a class="header" href="#launch-a-generic-substrate-fromt-end-2">Launch a generic Substrate Fromt-end</a></h3>
-<p>Use the following <a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a> to launch substrate front end</p>
-<p>to connect to a locally running node</p>
-<blockquote>
-<p>avoid some browser extensions that could generate interface issues</p>
+<p>replace <code>docker-compose</code> with <code>podman-compose</code> if you are using podman instead of docker</p>
 </blockquote>
 <h2 id="demo-purpose-and-used-components-1"><a class="header" href="#demo-purpose-and-used-components-1">Demo purpose and used components</a></h2>
 <h2 id="send-a-currency-1"><a class="header" href="#send-a-currency-1">Send a Currency</a></h2>
