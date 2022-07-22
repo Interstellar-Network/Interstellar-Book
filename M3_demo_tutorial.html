@@ -135,7 +135,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="m3-demo-tutorial"><a class="header" href="#m3-demo-tutorial">M3 Demo Tutorial</a></h1>
-<h2 id="prerequiste-docker-or-podman"><a class="header" href="#prerequiste-docker-or-podman">prerequiste docker or podman</a></h2>
+<h2 id="prerequiste-docker-or-podman"><a class="header" href="#prerequiste-docker-or-podman">prerequiste: docker or podman</a></h2>
 <p>install</p>
 <ul>
 <li>docker: https://docs.docker.com/engine/install/</li>
@@ -145,7 +145,7 @@
 <li>podman: 
 https://podman.io/getting-started/installation.html</li>
 </ul>
-<p>then compose</p>
+<p>then</p>
 <ul>
 <li>docker-compose: https://docs.docker.com/compose/install/</li>
 </ul>
@@ -154,17 +154,28 @@ https://podman.io/getting-started/installation.html</li>
 <li>podman-compose: https://github.com/containers/podman-compose#podman-compose</li>
 </ul>
 <h2 id="set-up-demo"><a class="header" href="#set-up-demo">Set-up Demo</a></h2>
-<p>Create a repository to add the docker compose configuration file: <a href="https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml">docker-compose.yml</a> in it</p>
+<h3 id="1-launch-the-blockchain"><a class="header" href="#1-launch-the-blockchain">1. Launch the blockchain</a></h3>
+<p>Create a directory</p>
+<p>example:</p>
+<pre><code>mkdir blockchain_demo
+</code></pre>
+<p>and add the following docker compose configuration file: <a href="https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml">docker-compose.yml</a> in it.</p>
 <p>Then start docker or podman</p>
 <pre><code>sudo service docker start
 </code></pre>
-<p>and then launch the blockchain demo with <code>ipfs</code> and all api services i.e. <code>api_circuits</code> and <code>api_garble</code> with the following comands in the created repository</p>
+<p>and then </p>
+<pre><code>cd blockchain_demo
+</code></pre>
+<p>and launch the blockchain demo with <code>ipfs</code> and all api services i.e. <code>api_circuits</code> and <code>api_garble</code> with the following comand in the created directory.</p>
 <pre><code>docker-compose down --timeout 1 &amp;&amp; docker-compose up --force-recreate
 </code></pre>
 <blockquote>
 <p>replace <code>docker-compose</code> with <code>podman-compose</code> if you are using podman instead of docker</p>
 </blockquote>
-<h2 id="demo-purpose-and-used-components"><a class="header" href="#demo-purpose-and-used-components">Demo purpose and used components</a></h2>
+<h3 id="2-install-the-wallet-app"><a class="header" href="#2-install-the-wallet-app">2. Install the wallet App</a></h3>
+<h3 id="3-ensure-that-wallet-can-connect-wallet-to-the-blockchain"><a class="header" href="#3-ensure-that-wallet-can-connect-wallet-to-the-blockchain">3. Ensure that wallet can connect Wallet to the blockchain</a></h3>
+<h2 id="demo-purpose"><a class="header" href="#demo-purpose">Demo purpose</a></h2>
+<p>The purpose of this demo is to show how a mobile wallet can use the <a href="./TTVP_Client.html">Trusted Transaction Protocol client</a> to confirm a transaction in a higly secure way</p>
 <h2 id="send-a-currency"><a class="header" href="#send-a-currency">Send a Currency</a></h2>
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
 
