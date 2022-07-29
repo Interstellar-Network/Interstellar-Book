@@ -62,7 +62,7 @@ to connect to a locally running node
 
 
 #### 3.1 Retrieve APK file
-
+>TO UPDATE
 [APK](https://github.com/Interstellar-Network/wallet-app/actions/runs/2755412279)
 Go to the end of the Action page and download the all-apks file
 
