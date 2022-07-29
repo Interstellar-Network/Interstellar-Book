@@ -58,10 +58,7 @@ to connect to a locally running node
 > avoid some browser extensions that could generate interface issues
 
 
-
-### 3. Install the wallet App i.e APK file on an android device or emulator
-
-
+### 3. Install the wallet App i.e APK file on an android device or an emulator
 
 
 #### 3.1 Retrieve APK file
