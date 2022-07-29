@@ -66,16 +66,16 @@ to connect to a locally running node
 
 #### 3.1 Retrieve APK file
 
-[APK](https://github.com/Interstellar-Network/wallet-app/actions/runs/2755412279
+[APK](https://github.com/Interstellar-Network/wallet-app/actions/runs/2755412279)
+Go to the end of the Action page and download the all-apks file
 
 #### 3.2 Install the APK
+##### 3.2.1 on an android device
 
+[How to install an APK on Android](https://www.lifewire.com/install-apk-on-android-4177185)
 
-#### 3.3 on an android device
+##### 3.2.2 on an windows emulator
 
-#### 3.4 on an windows emulator
-
-#### 3.4.1
 [Install Android studio on windows](https://developer.android.com/studio/)
 
 Install the pixel 5 API 31 emulator with Virtual Device Manager
