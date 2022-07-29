@@ -88,7 +88,7 @@ Install the pixel 5 API 31 emulator with Virtual Device Manager
 Wait for the emulator to launch and device to start and drag and drop the APK file on the emulator
 to install the App
 
-### 4. Ensure that wallet can connect Wallet to the blockchain
+### 4. Ensure that wallet can connect to the blockchain
 
 ```
 adb reverse tcp:5001 tcp:5001
