@@ -87,6 +87,8 @@ to install the App
 
 ### 4. Ensure that wallet can connect to the blockchain
 
+
+
 ```
 adb reverse tcp:5001 tcp:5001
 ```
@@ -99,7 +101,7 @@ to expose server desktop on emulator
 
 ## Demo purpose 
 
-The purpose of this demo is to show how a mobile wallet can use the [Trusted Transaction Protocol client](./TTVP_Client.md) to confirm a transaction in a higly secure way
+The purpose of this demo is to show how a mobile wallet can use the [Trusted Transaction Protocol client](./TTVP_Client.md) to confirm a transaction in a higly secure hardware-backed trusted way
 
 
 ## Start The demo
@@ -107,7 +109,7 @@ The purpose of this demo is to show how a mobile wallet can use the [Trusted Tra
 
 > IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
 
-> this is excatly the step one of the M2 delivery demo tutorial
+> this is exactly the step one of the M2 delivery demo tutorial
 that ensure that the configuration display circuit is used by the Garble Circuit Factory
 
 ## 1. Generate with `ocwCircuits` the configuration display circuit 
@@ -120,7 +122,7 @@ that ensure that the configuration display circuit is used by the Garble Circuit
 
 ![circuit sign](./fig/2ocwCircuit.png)
 
-### 1.3 Copy the ipfs hash/cid of the generated skcd file 
+### 1.3 The ipfs hash/cid of the generated skcd file on event
 
 > the cid appears in Events (blue dot on this screenshot example)
 
@@ -129,12 +131,13 @@ that ensure that the configuration display circuit is used by the Garble Circuit
 ## 2. Launch Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
 
-![click on App](./fig/SelectAndroidApp.png)
 
+<img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
 
 
 ## 2. Send a Currency
 
-following is an explicit video showing how to send a curency to a contact
+Following is an explicit video showing how to send a curency to a contact
+on SEND screen.
 
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
