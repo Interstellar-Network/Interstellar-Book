@@ -127,11 +127,11 @@ that ensure that the configuration display circuit is used by the Garble Circuit
 ![circuit sign](./fig/3ocwCircuitResult.png)
 
 ## 2. Launch Android App
-Go to setting, select All app then select `gg.interstellar.wallet.android`
+Swipe from bottom to top and click on `Wallet Interstellar`
 
 ![click on App](./fig/SelectAndroidApp.png)
 
-click and then click open to launch it
+
 
 ## 2. Send a Currency
 
