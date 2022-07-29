@@ -172,11 +172,57 @@ https://podman.io/getting-started/installation.html</li>
 <blockquote>
 <p>replace <code>docker-compose</code> with <code>podman-compose</code> if you are using podman instead of docker</p>
 </blockquote>
-<h3 id="2-install-the-wallet-app"><a class="header" href="#2-install-the-wallet-app">2. Install the wallet App</a></h3>
-<h3 id="3-ensure-that-wallet-can-connect-wallet-to-the-blockchain"><a class="header" href="#3-ensure-that-wallet-can-connect-wallet-to-the-blockchain">3. Ensure that wallet can connect Wallet to the blockchain</a></h3>
+<h3 id="2-launch-a-generic-substrate-fromt-end"><a class="header" href="#2-launch-a-generic-substrate-fromt-end">2. Launch a generic Substrate Fromt-end</a></h3>
+<p>Use the following <a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a> to launch substrate front end</p>
+<p>to connect to a locally running node</p>
+<blockquote>
+<p>avoid some browser extensions that could generate interface issues</p>
+</blockquote>
+<h3 id="3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-emulator"><a class="header" href="#3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-emulator">3. Install the wallet App i.e APK file on an android device or emulator</a></h3>
+<h4 id="31-retrieve-apk-file"><a class="header" href="#31-retrieve-apk-file">3.1 Retrieve APK file</a></h4>
+<p>[APK](https://github.com/Interstellar-Network/wallet-app/actions/runs/2755412279</p>
+<h4 id="32-install-the-apk"><a class="header" href="#32-install-the-apk">3.2 Install the APK</a></h4>
+<h4 id="33-on-an-android-device"><a class="header" href="#33-on-an-android-device">3.3 on an android device</a></h4>
+<h4 id="34-on-an-windows-emulator"><a class="header" href="#34-on-an-windows-emulator">3.4 on an windows emulator</a></h4>
+<h4 id="341"><a class="header" href="#341">3.4.1</a></h4>
+<p><a href="https://developer.android.com/studio/">Install Android studio on windows</a></p>
+<p>Install the pixel 5 API 31 emulator with Virtual Device Manager</p>
+<h4 id="342-launch-the-emulator"><a class="header" href="#342-launch-the-emulator">3.4.2 Launch the emulator</a></h4>
+<p><img src="./fig/Android_device_manager.png" alt="Launch pixel 5 API 31 emulator" /></p>
+<p>Wait for the emulator to launch and device to start and drag and drop the APK file on the emulator
+to install the App</p>
+<h3 id="4-ensure-that-wallet-can-connect-wallet-to-the-blockchain"><a class="header" href="#4-ensure-that-wallet-can-connect-wallet-to-the-blockchain">4. Ensure that wallet can connect Wallet to the blockchain</a></h3>
+<pre><code>adb reverse tcp:5001 tcp:5001
+</code></pre>
+<pre><code>adb reverse tcp:9944 tcp:9944 
+</code></pre>
+<p>to expose server desktop on emulator</p>
 <h2 id="demo-purpose"><a class="header" href="#demo-purpose">Demo purpose</a></h2>
 <p>The purpose of this demo is to show how a mobile wallet can use the <a href="./TTVP_Client.html">Trusted Transaction Protocol client</a> to confirm a transaction in a higly secure way</p>
-<h2 id="send-a-currency"><a class="header" href="#send-a-currency">Send a Currency</a></h2>
+<h2 id="start-the-demo"><a class="header" href="#start-the-demo">Start The demo</a></h2>
+<blockquote>
+<p>IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned</p>
+</blockquote>
+<blockquote>
+<p>this is excatly the step one of the M2 delivery demo tutorial
+that ensure that the configuration display circuit is used by the Garble Circuit Factory</p>
+</blockquote>
+<h2 id="1-generate-with-ocwcircuits-the-configuration-display-circuit"><a class="header" href="#1-generate-with-ocwcircuits-the-configuration-display-circuit">1. Generate with <code>ocwCircuits</code> the configuration display circuit</a></h2>
+<h3 id="11--select-ocwcircuits-pallet-and-submitconfigdisplaysigned-extrinsic"><a class="header" href="#11--select-ocwcircuits-pallet-and-submitconfigdisplaysigned-extrinsic">1.1  Select ocwCircuits pallet and submitConfigDisplaySigned extrinsic</a></h3>
+<p><img src="./fig/1ocwCircuitSelect.png" alt="circuit select" /></p>
+<h3 id="12-sign-transaction"><a class="header" href="#12-sign-transaction">1.2 Sign transaction</a></h3>
+<p><img src="./fig/2ocwCircuit.png" alt="circuit sign" /></p>
+<h3 id="13-copy-the-ipfs-hashcid-of-the-generated-skcd-file"><a class="header" href="#13-copy-the-ipfs-hashcid-of-the-generated-skcd-file">1.3 Copy the ipfs hash/cid of the generated skcd file</a></h3>
+<blockquote>
+<p>the cid appears in Events (blue dot on this screenshot example)</p>
+</blockquote>
+<p><img src="./fig/3ocwCircuitResult.png" alt="circuit sign" /></p>
+<h2 id="2-launch-android-app"><a class="header" href="#2-launch-android-app">2. Launch Android App</a></h2>
+<p>Go to setting, select All app then select <code>gg.interstellar.wallet.android</code></p>
+<p><img src="./fig/SelectAndroidApp.png" alt="click on App" /></p>
+<p>click and then click open to launch it</p>
+<h2 id="2-send-a-currency"><a class="header" href="#2-send-a-currency">2. Send a Currency</a></h2>
+<p>following is an explicit video showing how to send a curency to a contact</p>
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
 
                     </main>
