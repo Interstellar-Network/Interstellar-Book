@@ -109,24 +109,30 @@ The purpose of this demo is to show how a mobile wallet can use the [Trusted Tra
 
 > IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
 
-> this is exactly the step one of the M2 delivery demo tutorial
-that ensure that the configuration display circuit is used by the Garble Circuit Factory
+> this is almost the same step one of the M2 delivery demo tutorial except that it generate of package of circuirts.
 
-## 1. Generate with `ocwCircuits` the configuration display circuit 
+It set-up the configuration display circuit package used by the Garble Circuit Factory to generate randomized keyboard and message with one time code for each transactions.
 
-### 1.1  Select ocwCircuits pallet and submitConfigDisplaySigned extrinsic
+## 1. Generate with `ocwCircuits` the configuration display circuit package
 
-![circuit select](./fig/1ocwCircuitSelect.png)
+### 1.1  Select ocwCircuits pallet 
 
-### 1.2 Sign transaction
+![circuit select](./fig/select-ocwCircuits.png)
 
-![circuit sign](./fig/2ocwCircuit.png)
+### 1.2 select submitConfigDisplayPackageSigned extrinsic
+![circuit select](./fig/select-circuit-display-package.png)
+
+### 1.3 Sign transaction
+
+![circuit sign](./fig/ocw-sign.png)
 
 ### 1.3 The ipfs hash/cid of the generated skcd file on event
 
-> the cid appears in Events (blue dot on this screenshot example)
+> the cid of the circuit package appears in Events
 
-![circuit sign](./fig/3ocwCircuitResult.png)
+![circuit sign](./fig/ocw-show-event.png)
+
+
 
 ## 2. Launch Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
@@ -135,9 +141,28 @@ Swipe from bottom to top and click on `Wallet Interstellar`
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
 
 
+## 3. Check that mobile public key is registered on the mobile registry pallet
+
+select mobileRegistry pallet
+
+and mobileRegistryMap Query (not extrinsic)
+
+![circuit sign](./fig/select-MobileRegistry.png)
+
+
+
 ## 2. Send a Currency
 
 Following is an explicit video showing how to send a curency to a contact
 on SEND screen.
 
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
+
+
+
+## 3. Check Mobile user's ínput
+
+
+
+
+
