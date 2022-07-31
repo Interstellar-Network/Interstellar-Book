@@ -210,7 +210,8 @@ So you just need to set-up its path on the OS used, if it is not already set.</p
 </code></pre>
 <p>TROUBLESHOOTING: start the front-end
 <a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a>
-on your Device/Emulator to check it works properly</p>
+on your Device/Emulator to check it works properly.
+Otherwise fix network issues.</p>
 <h2 id="demo-purpose"><a class="header" href="#demo-purpose">Demo purpose</a></h2>
 <p>The purpose of this demo is to show how a mobile wallet can use the <a href="./TTVP_Client.html">Trusted Transaction Protocol client</a> to confirm a transaction in a higly secure and hardware-backed trusted way on a smartphone device.</p>
 <p>We focus on demonstrating:</p>
@@ -257,13 +258,13 @@ on SEND screen.</p>
 <p>As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.</p>
 </blockquote>
 <blockquote>
-<p>Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message.</p>
+<p>Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message validation.</p>
 </blockquote>
-<p>This makes public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
+<p>This makes the classic public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
 Moreover, it makes the usage of the wallet much more user friendly and safer.</p>
 <h2 id="4-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet"><a class="header" href="#4-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet">4. Check that mobile public key is registered on the mobile registry pallet</a></h2>
-<h3 id="41-copy-the-newmobileregistered-entry-key-in-mobileregistry-events"><a class="header" href="#41-copy-the-newmobileregistered-entry-key-in-mobileregistry-events">4.1 Copy the NewMobileRegistered <code>entry key</code> in MobileRegistry Events</a></h3>
-<p>When the mobile is registered an event with the entry in the MobileRegistryMap is generated</p>
+<h3 id="41-copy-the-account-key-in-mobileregistry-events"><a class="header" href="#41-copy-the-account-key-in-mobileregistry-events">4.1 Copy the <code>account key</code> in MobileRegistry Events</a></h3>
+<p>When the mobile is registered with an account, its mobile public key is stored on mobileRegistryMap in <code>MobileRegistry</code> pallet and an event is generated</p>
 <p><img src="./fig/MobileRegistryEvent.png" alt="circuit sign" /></p>
 <blockquote>
 <p>underline in red</p>
@@ -271,10 +272,22 @@ Moreover, it makes the usage of the wallet much more user friendly and safer.</p
 <h3 id="42-select-mobileregistry-pallet"><a class="header" href="#42-select-mobileregistry-pallet">4.2 select mobileRegistry pallet</a></h3>
 <p>and mobileRegistryMap Query (not extrinsic)</p>
 <p><img src="./fig/select-MobileRegistry.png" alt="circuit sign" /></p>
-<p>Then  paste the entry key copied in the previous step</p>
+<p>Then  paste the copied <code>account key</code></p>
 <p><img src="./fig/MobileRegistryQuery.png" alt="circuit sign" /></p>
 <p>When the Query is completed you will see the mobile public key associated with the device as a result.</p>
+<blockquote>
+<p>this public key is used to verify the hardware-backed signature of the transaction confirmation message that includes position typed by the user on the randomized keypad</p>
+</blockquote>
 <h2 id="5-check-mobile-users-ínput-and-transaction-status-on-the-front-end"><a class="header" href="#5-check-mobile-users-ínput-and-transaction-status-on-the-front-end">5. Check Mobile user's ínput and transaction status on the front-end</a></h2>
+<p>Check the events</p>
+<h3 id="51-transaction-success"><a class="header" href="#51-transaction-success">5.1 Transaction Success</a></h3>
+<p>you will see in the events
+<img src="./fig/TransactionSuccess.png" alt="circuit sign" />
+if the one-time-code was entered properly</p>
+<h3 id="52-transaction-fail"><a class="header" href="#52-transaction-fail">5.2 Transaction Fail</a></h3>
+<p>you will see in the events
+<img src="./fig/TransactionFail.png" alt="circuit sign" />
+if the one-time-code was wrong</p>
 
                     </main>
 
