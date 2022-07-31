@@ -1594,31 +1594,50 @@ https://podman.io/getting-started/installation.html</li>
 <p>avoid some browser extensions that could generate interface issues</p>
 </blockquote>
 <h3 id="3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator"><a class="header" href="#3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator">3. Install the wallet App i.e APK file on an android device or an emulator</a></h3>
-<h4 id="31-retrieve-apk-file"><a class="header" href="#31-retrieve-apk-file">3.1 Retrieve APK file</a></h4>
-<blockquote>
-<p>TO UPDATE
-<a href="https://github.com/Interstellar-Network/wallet-app/actions/runs/2755412279">APK</a>
-Go to the end of the Action page and download the all-apks file</p>
-</blockquote>
+<h4 id="31-retrieve-the-apk-file"><a class="header" href="#31-retrieve-the-apk-file">3.1 Retrieve the APK file</a></h4>
+<p>Download the <a href="https://github.com/Interstellar-Network/wallet-app/releases/tag/milestone3">APK file</a></p>
 <h4 id="32-install-the-apk"><a class="header" href="#32-install-the-apk">3.2 Install the APK</a></h4>
 <h5 id="321-on-an-android-device"><a class="header" href="#321-on-an-android-device">3.2.1 on an android device</a></h5>
 <p><a href="https://www.lifewire.com/install-apk-on-android-4177185">How to install an APK on Android</a></p>
+<p>WARNING: ensure that your device is configure for english.</p>
 <h5 id="322-on-an-windows-emulator"><a class="header" href="#322-on-an-windows-emulator">3.2.2 on an windows emulator</a></h5>
-<p><a href="https://developer.android.com/studio/">Install Android studio on windows</a></p>
+<p><a href="https://developer.android.com/studio/">Install Android studio</a></p>
 <p>Install the pixel 5 API 31 emulator with Virtual Device Manager</p>
 <h4 id="342-launch-the-emulator"><a class="header" href="#342-launch-the-emulator">3.4.2 Launch the emulator</a></h4>
 <p><img src="./fig/Android_device_manager.png" alt="Launch pixel 5 API 31 emulator" /></p>
-<p>Wait for the emulator to launch and device to start and drag and drop the APK file on the emulator
-to install the App</p>
+<p>Wait for the emulator to launch and emulated device to power on and drag and drop the APK file on the emulator to install the App.</p>
 <h3 id="4-ensure-that-wallet-can-connect-to-the-blockchain"><a class="header" href="#4-ensure-that-wallet-can-connect-to-the-blockchain">4. Ensure that wallet can connect to the blockchain</a></h3>
+<p>adb is installed by default with android studio.
+So you just need to set-up its path on the OS used, if it is not already set.</p>
+<p>Just connect the phone with an USB port or through WiFi( cf android studio).</p>
+<p>on the OS where the emulator is installed or the device is connected:</p>
 <pre><code>adb reverse tcp:5001 tcp:5001
 </code></pre>
 <pre><code>adb reverse tcp:9944 tcp:9944 
 </code></pre>
 <p>to expose server desktop on emulator</p>
+<p>on the OS where blocchain is installed:</p>
+<p>example if  blockchain run on WSL2</p>
+<pre><code> export WSL_HOST_IP=&quot;$(tail -1 /etc/resolv.conf | cut -d' ' -f2)&quot;
+</code></pre>
+<p>and use SSH to connect to the device or emulator on windows:</p>
+<pre><code>ssh -N -R 9944:localhost:9944 -R 5001:localhost:5001 [windows_user_name]@$WSL_HOST_IP
+</code></pre>
+<p>TROUBLESHOOTING: start the front-end
+<a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a>
+on your Device/Emulator to check it works properly</p>
 <h2 id="demo-purpose-1"><a class="header" href="#demo-purpose-1">Demo purpose</a></h2>
-<p>The purpose of this demo is to show how a mobile wallet can use the <a href="./TTVP_Client.html">Trusted Transaction Protocol client</a> to confirm a transaction in a higly secure hardware-backed trusted way</p>
+<p>The purpose of this demo is to show how a mobile wallet can use the <a href="./TTVP_Client.html">Trusted Transaction Protocol client</a> to confirm a transaction in a higly secure and hardware-backed trusted way on a smartphone device.</p>
+<p>We focus on demonstrating:</p>
+<ol>
+<li>The registration of the mobile device on the blockchain mobile registry.</li>
+<li>The confirmation of a transaction through the TTVP protocol and the execution of the core low-level TTVP client on a smartphone device.</li>
+</ol>
+<blockquote>
+<p>The purpose of the demo is not yet to show a fully functional wallet. We want to demonstrate that the TTVP protocol and Trusted Authentication and UI Layer is working as expected with our substrate based blockchain pallets to authenticate and confirm transactions or sensible operations.</p>
+</blockquote>
 <h2 id="start-the-demo"><a class="header" href="#start-the-demo">Start The demo</a></h2>
+<h2 id="1-generate-with-ocwcircuits-the-configuration-display-circuit-package"><a class="header" href="#1-generate-with-ocwcircuits-the-configuration-display-circuit-package">1. Generate with <code>ocwCircuits</code> the configuration display circuit package</a></h2>
 <blockquote>
 <p>IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned</p>
 </blockquote>
@@ -1626,30 +1645,51 @@ to install the App</p>
 <p>this is almost the same step one of the M2 delivery demo tutorial except that it generate of package of circuirts.</p>
 </blockquote>
 <p>It set-up the configuration display circuit package used by the Garble Circuit Factory to generate randomized keyboard and message with one time code for each transactions.</p>
-<h2 id="1-generate-with-ocwcircuits-the-configuration-display-circuit-package"><a class="header" href="#1-generate-with-ocwcircuits-the-configuration-display-circuit-package">1. Generate with <code>ocwCircuits</code> the configuration display circuit package</a></h2>
 <h3 id="11--select-ocwcircuits-pallet"><a class="header" href="#11--select-ocwcircuits-pallet">1.1  Select ocwCircuits pallet</a></h3>
 <p><img src="./fig/select-ocwCircuits.png" alt="circuit select" /></p>
 <h3 id="12-select-submitconfigdisplaypackagesigned-extrinsic"><a class="header" href="#12-select-submitconfigdisplaypackagesigned-extrinsic">1.2 select submitConfigDisplayPackageSigned extrinsic</a></h3>
 <p><img src="./fig/select-circuit-display-package.png" alt="circuit select" /></p>
 <h3 id="13-sign-transaction"><a class="header" href="#13-sign-transaction">1.3 Sign transaction</a></h3>
 <p><img src="./fig/ocw-sign.png" alt="circuit sign" /></p>
-<h3 id="13-the-ipfs-hashcid-of-the-generated-skcd-file-on-event"><a class="header" href="#13-the-ipfs-hashcid-of-the-generated-skcd-file-on-event">1.3 The ipfs hash/cid of the generated skcd file on event</a></h3>
-<blockquote>
-<p>the cid of the circuit package appears in Events</p>
-</blockquote>
+<h3 id="13-the-cid-of-the-circuit-package-generated-appears-in-events"><a class="header" href="#13-the-cid-of-the-circuit-package-generated-appears-in-events">1.3 The cid of the circuit package generated appears in Events</a></h3>
 <p><img src="./fig/ocw-show-event.png" alt="circuit sign" /></p>
 <h2 id="2-launch-android-app"><a class="header" href="#2-launch-android-app">2. Launch Android App</a></h2>
 <p>Swipe from bottom to top and click on <code>Wallet Interstellar</code></p>
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
-<h2 id="3-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet"><a class="header" href="#3-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet">3. Check that mobile public key is registered on the mobile registry pallet</a></h2>
-<p>select mobileRegistry pallet</p>
-<p>and mobileRegistryMap Query (not extrinsic)</p>
-<p><img src="./fig/select-MobileRegistry.png" alt="circuit sign" /></p>
-<h2 id="2-send-a-currency"><a class="header" href="#2-send-a-currency">2. Send a Currency</a></h2>
+<h2 id="3-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction"><a class="header" href="#3-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction">3. Send a Currency and wait for the Transaction confirmation screen to validate the transaction</a></h2>
+<h3 id="31-select-currency-and-contact"><a class="header" href="#31-select-currency-and-contact">3.1 Select currency and contact</a></h3>
 <p>Following is an explicit video showing how to send a curency to a contact
 on SEND screen.</p>
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
-<h2 id="3-check-mobile-users-ínput"><a class="header" href="#3-check-mobile-users-ínput">3. Check Mobile user's ínput</a></h2>
+<h3 id="32-click-on-the-blue-check-icon"><a class="header" href="#32-click-on-the-blue-check-icon">3.2 Click on the blue Check icon</a></h3>
+<h3 id="33-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code"><a class="header" href="#33-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code">3.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code</a></h3>
+<p>NOTE:</p>
+<blockquote>
+<p>The wallet app is still work in progress and we have still some little issues to fix between the low level layer in rust and C++, especially on the renderer to connect with the Kotlin/Swift UI layer.</p>
+</blockquote>
+<p>We want to avoid writting code that won't be used in the final version. For this reason we have made some little shortcut to demonstrate the execution of validation screen based on Garbled Circuits package eveluation.</p>
+<blockquote>
+<p>As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.</p>
+</blockquote>
+<blockquote>
+<p>Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message.</p>
+</blockquote>
+<p>This makes public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
+Moreover, it makes the usage of the wallet much more user friendly and safer.</p>
+<h2 id="4-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet"><a class="header" href="#4-check-that-mobile-public-key-is-registered-on-the-mobile-registry-pallet">4. Check that mobile public key is registered on the mobile registry pallet</a></h2>
+<h3 id="41-copy-the-newmobileregistered-entry-key-in-mobileregistry-events"><a class="header" href="#41-copy-the-newmobileregistered-entry-key-in-mobileregistry-events">4.1 Copy the NewMobileRegistered <code>entry key</code> in MobileRegistry Events</a></h3>
+<p>When the mobile is registered an event with the entry in the MobileRegistryMap is generated</p>
+<p><img src="./fig/MobileRegistryEvent.png" alt="circuit sign" /></p>
+<blockquote>
+<p>underline in red</p>
+</blockquote>
+<h3 id="42-select-mobileregistry-pallet"><a class="header" href="#42-select-mobileregistry-pallet">4.2 select mobileRegistry pallet</a></h3>
+<p>and mobileRegistryMap Query (not extrinsic)</p>
+<p><img src="./fig/select-MobileRegistry.png" alt="circuit sign" /></p>
+<p>Then  paste the entry key copied in the previous step</p>
+<p><img src="./fig/MobileRegistryQuery.png" alt="circuit sign" /></p>
+<p>When the Query is completed you will see the mobile public key associated with the device as a result.</p>
+<h2 id="5-check-mobile-users-ínput-and-transaction-status-on-the-front-end"><a class="header" href="#5-check-mobile-users-ínput-and-transaction-status-on-the-front-end">5. Check Mobile user's ínput and transaction status on the front-end</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apis-testing-guide"><a class="header" href="#apis-testing-guide">APIs Testing Guide</a></h1>
 <p>This is the tests related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
 <p>Those tests included in the tests folders of the following repositories <code>api_circuit</code> and <code>api_garble</code> wil demonstrate respectively:</p>
