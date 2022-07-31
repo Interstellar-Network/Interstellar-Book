@@ -115,7 +115,8 @@ ssh -N -R 9944:localhost:9944 -R 5001:localhost:5001 [windows_user_name]@$WSL_HO
 ```
 TROUBLESHOOTING: start the front-end
 [substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944)
- on your Device/Emulator to check it works properly
+ on your Device/Emulator to check it works properly.
+ Otherwise fix network issues.
 
 
 
@@ -184,16 +185,16 @@ NOTE:
 
 > As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.
 
-> Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message.
+> Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message validation.
 
-This makes public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
+This makes the classic public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
 Moreover, it makes the usage of the wallet much more user friendly and safer.
 
 ## 4. Check that mobile public key is registered on the mobile registry pallet
 
-### 4.1 Copy the NewMobileRegistered `entry key` in MobileRegistry Events
+### 4.1 Copy the `account key` in MobileRegistry Events
 
-When the mobile is registered an event with the entry in the MobileRegistryMap is generated
+When the mobile is registered with an account, its mobile public key is stored on mobileRegistryMap in `MobileRegistry` pallet and an event is generated
 
 ![circuit sign](./fig/MobileRegistryEvent.png)
 > underline in red
@@ -205,14 +206,30 @@ and mobileRegistryMap Query (not extrinsic)
 
 ![circuit sign](./fig/select-MobileRegistry.png)
 
-Then  paste the entry key copied in the previous step
+Then  paste the copied `account key`
 
 ![circuit sign](./fig/MobileRegistryQuery.png)
 
 When the Query is completed you will see the mobile public key associated with the device as a result.
 
+> this public key is used to verify the hardware-backed signature of the transaction confirmation message that includes position typed by the user on the randomized keypad
+
 ## 5. Check Mobile user's ínput and transaction status on the front-end
 
+Check the events
+
+### 5.1 Transaction Success
+
+
+you will see in the events
+![circuit sign](./fig/TransactionSuccess.png)
+if the one-time-code was entered properly
+
+### 5.2 Transaction Fail
+
+you will see in the events
+![circuit sign](./fig/TransactionFail.png)
+if the one-time-code was wrong
 
 
 
