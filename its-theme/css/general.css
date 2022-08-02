@@ -8,7 +8,8 @@
 }
 
 html {
-    font-family: "Open Sans", sans-serif;
+    /*font-family: "Open Sans", sans-serif;*/
+    font-family: "BF_Modernista";
     color: var(--fg);
     background-color: var(--bg);
     text-size-adjust: none;
