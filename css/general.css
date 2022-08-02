@@ -1,6 +1,8 @@
 /* Base styles and content styles */
 
 @import 'variables.css';
+@import '../fonts/BF_Modernista.css';
+
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
@@ -8,7 +10,8 @@
 }
 
 html {
-    font-family: "Open Sans", sans-serif;
+    /*font-family: "Open Sans", sans-serif;*/
+    font-familly: "BF_Modernista";
     color: var(--fg);
     background-color: var(--bg);
     text-size-adjust: none;
