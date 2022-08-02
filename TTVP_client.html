@@ -152,7 +152,7 @@ it prevents state of the art Banking trojan attacks on the mobile</p>
 <p>Following are the main components of the mobile client</p>
 <h3 id="substrate-client"><a class="header" href="#substrate-client">Substrate Client</a></h3>
 <p><a href="https://github.com/Interstellar-Network/wallet-app/blob/master/shared/rust/substrate-client/src/lib.rs">wallet-app/shared/rust/substrate-client/src</a></p>
-<p>following are the main extrinsic used</p>
+<p>following are the main extrinsics used</p>
 <h4 id="extrinsic_garble_and_strip_display_circuits_package_signed"><a class="header" href="#extrinsic_garble_and_strip_display_circuits_package_signed"><code>extrinsic_garble_and_strip_display_circuits_package_signed</code></a></h4>
 <p>Get garbled Circuit package from ocwGarble pallet</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
@@ -198,7 +198,7 @@ it prevents state of the art Banking trojan attacks on the mobile</p>
 <span class="boring">}
 </span></code></pre></pre>
 <h4 id="extrinsic_register_mobile"><a class="header" href="#extrinsic_register_mobile"><code>extrinsic_register_mobile</code></a></h4>
-<p>send the mobile public key to be registered</p>
+<p>send the mobile public key to be registered in the Mobile Registry pallet</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn extrinsic_register_mobile(
@@ -260,7 +260,7 @@ it prevents state of the art Banking trojan attacks on the mobile</p>
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="garble-circuit-evaluator"><a class="header" href="#garble-circuit-evaluator">Garble Circuit Evaluator</a></h3>
-<p>This is the high level part that in rustencapsulated call to low level C++ evaluator</p>
+<p>This is the high level part in rust that encapsulated call to lower level C++ evaluator</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub use cxx;
@@ -386,7 +386,7 @@ fn init_aes(key_low: u64, key_high: u64) -&gt; Box&lt;MyRustAes&gt; {
 <h3 id="renderer"><a class="header" href="#renderer">Renderer</a></h3>
 <p>This is the layer in charge of writting the results of display circuits evaluation directly to the framebuffer through GPU shaders
 <a href="https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer">wallet-app/shared/rust/renderer</a></p>
-<p>One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evalation</p>
+<p>One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evaluation/execution</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use android_logger::Config;
