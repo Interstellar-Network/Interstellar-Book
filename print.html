@@ -960,6 +960,626 @@ it prevents state of the art Banking trojan attacks on the mobile</p>
 <p>It also include an IPFS client to retrieve the cid of the <a href="./VC-GC.html">Visual Cryptography Display</a> i.e the one-time <a href=",/GC.html">Garbled Circuit</a> program generated for each transaction  by the <a href="./GCF.html">Garbled Circuit Factory</a> managed by the blockchain.</p>
 <p>The previous circuit is used to compose the <a href="./TAUI.html">Trusted Authentication and User Interface Layer</a> i.e <code>Secure UI Screen</code> that evaluates and renders the circuit to enable the user to confirm a transaction/sensitive operation with a <code>one-time code</code></p>
 <p>This Secure UI layer relies on a garbled circuit evaluator and a renderer to display the result of its evaluation directly to the framebuffer.</p>
+<h2 id="ttvp-client-components"><a class="header" href="#ttvp-client-components">TTVP client components</a></h2>
+<p>Following are the main components of the mobile client</p>
+<h3 id="substrate-client"><a class="header" href="#substrate-client">Substrate Client</a></h3>
+<p><a href="https://github.com/Interstellar-Network/wallet-app/blob/master/shared/rust/substrate-client/src/lib.rs">wallet-app/shared/rust/substrate-client/src</a></p>
+<p>following are the main extrinsic used</p>
+<h4 id="extrinsic_garble_and_strip_display_circuits_package_signed"><a class="header" href="#extrinsic_garble_and_strip_display_circuits_package_signed"><code>extrinsic_garble_and_strip_display_circuits_package_signed</code></a></h4>
+<p>Get garbled Circuit package from ocwGarble pallet</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn extrinsic_garble_and_strip_display_circuits_package_signed(
+    api: &amp;Api&lt;sp_core::sr25519::Pair, WsRpcClient&gt;,
+    tx_message: &amp;str,
+) -&gt; Hash {
+    ////////////////////////////////////////////////////////////////////////////
+    // // &quot;set the recipient&quot;
+    // let to = AccountKeyring::Bob.to_account_id();
+
+    // // &quot;the names are given as strings&quot;
+    // #[allow(clippy::redundant_clone)]
+    // let xt: UncheckedExtrinsicV4&lt;_&gt; = compose_extrinsic!(
+    //     api.clone(),
+    //     &quot;Balances&quot;,
+    //     &quot;transfer&quot;,
+    //     GenericAddress::Id(to),
+    //     Compact(42_u128)
+    // );
+    ////////////////////////////////////////////////////////////////////////////
+    #[allow(clippy::redundant_clone)]
+    let xt: UncheckedExtrinsicV4&lt;_&gt; = compose_extrinsic!(
+        api.clone(),
+        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
+        &quot;OcwGarble&quot;,
+        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
+        &quot;garble_and_strip_display_circuits_package_signed&quot;,
+        tx_message.as_bytes().to_vec()
+    );
+
+    println!(&quot;[+] Composed Extrinsic:\n {:?}\n&quot;, xt);
+
+    // &quot;send and watch extrinsic until InBlock&quot;
+    let tx_hash = api
+        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
+        .unwrap();
+    println!(&quot;[+] Transaction got included. Hash: {:?}&quot;, tx_hash);
+
+    tx_hash.expect(&quot;send_extrinsic failed&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="extrinsic_register_mobile"><a class="header" href="#extrinsic_register_mobile"><code>extrinsic_register_mobile</code></a></h4>
+<p>send the mobile public key to be registered</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn extrinsic_register_mobile(
+    api: &amp;Api&lt;sp_core::sr25519::Pair, WsRpcClient&gt;,
+    pub_key: Vec&lt;u8&gt;,
+) -&gt; Hash {
+    #[allow(clippy::redundant_clone)]
+    let xt: UncheckedExtrinsicV4&lt;_&gt; = compose_extrinsic!(
+        api.clone(),
+        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
+        &quot;MobileRegistry&quot;,
+        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
+        &quot;register_mobile&quot;,
+        pub_key
+    );
+
+    println!(&quot;[+] Composed Extrinsic:\n {:?}\n&quot;, xt);
+
+    // &quot;send and watch extrinsic until InBlock&quot;
+    let tx_hash = api
+        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
+        .unwrap();
+    println!(&quot;[+] Transaction got included. Hash: {:?}&quot;, tx_hash);
+
+    tx_hash.expect(&quot;send_extrinsic failed&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="extrinsic_check_input"><a class="header" href="#extrinsic_check_input"><code>extrinsic_check_input</code></a></h3>
+<p>check user input i.e one-time-code inputted on the randomized keypad</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn extrinsic_check_input(
+    api: &amp;Api&lt;sp_core::sr25519::Pair, WsRpcClient&gt;,
+    ipfs_cid: Vec&lt;u8&gt;,
+    input_digits: Vec&lt;u8&gt;,
+) -&gt; Hash {
+    #[allow(clippy::redundant_clone)]
+    let xt: UncheckedExtrinsicV4&lt;_&gt; = compose_extrinsic!(
+        api.clone(),
+        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
+        &quot;TxValidation&quot;,
+        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
+        &quot;check_input&quot;,
+        ipfs_cid,
+        input_digits
+    );
+
+    println!(&quot;[+] Composed Extrinsic:\n {:?}\n&quot;, xt);
+
+    // &quot;send and watch extrinsic until InBlock&quot;
+    let tx_hash = api
+        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
+        .unwrap();
+    println!(&quot;[+] Transaction got included. Hash: {:?}&quot;, tx_hash);
+
+    tx_hash.expect(&quot;send_extrinsic failed&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="garble-circuit-evaluator"><a class="header" href="#garble-circuit-evaluator">Garble Circuit Evaluator</a></h3>
+<p>This is the high level part that in rustencapsulated call to low level C++ evaluator</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub use cxx;
+
+use aes::cipher::{
+    generic_array::{typenum::consts::U16, GenericArray},
+    BlockEncrypt, KeyInit,
+};
+use aes::Aes128;
+
+#[cxx::bridge]
+pub mod ffi {
+
+    // Rust types and signatures exposed to C++.
+    extern &quot;Rust&quot; {
+        type MyRustAes;
+
+        unsafe fn encrypt_block(aes: &amp;MyRustAes, low: &amp;mut u64, high: &amp;mut u64);
+
+        /// param: key: usually a PGC's global_key field
+        // Box&lt;&gt; else &quot;returning opaque Rust type by value is not supported&quot;
+        unsafe fn init_aes(key_low: u64, key_high: u64) -&gt; Box&lt;MyRustAes&gt;;
+    }
+
+    unsafe extern &quot;C++&quot; {
+        include!(&quot;circuit-evaluate/src/rust_wrapper.h&quot;);
+
+        type EvaluateWrapper;
+
+        /// Create a new EvaluateWrapper, to be used later eg
+        /// let evaluate_wrapper = ffi::new_evaluate_wrapper(...);
+        /// evaluate_wrapper.EvaluateWithInputs(...); etc
+        ///
+        /// param: pgarbled_buffer can be a FULL, or a STRIPPED circuit
+        /// typically in PROD we use STRIPPED ones, but for tests/dev we keep compat with FULL circuits
+        /// [in which case] packmsg_buffer can be empty
+        fn new_evaluate_wrapper(
+            pgarbled_buffer: Vec&lt;u8&gt;,
+            packmsg_buffer: Vec&lt;u8&gt;,
+        ) -&gt; UniquePtr&lt;EvaluateWrapper&gt;;
+
+        /// PROD version
+        /// inputs are randomized, outputs are externally given
+        /// typically outputs points to some kind of &quot;Texture data&quot;
+        fn EvaluateWithPackmsg(self: Pin&lt;&amp;mut EvaluateWrapper&gt;, outputs: &amp;mut Vec&lt;u8&gt;);
+        /// TEST/DEV only
+        /// PROD uses randomize inputs
+        fn EvaluateWithPackmsgWithInputs(&amp;self, inputs: Vec&lt;u8&gt;) -&gt; Vec&lt;u8&gt;;
+        /// TEST/DEV only
+        /// PROD is using the PACKMSG version
+        fn EvaluateWithInputs(&amp;self, inputs: Vec&lt;u8&gt;) -&gt; Vec&lt;u8&gt;;
+
+        fn GetNbInputs(&amp;self) -&gt; usize;
+        fn GetNbOutputs(&amp;self) -&gt; usize;
+        fn GetWidth(&amp;self) -&gt; usize;
+        fn GetHeight(&amp;self) -&gt; usize;
+    }
+}
+
+/// We MUST impl Send+Sync b/c EvaluateWrapper is used as a Bevy's Resource
+/// EvaluateWithPackmsg/etc use a &quot;const&quot; PGC so on that part we are thread safe
+/// BUT EvaluateWithPackmsg in circuit_evaluate/src/rust_wrapper.cpp MAY NOT be thread safe
+/// depending on where &quot;outputs&quot; are(eg NOT thread safe if a class field, thread safe if returning std::vector)
+unsafe impl Send for ffi::EvaluateWrapper {}
+unsafe impl Sync for ffi::EvaluateWrapper {}
+
+pub struct MyRustAes {
+    pub aes: Aes128,
+}
+
+pub fn encrypt_block(aes: &amp;MyRustAes, low: &amp;mut u64, high: &amp;mut u64) {
+    // init &quot;block&quot; from &quot;high+low&quot;
+    // TODO or better instead of &quot;high, low&quot; params: rewrite to accept a param like &quot;key: *const c_char&quot; and use reinterpret_cast(&amp;this) in block.h?
+    let input_vec: Vec&lt;u8&gt; = if cfg!(target_endian = &quot;big&quot;) {
+        let mut v: Vec&lt;u8&gt; = vec![];
+        v.extend(low.to_be_bytes());
+        v.extend(high.to_be_bytes());
+        v
+    } else {
+        let mut v: Vec&lt;u8&gt; = vec![];
+        v.extend(low.to_le_bytes());
+        v.extend(high.to_le_bytes());
+        v
+    };
+
+    let mut block: GenericArray&lt;u8, U16&gt; = GenericArray::clone_from_slice(input_vec.as_slice());
+
+    aes.aes.encrypt_block(&amp;mut block);
+
+    let low_arr: [u8; 8] = block.as_slice()[..8].try_into().expect(&quot;Wrong length&quot;);
+    let high_arr: [u8; 8] = block.as_slice()[8..].try_into().expect(&quot;Wrong length&quot;);
+
+    if cfg!(target_endian = &quot;big&quot;) {
+        *low = u64::from_be_bytes(low_arr);
+        *high = u64::from_be_bytes(high_arr);
+    } else {
+        *low = u64::from_le_bytes(low_arr);
+        *high = u64::from_le_bytes(high_arr);
+    }
+}
+
+fn init_aes(key_low: u64, key_high: u64) -&gt; Box&lt;MyRustAes&gt; {
+    let key: Vec&lt;u8&gt; = if cfg!(target_endian = &quot;big&quot;) {
+        let mut v: Vec&lt;u8&gt; = vec![];
+        v.extend(key_low.to_be_bytes());
+        v.extend(key_high.to_be_bytes());
+        v
+    } else {
+        let mut v: Vec&lt;u8&gt; = vec![];
+        v.extend(key_low.to_le_bytes());
+        v.extend(key_high.to_le_bytes());
+        v
+    };
+
+    Box::new(MyRustAes {
+        aes: Aes128::new_from_slice(&amp;key).unwrap(),
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>low level C++ garbled circuits evaluator part</p>
+<p><a href="https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/circuit_evaluate/src/cpp">wallet-app/shared/rust/circuit_evaluate/src/cpp/</a></p>
+<h3 id="renderer"><a class="header" href="#renderer">Renderer</a></h3>
+<p>This is the layer in charge of writting the results of display circuits evaluation directly to the framebuffer through GPU shaders
+<a href="https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer">wallet-app/shared/rust/renderer</a></p>
+<p>One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evalation</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use android_logger::Config;
+use bevy::prelude::Color;
+use common::DisplayStrippedCircuitsPackageBuffers;
+use core::ffi::c_void;
+use jni::objects::{JClass, JObject, JString, ReleaseMode};
+use jni::sys::{jbyteArray, jfloat, jfloatArray, jint, jlong, jstring};
+use jni::JNIEnv;
+use jni_fn::jni_fn;
+use log::{debug, info, Level};
+use raw_window_handle::{AndroidNdkHandle, RawWindowHandle};
+
+// #[cfg(target_os = &quot;android&quot;)]
+use android_logger::FilterBuilder;
+
+use crate::{
+    init_app, my_raw_window_handle, update_texture_utils, vertices_utils::Rect, App,
+    TextureUpdateCallbackType,
+};
+
+extern &quot;C&quot; {
+    pub fn ANativeWindow_fromSurface(env: JNIEnv, surface: JObject) -&gt; usize;
+    // TODO maybe use:ANativeWindow_getFormat?
+    pub fn ANativeWindow_getHeight(window_ptr: usize) -&gt; u32;
+    pub fn ANativeWindow_getWidth(window_ptr: usize) -&gt; u32;
+}
+
+pub fn get_raw_window_handle(env: JNIEnv, surface: JObject) -&gt; (RawWindowHandle, u32, u32) {
+    let a_native_window = unsafe { ANativeWindow_fromSurface(env, surface) };
+    let mut handle = AndroidNdkHandle::empty();
+    handle.a_native_window = a_native_window as *mut c_void;
+
+    let width = unsafe { ANativeWindow_getWidth(a_native_window) };
+    let height = unsafe { ANativeWindow_getHeight(a_native_window) };
+
+    return (RawWindowHandle::AndroidNdk(handle), width, height);
+}
+
+// TODO static state? or return Box&lt;State&gt; in initSurface and store as &quot;long&quot; in Kotlin?
+// static mut state: Option&lt;State&gt; = None;size
+
+fn init_surface(
+    env: JNIEnv,
+    surface: JObject,
+    messageRects: jfloatArray,
+    pinpadRects: jfloatArray,
+    pinpad_nb_cols: usize,
+    pinpad_nb_rows: usize,
+    message_text_color: Color,
+    circle_text_color: Color,
+    circle_color: Color,
+    background_color: Color,
+    message_pgarbled_buf: Vec&lt;u8&gt;,
+    message_packmsg_buf: Vec&lt;u8&gt;,
+    pinpad_pgarbled_buf: Vec&lt;u8&gt;,
+    pinpad_packmsg_buf: Vec&lt;u8&gt;,
+) -&gt; jlong {
+    // TODO use loggers.rs(same as substrate-client)
+    // WARNING: conflicts with substrate-client/src/loggers.rs
+    // only the first one called is taken into account
+    android_logger::init_once(
+        Config::default()
+            .with_min_level(Level::Info)
+            .with_tag(&quot;interstellar&quot;)
+            .with_filter(
+                FilterBuilder::new()
+                    // useful: wgpu_hal=info
+                    .parse(&quot;info,jni::crate=debug&quot;)
+                    .build(),
+            ),
+    );
+
+    let (handle, width, height) = get_raw_window_handle(env, surface);
+    log::debug!(
+        &quot;initSurface: got handle! width = {}, height = {}&quot;,
+        width,
+        height
+    );
+    info!(&quot;initSurface before new_native&quot;);
+
+    let mut message_rects_vec = unsafe {
+        convert_rect_floatArr_to_vec_rect(env, messageRects, width as f32, height as f32)
+    };
+    let mut pinpad_rects_vec =
+        unsafe { convert_rect_floatArr_to_vec_rect(env, pinpadRects, width as f32, height as f32) };
+    assert!(
+        message_rects_vec.len() == 1,
+        &quot;should have only ONE message_rects!&quot;,
+    );
+    assert!(
+        pinpad_rects_vec.len() == pinpad_nb_cols * pinpad_nb_rows,
+        &quot;pinpadRects length MUST = pinpad_nb_cols * pinpad_nb_rows!&quot;
+    );
+    // get the only Rect from &quot;message_rects&quot;; owned
+    let message_rect = message_rects_vec.swap_remove(0);
+    debug!(&quot;init_surface: message_rect: {:?}&quot;, message_rect);
+    // pinpad: convert the Vec&lt;&gt; into a 2D matrix
+    let mut pinpad_rects = ndarray::Array2::&lt;Rect&gt;::default((pinpad_nb_rows, pinpad_nb_cols));
+    for row in 0..pinpad_nb_rows {
+        for col in 0..pinpad_nb_cols {
+            let index = col + row * pinpad_nb_cols;
+            debug!(
+                &quot;init_surface: col: {:?}, row: {:?}, index: {}&quot;,
+                col, row, index
+            );
+            pinpad_rects[[row, col]] = pinpad_rects_vec.get(index).unwrap().clone();
+            // swap_remove takes the first(0 in this case), so no need to compute &quot;let index = col + row * pinpad_nb_cols;&quot;
+            // pinpad_rects[[row, col]] = pinpad_rects_vec.swap_remove(0);
+            // FAIL: the order ends up messed up, which means the &quot;cancel&quot; and &quot;go&quot; button are not in the right place
+        }
+    }
+
+    // TODO?
+    // let size = winit::dpi::PhysicalSize::new(width, height);
+    // &amp;awindow,
+    //     size,
+    //     update_texture_data,
+    //     vertices,
+    //     indices,
+    //     texture_base,
+    let mut app = App::new();
+
+    log::debug!(&quot;before init_app&quot;);
+    init_app(
+        &amp;mut app,
+        message_rect,
+        pinpad_rects,
+        pinpad_nb_cols,
+        pinpad_nb_rows,
+        message_text_color,
+        circle_text_color,
+        circle_color,
+        background_color,
+        // DEV/DEBUG: offline
+        // include_bytes!(&quot;../examples/data/message_224x96.pgarbled.stripped.pb.bin&quot;).to_vec(),
+        // include_bytes!(&quot;../examples/data/message_224x96.packmsg.pb.bin&quot;).to_vec(),
+        // include_bytes!(&quot;../examples/data/pinpad_590x50.pgarbled.stripped.pb.bin&quot;).to_vec(),
+        // include_bytes!(&quot;../examples/data/pinpad_590x50.packmsg.pb.bin&quot;).to_vec(),
+        message_pgarbled_buf,
+        message_packmsg_buf,
+        pinpad_pgarbled_buf,
+        pinpad_packmsg_buf,
+    );
+
+    // NOTE: MUST be after init_app(or rather DefaultPlugins) else
+    // panic at: &quot;let mut windows = world.get_resource_mut::&lt;Windows&gt;().unwrap();&quot;
+    #[cfg(target_os = &quot;android&quot;)]
+    crate::init_window(
+        &amp;mut app,
+        width,
+        height,
+        my_raw_window_handle::MyRawWindowHandleWrapper::new(handle),
+    );
+
+    info!(&quot;init_app ok!&quot;);
+
+    Box::into_raw(Box::new(app)) as jlong
+    // TODO static state?
+    // 0
+}
+
+/// IMPORTANT: pinpadRects is assumed to be given from top-&gt;bottom, left-&gt;right
+/// ie pinpadRects[0] is top left, pinpadRects[12] is bottom right
+///
+/// param: surface: SHOULD come from &quot;override fun surfaceCreated(holder: SurfaceHolder)&quot; holder.surface
+/// param: circuits_package_ptr: MUST be the returned value from substrate-client/src/jni_wrapper.rs GetCircuits
+///     NOTE: the pointer is NOT valid after this function returns!
+#[no_mangle]
+#[jni_fn(&quot;gg.interstellar.wallet.RustWrapper&quot;)]
+pub unsafe fn initSurface(
+    env: JNIEnv,
+    _: JClass,
+    surface: JObject,
+    messageRects: jfloatArray,
+    pinpadRects: jfloatArray,
+    pinpad_nb_cols: jint,
+    pinpad_nb_rows: jint,
+    message_text_color_hex: JString,
+    circle_text_color_hex: JString,
+    circle_color_hex: JString,
+    background_color_hex: JString,
+    circuits_package_ptr: jlong,
+) -&gt; jlong {
+    // USE A Box, that way the pointer is properly cleaned up when exiting this function
+    // let circuits_package = &amp;mut *(circuits_package_ptr as *mut DisplayStrippedCircuitsPackageBuffers);
+    let display_stripped_circuits_package_buffers: Box&lt;DisplayStrippedCircuitsPackageBuffers&gt; =
+        Box::from_raw(circuits_package_ptr as *mut _);
+
+    init_surface(
+        env,
+        surface,
+        messageRects,
+        pinpadRects,
+        pinpad_nb_cols.try_into().unwrap(),
+        pinpad_nb_rows.try_into().unwrap(),
+        Color::hex::&lt;String&gt;(
+            env.get_string(message_text_color_hex)
+                .expect(&quot;Couldn't get java string message_text_color_hex!&quot;)
+                .into(),
+        )
+        .unwrap(),
+        Color::hex::&lt;String&gt;(
+            env.get_string(circle_text_color_hex)
+                .expect(&quot;Couldn't get java string circle_text_color_hex!&quot;)
+                .into(),
+        )
+        .unwrap(),
+        Color::hex::&lt;String&gt;(
+            env.get_string(circle_color_hex)
+                .expect(&quot;Couldn't get java string circle_color_hex!&quot;)
+                .into(),
+        )
+        .unwrap(),
+        Color::hex::&lt;String&gt;(
+            env.get_string(background_color_hex)
+                .expect(&quot;Couldn't get java string background_color_hex!&quot;)
+                .into(),
+        )
+        .unwrap(),
+        display_stripped_circuits_package_buffers
+            .message_pgarbled_buf
+            .clone(),
+        display_stripped_circuits_package_buffers
+            .message_packmsg_buf
+            .clone(),
+        display_stripped_circuits_package_buffers
+            .pinpad_pgarbled_buf
+            .clone(),
+        display_stripped_circuits_package_buffers
+            .pinpad_packmsg_buf
+            .clone(),
+    )
+}
+
+#[no_mangle]
+#[jni_fn(&quot;gg.interstellar.wallet.RustWrapper&quot;)]
+pub unsafe fn render(_env: *mut JNIEnv, _: JClass, obj: jlong) {
+    // TODO static state?
+    let app = &amp;mut *(obj as *mut App);
+    // DO NOT use app.run() cf https://github.com/bevyengine/bevy/blob/main/examples/app/custom_loop.rs
+    // calling app.run() makes Android display not updating after a few loops.
+    // The texture are setup, circuit_evaluate runs a few times and then nothing changes anymore
+    // change_texture_message/change_texture_pinpad are NOT called anymore
+    // app.run();
+    app.update();
+}
+
+#[no_mangle]
+#[jni_fn(&quot;gg.interstellar.wallet.RustWrapper&quot;)]
+pub unsafe fn cleanup(_env: *mut JNIEnv, _: JClass, obj: jlong) {
+    let _obj: Box&lt;App&gt; = Box::from_raw(obj as *mut _);
+}
+
+/// Convert a floatArray like [left0, top0, right0, bottom0, left1, top2, right1, bottom1, ...]
+/// into vec[Rect(left0, top0, right0, bottom0),Rect(left1, top2, right1, bottom1),...]
+///
+/// NOTE: will also convert the Coords to match Bevy
+/// eg a Rect on the top of screen, full width:
+//  0 = {Rect@20731} Rect.fromLTRB(0.0, 0.0, 1080.0, 381.0)
+//  message_rects_flattened = {ArrayList@20533}  size = 4
+//   0 = {Float@20689} 0.0
+//   1 = {Float@20690} 0.0
+//   2 = {Float@20691} 1080.0
+//   3 = {Float@20692} 381.0
+// will be converted to:
+// Rect(left:0.0, top: height - 0.0, right: 1080, bottom: height - 381.0)
+unsafe fn convert_rect_floatArr_to_vec_rect(
+    env: JNIEnv,
+    rectsFloatArray: jfloatArray,
+    width: f32,
+    height: f32,
+) -&gt; Vec&lt;Rect&gt; {
+    let rects_floatarr = env
+        .get_float_array_elements(rectsFloatArray, ReleaseMode::NoCopyBack)
+        .unwrap();
+    assert_ne!(
+        rects_floatarr.size().unwrap(),
+        0,
+        &quot;rects_floatarr is empty!&quot;
+    );
+    assert_eq!(
+        rects_floatarr.size().unwrap() % 4,
+        0,
+        &quot;rects_floatarr MUST be % 4!&quot;
+    );
+
+    let mut rects_vec =
+        Vec::&lt;Rect&gt;::with_capacity((rects_floatarr.size().unwrap() / 4).try_into().unwrap());
+    let mut idx = 0;
+    for i in (0..rects_floatarr.size().unwrap()).step_by(4) {
+        rects_vec.insert(
+            idx,
+            Rect::new_to_ndc_android(
+                // message_rects_jlist.get(i).unwrap().unwrap().into(),
+                // message_rects_jlist.get(i + 1).unwrap().unwrap().into(),
+                // message_rects_jlist.get(i + 2).unwrap().unwrap().into(),
+                // message_rects_jlist.get(i + 3).unwrap().unwrap().into(),
+                *rects_floatarr.as_ptr().offset(i.try_into().unwrap()),
+                *rects_floatarr.as_ptr().offset((i + 1).try_into().unwrap()),
+                *rects_floatarr.as_ptr().offset((i + 2).try_into().unwrap()),
+                *rects_floatarr.as_ptr().offset((i + 3).try_into().unwrap()),
+                width,
+                height,
+            ),
+        );
+        idx += 1;
+    }
+
+    rects_vec
+}
+
+// https://github.com/jni-rs/jni-rs/blob/master/tests/util/mod.rs
+#[cfg(test)]
+#[cfg(target_os = &quot;linux&quot;)] // we do not need jni features = [&quot;invocation&quot;] for Android
+fn jvm() -&gt; &amp;'static std::sync::Arc&lt;jni::JavaVM&gt; {
+    static mut JVM: Option&lt;std::sync::Arc&lt;jni::JavaVM&gt;&gt; = None;
+    static INIT: std::sync::Once = std::sync::Once::new();
+
+    INIT.call_once(|| {
+        let jvm_args = jni::InitArgsBuilder::new()
+            .version(jni::JNIVersion::V8)
+            .option(&quot;-Xcheck:jni&quot;)
+            .build()
+            .unwrap_or_else(|e| panic!(&quot;{:#?}&quot;, e));
+
+        let jvm = jni::JavaVM::new(jvm_args).unwrap_or_else(|e| panic!(&quot;{:#?}&quot;, e));
+
+        unsafe {
+            JVM = Some(std::sync::Arc::new(jvm));
+        }
+    });
+
+    unsafe { JVM.as_ref().unwrap() }
+}
+
+#[cfg(test)]
+#[cfg(target_os = &quot;linux&quot;)] // we do not need jni features = [&quot;invocation&quot;] for Android
+#[allow(dead_code)]
+pub fn attach_current_thread() -&gt; jni::AttachGuard&lt;'static&gt; {
+    jvm()
+        .attach_current_thread()
+        .expect(&quot;failed to attach jvm thread&quot;)
+}
+
+// cf https://github.com/jni-rs/jni-rs/blob/master/tests/jni_api.rs
+#[cfg(target_os = &quot;linux&quot;)] // we do not need jni features = [&quot;invocation&quot;] for Android
+#[test]
+pub fn test_convert_rect_floatArr_to_vec_rect() {
+    let env = attach_current_thread();
+
+    //     result = {Rect[1]@20529}
+    //  0 = {Rect@20731} Rect.fromLTRB(0.0, 0.0, 1080.0, 381.0)
+    // message_rects_flattened = {ArrayList@20533}  size = 4
+    //  0 = {Float@20689} 0.0
+    //  1 = {Float@20690} 0.0
+    //  2 = {Float@20691} 1080.0
+    //  3 = {Float@20692} 381.0
+    let buf: &amp;[jfloat] = &amp;[
+        0.0 as jfloat,
+        0.0 as jfloat,
+        1080.0 as jfloat,
+        381.0 as jfloat,
+    ];
+    let java_array = env
+        .new_float_array(4)
+        .expect(&quot;JNIEnv#new_float_array must create a Java jfloat array with given size&quot;);
+
+    // Insert array elements
+    let _ = env.set_float_array_region(java_array, 0, buf);
+
+    let res = unsafe { convert_rect_floatArr_to_vec_rect(*env, java_array, 1080., 1920.) };
+
+    assert_eq!(res[0], Rect::new(-0.5625, 1.0, 0.5625, 0.603125))
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="validation-screen"><a class="header" href="#validation-screen">Validation Screen</a></h3>
+<p>High level screen in kotlin/jetpack compose or swift UI to display the surface view arrays generated directly by the GPU
+This is just to illustrate that all the work is done by the lower level layers</p>
+<p><a href="https://github.com/Interstellar-Network/wallet-app/blob/master/androidApp/src/main/java/gg/interstellar/wallet/android/ui/TxPinpadScreen.kt">TxPinpadScreen.kt</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hardware-backed-mobile-key"><a class="header" href="#hardware-backed-mobile-key">Hardware-backed Mobile Key</a></h1>
 <h2 id="hardware-keystore"><a class="header" href="#hardware-keystore">Hardware Keystore</a></h2>
 <p><a href="https://source.android.com/security/keystore">Hardware-backed Keystore</a></p>
