@@ -637,7 +637,7 @@ pub fn test_convert_rect_floatArr_to_vec_rect() {
 }
 ```
 ### Validation Screen
-High level screen in kotlin/jetpack compose or swift UI to display the surface view arrays generated directly by the GPU
-This is just to illustrate that all the work is done by the lower level layers
+High level screen in jetpack compose or swift UI to display the array of surface views generated directly by the GPU into the framebuffer with shaders.
+This is just to illustrate that all the work is done by the lower level layers.
 
 [TxPinpadScreen.kt](https://github.com/Interstellar-Network/wallet-app/blob/master/androidApp/src/main/java/gg/interstellar/wallet/android/ui/TxPinpadScreen.kt)
