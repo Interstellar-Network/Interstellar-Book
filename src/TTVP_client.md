@@ -27,7 +27,7 @@ Following are the main components of the mobile client
 
 [wallet-app/shared/rust/substrate-client/src](https://github.com/Interstellar-Network/wallet-app/blob/master/shared/rust/substrate-client/src/lib.rs)
 
-following are the main extrinsic used
+following are the main extrinsics used
 
 #### `extrinsic_garble_and_strip_display_circuits_package_signed`
 Get garbled Circuit package from ocwGarble pallet
@@ -74,7 +74,7 @@ fn extrinsic_garble_and_strip_display_circuits_package_signed(
 ```
 
 #### `extrinsic_register_mobile`
-send the mobile public key to be registered
+send the mobile public key to be registered in the Mobile Registry pallet
 ```rust
 pub fn extrinsic_register_mobile(
     api: &Api<sp_core::sr25519::Pair, WsRpcClient>,
@@ -133,7 +133,7 @@ pub fn extrinsic_check_input(
 ```
 
 ### Garble Circuit Evaluator
-This is the high level part that in rustencapsulated call to low level C++ evaluator
+This is the high level part in rust that encapsulated call to lower level C++ evaluator
 ```rust
 pub use cxx;
 
@@ -260,7 +260,7 @@ low level C++ garbled circuits evaluator part
 This is the layer in charge of writting the results of display circuits evaluation directly to the framebuffer through GPU shaders
 [wallet-app/shared/rust/renderer](https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer)
 
-One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evalation
+One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evaluation/execution
 ```rust
 use android_logger::Config;
 use bevy::prelude::Color;
