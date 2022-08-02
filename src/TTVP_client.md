@@ -186,8 +186,8 @@ This is the layer in charge of writting the results of display circuits evaluati
 [wallet-app/shared/rust/renderer](https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer)
 
 `setup.rs` is one of the most critical part of the renderer, responsible for the creation of textures in which renderer will display the result of circuits evaluation/execution with GPU shaders
-`setup.rs`
-```rust
+
+```rust, editable
 pub fn setup_pinpad_textures(
     mut commands: Commands,
     mut images: ResMut<Assets<Image>>,
