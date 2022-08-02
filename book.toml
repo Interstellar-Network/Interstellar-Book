@@ -52,7 +52,12 @@ preferred-dark-theme = "navy"
 #additional-css = ["theme/pagetoc.css"] 
 #additional-js  = ["theme/pagetoc.js"]
 
+copy-fonts = true
+additional-css = ["fonts/BF_Modernista.css"]
 
+[output.html.font]
+enable = true
+woff = true
 
 # here is a must to load ace editor in mdbook
 [output.html.playground]
