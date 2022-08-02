@@ -2,19 +2,19 @@
 font-family: BF_Modernista;
 font-style: normal;
 font-weight: normal;
-src: url('BF_Modernista-Regular.ttf');
+src: url('BF_Modernista-Regular.woff')  format('woff');
 }
 
 @font-face {
 font-family: BF_Modernista;
 font-style: italic;
 font-weight: normal;
-src: url('BF_Modernista-Regular.ttf');
+src: url('BF_Modernista-Regular.woff')  format('woff');
 }
 
 @font-face {
 font-family: BF_Modernista;
 font-style: bold;
 font-weight: normal;
-src: url('BF_Modernista-Regular.ttf');
+src: url('BF_Modernista-Regular.woff')  format('woff');
 }
