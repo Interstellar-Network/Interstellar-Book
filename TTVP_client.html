@@ -316,11 +316,8 @@ fn init_aes(key_low: u64, key_high: u64) -&gt; Box&lt;MyRustAes&gt; {
 <h3 id="renderer"><a class="header" href="#renderer">Renderer</a></h3>
 <p>This is the layer in charge of writting the results of display circuits evaluation directly to the framebuffer through GPU shaders
 <a href="https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer">wallet-app/shared/rust/renderer</a></p>
-<p><code>setup.rs</code> is one of the most critical part of the renderer, responsible for the creation of textures in which renderer will display the result of circuits evaluation/execution with GPU shaders
-<code>setup.rs</code></p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub fn setup_pinpad_textures(
+<p><code>setup.rs</code> is one of the most critical part of the renderer, responsible for the creation of textures in which renderer will display the result of circuits evaluation/execution with GPU shaders</p>
+<pre><pre class="playground"><code class="language-rust  editable">pub fn setup_pinpad_textures(
     mut commands: Commands,
     mut images: ResMut&lt;Assets&lt;Image&gt;&gt;,
     mut texture_atlas: ResMut&lt;Assets&lt;TextureAtlas&gt;&gt;,
@@ -548,8 +545,7 @@ fn uv_debug_texture(width: u32, height: u32) -&gt; Image {
         // wgpu::TextureFormat::bevy_default(),
         wgpu::TextureFormat::R8Unorm,
     )
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre></pre>
 <h3 id="validation-screen"><a class="header" href="#validation-screen">Validation Screen</a></h3>
 <p>High level screen in jetpack compose or swift UI to display the array of surface views generated directly by the GPU into the framebuffer with shaders.
 This is just to illustrate that all the work is done by the lower level layers.</p>
