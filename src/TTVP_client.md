@@ -36,41 +36,7 @@ Get garbled Circuit package from ocwGarble pallet
 fn extrinsic_garble_and_strip_display_circuits_package_signed(
     api: &Api<sp_core::sr25519::Pair, WsRpcClient>,
     tx_message: &str,
-) -> Hash {
-    ////////////////////////////////////////////////////////////////////////////
-    // // "set the recipient"
-    // let to = AccountKeyring::Bob.to_account_id();
-
-    // // "the names are given as strings"
-    // #[allow(clippy::redundant_clone)]
-    // let xt: UncheckedExtrinsicV4<_> = compose_extrinsic!(
-    //     api.clone(),
-    //     "Balances",
-    //     "transfer",
-    //     GenericAddress::Id(to),
-    //     Compact(42_u128)
-    // );
-    ////////////////////////////////////////////////////////////////////////////
-    #[allow(clippy::redundant_clone)]
-    let xt: UncheckedExtrinsicV4<_> = compose_extrinsic!(
-        api.clone(),
-        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
-        "OcwGarble",
-        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
-        "garble_and_strip_display_circuits_package_signed",
-        tx_message.as_bytes().to_vec()
-    );
-
-    println!("[+] Composed Extrinsic:\n {:?}\n", xt);
-
-    // "send and watch extrinsic until InBlock"
-    let tx_hash = api
-        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
-        .unwrap();
-    println!("[+] Transaction got included. Hash: {:?}", tx_hash);
-
-    tx_hash.expect("send_extrinsic failed")
-}
+) 
 ```
 
 #### `extrinsic_register_mobile`
@@ -79,61 +45,20 @@ send the mobile public key to be registered in the Mobile Registry pallet
 pub fn extrinsic_register_mobile(
     api: &Api<sp_core::sr25519::Pair, WsRpcClient>,
     pub_key: Vec<u8>,
-) -> Hash {
-    #[allow(clippy::redundant_clone)]
-    let xt: UncheckedExtrinsicV4<_> = compose_extrinsic!(
-        api.clone(),
-        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
-        "MobileRegistry",
-        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
-        "register_mobile",
-        pub_key
-    );
-
-    println!("[+] Composed Extrinsic:\n {:?}\n", xt);
-
-    // "send and watch extrinsic until InBlock"
-    let tx_hash = api
-        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
-        .unwrap();
-    println!("[+] Transaction got included. Hash: {:?}", tx_hash);
-
-    tx_hash.expect("send_extrinsic failed")
-}
+) 
 ```
-### `extrinsic_check_input`
+#### `extrinsic_check_input`
 check user input i.e one-time-code inputted on the randomized keypad
 ```rust
 pub fn extrinsic_check_input(
     api: &Api<sp_core::sr25519::Pair, WsRpcClient>,
     ipfs_cid: Vec<u8>,
     input_digits: Vec<u8>,
-) -> Hash {
-    #[allow(clippy::redundant_clone)]
-    let xt: UncheckedExtrinsicV4<_> = compose_extrinsic!(
-        api.clone(),
-        // MUST match the name in /substrate-offchain-worker-demo/runtime/src/lib.rs
-        "TxValidation",
-        // MUST match the call in /substrate-offchain-worker-demo/pallets/ocw-circuits/src/lib.rs
-        "check_input",
-        ipfs_cid,
-        input_digits
-    );
-
-    println!("[+] Composed Extrinsic:\n {:?}\n", xt);
-
-    // "send and watch extrinsic until InBlock"
-    let tx_hash = api
-        .send_extrinsic(xt.hex_encode(), XtStatus::InBlock)
-        .unwrap();
-    println!("[+] Transaction got included. Hash: {:?}", tx_hash);
-
-    tx_hash.expect("send_extrinsic failed")
-}
+) 
 ```
 
 ### Garble Circuit Evaluator
-This is the high level part in rust that encapsulated call to lower level C++ evaluator
+This is the high level part in rust that encapsulated calls to lower level C++ evaluator
 ```rust
 pub use cxx;
 
@@ -260,381 +185,237 @@ low level C++ garbled circuits evaluator part
 This is the layer in charge of writting the results of display circuits evaluation directly to the framebuffer through GPU shaders
 [wallet-app/shared/rust/renderer](https://github.com/Interstellar-Network/wallet-app/tree/master/shared/rust/renderer)
 
-One of the most critical part of the renderer, responsible to create surface view in which renderer will display the texture resulting of circuits evaluation/execution
+`setup.rs` is one of the most critical part of the renderer, responsible for the creation of textures in which renderer will display the result of circuits evaluation/execution with GPU shaders
+`setup.rs`
 ```rust
-use android_logger::Config;
-use bevy::prelude::Color;
-use common::DisplayStrippedCircuitsPackageBuffers;
-use core::ffi::c_void;
-use jni::objects::{JClass, JObject, JString, ReleaseMode};
-use jni::sys::{jbyteArray, jfloat, jfloatArray, jint, jlong, jstring};
-use jni::JNIEnv;
-use jni_fn::jni_fn;
-use log::{debug, info, Level};
-use raw_window_handle::{AndroidNdkHandle, RawWindowHandle};
+pub fn setup_pinpad_textures(
+    mut commands: Commands,
+    mut images: ResMut<Assets<Image>>,
+    mut texture_atlas: ResMut<Assets<TextureAtlas>>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials_color: ResMut<Assets<ColorMaterial>>,
+    rects_pinpad: Res<crate::RectsPinpad>,
+) {
+    // TODO https://bevy-cheatbook.github.io/features/parent-child.html
+    // circle is the parent, Texture is child
 
-// #[cfg(target_os = "android")]
-use android_logger::FilterBuilder;
+    /// WARNING it is assumed that the layout is one row of 10 "cases"
+    let atlas_width = rects_pinpad.circuit_dimension[0];
+    let atlas_height = rects_pinpad.circuit_dimension[1];
 
-use crate::{
-    init_app, my_raw_window_handle, update_texture_utils, vertices_utils::Rect, App,
-    TextureUpdateCallbackType,
-};
+    // pinpad
+    let atlas_handle = texture_atlas.add(TextureAtlas::from_grid(
+        images.add(uv_debug_texture(atlas_width, atlas_height)),
+        Vec2::new((atlas_width as f32) / 10., atlas_height as f32),
+        10,
+        1,
+    ));
+    // draw a sprite from the atlas
+    for row in 0..rects_pinpad.nb_rows {
+        for mut col in 0..rects_pinpad.nb_cols {
+            // on index = 9, we want to draw in the BOTTOM CENTER; which is why we move "col++"
+            // TODO proper index directly(ie without "if"): exclude lower left(cancel button) and lower right(done button)
+            let index = col + row * rects_pinpad.nb_cols;
+            if index == 9 {
+                col = col + 1;
+            } else if index >= 10 {
+                break;
+            }
 
-extern "C" {
-    pub fn ANativeWindow_fromSurface(env: JNIEnv, surface: JObject) -> usize;
-    // TODO maybe use:ANativeWindow_getFormat?
-    pub fn ANativeWindow_getHeight(window_ptr: usize) -> u32;
-    pub fn ANativeWindow_getWidth(window_ptr: usize) -> u32;
-}
+            let current_rect = &rects_pinpad.rects[[row, col]];
 
-pub fn get_raw_window_handle(env: JNIEnv, surface: JObject) -> (RawWindowHandle, u32, u32) {
-    let a_native_window = unsafe { ANativeWindow_fromSurface(env, surface) };
-    let mut handle = AndroidNdkHandle::empty();
-    handle.a_native_window = a_native_window as *mut c_void;
+            let center_x = current_rect.center()[0];
+            let center_y = current_rect.center()[1];
 
-    let width = unsafe { ANativeWindow_getWidth(a_native_window) };
-    let height = unsafe { ANativeWindow_getHeight(a_native_window) };
+            commands.spawn_bundle(SpriteSheetBundle {
+                transform: Transform {
+                    translation: Vec3::new(center_x, center_y, 1.0),
+                    ..default()
+                },
+                sprite: TextureAtlasSprite {
+                    index: index,
+                    custom_size: Some(Vec2::new(
+                        current_rect.width() / 2.0,
+                        current_rect.height() / 2.0,
+                    )),
+                    color: rects_pinpad.text_color,
+                    ..default()
+                },
+                texture_atlas: atlas_handle.clone(),
+                ..default()
+            });
 
-    return (RawWindowHandle::AndroidNdk(handle), width, height);
-}
+            // circle_radius: max(width, height), that way it works even if change
+            let circle_radius = (current_rect.width() / 2.0).max(current_rect.height() / 2.0);
 
-// TODO static state? or return Box<State> in initSurface and store as "long" in Kotlin?
-// static mut state: Option<State> = None;size
-
-fn init_surface(
-    env: JNIEnv,
-    surface: JObject,
-    messageRects: jfloatArray,
-    pinpadRects: jfloatArray,
-    pinpad_nb_cols: usize,
-    pinpad_nb_rows: usize,
-    message_text_color: Color,
-    circle_text_color: Color,
-    circle_color: Color,
-    background_color: Color,
-    message_pgarbled_buf: Vec<u8>,
-    message_packmsg_buf: Vec<u8>,
-    pinpad_pgarbled_buf: Vec<u8>,
-    pinpad_packmsg_buf: Vec<u8>,
-) -> jlong {
-    // TODO use loggers.rs(same as substrate-client)
-    // WARNING: conflicts with substrate-client/src/loggers.rs
-    // only the first one called is taken into account
-    android_logger::init_once(
-        Config::default()
-            .with_min_level(Level::Info)
-            .with_tag("interstellar")
-            .with_filter(
-                FilterBuilder::new()
-                    // useful: wgpu_hal=info
-                    .parse("info,jni::crate=debug")
-                    .build(),
-            ),
-    );
-
-    let (handle, width, height) = get_raw_window_handle(env, surface);
-    log::debug!(
-        "initSurface: got handle! width = {}, height = {}",
-        width,
-        height
-    );
-    info!("initSurface before new_native");
-
-    let mut message_rects_vec = unsafe {
-        convert_rect_floatArr_to_vec_rect(env, messageRects, width as f32, height as f32)
-    };
-    let mut pinpad_rects_vec =
-        unsafe { convert_rect_floatArr_to_vec_rect(env, pinpadRects, width as f32, height as f32) };
-    assert!(
-        message_rects_vec.len() == 1,
-        "should have only ONE message_rects!",
-    );
-    assert!(
-        pinpad_rects_vec.len() == pinpad_nb_cols * pinpad_nb_rows,
-        "pinpadRects length MUST = pinpad_nb_cols * pinpad_nb_rows!"
-    );
-    // get the only Rect from "message_rects"; owned
-    let message_rect = message_rects_vec.swap_remove(0);
-    debug!("init_surface: message_rect: {:?}", message_rect);
-    // pinpad: convert the Vec<> into a 2D matrix
-    let mut pinpad_rects = ndarray::Array2::<Rect>::default((pinpad_nb_rows, pinpad_nb_cols));
-    for row in 0..pinpad_nb_rows {
-        for col in 0..pinpad_nb_cols {
-            let index = col + row * pinpad_nb_cols;
-            debug!(
-                "init_surface: col: {:?}, row: {:?}, index: {}",
-                col, row, index
-            );
-            pinpad_rects[[row, col]] = pinpad_rects_vec.get(index).unwrap().clone();
-            // swap_remove takes the first(0 in this case), so no need to compute "let index = col + row * pinpad_nb_cols;"
-            // pinpad_rects[[row, col]] = pinpad_rects_vec.swap_remove(0);
-            // FAIL: the order ends up messed up, which means the "cancel" and "go" button are not in the right place
+            commands.spawn_bundle(MaterialMesh2dBundle {
+                mesh: meshes.add(Circle::new(circle_radius).into()).into(),
+                material: materials_color.add(rects_pinpad.circle_color.into()),
+                transform: Transform::from_xyz(center_x, center_y, 0.0),
+                ..default()
+            });
         }
     }
+}
+
+/// Will draw the message texture at the given RectMessage
+pub fn setup_message_texture(
+    mut commands: Commands,
+    mut images: ResMut<Assets<Image>>,
+    rect_message: Res<crate::RectMessage>,
+) {
+    // Texture message = foreground
+    commands.spawn_bundle(SpriteBundle {
+        texture: images.add(uv_debug_texture(
+            rect_message.circuit_dimension[0],
+            rect_message.circuit_dimension[1],
+        )),
+        sprite: Sprite {
+            custom_size: Some(Vec2::new(
+                rect_message.rect.width(),
+                rect_message.rect.height(),
+            )),
+            color: rect_message.text_color,
+            ..default()
+        },
+        transform: Transform::from_xyz(
+            // Sprite default to Anchor::Center which means x=0.0 will center it; and this also why "rect.height() / 2.0" and ""rect.width() / 2.0""
+            rect_message.rect.center()[0],
+            rect_message.rect.center()[1],
+            1.0,
+        ),
+        ..default()
+    });
+}
+
+/// add_startup_system: Init TextureUpdateCallbackMessage/TextureUpdateCallbackPinpad
+/// using the mod "update_texture_utils"
+// TODO ideally we would want to pass the function all the way from init_app, to completely
+// decouple renderer and "circuit update"
+pub fn setup_texture_update_systems(
+    mut texture_update_callback_message: ResMut<TextureUpdateCallbackMessage>,
+    mut texture_update_callback_pinpad: ResMut<TextureUpdateCallbackPinpad>,
+) {
+    texture_update_callback_message.callback = Some(Box::new(
+        crate::update_texture_utils::update_texture_data_message,
+    ));
+    texture_update_callback_pinpad.callback = Some(Box::new(
+        crate::update_texture_utils::update_texture_data_pinpad,
+    ));
+}
+
+/// NOTE: it will REPLACE the default shader used by all SpriteSheetBundle/SpriteBundle/etc
+/// This shader is allows to us to use alpha as a mask
+/// - when the channel is set, it will draw the given color(set in Sprite init)
+/// - when channel is 0.0, it will be full transparent[rbga 0,0,0,0]
+/// -> ie we DO NOT want a background color; we want to "draw only the foreground"
+///
+/// ARCHIVE/ALTERNATIVE?
+/// Based on https://github.com/bevyengine/bevy/blob/v0.7.0/examples/2d/sprite_manual.rs
+/// but derive SpritePipeline instead of SpritePipeline
+///
+/// Allows to use a custom shader, with added uniform for colors
+/// SpritePipeline only supports blending ONE color, but we want a behavior like
+/// an ALPHA only texture(RED channel only in our case)
+/// - if the channel is 1.0: draw the foreground color
+/// - if the channel is 0.0: draw the background color
+/// We do it this way b/c the "circuit outputs" are binary, so it simpler to have a
+/// binary-like texture on the GPU side.
+/// We could probably do it with a RGBA texture IFF the layout in memory is RRR...GGG...BBB...AAA
+/// else it would means a sub-optimal buffer copy each frame instead of the direct
+/// ~ memcopy("circuit outputs", "texture")
+///
+/// -> TODO? this fails b/c SpritePipeline* fields are private, which means we basically have to copy paste everything
+/// in order to access them in "queue_colored_sprites"
+//
+// TODO can we find a way to override the shader only when needed
+// see https://github.com/bevyengine/bevy/blob/main/crates/bevy_sprite/src/render/mod.rs for where SPRITE_SHADER_HANDLE is used
+// cf colored_sprite_pipeline.rs
+// NOTE: right now we use a DEFINE(let in wgsl) so both message and pinpad sprite WILL have the same text color...
+pub fn setup_transparent_shader_for_sprites(
+    mut shaders: ResMut<Assets<Shader>>,
+    // mut pipeline_cache: ResMut<bevy::render::render_resource::PipelineCache>,
+    // mut pipelines: ResMut<
+    //     bevy::render::render_resource::SpecializedRenderPipelines<bevy::sprite::SpritePipeline>,
+    // >,
+    // mut sprite_pipeline: ResMut<bevy::sprite::SpritePipeline>,
+    // msaa: Res<Msaa>,
+    // theme: Res<crate::Theme>,
+) {
+    // cf https://github.com/bevyengine/bevy/blob/v0.7.0/crates/bevy_sprite/src/lib.rs
+    // can we modify render/sprite.wgsl to do "if background color, set alpha = 0.0, else draw color"
+    // TODO is there a way to override the shader for a specific Sprite?
+
+    // let text_color_rgba = theme.text_color.as_rgba_f32();
+    // let define_str = format!(
+    //     "let BACKGROUND_COLOR: vec4<f32> = vec4<f32>({:.5}, {:.5}, {:.5}, {:.5});",
+    //     text_color_rgba[0], text_color_rgba[1], text_color_rgba[2], text_color_rgba[3]
+    // );
+
+    let shader_str = format!("{}", include_str!("../data/transparent_sprite.wgsl"));
+
+    let new_sprite_shader = Shader::from_wgsl(shader_str);
+    shaders.set_untracked(bevy::sprite::SPRITE_SHADER_HANDLE, new_sprite_shader);
 
     // TODO?
-    // let size = winit::dpi::PhysicalSize::new(width, height);
-    // &awindow,
-    //     size,
-    //     update_texture_data,
-    //     vertices,
-    //     indices,
-    //     texture_base,
-    let mut app = App::new();
-
-    log::debug!("before init_app");
-    init_app(
-        &mut app,
-        message_rect,
-        pinpad_rects,
-        pinpad_nb_cols,
-        pinpad_nb_rows,
-        message_text_color,
-        circle_text_color,
-        circle_color,
-        background_color,
-        // DEV/DEBUG: offline
-        // include_bytes!("../examples/data/message_224x96.pgarbled.stripped.pb.bin").to_vec(),
-        // include_bytes!("../examples/data/message_224x96.packmsg.pb.bin").to_vec(),
-        // include_bytes!("../examples/data/pinpad_590x50.pgarbled.stripped.pb.bin").to_vec(),
-        // include_bytes!("../examples/data/pinpad_590x50.packmsg.pb.bin").to_vec(),
-        message_pgarbled_buf,
-        message_packmsg_buf,
-        pinpad_pgarbled_buf,
-        pinpad_packmsg_buf,
-    );
-
-    // NOTE: MUST be after init_app(or rather DefaultPlugins) else
-    // panic at: "let mut windows = world.get_resource_mut::<Windows>().unwrap();"
-    #[cfg(target_os = "android")]
-    crate::init_window(
-        &mut app,
-        width,
-        height,
-        my_raw_window_handle::MyRawWindowHandleWrapper::new(handle),
-    );
-
-    info!("init_app ok!");
-
-    Box::into_raw(Box::new(app)) as jlong
-    // TODO static state?
-    // 0
+    // pipeline_cache
+    //     .get_render_pipeline_descriptor(bevy::render::render_resource::CachedRenderPipelineId(0))
+    //     .fragment
+    //     .unwrap()
+    //     .shader_defs
+    //     .push("other".to_string());
+    //
+    // cf /.../bevy_sprite-0.7.0/src/render/mod.rs around "let colored_pipeline"
+    // let key = bevy::sprite::SpritePipelineKey::from_msaa_samples(msaa.samples);
+    // let pipeline = pipelines.specialize(&mut pipeline_cache, &sprite_pipeline, key);
+    // let colored_pipeline = pipelines.specialize(
+    //     &mut pipeline_cache,
+    //     &sprite_pipeline,
+    //     key | bevy::sprite::SpritePipelineKey::COLORED,
+    // );
 }
 
-/// IMPORTANT: pinpadRects is assumed to be given from top->bottom, left->right
-/// ie pinpadRects[0] is top left, pinpadRects[12] is bottom right
-///
-/// param: surface: SHOULD come from "override fun surfaceCreated(holder: SurfaceHolder)" holder.surface
-/// param: circuits_package_ptr: MUST be the returned value from substrate-client/src/jni_wrapper.rs GetCircuits
-///     NOTE: the pointer is NOT valid after this function returns!
-#[no_mangle]
-#[jni_fn("gg.interstellar.wallet.RustWrapper")]
-pub unsafe fn initSurface(
-    env: JNIEnv,
-    _: JClass,
-    surface: JObject,
-    messageRects: jfloatArray,
-    pinpadRects: jfloatArray,
-    pinpad_nb_cols: jint,
-    pinpad_nb_rows: jint,
-    message_text_color_hex: JString,
-    circle_text_color_hex: JString,
-    circle_color_hex: JString,
-    background_color_hex: JString,
-    circuits_package_ptr: jlong,
-) -> jlong {
-    // USE A Box, that way the pointer is properly cleaned up when exiting this function
-    // let circuits_package = &mut *(circuits_package_ptr as *mut DisplayStrippedCircuitsPackageBuffers);
-    let display_stripped_circuits_package_buffers: Box<DisplayStrippedCircuitsPackageBuffers> =
-        Box::from_raw(circuits_package_ptr as *mut _);
-
-    init_surface(
-        env,
-        surface,
-        messageRects,
-        pinpadRects,
-        pinpad_nb_cols.try_into().unwrap(),
-        pinpad_nb_rows.try_into().unwrap(),
-        Color::hex::<String>(
-            env.get_string(message_text_color_hex)
-                .expect("Couldn't get java string message_text_color_hex!")
-                .into(),
-        )
-        .unwrap(),
-        Color::hex::<String>(
-            env.get_string(circle_text_color_hex)
-                .expect("Couldn't get java string circle_text_color_hex!")
-                .into(),
-        )
-        .unwrap(),
-        Color::hex::<String>(
-            env.get_string(circle_color_hex)
-                .expect("Couldn't get java string circle_color_hex!")
-                .into(),
-        )
-        .unwrap(),
-        Color::hex::<String>(
-            env.get_string(background_color_hex)
-                .expect("Couldn't get java string background_color_hex!")
-                .into(),
-        )
-        .unwrap(),
-        display_stripped_circuits_package_buffers
-            .message_pgarbled_buf
-            .clone(),
-        display_stripped_circuits_package_buffers
-            .message_packmsg_buf
-            .clone(),
-        display_stripped_circuits_package_buffers
-            .pinpad_pgarbled_buf
-            .clone(),
-        display_stripped_circuits_package_buffers
-            .pinpad_packmsg_buf
-            .clone(),
-    )
-}
-
-#[no_mangle]
-#[jni_fn("gg.interstellar.wallet.RustWrapper")]
-pub unsafe fn render(_env: *mut JNIEnv, _: JClass, obj: jlong) {
-    // TODO static state?
-    let app = &mut *(obj as *mut App);
-    // DO NOT use app.run() cf https://github.com/bevyengine/bevy/blob/main/examples/app/custom_loop.rs
-    // calling app.run() makes Android display not updating after a few loops.
-    // The texture are setup, circuit_evaluate runs a few times and then nothing changes anymore
-    // change_texture_message/change_texture_pinpad are NOT called anymore
-    // app.run();
-    app.update();
-}
-
-#[no_mangle]
-#[jni_fn("gg.interstellar.wallet.RustWrapper")]
-pub unsafe fn cleanup(_env: *mut JNIEnv, _: JClass, obj: jlong) {
-    let _obj: Box<App> = Box::from_raw(obj as *mut _);
-}
-
-/// Convert a floatArray like [left0, top0, right0, bottom0, left1, top2, right1, bottom1, ...]
-/// into vec[Rect(left0, top0, right0, bottom0),Rect(left1, top2, right1, bottom1),...]
-///
-/// NOTE: will also convert the Coords to match Bevy
-/// eg a Rect on the top of screen, full width:
-//  0 = {Rect@20731} Rect.fromLTRB(0.0, 0.0, 1080.0, 381.0)
-//  message_rects_flattened = {ArrayList@20533}  size = 4
-//   0 = {Float@20689} 0.0
-//   1 = {Float@20690} 0.0
-//   2 = {Float@20691} 1080.0
-//   3 = {Float@20692} 381.0
-// will be converted to:
-// Rect(left:0.0, top: height - 0.0, right: 1080, bottom: height - 381.0)
-unsafe fn convert_rect_floatArr_to_vec_rect(
-    env: JNIEnv,
-    rectsFloatArray: jfloatArray,
-    width: f32,
-    height: f32,
-) -> Vec<Rect> {
-    let rects_floatarr = env
-        .get_float_array_elements(rectsFloatArray, ReleaseMode::NoCopyBack)
-        .unwrap();
-    assert_ne!(
-        rects_floatarr.size().unwrap(),
-        0,
-        "rects_floatarr is empty!"
-    );
-    assert_eq!(
-        rects_floatarr.size().unwrap() % 4,
-        0,
-        "rects_floatarr MUST be % 4!"
-    );
-
-    let mut rects_vec =
-        Vec::<Rect>::with_capacity((rects_floatarr.size().unwrap() / 4).try_into().unwrap());
-    let mut idx = 0;
-    for i in (0..rects_floatarr.size().unwrap()).step_by(4) {
-        rects_vec.insert(
-            idx,
-            Rect::new_to_ndc_android(
-                // message_rects_jlist.get(i).unwrap().unwrap().into(),
-                // message_rects_jlist.get(i + 1).unwrap().unwrap().into(),
-                // message_rects_jlist.get(i + 2).unwrap().unwrap().into(),
-                // message_rects_jlist.get(i + 3).unwrap().unwrap().into(),
-                *rects_floatarr.as_ptr().offset(i.try_into().unwrap()),
-                *rects_floatarr.as_ptr().offset((i + 1).try_into().unwrap()),
-                *rects_floatarr.as_ptr().offset((i + 2).try_into().unwrap()),
-                *rects_floatarr.as_ptr().offset((i + 3).try_into().unwrap()),
-                width,
-                height,
-            ),
-        );
-        idx += 1;
-    }
-
-    rects_vec
-}
-
-// https://github.com/jni-rs/jni-rs/blob/master/tests/util/mod.rs
-#[cfg(test)]
-#[cfg(target_os = "linux")] // we do not need jni features = ["invocation"] for Android
-fn jvm() -> &'static std::sync::Arc<jni::JavaVM> {
-    static mut JVM: Option<std::sync::Arc<jni::JavaVM>> = None;
-    static INIT: std::sync::Once = std::sync::Once::new();
-
-    INIT.call_once(|| {
-        let jvm_args = jni::InitArgsBuilder::new()
-            .version(jni::JNIVersion::V8)
-            .option("-Xcheck:jni")
-            .build()
-            .unwrap_or_else(|e| panic!("{:#?}", e));
-
-        let jvm = jni::JavaVM::new(jvm_args).unwrap_or_else(|e| panic!("{:#?}", e));
-
-        unsafe {
-            JVM = Some(std::sync::Arc::new(jvm));
-        }
-    });
-
-    unsafe { JVM.as_ref().unwrap() }
-}
-
-#[cfg(test)]
-#[cfg(target_os = "linux")] // we do not need jni features = ["invocation"] for Android
-#[allow(dead_code)]
-pub fn attach_current_thread() -> jni::AttachGuard<'static> {
-    jvm()
-        .attach_current_thread()
-        .expect("failed to attach jvm thread")
-}
-
-// cf https://github.com/jni-rs/jni-rs/blob/master/tests/jni_api.rs
-#[cfg(target_os = "linux")] // we do not need jni features = ["invocation"] for Android
-#[test]
-pub fn test_convert_rect_floatArr_to_vec_rect() {
-    let env = attach_current_thread();
-
-    //     result = {Rect[1]@20529}
-    //  0 = {Rect@20731} Rect.fromLTRB(0.0, 0.0, 1080.0, 381.0)
-    // message_rects_flattened = {ArrayList@20533}  size = 4
-    //  0 = {Float@20689} 0.0
-    //  1 = {Float@20690} 0.0
-    //  2 = {Float@20691} 1080.0
-    //  3 = {Float@20692} 381.0
-    let buf: &[jfloat] = &[
-        0.0 as jfloat,
-        0.0 as jfloat,
-        1080.0 as jfloat,
-        381.0 as jfloat,
+// Creates a colorful test pattern
+// https://github.com/bevyengine/bevy/blob/main/examples/3d/shapes.rs
+fn uv_debug_texture(width: u32, height: u32) -> Image {
+    // : Vec<u8> = vec!
+    // : &[u8; 32] = &
+    let palette: Vec<u8> = vec![
+        255, 102, 159, 255, 255, 159, 102, 255, 236, 255, 102, 255, 121, 255, 102, 255, 102, 255,
+        198, 255, 102, 198, 255, 255, 121, 102, 255, 255, 236, 102, 255, 255,
     ];
-    let java_array = env
-        .new_float_array(4)
-        .expect("JNIEnv#new_float_array must create a Java jfloat array with given size");
 
-    // Insert array elements
-    let _ = env.set_float_array_region(java_array, 0, buf);
+    // let mut texture_data = vec![0; (width * height * TEXTURE_PIXEL_NB_BYTES).try_into().unwrap()];
+    // for y in 0..height {
+    //     let offset = width * y * TEXTURE_PIXEL_NB_BYTES;
+    //     texture_data[offset..(offset + width * TEXTURE_PIXEL_NB_BYTES)].copy_from_slice(&palette);
+    //     palette.rotate_right(4);
+    // }
+    //
+    // 4 because RGBA(or ARGB)
+    let target_size = (width * height * TEXTURE_PIXEL_NB_BYTES) as usize;
+    let mut texture_data = Vec::with_capacity(target_size);
+    while texture_data.len() < target_size {
+        let start = texture_data.len();
+        // end:
+        // - try to append the whole "palette"(32 bytes)
+        // - but DO NOT exceed target_size
+        let end = std::cmp::min(target_size, start + palette.len());
+        texture_data.extend(&palette[0..(end - start)]);
+    }
+    assert!(texture_data.len() == target_size);
 
-    let res = unsafe { convert_rect_floatArr_to_vec_rect(*env, java_array, 1080., 1920.) };
-
-    assert_eq!(res[0], Rect::new(-0.5625, 1.0, 0.5625, 0.603125))
-}
+    Image::new_fill(
+        Extent3d {
+            width: width,
+            height: height,
+            depth_or_array_layers: 1,
+        },
+        wgpu::TextureDimension::D2,
+        &texture_data,
+        // wgpu::TextureFormat::bevy_default(),
+        wgpu::TextureFormat::R8Unorm,
+    )
 ```
 ### Validation Screen
 High level screen in jetpack compose or swift UI to display the array of surface views generated directly by the GPU into the framebuffer with shaders.

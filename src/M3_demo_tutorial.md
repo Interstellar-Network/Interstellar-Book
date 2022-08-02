@@ -2,23 +2,14 @@
 
 
 
-## prerequiste: docker or podman
+## prerequiste
 
-install
-- docker: https://docs.docker.com/engine/install/
 
- or 
+| Install Docker | Install Podman |
+| ------------   | -------------  |
+|[docker](https://docs.docker.com/engine/install/)| [podman](https://podman.io/getting-started/installation.html) |
+|[docker-compose](https://docs.docker.com/compose/install/)|[podman-compose](https://github.com/containers/podman-compose#podman-compose)|
 
-- podman: 
-https://podman.io/getting-started/installation.html
-
-then
-
-- docker-compose: https://docs.docker.com/compose/install/
-
-or
-
-- podman-compose: https://github.com/containers/podman-compose#podman-compose
 
 
 ## Set-up Demo
@@ -78,7 +69,7 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 [Install Android studio](https://developer.android.com/studio/)
 
-Install the pixel 5 API 31 emulator with Virtual Device Manager
+Install the pixel 5 API 31 emulator with Virtual Device Manager or any `x86_64` emulator.
 
 
 #### 3.4.2 Launch the emulator
@@ -89,12 +80,24 @@ Wait for the emulator to launch and emulated device to power on and drag and dro
 
 ### 4. Ensure that wallet can connect to the blockchain
 
+>The app is currently a dev version, so it expects the servers(RPC/WS, and IPFS) to be on localhost.
+
+Which is obviously not the case when running on Device/Emulator.
+
+To remedy `adb reverse` will expose "`localhost` of the desktop" as "`localhost` of the device".
+
+>Then, IF the blockchain(docker-compose) are NOT running on the desktop, you need to expose them. It can be done e.g. using ssh port forwarding, or through some other means.
+
+![config-localhost-device](./fig/config-localhost-device.svg)
+
+Following is a configuration example with a windows desktop that run an android emulator and a WSL/VM running the blockchain(docker-compose)
+
 adb is installed by default with android studio.
 So you just need to set-up its path on the OS used, if it is not already set.
 
 Just connect the phone with an USB port or through WiFi( cf android studio).
 
-on the OS where the emulator is installed or the device is connected:
+on the OS where the emulator is running or the device is connected:
 ```
 adb reverse tcp:5001 tcp:5001
 ```
@@ -109,7 +112,7 @@ example if  blockchain run on WSL2
 ```
  export WSL_HOST_IP="$(tail -1 /etc/resolv.conf | cut -d' ' -f2)"
  ```
-and use SSH to connect to the device or emulator on windows:
+and use SSH to connect to the emulator running on windows or android devices connected to adb through USB port or WiFi:
 ```
 ssh -N -R 9944:localhost:9944 -R 5001:localhost:5001 [windows_user_name]@$WSL_HOST_IP
 ```
@@ -117,8 +120,6 @@ TROUBLESHOOTING: start the front-end
 [substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944)
  on your Device/Emulator to check it works properly.
  Otherwise fix network issues.
-
-
 
 
 ## Demo purpose 
@@ -177,6 +178,16 @@ on SEND screen.
 ### 3.2 Click on the blue Check icon
 
 ### 3.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code
+
+### 3.4 check Toast message order
+- Processing...
+- Registered
+- [error] No circuits available after 10s; exiting!
+
+[after taping one-time code digits]
+- Validating transaction...
+- Transaction done!
+
 
 NOTE:
 > The wallet app is still work in progress and we have still some little issues to fix between the low level layer in rust and C++, especially on the renderer to connect with the Kotlin/Swift UI layer.
