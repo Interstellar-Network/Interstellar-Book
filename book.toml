@@ -47,13 +47,14 @@ title = "Interstellar Book"
 
 
 [output.html]
+theme = "its-theme"
 default-theme = "navy"
 preferred-dark-theme = "navy"
 #additional-css = ["theme/pagetoc.css"] 
 #additional-js  = ["theme/pagetoc.js"]
 
-#copy-fonts = true
-#additional-css = ["fonts/BF_Modernista.css"]
+copy-fonts = true
+additional-css = ["its-theme/fonts/BF_Modernista.css"]
 
 [output.html.font]
 enable = true
