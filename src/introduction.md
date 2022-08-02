@@ -1,13 +1,7 @@
 
 <picture>
-  <source 
-    srcset="fig/Interstellar-White-Text.png" 
-    media="(prefers-color-scheme: dark)">
-  <img src="fig/Interstellar-Black-Text.png">
+  <img src="fig/Interstellar_Violet_Logo_Text.png">
 </picture>
-
-
-
 
 
 # Introduction
