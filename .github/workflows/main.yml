@@ -29,7 +29,7 @@ jobs:
       - run: |
           mdbook build
           cp ./config/CNAME ./book/CNAME
-          cp ./its-theme/fonts/BF_Modernista.woff ./book/its-theme/fonts/
+          cp ./its-theme/fonts/BF_Modernista-Regular.woff ./book/its-theme/fonts/
           #quick fix to enable BF_Modernista on Brave
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
