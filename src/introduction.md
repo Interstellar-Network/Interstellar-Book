@@ -17,9 +17,9 @@ The main pain points of non-custodial wallet solutions still are:
 Interstellar is a novel non-custodial mobile multichain wallet with hardware level security. Based on a Substrate blockchain and SubstraTEE/IntegriTEE workers connected to a mobile, the wallet solution comes without passphrases or any other secrets to store or remember.
 
 **Thanks to Trusted User Interfaces on mobiles and Trusted Execution Environments in both mobiles and blockchain nodes, we can now provide the same hardware security level as hardware wallets with only a mobile and a blockchain - Unlocking an unmatched user experience.**
-<img src="./fig/Hardware_Mobile_Blockchain_Overview.png" alt="Hadrware mobile-blockchain" height="500"/>
 
 
+![Hardware Mobile Blockchain Overview](./fig/Hardware_Mobile_Blockchain_Overview.png)
 
 Because TUI is not yet avalaible on all mobile devices, we use a Garbled Circuit/Visual Cryptography scheme which provides an alternative that will be complementary down the road to mitigate potential flaws in TUI.
 
