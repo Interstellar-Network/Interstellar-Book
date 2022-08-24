@@ -5,11 +5,15 @@
 
 # Introduction
 
-"The web3 ecosystem needs a friendly user experience with hardware level security to reach mass adoption."
+"The Web3 ecosystem needs a friendly user experience with hardware level security to reach mass adoption."
  
+ [The Top 3 Web3 Wallet Problems](https://medium.com/@jlleleu/d53724fee1cd)
+
 The main pain points of non-custodial wallet solutions still are:
-- **User experience** [Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e)  
-- **Security** [Are cryptocurrency wallets more at risk than ever?](https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7) 
+
+- **User experience** | [Can an easy to set-up Wallet be an efficient customer acquisition tool for Dapps and DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e)
+
+- **Security** | [Are Cryptocurrency Wallets more at risk than ever?](https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7)
 
 > We think that current wallet solutions slow down the DeFi adoption.
 
@@ -31,20 +35,20 @@ Because TUI is not yet avalaible on all mobile devices, we use a Garbled Circuit
 
 - **Multichain wallet** - securely store and interact with native cryptocurrency coins, tokens and NFTs from multiple blockchains
 
-- **Nothing to store or remember** - no private key, passphrase, password, pin or login
+- **Easiest set-up in the ecosystem** - no private key, passphrase, password, pin or login
 
-- **Hardware level security** - TEE on nodes and mobiles (incl. TUI), Garbled Circuits and Visual Cryptography
+- **Hardware level security** - TEE on blockchain nodes and mobiles (incl. TUI), Garbled Circuits and Visual Cryptography
+
+- **Simple Recovery Services** - leverages the existing Substrate pallet for social recovery + a novel decentralized autonomous recovery service based on NFC
+
+- **Send crypto with social network messages** - share a link that includes a pending transaction, even to friends with no wallet: explained in [Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e)
 
 - **Confirm a transaction with ONLY ONE SCREEN** - no SMS to wait for, no additional 2FA app to use, no QR code to scan
 
-- **Up to 1,000,000 tps** - no tps limit due to slow consensus, thanks to IntegriTEE layer 2 based on hardware enclave technology 
-
-- **Social Recovery Service** - leverages the existing Substrate pallet and a novel decentralized autonomous recovery service based on NFC
-
-- **Features to securely send crypto with social network messages (even to persons with no wallet)** - explained in [Can an easy to set-up wallet be an efficient customer acquisition tool for DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e) 
+- **Up to 1,000,000 tps** - no tps limit due to slow consensus, thanks to IntegriTEE layer 2 based on hardware enclave technology
 
 #### Our solution is designed to support blockchain and DeFi mass market adoption with:
 
-- **A decentralized key & asset management service** where the user’s private keys and signature programs are stored and executed in TEE nodes
+- **A decentralized key & asset management service** | The user’s private key and signature programs are stored and executed in TEE nodes
 
-- **A decentralized Trusted Transaction Validation Protocol** that leverages TEE and TUI features on mobile, combined with One Time Garbled Circuits and Visual Cryptography to provide a **Trusted Authentication and Trusted UI layer** on user devices
+- **A decentralized Trusted Transaction Validation Protocol** | Leverages TEE and TUI features on mobile, combined with One Time Garbled Circuits and Visual Cryptography to provide a Trusted Authentication and Trusted UI layer on user devices
