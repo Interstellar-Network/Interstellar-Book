@@ -62,6 +62,10 @@ services:
       - "8990:8990"
       # --ws-port
       - "9990:9990"
+    # cf README: "IMPORTANT: you **MUST** use `--enable-offchain-indexing=1`"
+    # --ws-external, needed else can not connect from host, cf https://github.com/substrate-developer-hub/substrate-node-template/blob/main/docker-compose.yml
+    # --rpc-external + --rpc-methods unsafe, same than "ws-external" but only needed for cli/demo_interstellar.sh
+    command: ["--ws-external", "--rpc-external", "--rpc-methods", "unsafe", "--dev", "--tmp", "--ws-port", "9990", "--port", "30390", "--rpc-port", "8990", "--enable-offchain-indexing=1"]
     environment:
       RUST_LOG: info,pallet_tx_registry=info,jsonrpsee_ws_server::server=warn
       RUST_BACKTRACE: 1
@@ -79,7 +83,8 @@ services:
       - "2091:2091"
       # -h, --untrusted-http-port
       - "4545:4545"
-    command: [ "--clean-reset", "--node-port", "9990", "--node-url", "ws://integritee_node", "-P", "2090", "-r", "3490", "-w", "2091", "-h", "4545", "run", "--skip-ra", "--dev" ]
+    # --ws-external, needed else can not connect from host, cf https://github.com/substrate-developer-hub/substrate-node-template/blob/main/docker-compose.yml
+    command: [ "--ws-external", "--clean-reset", "--node-port", "9990", "--node-url", "ws://integritee_node", "-P", "2090", "-r", "3490", "-w", "2091", "-h", "4545", "run", "--skip-ra", "--dev" ]
     environment:
       RUST_LOG: warn,pallet_ocw_garble=info,pallet_tx_validation=info,pallet_tx_registry=info,ocw_common=info,integritee_cli=info,ita_stf=info
       RUST_BACKTRACE: 1
