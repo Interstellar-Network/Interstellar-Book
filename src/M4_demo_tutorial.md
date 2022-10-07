@@ -57,9 +57,10 @@ that will connect to the node running in `docker-compose`
 - check which network docker-compose/podman-compose is using:\
   `docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' blockchain_demo_ipfs_1`
   - it should return for example: `blockchain_demo_default`
-  - if it fails: use `podman ps` and replace `blockchain_demo_ipfs_1` in the previous command by the correct name
-- run the demo (twice): `CLIENT_BIN="podman run --network blockchain_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
-  **IMPORTANT** the `--network` parameter MUST match the result of the previous command `docker container inspect`
+  - if it fails: use `docker ps` and replace `blockchain_demo_ipfs_1` in the previous command by the correct name
+- run the demo (twice): `CLIENT_BIN="docker run --network blockchain_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
+  **IMPORTANT** the `--network` parameter MUST match the result of the previous command `docker container inspect`\
+  **NOTE** replace `docker` by `podman` in `CLIENT_BIN=` if needed
     * the first time you start the demo it should say:
     ```
     [...]
