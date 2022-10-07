@@ -12,6 +12,8 @@ Therefore it is a backend-oriented milestone, and the demo takes the form of scr
 | [docker](https://docs.docker.com/engine/install/)          | [podman](https://podman.io/getting-started/installation.html)                 |
 | [docker-compose](https://docs.docker.com/compose/install/) | [podman-compose](https://github.com/containers/podman-compose#podman-compose) |
 
+NOTE: usually when using `docker` or `docker-comppse` you MUST also use `sudo`; and conversely you MUST NOT be root with `podman` and `podman-compose`
+
 - `sudo apt-get install jq`
 
 ## Demo
@@ -24,7 +26,7 @@ eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-N
 - *needed only if using docker:* `sudo service docker start` \
   podman does **not** require a service/daemon
 - launch the full stack with the following command in the created directory: \
-`docker-compose down --timeout 1 && docker-compose up --force-recreate` \
+`sudo docker-compose down --timeout 1 && sudo docker-compose up --force-recreate` \
 **NOTE:** replace `docker-compose` with `podman-compose` if you want to use podman instead of docker
 - wait a few seconds until you see this kind of lines repeating:
 ```
@@ -51,18 +53,18 @@ that will connect to the node running in `docker-compose`
 ### 2. Run the integritee demo script
 
 - create a docker/podman volume:\
-    `docker volume create KeyStoreVolume1`
+    `sudo docker volume create KeyStoreVolume1`
 - get the demo script:
     * for consistency, make sure you are in the directory created at "prepare a temp folder" above
     * `curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh`
     * `chmod +x demo_interstellar.sh`
 - check which network docker-compose/podman-compose is using:\
-  `docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' blockchain_demo_ipfs_1`
+  `sudo docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' blockchain_demo_ipfs_1`
   - it should return for example: `blockchain_demo_default`
   - if it fails: use `docker ps` and replace `blockchain_demo_ipfs_1` in the previous command by the correct name
-- run the demo (twice): `CLIENT_BIN="docker run --network blockchain_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
+- run the demo (twice): `CLIENT_BIN="sudo docker run --network blockchain_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
   **IMPORTANT** the `--network` parameter MUST match the result of the previous command `docker container inspect`\
-  **NOTE** replace `docker` by `podman` in `CLIENT_BIN=` if needed
+  **NOTE** replace `sudo docker` by `podman` in `CLIENT_BIN=` if needed
     * the first time you start the demo it should say:
     ```
     [...]
