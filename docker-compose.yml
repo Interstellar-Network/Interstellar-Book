@@ -70,6 +70,11 @@ services:
       RUST_LOG: info,pallet_tx_registry=info,jsonrpsee_ws_server::server=warn
       RUST_BACKTRACE: 1
       INTERSTELLAR_URI_ROOT_API_CIRCUITS: http://api_circuits:3000
+    healthcheck:
+        test: ["CMD", "lsof", "-i", ":9990"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
 
   integritee_service:
     image: "ghcr.io/interstellar-network/integritee_service:milestone4"
@@ -90,3 +95,5 @@ services:
       RUST_BACKTRACE: 1
       INTERSTELLAR_URI_ROOT_API_GARBLE: http://api_garble:3001
       INTERSTELLAR_URI_NODE: http://integritee_node:8990
+    depends_on:
+      - integritee_node
