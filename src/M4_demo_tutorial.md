@@ -1,4 +1,4 @@
-# M3 Demo Tutorial
+# M4 Demo Tutorial
 
 This goal of this milestone was to port security-critical pallets to Integritee.
 
