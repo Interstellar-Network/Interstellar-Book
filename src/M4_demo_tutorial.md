@@ -12,6 +12,8 @@ Therefore it is a backend-oriented milestone, and the demo takes the form of scr
 | [docker](https://docs.docker.com/engine/install/)          | [podman](https://podman.io/getting-started/installation.html)                 |
 | [docker-compose](https://docs.docker.com/compose/install/) | [podman-compose](https://github.com/containers/podman-compose#podman-compose) |
 
+- `sudo apt-get install jq`
+
 ## Demo
 
 ### 1. Launch the blockchain
