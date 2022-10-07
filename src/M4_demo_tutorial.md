@@ -26,8 +26,8 @@ eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-N
 - *needed only if using docker:* `sudo service docker start` \
   podman does **not** require a service/daemon
 - launch the full stack with the following command in the created directory: \
-`sudo docker-compose down --timeout 1 && sudo docker-compose up --force-recreate` \
-**NOTE:** replace `docker-compose` with `podman-compose` if you want to use podman instead of docker
+`sudo docker compose down --timeout 1 && sudo docker compose up --force-recreate` \
+**NOTE:** replace `docker compose` with `podman-compose` if you want to use podman instead of docker
 - wait a few seconds until you see this kind of lines repeating:
 ```
 2022-10-05 14:17:12 [ocw-circuits] Hello from pallet-ocw-circuits.
