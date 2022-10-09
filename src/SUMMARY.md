@@ -13,6 +13,7 @@
 - [Trusted Transaction Validation Protocol](./TTVP.md)
     - [Trusted Authentication & UI Layer](./TAUI.md)
     - [TTVP detailed](./TTVP_detailed.md)
+    - [TTVP in Hardware Enclave-TEE](./TTVP-TEE.md)
 
 
 - [Mobile Registry](./Mobile_Registry.md)
@@ -37,7 +38,9 @@
     - [M3 Delivery](./M3.md)
         - [M3 Docker Demo Tutorial](./M3_demo_tutorial.md)
 
-
+     - [M4 Delivery](./M4.md)
+        - [M3 Docker Demo Tutorial](./M4_demo_tutorial.md)
+           
     - [GCF APIs Testing Guide](./GCF_API_Test_Guide.md)
 
    
