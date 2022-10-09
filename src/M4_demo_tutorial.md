@@ -105,5 +105,11 @@ When the script is waiting for inputs, check the docker-compose logs for somethi
 * In this example the correct code is `[9, 7]` and the permutation of the pinpad are `[8, 4, 6, 7, 3, 1, 5, 2, 9, 0]`
     * NOTE: if you go back to the previous milestone demo, that is the order of the digit displayed on the Android app
 
+
+![random keypad](./fig/random-keypad.svg)
+
+
+
+
 * `9` is the <u>eighth</u> digit in the list(0-indexed) and `7` the <u>third</u> one
 * you must enter `8 3` when prompted

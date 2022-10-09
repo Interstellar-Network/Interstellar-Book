@@ -1,4 +1,4 @@
-# Trusted Transaction Validation Protcol implementation in TEE
+# Trusted Transaction Validation Protocol implementation in TEE
 
 A part of the transaction validation protocol is implemented whithin a Trusted Execution Environement in hardware enclave nodes i.e Integritee workers.
 
