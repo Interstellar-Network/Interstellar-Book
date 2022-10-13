@@ -59,10 +59,10 @@ that will connect to the node running in `docker-compose`
     * `curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh`
     * `chmod +x demo_interstellar.sh`
 - check which network docker-compose/podman-compose is using:\
-  `sudo docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' blockchain_demo_ipfs_1`
-  - it should return for example: `blockchain_demo_default`
-  - if it fails: use `docker ps` and replace `blockchain_demo_ipfs_1` in the previous command by the correct name
-- run the demo (twice): `CLIENT_BIN="sudo docker run --network blockchain_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
+  `sudo docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' interstellar_demo-integritee_service-1`
+  - it should return for example: `interstellar_demo_default`
+  - if it fails: use `docker ps` and replace `interstellar_demo-integritee_service-1` in the previous command by the correct name
+- run the demo (twice): `CLIENT_BIN="sudo docker run --network interstellar_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
   **IMPORTANT** the `--network` parameter MUST match the result of the previous command `docker container inspect`\
   **NOTE** replace `sudo docker` by `podman` in `CLIENT_BIN=` if needed
     * the first time you start the demo it should say:
