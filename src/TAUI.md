@@ -11,7 +11,7 @@ Following a schema illustrating how the trusted authentication and transaction v
 
 ## 1 The mobile received a transaction to validate
 
-For each transaction to validate, a one time program i.e. garbled circuit is received and executed by the garbled circuit evaluator on the mobile.
+For each transaction to validate, a one time program i.e. [garbled circuit](./GC.md) is received and executed by the garbled circuit evaluator on the mobile to display the [Validation Screen](./VC-GC.md)
 
 ## 2 User input
 Then the user inputs on the randomized keypad the one time code he see on the screen: 256 in this example.
