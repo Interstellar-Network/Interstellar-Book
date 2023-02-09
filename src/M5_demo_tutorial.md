@@ -31,14 +31,23 @@ NOTE: usually when using `docker` or `docker-comppse` you MUST also use `sudo`; 
 eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-compose.yml`
 - *needed only if using docker:* 
 
-    -download also the following file, eg: `curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh`
+    - download the following `docker-ipfs-init.sh` eg: 
+    `curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh`
+    - check that the file is in the directory
+    ```
+    ls -al
+    total 20
+    drwxr-xr-x  2 jll jll 4096 Feb  9 16:46 .
+    drwxr-xr-x 13 jll jll 4096 Feb  8 19:11 ..
+    -rw-r--r--  1 jll jll 6383 Feb  9 16:52 docker-compose.yml
+    -rw-r--r--  1 jll jll  222 Feb  9 15:06 docker-ipfs-init.sh
+    ```
+    - launch docker service:`sudo service docker start` 
 
-    -launch docker service:`sudo service docker start` 
-    
   >podman does **not** require a service/daemon
 - launch the full stack with the following command in the created directory: \
 `sudo docker compose down --timeout 1 && sudo docker compose up --force-recreate` \
-**NOTE:** replace `docker compose` with `podman-compose` if you want to use podman instead of docker
+    >replace `docker compose` with `podman-compose` if you want to use podman instead of docker
 - wait a few seconds until you see this kind of lines repeating:
 ```
 2022-10-05 14:17:12 [ocw-circuits] Hello from pallet-ocw-circuits.
@@ -63,19 +72,20 @@ that will connect to the node running in `docker-compose`
 
 ### 2. Run the integritee demo script
 
-- create a docker/podman volume:\
-    `sudo docker volume create KeyStoreVolume1`
+
 - get the demo script:
     * for consistency, make sure you are in the directory created at "prepare a temp folder" above
     * `curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh`
     * `chmod +x demo_interstellar.sh`
-- check which network docker-compose/podman-compose is using:\
-  `sudo docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf "%s\n" $net}}{{end}}' interstellar_demo-integritee_service-1`
-  - it should return for example: `interstellar_demo_default`
-  - if it fails: use `docker ps` and replace `interstellar_demo-integritee_service-1` in the previous command by the correct name
-- run the demo (twice): `CLIENT_BIN="sudo docker run --network interstellar_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4" ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090` \
-  **IMPORTANT** the `--network` parameter MUST match the result of the previous command `docker container inspect`\
-  **NOTE** replace `sudo docker` by `podman` in `CLIENT_BIN=` if needed
+
+
+- run the script [twice]:
+
+    - `sudo docker compose run --entrypoint /usr/local/worker-cli/demo_interstellar.sh integritee_cli -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990`
+
+
+
+    >replace `sudo docker compose` by `podman-comnpose` in the previous command when using podman
     * the first time you start the demo it should say:
     ```
     [...]
@@ -130,33 +140,7 @@ When the script is waiting for inputs, check the docker-compose logs for somethi
 
 
 ### 1. Launch the blockchain
-Create a directory
-
-example:
-```
-mkdir blockchain_demo
-```
- and add the following docker compose configuration file: [docker-compose.yml](https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml) in it.
-
-
-
-
-Then start docker or podman
-```
-sudo service docker start
-```
-and then 
-```
-cd blockchain_demo
-```
-and launch the blockchain demo with `ipfs` and  api services i.e. `api_circuits` 
-
-```
-docker-compose down --timeout 1 && docker-compose up --force-recreate
-```
-> replace `docker-compose` with `podman-compose` if you are using podman instead of docker
-
-
+if not yet launched (same process as with demo script)
 
 ### 2. Launch a generic Substrate Fromt-end
 
