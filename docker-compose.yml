@@ -15,7 +15,8 @@
 #   - `podman exec -it interstellar-book_api_circuits_1 /bin/bash`
 #   - `apt-get update && apt-get install -y curl && curl -v http://ipfs:5001/version`
 # - RUN:
-#   - initialize the circuits: `podman run --rm -it --network interstellar-book_default --entrypoint /usr/local/worker-cli/demo_interstellar.sh --env CLIENT_BIN=/usr/local/bin/integritee-cli ghcr.io/interstellar-network/integritee_cli:dev -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990`
+#   - cf comment at the end L113 "integritee_cli"
+#   - ALTERNATIVE: initialize the circuits: `podman run --rm -it --network interstellar-book_default --entrypoint /usr/local/worker-cli/demo_interstellar.sh --env CLIENT_BIN=/usr/local/bin/integritee-cli ghcr.io/interstellar-network/integritee_cli:dev -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990`
 #     - NOTE: replace "interstellar-book_default" by the correct network shown by `podman ps`
 #   - WAIT until you see the circuits on the front-end
 #     - https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws://localhost:9990
@@ -104,3 +105,19 @@ services:
       IPFS_ROOT_URL: http://ipfs:5001
     depends_on:
       - integritee_node
+
+  # podman equivalent: podman run --rm -it --network interstellar-book_default --entrypoint /usr/local/worker-cli/demo_interstellar.sh --env CLIENT_BIN=/usr/local/bin/integritee-cli ghcr.io/interstellar-network/integritee_cli:dev -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990
+  # compose is not really made to start "one shot" containers so it's a bit of a hack:
+  # - we default the entrypoint to "/usr/bin/true"
+  # - and then we can start the "demo script" on demand with: `podman-compose run --entrypoint /usr/local/worker-cli/demo_interstellar.sh integritee_cli`
+  integritee_cli:
+    image: "ghcr.io/interstellar-network/integritee_cli:dev"
+    hostname: integritee_cli
+    stdin_open: true
+    tty: true
+    entrypoint: ["/usr/bin/true"]
+    command: ["-P", "2090", "-p", "9990", "-u", "ws://integritee_node", "-V", "wss://integritee_service", "-R", "http://integritee_node:8990"]
+    environment:
+      CLIENT_BIN: /usr/local/bin/integritee-cli
+    depends_on:
+      - integritee_service
