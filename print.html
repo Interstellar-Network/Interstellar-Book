@@ -2333,9 +2333,12 @@ it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot
 <p><a href="./M5_demo_tutorial.html">Demo tutorial</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m5-demo-tutorial"><a class="header" href="#m5-demo-tutorial">M5 Demo Tutorial</a></h1>
 <p>The purpose of this demo is to test the integration of the garbled circuit production in TEE nodes to demonstrate our core security finalized proof of concept.</p>
-<p>As explained previously the garbling scheme implemeted on TEE nodes and android client is not yet optimized for display circuits like the previous one.
-so we also provide a script client to test the garble circuit production on TEE nodes.</p>
-<p>You can also test that the end to end solution with an android client, although due to the current poor circuit evaluation performance</p>
+<p>As explained previously the garbling scheme implemeted on TEE nodes and android client is not yet optimized for display circuits like the previous one.</p>
+<p>So we also provide a script client to test the garble circuit production on TEE nodes.</p>
+<p>You can also test that the end to end solution with an android client. </p>
+<blockquote>
+<p>Although due to the current poor circuit evaluation performance, the validation screen is really difficult to read and does not reflect in any way the intended user experience</p>
+</blockquote>
 <h2 id="prerequiste-2"><a class="header" href="#prerequiste-2">prerequiste</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Install Docker</th><th>Install Podman</th></tr></thead><tbody>
 <tr><td><a href="https://docs.docker.com/engine/install/">docker</a></td><td><a href="https://podman.io/getting-started/installation.html">podman</a></td></tr>
@@ -2359,8 +2362,10 @@ eg: <code>curl -o docker-compose.yml https://raw.githubusercontent.com/Interstel
 <li>
 <p><em>needed only if using docker:</em> </p>
 <p>-download also the following file, eg: <code>curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh</code></p>
-<p>-launch docker service:<code>sudo service docker start</code> 
-&gt;podman does <strong>not</strong> require a service/daemon</p>
+<p>-launch docker service:<code>sudo service docker start</code> </p>
+<blockquote>
+<p>podman does <strong>not</strong> require a service/daemon</p>
+</blockquote>
 </li>
 <li>
 <p>launch the full stack with the following command in the created directory: <br />
