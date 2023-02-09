@@ -20,7 +20,7 @@ You can also test that the end to end solution with an android client.
 
 NOTE: usually when using `docker` or `docker-comppse` you MUST also use `sudo`; and conversely you MUST NOT be root with `podman` and `podman-compose`
 
-- `sudo apt-get install jq`
+- `sudo apt-get install jq curl wget `
 
 ## Demo with script
 
@@ -33,7 +33,7 @@ eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-N
 
     - download the following `docker-ipfs-init.sh` eg: 
     `curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh`
-    - check that the file is in the directory
+    - check that the file is in the same directory as docker compose
     ```
     ls -al
     total 20
@@ -139,18 +139,6 @@ When the script is waiting for inputs, check the docker-compose logs for somethi
 ## Demo with Android client
 
 
-### 1. Launch the blockchain
-if not yet launched (same process as with demo script)
-
-### 2. Launch a generic Substrate Fromt-end
-
-Use the following [substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944) to launch substrate front end
-
-to connect to a locally running node
-
-> avoid some browser extensions that could generate interface issues
-
-
 ### 3. Install the wallet App i.e APK file on an android device or an emulator
 
 
@@ -167,7 +155,7 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 
 
-##### 3.2.2 on an windows emulator
+##### 3.2.2 on an emulator
 
 [Install Android studio](https://developer.android.com/studio/)
 
@@ -221,7 +209,7 @@ example if  blockchain run on WSL2
  ```
 and use SSH to connect to the emulator running on windows or android devices connected to adb through USB port or WiFi:
 ```
-ssh -N -R 9944:localhost:9944 -R 5001:localhost:5001 [windows_user_name]@$WSL_HOST_IP
+ssh -N -R 9990:localhost:9990 -R 5001:localhost:5001 -R 2090:localhost:2090 [windows_user_name]@$WSL_HOST_IP
 ```
 TROUBLESHOOTING: start the front-end
 [substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944)
@@ -229,52 +217,17 @@ TROUBLESHOOTING: start the front-end
  Otherwise fix network issues.
 
 
-## Demo purpose 
-
-The purpose of this demo is to show how a mobile wallet can use the [Trusted Transaction Protocol client](./TTVP_Client.md) to confirm a transaction in a higly secure and hardware-backed trusted way on a smartphone device.
-
-We focus on demonstrating:
-1. The registration of the mobile device on the blockchain mobile registry.
-2. The confirmation of a transaction through the TTVP protocol and the execution of the core low-level TTVP client on a smartphone device.
-
-> The purpose of the demo is not yet to show a fully functional wallet. We want to demonstrate that the TTVP protocol and Trusted Authentication and UI Layer is working as expected with our substrate based blockchain pallets to authenticate and confirm transactions or sensible operations.
 
 ## Start The demo
 
-
-## 1. Generate with `ocwCircuits` the configuration display circuit package
-
-> IMPORTANT: when interacting with pallets you MUST use the Signed button in blue to sign all the transactions, not SUDO, neither Unsigned
-
-> this is almost the same step one of the M2 delivery demo tutorial except that it generate of package of circuirts.
-
-It set-up the configuration display circuit package used by the Garble Circuit Factory to generate randomized keyboard and message with one time code for each transactions.
-
-
-### 1.1  Select ocwCircuits pallet 
-
-![circuit select](./fig/select-ocwCircuits.png)
-
-### 1.2 select submitConfigDisplayPackageSigned extrinsic
-![circuit select](./fig/select-circuit-display-package.png)
-
-### 1.3 Sign transaction
-
-![circuit sign](./fig/ocw-sign.png)
-
-### 1.3 The cid of the circuit package generated appears in Events
-
-![circuit sign](./fig/ocw-show-event.png)
-
-
-## 2. Launch Android App
+## 1. Launch Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
 
 
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
 
 
-## 3. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
+## 2. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
 
 ### 3.1 Select currency and contact
 Following is an explicit video showing how to send a curency to a contact
@@ -295,11 +248,12 @@ on SEND screen.
 - Validating transaction...
 - Transaction done!
 
-
+///////TO REFINE little game 
+not functionnal like the M3.
 NOTE:
 > The wallet app is still work in progress and we have still some little issues to fix between the low level layer in rust and C++, especially on the renderer to connect with the Kotlin/Swift UI layer.
 
- We want to avoid writting code that won't be used in the final version. For this reason we have made some little shortcut to demonstrate the execution of validation screen based on Garbled Circuits package eveluation.
+ We want to avoid writting code that won't be used in the final version. For this reason we have made some little shortcut to demonstrate the execution of validation screen based on Garbled Circuits package evaluation.
 
 > As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.
 
@@ -308,46 +262,7 @@ NOTE:
 This makes the classic public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
 Moreover, it makes the usage of the wallet much more user friendly and safer.
 
-## 4. Check that mobile public key is registered on the mobile registry pallet
 
-### 4.1 Copy the `account key` in MobileRegistry Events
-
-When the mobile is registered with an account, its mobile public key is stored on mobileRegistryMap in `MobileRegistry` pallet and an event is generated
-
-![circuit sign](./fig/MobileRegistryEvent.png)
-> underline in red
-
-
-### 4.2 select mobileRegistry pallet
-
-and mobileRegistryMap Query (not extrinsic)
-
-![circuit sign](./fig/select-MobileRegistry.png)
-
-Then  paste the copied `account key`
-
-![circuit sign](./fig/MobileRegistryQuery.png)
-
-When the Query is completed you will see the mobile public key associated with the device as a result.
-
-> this public key is used to verify the hardware-backed signature of the transaction confirmation message that includes position typed by the user on the randomized keypad
-
-## 5. Check Mobile user's ínput and transaction status on the front-end
-
-Check the events
-
-### 5.1 Transaction Success
-
-
-you will see in the events
-![circuit sign](./fig/TransactionSuccess.png)
-if the one-time-code was entered properly
-
-### 5.2 Transaction Fail
-
-you will see in the events
-![circuit sign](./fig/TransactionFail.png)
-if the one-time-code was wrong
 
 
 
