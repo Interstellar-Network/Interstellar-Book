@@ -33,7 +33,7 @@ services:
   # IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH config Addresses.API /ip4/0.0.0.0/tcp/5001
   # TODO? IPFS_PATH=/tmp/ipfs $GO_IPFS_PATH daemon --enable-pubsub-experiment
   ipfs:
-    image: "ipfs/go-ipfs:latest"
+    image: "ipfs/kubo:latest"
     ports:
       - "4001:4001"
       - "4001:4001/udp"
@@ -42,6 +42,9 @@ services:
     environment:
       # TODO? use "server"?
       IPFS_PROFILE: test
+    volumes:
+      # https://docs.ipfs.tech/install/run-ipfs-inside-docker/#customizing-your-node
+      - ./docker-ipfs-init.sh:/container-init.d/001-test.sh
 
   # docker run -it --name api_circuits --rm -p 3000:3000 --env RUST_LOG="warn,info,debug" ghcr.io/interstellar-network/api_circuits:milestone2 /usr/local/bin/api_circuits --ipfs-server-multiaddr /ip4/172.17.0.1/tcp/5001
   api_circuits:
