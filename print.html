@@ -2361,8 +2361,21 @@ eg: <code>curl -o docker-compose.yml https://raw.githubusercontent.com/Interstel
 </li>
 <li>
 <p><em>needed only if using docker:</em> </p>
-<p>-download also the following file, eg: <code>curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh</code></p>
-<p>-launch docker service:<code>sudo service docker start</code> </p>
+<ul>
+<li>download the following <code>docker-ipfs-init.sh</code> eg: 
+<code>curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh</code></li>
+<li>check that the file is in the directory</li>
+</ul>
+<pre><code>ls -al
+total 20
+drwxr-xr-x  2 jll jll 4096 Feb  9 16:46 .
+drwxr-xr-x 13 jll jll 4096 Feb  8 19:11 ..
+-rw-r--r--  1 jll jll 6383 Feb  9 16:52 docker-compose.yml
+-rw-r--r--  1 jll jll  222 Feb  9 15:06 docker-ipfs-init.sh
+</code></pre>
+<ul>
+<li>launch docker service:<code>sudo service docker start</code> </li>
+</ul>
 <blockquote>
 <p>podman does <strong>not</strong> require a service/daemon</p>
 </blockquote>
@@ -2370,7 +2383,7 @@ eg: <code>curl -o docker-compose.yml https://raw.githubusercontent.com/Interstel
 <li>
 <p>launch the full stack with the following command in the created directory: <br />
 <code>sudo docker compose down --timeout 1 &amp;&amp; sudo docker compose up --force-recreate</code> <br />
-<strong>NOTE:</strong> replace <code>docker compose</code> with <code>podman-compose</code> if you want to use podman instead of docker</p>
+&gt;replace <code>docker compose</code> with <code>podman-compose</code> if you want to use podman instead of docker</p>
 </li>
 <li>
 <p>wait a few seconds until you see this kind of lines repeating:</p>
@@ -2395,25 +2408,22 @@ that will connect to the node running in <code>docker-compose</code></p>
 </blockquote>
 <h3 id="2-run-the-integritee-demo-script-1"><a class="header" href="#2-run-the-integritee-demo-script-1">2. Run the integritee demo script</a></h3>
 <ul>
-<li>create a docker/podman volume:<br />
-<code>sudo docker volume create KeyStoreVolume1</code></li>
-<li>get the demo script:
+<li>
+<p>get the demo script:</p>
 <ul>
 <li>for consistency, make sure you are in the directory created at &quot;prepare a temp folder&quot; above</li>
 <li><code>curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh</code></li>
 <li><code>chmod +x demo_interstellar.sh</code></li>
 </ul>
 </li>
-<li>check which network docker-compose/podman-compose is using:<br />
-<code>sudo docker container inspect --format '{{range $net,$v := .NetworkSettings.Networks}}{{printf &quot;%s\n&quot; $net}}{{end}}' interstellar_demo-integritee_service-1</code>
+<li>
+<p>run the script [twice]:</p>
 <ul>
-<li>it should return for example: <code>interstellar_demo_default</code></li>
-<li>if it fails: use <code>docker ps</code> and replace <code>interstellar_demo-integritee_service-1</code> in the previous command by the correct name</li>
+<li><code>sudo docker compose run --entrypoint /usr/local/worker-cli/demo_interstellar.sh integritee_cli -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990</code></li>
 </ul>
-</li>
-<li>run the demo (twice): <code>CLIENT_BIN=&quot;sudo docker run --network interstellar_demo_default --name integritee_cli -v KeyStoreVolume1:/usr/local/bin/my_trusted_keystore --rm ghcr.io/interstellar-network/integritee_cli:milestone4&quot; ./demo_interstellar.sh -V wss://integritee_service -p 9990 -u ws://integritee_node -P 2090</code> <br />
-<strong>IMPORTANT</strong> the <code>--network</code> parameter MUST match the result of the previous command <code>docker container inspect</code><br />
-<strong>NOTE</strong> replace <code>sudo docker</code> by <code>podman</code> in <code>CLIENT_BIN=</code> if needed
+<blockquote>
+<p>replace <code>sudo docker compose</code> by <code>podman-comnpose</code> in the previous command when using podman</p>
+</blockquote>
 <ul>
 <li>the first time you start the demo it should say:</li>
 </ul>
@@ -2439,9 +2449,13 @@ Extrinsic started: wait a few seconds(~5-10s) and restart this script
 2022-10-05 14:35:09 [fetch_from_remote_grpc_web] header: date Wed, 05 Oct 2022 14:35:08 GMT
 2022-10-05 14:35:09 [ocw-circuits] callback_new_skcd_signed sent number : 1
 </code></pre>
-it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot; NOT <strong>0</strong></li>
-<li>re-run the script</li>
-<li>when asked for inputs <code>Inputs to use? [space separated list of int; eg 0 1 2 3]</code>
+<p>it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot; NOT <strong>0</strong></p>
+</li>
+<li>
+<p>re-run the script</p>
+</li>
+<li>
+<p>when asked for inputs <code>Inputs to use? [space separated list of int; eg 0 1 2 3]</code></p>
 <ul>
 <li>enter a space-separated list of digits eg <code>4 2</code></li>
 <li>if you used invalid inputs, you will see eg <code>Trusted call 0x7275e5e0fe5812ee9560a6b23469fe3007af3a080b11f88ad71c66364393f6d8 is Invalid</code></li>
@@ -2467,23 +2481,7 @@ it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot
 </ul>
 <h2 id="demo-with-android-client"><a class="header" href="#demo-with-android-client">Demo with Android client</a></h2>
 <h3 id="1-launch-the-blockchain-3"><a class="header" href="#1-launch-the-blockchain-3">1. Launch the blockchain</a></h3>
-<p>Create a directory</p>
-<p>example:</p>
-<pre><code>mkdir blockchain_demo
-</code></pre>
-<p>and add the following docker compose configuration file: <a href="https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml">docker-compose.yml</a> in it.</p>
-<p>Then start docker or podman</p>
-<pre><code>sudo service docker start
-</code></pre>
-<p>and then </p>
-<pre><code>cd blockchain_demo
-</code></pre>
-<p>and launch the blockchain demo with <code>ipfs</code> and  api services i.e. <code>api_circuits</code> </p>
-<pre><code>docker-compose down --timeout 1 &amp;&amp; docker-compose up --force-recreate
-</code></pre>
-<blockquote>
-<p>replace <code>docker-compose</code> with <code>podman-compose</code> if you are using podman instead of docker</p>
-</blockquote>
+<p>if not yet launched (same process as with demo script)</p>
 <h3 id="2-launch-a-generic-substrate-fromt-end-1"><a class="header" href="#2-launch-a-generic-substrate-fromt-end-1">2. Launch a generic Substrate Fromt-end</a></h3>
 <p>Use the following <a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a> to launch substrate front end</p>
 <p>to connect to a locally running node</p>
