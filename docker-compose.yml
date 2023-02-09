@@ -1,13 +1,26 @@
 # README
 #
 ## prereq
-# - `sudo apt install podman-plugins`(or podman-dnsname if that does not work)
+# - install podman-compose: eg [NO! FAILS]`brew install podman-compose` or using https://github.com/containers/podman-compose#installation
+#   NOTE1: install using the same package manager(apt, homebrew, etc) than you used for podman to avoid issues.
+#   NOTE2: if recently upgrade from an old Ubuntu, etc:
+#    - remove all podman-compose
+#    - CHECK: `podman-compose --version`: it MUST NOT return anything!
+# - [only if podman installed with apt?]`sudo apt install podman-plugins`(or podman-dnsname if that does not work)
+# - CHECK: `podman-compose --version`
 #
 ## run(dev)
 # - `podman-compose down --timeout 1 && podman-compose up --force-recreate`
 # - CHECK:
 #   - `podman exec -it interstellar-book_api_circuits_1 /bin/bash`
 #   - `apt-get update && apt-get install -y curl && curl -v http://ipfs:5001/version`
+# - RUN:
+#   - initialize the circuits: `podman run --rm -it --network interstellar-book_default --entrypoint /usr/local/worker-cli/demo_interstellar.sh --env CLIENT_BIN=/usr/local/bin/integritee-cli ghcr.io/interstellar-network/integritee_cli:dev -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990`
+#     - NOTE: replace "interstellar-book_default" by the correct network shown by `podman ps`
+#   - WAIT until you see the circuits on the front-end
+#     - https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws://localhost:9990
+#     - Query: ocwCircuits -> displaySkcdPackageValue
+#   - restart the last command
 
 version: '3'
 services:
@@ -44,18 +57,19 @@ services:
     image: "ghcr.io/interstellar-network/integritee_node:dev"
     hostname: integritee_node
     ports:
-      # front-end
-      - "9944:9944"
+      # TODO what is this for?
+      # --port
+      - "30390:30390"
       # --rpc-port
       - "8990:8990"
       # --ws-port
       - "9990:9990"
-    # cf README: "IMPORTANT: you **MUST** use `--enable-offchain-indexing=1`"
+    # cf README: "IMPORTANT: you **MUST** use `--enable-offchain-indexing=true`"
     # --ws-external, needed else can not connect from host, cf https://github.com/substrate-developer-hub/substrate-node-template/blob/main/docker-compose.yml
     # --rpc-external + --rpc-methods unsafe, same than "ws-external" but only needed for cli/demo_interstellar.sh
     command: ["--ws-external", "--rpc-external", "--rpc-methods", "unsafe", "--dev", "--tmp", "--ws-port", "9990", "--port", "30390", "--rpc-port", "8990", "--enable-offchain-indexing=true"]
     environment:
-      RUST_LOG: info,pallet_tx_registry=info,jsonrpsee_ws_server::server=warn
+      RUST_LOG: info,jsonrpsee_server=warn
       RUST_BACKTRACE: 1
       INTERSTELLAR_URI_ROOT_API_CIRCUITS: http://api_circuits:3000
     healthcheck:
@@ -77,12 +91,13 @@ services:
       # -h, --untrusted-http-port
       - "4545:4545"
     # integritee-service SHOULD properly handle timeouts/retries but it is not the case so we wait until "integritee_node" is ready
-    entrypoint: ["/usr/local/bin/dockerize", "-wait", "tcp://integritee_node:9990", "/usr/local/bin/integritee"]
+    entrypoint: ["/usr/local/bin/dockerize", "-wait", "tcp://integritee_node:9990", "/usr/local/bin/integritee-service"]
     # --ws-external, needed else can not connect from host, cf https://github.com/substrate-developer-hub/substrate-node-template/blob/main/docker-compose.yml
     command: [ "--ws-external", "--clean-reset", "--node-port", "9990", "--node-url", "ws://integritee_node", "-P", "2090", "-r", "3490", "-w", "2091", "-h", "4545", "run", "--skip-ra", "--dev" ]
     environment:
-      RUST_LOG: warn,pallet_ocw_garble=info,pallet_ocw_circuits=info,pallet_tx_validation=info,pallet_tx_registry=info,integritee_cli=info,ita_stf=info
+      RUST_LOG: warn,integritee_cli=debug,pallet_ocw_garble=info,pallet_tx_registry=info,pallet_tx_validation=info,http_grpc_client=warn,lib_garble_rs=info,ipfs_client_http_req=info
       RUST_BACKTRACE: 1
       INTERSTELLAR_URI_NODE: http://integritee_node:8990
+      IPFS_ROOT_URL: http://ipfs:5001
     depends_on:
       - integritee_node
