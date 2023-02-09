@@ -3,11 +3,12 @@
 The purpose of this demo is to test the integration of the garbled circuit production in TEE nodes to demonstrate our core security finalized proof of concept.
 
 As explained previously the garbling scheme implemeted on TEE nodes and android client is not yet optimized for display circuits like the previous one.
-so we also provide a script client to test the garble circuit production on TEE nodes.
 
-You can also test that the end to end solution with an android client, although due to the current poor circuit evaluation performance
+So we also provide a script client to test the garble circuit production on TEE nodes.
 
+You can also test that the end to end solution with an android client. 
 
+> Although due to the current poor circuit evaluation performance, the validation screen is really difficult to read and does not reflect in any way the intended user experience
 
 ## prerequiste
 
@@ -33,6 +34,7 @@ eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-N
     -download also the following file, eg: `curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh`
 
     -launch docker service:`sudo service docker start` 
+    
   >podman does **not** require a service/daemon
 - launch the full stack with the following command in the created directory: \
 `sudo docker compose down --timeout 1 && sudo docker compose up --force-recreate` \
