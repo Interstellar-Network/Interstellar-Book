@@ -1,14 +1,14 @@
 # M5 Demo Tutorial
 
-The purpose of this demo is to test the integration of the garbled circuit production in TEE nodes to demonstrate our core security finalized proof of concept.
+The goal of this demonstration is to showcase the successful integration of the garbled circuit technology into TEE nodes, thereby demonstrating our finalized core security proof of concept. 
 
-As explained previously the garbling scheme implemeted on TEE nodes and android client is not yet optimized for display circuits like the previous one.
+However, the garbling scheme implemented on TEE nodes and the Android client is not yet optimized for display circuits, as previously mentioned. 
 
-So we also provide a script client to test the garble circuit production on TEE nodes.
+To address this, we have provided a script client for testing the garbled circuit production on TEE nodes. You can also verify that the end-to-end solution is functional using an Android client. 
 
-You can also test that the end to end solution with an android client. 
+> Please note, however, that the evaluation performance of the garbled circuit is currently poor, making the validation screen difficult to read and not representative of the intended user experience.
 
-> Although due to the current poor circuit evaluation performance, the validation screen is really difficult to read and does not reflect in any way the intended user experience
+T
 
 ## prerequiste
 
@@ -248,19 +248,20 @@ on SEND screen.
 - Validating transaction...
 - Transaction done!
 
-///////TO REFINE little game 
-not functionnal like the M3.
-NOTE:
-> The wallet app is still work in progress and we have still some little issues to fix between the low level layer in rust and C++, especially on the renderer to connect with the Kotlin/Swift UI layer.
+>The current performance of the Garbled Circuit evaluation makes it challenging to read the validation screen. As a result, you can either enter two digits to initiate verification or try to guess the correct code as a mental exercise ;-)
 
- We want to avoid writting code that won't be used in the final version. For this reason we have made some little shortcut to demonstrate the execution of validation screen based on Garbled Circuits package evaluation.
+It is important to note that the wallet app is still under development and there are a few technical issues that need to be addressed, particularly between the low-level layers in Rust and C++, and in connecting the renderer with the Kotlin/Swift UI layer.
 
-> As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.
+To demonstrate the execution of the validation screen based on the Garbled Circuits package evaluation, we have implemented a shortcut. However, please keep in mind that this is temporary and some of the code may not be used in the final version.
 
-> Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message validation.
+At this time, the inputted amount and the transaction beneficiary are not displayed in the message. Despite this, the transaction validation screen is fully functional.
 
-This makes the classic public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
-Moreover, it makes the usage of the wallet much more user friendly and safer.
+In the future, we plan to implement a trusted beneficiary feature. This will allow users to create a trusted beneficiary contact and register their public address in the blockchain through a secure operation message validation. This will prevent attackers from substituting the contact name with their own public key, making the wallet both user-friendly and safer.
+
+
+
+
+
 
 
 
