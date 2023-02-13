@@ -18,7 +18,7 @@ T
 |[docker](https://docs.docker.com/engine/install/)| [podman](https://podman.io/getting-started/installation.html) |
 |[docker-compose](https://docs.docker.com/compose/install/)|[podman-compose](https://github.com/containers/podman-compose#podman-compose)|
 
-NOTE: usually when using `docker` or `docker-comppse` you MUST also use `sudo`; and conversely you MUST NOT be root with `podman` and `podman-compose`
+NOTE: usually when using `docker` or `docker-compose` you MUST also use `sudo`; and conversely you MUST NOT be root with `podman` and `podman-compose`
 
 - `sudo apt-get install jq curl wget `
 
@@ -29,9 +29,8 @@ NOTE: usually when using `docker` or `docker-comppse` you MUST also use `sudo`; 
 - prepare a temp folder eg: `mkdir interstellar_demo && cd interstellar_demo`
 - get the following docker compose file: [docker-compose.yml](https://github.com/Interstellar-Network/Interstellar-Book/blob/docker-compose/docker-compose.yml#L17)
 eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-compose.yml`
-- *needed only if using docker:* 
 
-    - download the following `docker-ipfs-init.sh` eg: 
+- download the following `docker-ipfs-init.sh` eg: 
     `curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh`
     - check that the file is in the same directory as docker compose
     ```
@@ -42,6 +41,8 @@ eg: `curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-N
     -rw-r--r--  1 jll jll 6383 Feb  9 16:52 docker-compose.yml
     -rw-r--r--  1 jll jll  222 Feb  9 15:06 docker-ipfs-init.sh
     ```
+
+- *needed only if using docker:* 
     - launch docker service:`sudo service docker start` 
 
   >podman does **not** require a service/daemon
@@ -73,10 +74,6 @@ that will connect to the node running in `docker-compose`
 ### 2. Run the integritee demo script
 
 
-- get the demo script:
-    * for consistency, make sure you are in the directory created at "prepare a temp folder" above
-    * `curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh`
-    * `chmod +x demo_interstellar.sh`
 
 
 - run the script [twice]:
@@ -84,8 +81,7 @@ that will connect to the node running in `docker-compose`
     - `sudo docker compose run --entrypoint /usr/local/worker-cli/demo_interstellar.sh integritee_cli -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990`
 
 
-
-    >replace `sudo docker compose` by `podman-comnpose` in the previous command when using podman
+    >replace `sudo docker compose` by `podman-compose` in the previous command when using podman
     * the first time you start the demo it should say:
     ```
     [...]
@@ -93,10 +89,18 @@ that will connect to the node running in `docker-compose`
     OCW_CIRCUITS_STORAGE is NOT initialized
     MUST call extrinsic 'ocwCircuits::submitConfigDisplayCircuitsPackageSigned'
     Calling 'ocwCircuits::submitConfigDisplayCircuitsPackageSigned'
-    Extrinsic started: wait a few seconds(~5-10s) and restart this script
+    Extrinsic started: wait a few seconds(~45-60s) and restart this script
     ```
     * wait a few seconds
-    * check docker-compose/podman-compose logs; you should see something like
+    * check docker-compose/podman-compose logs; 
+    
+    or check the front-end:
+    'Query' 
+     for 'DisplaySkcdValue'
+    
+    
+    
+    you should see something like
     ```
     2022-10-05T14:35:08.974284Z DEBUG hyper::proto::h1::conn: incoming body is chunked encoding
     2022-10-05T14:35:08.974294Z DEBUG hyper::proto::h1::decode: incoming chunked header: 0x82 (130 bytes)
@@ -110,6 +114,7 @@ that will connect to the node running in `docker-compose`
     2022-10-05 14:35:09 [ocw-circuits] callback_new_skcd_signed sent number : 1
     ```
     it MUST say "callback_new_skcd_signed sent number : **1**" NOT **0**
+
 - re-run the script
 - when asked for inputs `Inputs to use? [space separated list of int; eg 0 1 2 3]`
     * enter a space-separated list of digits eg `4 2`
@@ -139,15 +144,15 @@ When the script is waiting for inputs, check the docker-compose logs for somethi
 ## Demo with Android client
 
 
-### 3. Install the wallet App i.e APK file on an android device or an emulator
+### 1. Install the wallet App i.e APK file on an android device or an emulator
 
 
-#### 3.1 Retrieve the APK file
+#### 2.1 Retrieve the APK file
 Download the [APK file](https://github.com/Interstellar-Network/wallet-app/releases/tag/milestone5)
 
 
-#### 3.2 Install the APK
-##### 3.2.1 on an android device
+#### 2.2 Install the APK
+##### 2.2.1 on an android device
 
 [How to install an APK on Android](https://www.lifewire.com/install-apk-on-android-4177185)
 
@@ -155,7 +160,7 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 
 
-##### 3.2.2 on an emulator
+##### 2.2.2 on an emulator
 
 [Install Android studio](https://developer.android.com/studio/)
 
@@ -163,13 +168,13 @@ Install the pixel 5 API 31 emulator with Virtual Device Manager or any `x86_64` 
 
 
 
-#### 3.4.2 Launch the emulator
+##### 2.4.2 Launch the emulator
 
 ![Launch pixel 5 API 31 emulator](./fig/Android_device_manager.png)
 
 Wait for the emulator to launch and emulated device to power on and drag and drop the APK file on the emulator to install the App.
 
-### 4. Ensure that wallet can connect to the blockchain
+### 3. Ensure that wallet can connect to the blockchain
 
 >The app is currently a dev version, so it expects the servers(RPC/WS, and IPFS) to be on localhost.
 
@@ -218,28 +223,28 @@ TROUBLESHOOTING: start the front-end
 
 
 
-## Start The demo
 
-## 1. Launch Android App
+
+## 4. Launch Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
 
 
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
 
 
-## 2. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
+## 5. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
 
-### 3.1 Select currency and contact
+### 6.1 Select currency and contact
 Following is an explicit video showing how to send a curency to a contact
 on SEND screen.
 
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
 
-### 3.2 Click on the blue Check icon
+### 6.2 Click on the blue Check icon
 
-### 3.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code
+### 6.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code
 
-### 3.4 check Toast message order
+### 6.4 check Toast message order
 - Processing...
 - Registered
 - [error] No circuits available after 10s; exiting!
