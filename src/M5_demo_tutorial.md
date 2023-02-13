@@ -147,12 +147,12 @@ When the script is waiting for inputs, check the docker-compose logs for somethi
 ### 1. Install the wallet App i.e APK file on an android device or an emulator
 
 
-#### 2.1 Retrieve the APK file
+#### 1.1 Retrieve the APK file
 Download the [APK file](https://github.com/Interstellar-Network/wallet-app/releases/tag/milestone5)
 
 
-#### 2.2 Install the APK
-##### 2.2.1 on an android device
+#### 1.2 Install the APK
+##### 1.2.1 on an android device
 
 [How to install an APK on Android](https://www.lifewire.com/install-apk-on-android-4177185)
 
@@ -160,7 +160,7 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 
 
-##### 2.2.2 on an emulator
+##### 1.2.2 on an emulator
 
 [Install Android studio](https://developer.android.com/studio/)
 
@@ -168,13 +168,13 @@ Install the pixel 5 API 31 emulator with Virtual Device Manager or any `x86_64` 
 
 
 
-##### 2.4.2 Launch the emulator
+#### 2 Launch the emulator
 
 ![Launch pixel 5 API 31 emulator](./fig/Android_device_manager.png)
 
 Wait for the emulator to launch and emulated device to power on and drag and drop the APK file on the emulator to install the App.
 
-### 3. Ensure that wallet can connect to the blockchain
+#### 3. Ensure that wallet can connect to the blockchain
 
 >The app is currently a dev version, so it expects the servers(RPC/WS, and IPFS) to be on localhost.
 
@@ -225,26 +225,27 @@ TROUBLESHOOTING: start the front-end
 
 
 
-## 4. Launch Android App
+#### 4. Launch Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
 
 
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
 
 
-## 5. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
+#### 5. Send a Currency and wait for the Transaction confirmation screen to validate the transaction
 
-### 6.1 Select currency and contact
+
+##### 5.1 Select currency and contact
 Following is an explicit video showing how to send a curency to a contact
 on SEND screen.
 
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
 
-### 6.2 Click on the blue Check icon
+##### 5.2 Click on the blue Check icon
 
-### 6.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code
+##### 5.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code
 
-### 6.4 check Toast message order
+##### 5.4 check Toast message order
 - Processing...
 - Registered
 - [error] No circuits available after 10s; exiting!
