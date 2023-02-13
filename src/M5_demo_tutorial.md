@@ -66,7 +66,7 @@ that will connect to the node running in `docker-compose`
 
 > when using WSL: you **MUST** use `localhost` **NOT** `127.0.0.1` else the forwarding windows -> wsl -> docker/podman will not work [if you directly clicked on the given links it is already set, but be careful if you use another front-end]
 
-> avoid some browser extensions that could generate interface issues
+> If you have some user interface issues - desactivate some browser extensions like password managers that can write on input fields ;)
 
 
 ### 2. Run the integritee demo script
