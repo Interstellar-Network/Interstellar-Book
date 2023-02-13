@@ -8,8 +8,6 @@ To address this, we have provided a script client for testing the garbled circui
 
 > Please note, however, that the evaluation performance of the garbled circuit is currently poor, making the validation screen difficult to read and not representative of the intended user experience.
 
-T
-
 ## prerequiste
 
 
