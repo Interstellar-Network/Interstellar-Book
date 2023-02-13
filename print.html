@@ -2334,20 +2334,20 @@ it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot
 <h2 id="article-4"><a class="header" href="#article-4">Article</a></h2>
 <p>Updated <a href="https://medium.com/@jlleleu/web3-foundation-and-interstellar-protocol-b4003a64e927">link to medium draft article: Web 3 Foundation and Interstellar Protocol</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m5-demo-tutorial"><a class="header" href="#m5-demo-tutorial">M5 Demo Tutorial</a></h1>
-<p>The purpose of this demo is to test the integration of the garbled circuit production in TEE nodes to demonstrate our core security finalized proof of concept.</p>
-<p>As explained previously the garbling scheme implemeted on TEE nodes and android client is not yet optimized for display circuits like the previous one.</p>
-<p>So we also provide a script client to test the garble circuit production on TEE nodes.</p>
-<p>You can also test that the end to end solution with an android client. </p>
+<p>The goal of this demonstration is to showcase the successful integration of the garbled circuit technology into TEE nodes, thereby demonstrating our finalized core security proof of concept. </p>
+<p>However, the garbling scheme implemented on TEE nodes and the Android client is not yet optimized for display circuits, as previously mentioned. </p>
+<p>To address this, we have provided a script client for testing the garbled circuit production on TEE nodes. You can also verify that the end-to-end solution is functional using an Android client. </p>
 <blockquote>
-<p>Although due to the current poor circuit evaluation performance, the validation screen is really difficult to read and does not reflect in any way the intended user experience</p>
+<p>Please note, however, that the evaluation performance of the garbled circuit is currently poor, making the validation screen difficult to read and not representative of the intended user experience.</p>
 </blockquote>
+<p>T</p>
 <h2 id="prerequiste-2"><a class="header" href="#prerequiste-2">prerequiste</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Install Docker</th><th>Install Podman</th></tr></thead><tbody>
 <tr><td><a href="https://docs.docker.com/engine/install/">docker</a></td><td><a href="https://podman.io/getting-started/installation.html">podman</a></td></tr>
 <tr><td><a href="https://docs.docker.com/compose/install/">docker-compose</a></td><td><a href="https://github.com/containers/podman-compose#podman-compose">podman-compose</a></td></tr>
 </tbody></table>
 </div>
-<p>NOTE: usually when using <code>docker</code> or <code>docker-comppse</code> you MUST also use <code>sudo</code>; and conversely you MUST NOT be root with <code>podman</code> and <code>podman-compose</code></p>
+<p>NOTE: usually when using <code>docker</code> or <code>docker-compose</code> you MUST also use <code>sudo</code>; and conversely you MUST NOT be root with <code>podman</code> and <code>podman-compose</code></p>
 <ul>
 <li><code>sudo apt-get install jq curl wget </code></li>
 </ul>
@@ -2362,10 +2362,9 @@ it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot
 eg: <code>curl -o docker-compose.yml https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-compose.yml</code></p>
 </li>
 <li>
-<p><em>needed only if using docker:</em> </p>
+<p>download the following <code>docker-ipfs-init.sh</code> eg: 
+<code>curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh</code></p>
 <ul>
-<li>download the following <code>docker-ipfs-init.sh</code> eg: 
-<code>curl -o docker-ipfs-init.sh https://raw.githubusercontent.com/Interstellar-Network/Interstellar-Book/docker-compose/docker-ipfs-init.sh</code></li>
 <li>check that the file is in the same directory as docker compose</li>
 </ul>
 <pre><code>ls -al
@@ -2375,6 +2374,9 @@ drwxr-xr-x 13 jll jll 4096 Feb  8 19:11 ..
 -rw-r--r--  1 jll jll 6383 Feb  9 16:52 docker-compose.yml
 -rw-r--r--  1 jll jll  222 Feb  9 15:06 docker-ipfs-init.sh
 </code></pre>
+</li>
+<li>
+<p><em>needed only if using docker:</em> </p>
 <ul>
 <li>launch docker service:<code>sudo service docker start</code> </li>
 </ul>
@@ -2411,20 +2413,12 @@ that will connect to the node running in <code>docker-compose</code></p>
 <h3 id="2-run-the-integritee-demo-script-1"><a class="header" href="#2-run-the-integritee-demo-script-1">2. Run the integritee demo script</a></h3>
 <ul>
 <li>
-<p>get the demo script:</p>
-<ul>
-<li>for consistency, make sure you are in the directory created at &quot;prepare a temp folder&quot; above</li>
-<li><code>curl https://raw.githubusercontent.com/Interstellar-Network/integritee-worker/interstellar/cli/demo_interstellar.sh -o demo_interstellar.sh</code></li>
-<li><code>chmod +x demo_interstellar.sh</code></li>
-</ul>
-</li>
-<li>
 <p>run the script [twice]:</p>
 <ul>
 <li><code>sudo docker compose run --entrypoint /usr/local/worker-cli/demo_interstellar.sh integritee_cli -P 2090 -p 9990 -u ws://integritee_node -V wss://integritee_service -R http://integritee_node:8990</code></li>
 </ul>
 <blockquote>
-<p>replace <code>sudo docker compose</code> by <code>podman-comnpose</code> in the previous command when using podman</p>
+<p>replace <code>sudo docker compose</code> by <code>podman-compose</code> in the previous command when using podman</p>
 </blockquote>
 <ul>
 <li>the first time you start the demo it should say:</li>
@@ -2434,12 +2428,16 @@ OCW_CIRCUITS_STORAGE: null
 OCW_CIRCUITS_STORAGE is NOT initialized
 MUST call extrinsic 'ocwCircuits::submitConfigDisplayCircuitsPackageSigned'
 Calling 'ocwCircuits::submitConfigDisplayCircuitsPackageSigned'
-Extrinsic started: wait a few seconds(~5-10s) and restart this script
+Extrinsic started: wait a few seconds(~45-60s) and restart this script
 </code></pre>
 <ul>
 <li>wait a few seconds</li>
-<li>check docker-compose/podman-compose logs; you should see something like</li>
+<li>check docker-compose/podman-compose logs; </li>
 </ul>
+<p>or check the front-end:
+'Query' 
+for 'DisplaySkcdValue'</p>
+<p>you should see something like</p>
 <pre><code>2022-10-05T14:35:08.974284Z DEBUG hyper::proto::h1::conn: incoming body is chunked encoding
 2022-10-05T14:35:08.974294Z DEBUG hyper::proto::h1::decode: incoming chunked header: 0x82 (130 bytes)
 2022-10-05T14:35:09.019290Z DEBUG hyper::proto::h1::conn: incoming body completed
@@ -2482,20 +2480,20 @@ Extrinsic started: wait a few seconds(~5-10s) and restart this script
 <li>you must enter <code>8 3</code> when prompted</li>
 </ul>
 <h2 id="demo-with-android-client"><a class="header" href="#demo-with-android-client">Demo with Android client</a></h2>
-<h3 id="3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator-1"><a class="header" href="#3-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator-1">3. Install the wallet App i.e APK file on an android device or an emulator</a></h3>
-<h4 id="31-retrieve-the-apk-file-1"><a class="header" href="#31-retrieve-the-apk-file-1">3.1 Retrieve the APK file</a></h4>
+<h3 id="1-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator"><a class="header" href="#1-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator">1. Install the wallet App i.e APK file on an android device or an emulator</a></h3>
+<h4 id="21-retrieve-the-apk-file"><a class="header" href="#21-retrieve-the-apk-file">2.1 Retrieve the APK file</a></h4>
 <p>Download the <a href="https://github.com/Interstellar-Network/wallet-app/releases/tag/milestone5">APK file</a></p>
-<h4 id="32-install-the-apk-1"><a class="header" href="#32-install-the-apk-1">3.2 Install the APK</a></h4>
-<h5 id="321-on-an-android-device-1"><a class="header" href="#321-on-an-android-device-1">3.2.1 on an android device</a></h5>
+<h4 id="22-install-the-apk"><a class="header" href="#22-install-the-apk">2.2 Install the APK</a></h4>
+<h5 id="221-on-an-android-device"><a class="header" href="#221-on-an-android-device">2.2.1 on an android device</a></h5>
 <p><a href="https://www.lifewire.com/install-apk-on-android-4177185">How to install an APK on Android</a></p>
 <p>WARNING: ensure that your device is configure for english.</p>
-<h5 id="322-on-an-emulator"><a class="header" href="#322-on-an-emulator">3.2.2 on an emulator</a></h5>
+<h5 id="222-on-an-emulator"><a class="header" href="#222-on-an-emulator">2.2.2 on an emulator</a></h5>
 <p><a href="https://developer.android.com/studio/">Install Android studio</a></p>
 <p>Install the pixel 5 API 31 emulator with Virtual Device Manager or any <code>x86_64</code> emulator.</p>
-<h4 id="342-launch-the-emulator-1"><a class="header" href="#342-launch-the-emulator-1">3.4.2 Launch the emulator</a></h4>
+<h5 id="242-launch-the-emulator"><a class="header" href="#242-launch-the-emulator">2.4.2 Launch the emulator</a></h5>
 <p><img src="./fig/Android_device_manager.png" alt="Launch pixel 5 API 31 emulator" /></p>
 <p>Wait for the emulator to launch and emulated device to power on and drag and drop the APK file on the emulator to install the App.</p>
-<h3 id="4-ensure-that-wallet-can-connect-to-the-blockchain-1"><a class="header" href="#4-ensure-that-wallet-can-connect-to-the-blockchain-1">4. Ensure that wallet can connect to the blockchain</a></h3>
+<h3 id="3-ensure-that-wallet-can-connect-to-the-blockchain"><a class="header" href="#3-ensure-that-wallet-can-connect-to-the-blockchain">3. Ensure that wallet can connect to the blockchain</a></h3>
 <blockquote>
 <p>The app is currently a dev version, so it expects the servers(RPC/WS, and IPFS) to be on localhost.</p>
 </blockquote>
@@ -2528,18 +2526,17 @@ So you just need to set-up its path on the OS used, if it is not already set.</p
 <a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a>
 on your Device/Emulator to check it works properly.
 Otherwise fix network issues.</p>
-<h2 id="start-the-demo-1"><a class="header" href="#start-the-demo-1">Start The demo</a></h2>
-<h2 id="1-launch-android-app"><a class="header" href="#1-launch-android-app">1. Launch Android App</a></h2>
+<h2 id="4-launch-android-app"><a class="header" href="#4-launch-android-app">4. Launch Android App</a></h2>
 <p>Swipe from bottom to top and click on <code>Wallet Interstellar</code></p>
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
-<h2 id="2-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction"><a class="header" href="#2-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction">2. Send a Currency and wait for the Transaction confirmation screen to validate the transaction</a></h2>
-<h3 id="31-select-currency-and-contact-1"><a class="header" href="#31-select-currency-and-contact-1">3.1 Select currency and contact</a></h3>
+<h2 id="5-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction"><a class="header" href="#5-send-a-currency-and-wait-for-the-transaction-confirmation-screen-to-validate-the-transaction">5. Send a Currency and wait for the Transaction confirmation screen to validate the transaction</a></h2>
+<h3 id="61-select-currency-and-contact"><a class="header" href="#61-select-currency-and-contact">6.1 Select currency and contact</a></h3>
 <p>Following is an explicit video showing how to send a curency to a contact
 on SEND screen.</p>
 <img src="./fig/Send_Currency_Demo.gif" alt="wallet menu"  width="300"/>
-<h3 id="32-click-on-the-blue-check-icon-1"><a class="header" href="#32-click-on-the-blue-check-icon-1">3.2 Click on the blue Check icon</a></h3>
-<h3 id="33-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code-1"><a class="header" href="#33-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code-1">3.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code</a></h3>
-<h3 id="34-check-toast-message-order-1"><a class="header" href="#34-check-toast-message-order-1">3.4 check Toast message order</a></h3>
+<h3 id="62-click-on-the-blue-check-icon"><a class="header" href="#62-click-on-the-blue-check-icon">6.2 Click on the blue Check icon</a></h3>
+<h3 id="63-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code"><a class="header" href="#63-wait-for-the-transaction-validation-screen-to-appear-and-type-the-two-digits-one-time-code">6.3 Wait for the transaction validation screen to appear and type the two-digits one-time-code</a></h3>
+<h3 id="64-check-toast-message-order"><a class="header" href="#64-check-toast-message-order">6.4 check Toast message order</a></h3>
 <ul>
 <li>Processing...</li>
 <li>Registered</li>
@@ -2550,21 +2547,13 @@ on SEND screen.</p>
 <li>Validating transaction...</li>
 <li>Transaction done!</li>
 </ul>
-<p>///////TO REFINE little game 
-not functionnal like the M3.
-NOTE:</p>
 <blockquote>
-<p>The wallet app is still work in progress and we have still some little issues to fix between the low level layer in rust and C++, especially on the renderer to connect with the Kotlin/Swift UI layer.</p>
+<p>The current performance of the Garbled Circuit evaluation makes it challenging to read the validation screen. As a result, you can either enter two digits to initiate verification or try to guess the correct code as a mental exercise ;-)</p>
 </blockquote>
-<p>We want to avoid writting code that won't be used in the final version. For this reason we have made some little shortcut to demonstrate the execution of validation screen based on Garbled Circuits package evaluation.</p>
-<blockquote>
-<p>As a result we do not show yet the inputted amount and the transaction beneficiary in the message. Although the transaction validation screen is fully functional.</p>
-</blockquote>
-<blockquote>
-<p>Remark: Regarding the beneficiary of the transaction, we will implement a trusted beneficiary feature: a user will be able to create a trusted beneficiary contact whose public address will be registered in the blockchain through a sensitive operation message validation.</p>
-</blockquote>
-<p>This makes the classic public key address substitution impossible for an attacker. Bad actors won't be able to replace a contact name by their own public key.
-Moreover, it makes the usage of the wallet much more user friendly and safer.</p>
+<p>It is important to note that the wallet app is still under development and there are a few technical issues that need to be addressed, particularly between the low-level layers in Rust and C++, and in connecting the renderer with the Kotlin/Swift UI layer.</p>
+<p>To demonstrate the execution of the validation screen based on the Garbled Circuits package evaluation, we have implemented a shortcut. However, please keep in mind that this is temporary and some of the code may not be used in the final version.</p>
+<p>At this time, the inputted amount and the transaction beneficiary are not displayed in the message. Despite this, the transaction validation screen is fully functional.</p>
+<p>In the future, we plan to implement a trusted beneficiary feature. This will allow users to create a trusted beneficiary contact and register their public address in the blockchain through a secure operation message validation. This will prevent attackers from substituting the contact name with their own public key, making the wallet both user-friendly and safer.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apis-testing-guide"><a class="header" href="#apis-testing-guide">APIs Testing Guide</a></h1>
 <p>This is the tests related to the gRPC APIs call to the GCF external service gRPC tokio server.</p>
 <p>Those tests included in the tests folders of the following repositories <code>api_circuit</code> and <code>api_garble</code> wil demonstrate respectively:</p>
