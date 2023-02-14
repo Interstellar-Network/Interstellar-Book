@@ -2521,10 +2521,12 @@ So you just need to set-up its path on the OS used, if it is not already set.</p
 <p>and use SSH to connect to the emulator running on windows or android devices connected to adb through USB port or WiFi:</p>
 <pre><code>ssh -N -R 9990:localhost:9990 -R 5001:localhost:5001 -R 2090:localhost:2090 [windows_user_name]@$WSL_HOST_IP
 </code></pre>
+<blockquote>
 <p>TROUBLESHOOTING: start the front-end
-<a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944">substrate link</a>
+<a href="https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws://localhost:9990">substrate link</a>
 on your Device/Emulator to check it works properly.
 Otherwise fix network issues.</p>
+</blockquote>
 <h4 id="3-launch-android-app"><a class="header" href="#3-launch-android-app">3. Launch Android App</a></h4>
 <p>Swipe from bottom to top and click on <code>Wallet Interstellar</code></p>
 <img src="./fig/SelectAndroidApp.png" alt="wallet menu"  width="120"/>
