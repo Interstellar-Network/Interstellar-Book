@@ -251,11 +251,11 @@ on SEND screen.
 
 >The current performance of the Garbled Circuit evaluation makes it challenging to read the validation screen. As a result, you can either enter two digits to initiate verification or try to guess the correct code as a mental exercise ;-)
 
-It is important to note that the wallet app is still under development and there are a few technical issues that need to be addressed, particularly between the low-level layers in Rust and C++, and in connecting the renderer with the Kotlin/Swift UI layer.
+It is important to note that the wallet app is under development and there are still a few technical issues that need to be addressed, particularly between the low-level layers in Rust and C++, and in connecting the renderer with the Kotlin/Swift UI layer.
 
-To demonstrate the execution of the validation screen based on the Garbled Circuits package evaluation, we have implemented a shortcut. However, please keep in mind that this is temporary and some of the code may not be used in the final version.
+To demonstrate the execution of the validation screen based on the Garbled Circuits evaluation, we have implemented a shortcut. However, please keep in mind that this is temporary and some of the code will not be used in the final version.
 
-At this time, the inputted amount and the transaction beneficiary are not displayed in the message. Despite this, the transaction validation screen is fully functional.
+At this time, the inputted amount and the transaction beneficiary are not displayed in the message. Despite this, the transaction validation screen is functional.
 
 In the future, we plan to implement a trusted beneficiary feature. This will allow users to create a trusted beneficiary contact and register their public address in the blockchain through a secure operation message validation. This will prevent attackers from substituting the contact name with their own public key, making the wallet both user-friendly and safer.
 
