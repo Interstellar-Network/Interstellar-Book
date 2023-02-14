@@ -214,8 +214,8 @@ and use SSH to connect to the emulator running on windows or android devices con
 ```
 ssh -N -R 9990:localhost:9990 -R 5001:localhost:5001 -R 2090:localhost:2090 [windows_user_name]@$WSL_HOST_IP
 ```
-TROUBLESHOOTING: start the front-end
-[substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws%3A%2F%2Flocalhost%3A9944)
+>TROUBLESHOOTING: start the front-end
+[substrate link](https://substrate-developer-hub.github.io/substrate-front-end-template/?rpc=ws://localhost:9990)
  on your Device/Emulator to check it works properly.
  Otherwise fix network issues.
 
