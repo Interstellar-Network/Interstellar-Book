@@ -26,8 +26,7 @@
 
 - [Testing](./Testing.md)
 
-    - [Runtime prerequisite](./runtime_prerequisite.md)
-    - [compilation prerequisite](./compilation_prerequisite.md)
+   
 
     - [M1 Delivery](./M1.md)
         - [M1 Docker Demo Tutorial](./M1_demo_tutorial.md)
