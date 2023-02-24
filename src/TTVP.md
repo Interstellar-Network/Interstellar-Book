@@ -4,7 +4,7 @@ The purpose of the Trusted Transaction Validation Protocol is to provide a decen
 
 ## Trusted Transaction Validation Protocol architecture - TTVP
 
-The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. It also includes future roadmap modules (briefly described)
+The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. 
 
 ![TTVP overview](./fig/Architecture-mobile-L1-L2-Signers.svg)
 
