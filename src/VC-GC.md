@@ -62,7 +62,7 @@ of a frame with a probability of 1/n ( n > 2)
 To fine tune the design of our circuits and provide realistic look and feel of the solution, we designed the following
 [Transaction validation screen simulations](http://bit.ly/3BLvXoq) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs) and [PsychoPy neuroscience/psychophysic tools](https://www.psychopy.org/)
 
-Transaction validation simaulations:
+Transaction validation simulations:
 - [on Desktop](https://simu.interstellar.gg/3F60.html)
 - [on mobile](https://simu.interstellar.gg/3F60M.html) 
 
