@@ -63,8 +63,8 @@ To fine tune the design of our circuits and provide realistic look and feel of t
 [Transaction validation screen simulations](http://bit.ly/3BLvXoq) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs) and [PsychoPy neuroscience/psychophysic tools](https://www.psychopy.org/)
 
 Transaction validation simaulations:
-[on Desktop](https://simu.interstellar.gg/3F60.html)
-[on mobile](https://simu.interstellar.gg/3F60M.html) 
+- [on Desktop](https://simu.interstellar.gg/3F60.html)
+- [on mobile](https://simu.interstellar.gg/3F60M.html) 
 
 ### Future plans
 
