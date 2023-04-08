@@ -59,12 +59,12 @@ of a frame with a probability of 1/n ( n > 2)
 
 ### Simulations
 
-To fine tune the design of our circuits and provide realistic look and feel of the solution, we designed the following
-[Transaction validation screen simulations](http://bit.ly/3BLvXoq) based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs) and [PsychoPy neuroscience/psychophysic tools](https://www.psychopy.org/)
+To fine tune the design of our circuits and provide realistic look and feel of the solution, we designed the
+simualtions based on [PsychoJS library -  PsychoPy (github.com)](https://github.com/psychopy/psychojs) and [PsychoPy neuroscience/psychophysic tools](https://www.psychopy.org/)
 
-Transaction validation simulations:
-- [on Desktop](https://simu.interstellar.gg/3F60.html)
-- [on mobile](https://simu.interstellar.gg/3F60M.html) 
+Transaction validation screen simulations links (just clik on OK) if you are on a:
+- [Desktop](https://simu.interstellar.gg/3F60.html)
+- [Mobile](https://simu.interstellar.gg/3F60M.html) 
 
 ### Future plans
 
