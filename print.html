@@ -958,20 +958,20 @@ Then the signed random position i.e. P1, P2, P3 are sent to the nodes to be veri
 <h2 id="tx-validation-req"><a class="header" href="#tx-validation-req">TX Validation Req</a></h2>
 <p>Upon reception of the previous message the node compute a garbled circuit program to oversee displaying of each pixel on the user's device's screen. This one time program that includes  transaction parameters, a one time code and a randomized keypad is sent to the owner’s wallet mobile app.</p>
 <h2 id="tx-validation-resp"><a class="header" href="#tx-validation-resp">TX Validation Resp</a></h2>
-<p>When the client's device receives the garbled circuit, it evaluates the circuit to display the keypad and the transaction message with a one-time code for validation. Once the transaction screen appears on the device, the user will type the one-time code displayed, on the random keypad. The response message (randomized keypad position) is then signed and sent to the nodes for validation. The wallet owner’s fingerprint and/or facial recognition is used to authenticate the user’s presence and triggers the signature of the message with the user’s mobile private key in the hardware enclave.</p>
+<p>When the client's device receives the garbled circuit, it evaluates the circuit to display the keypad and the transaction message with a one-time code for validation. Once the transaction screen appears on the device, the user will type the one-time code displayed, on the random keypad. The response message (randomized keypad position) is then signed with proxy private key and sent to the nodes for validation. The wallet owner’s fingerprint and/or facial recognition is used to authenticate the user’s presence and triggers the signature of the message with the user’s mobile proxy private key in the hardware enclave.</p>
 <h2 id="the-node-receives-tx-resp"><a class="header" href="#the-node-receives-tx-resp">The node receives TX Resp</a></h2>
-<p>It then uses the mobile public key provided by the mobile registry pallet to verify that the randomized position typed by the wallet owner comes from his device and that the user was present at that time. This process ensures that even if a legit garbled circuit is stolen during the transaction session, it cannot be used by another device through a man in the middle attack to validate the transaction. The node then checks if the one time code is valid to trigger the signer.
+<p>It then uses the mobile proxy public key provided by the mobile registry pallet to verify that the randomized position typed by the wallet owner comes from his device and that the user was present at that time. This process ensures that even if a legit garbled circuit is stolen during the transaction session, it cannot be used by another device through a man in the middle attack to validate the transaction. The node then checks if the one time code is valid to trigger the signer.
 We use extrinsic unsigned transactions with signed extensions to enable the verification of the messages with the mobile public keys managed by the mobile registry pallet.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol-implementation-in-tee"><a class="header" href="#trusted-transaction-validation-protocol-implementation-in-tee">Trusted Transaction Validation Protocol implementation in TEE</a></h1>
 <p>A part of the transaction validation protocol is implemented whithin a Trusted Execution Environement in hardware enclave nodes i.e Integritee workers.</p>
 <p>Following a scheme with flowchart explaining what part is within Layer 2 i.e L2 TEE worker nodes and what part is managed whithin Layer 1 i.e L1 nodes</p>
 <p><img src="./fig/integritee-structure.svg" alt="integritee-structure" /></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="mobile-tee-registry"><a class="header" href="#mobile-tee-registry">Mobile TEE Registry</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mobile-registry"><a class="header" href="#mobile-registry">Mobile Registry</a></h1>
 <p>This is the module in charge of the mobile device public key registration and management in the blockchain substrate framework.</p>
 <p><img src="./fig/Mobile_registration.svg" alt="mobile registration" /></p>
-<p>When a <a href="./TTVP_client.html">TTVP Client</a>/Wallet is created, a Public/Private key pair is generated in the mobile Hardware Enclave/TEE. The public key is send to this registry and the private key remains on the devices, not accessible by anyone, even when it is rooted. The signature of all messages to the blockchain is triggered with the user's biometrics (also managed with TEE).</p>
+<p>When a <a href="./TTVP_client.html">TTVP Client</a>/Wallet is created, a Proxy Public/Private key pair is generated in the mobile Hardware Enclave/Secure Element/TEE. The public key is send to this registry and the private key remains on the devices, not accessible by anyone, even when it is rooted. The signature of all messages to the blockchain is triggered with the user's biometrics (also hardware protected managed with TEE).</p>
 <p>This <a href="./HBMK.html">hardware-backed mobile private key</a> on the device is used to generate an unsigned transaction extrinsic with signed option and this signature is verified by the blockchain with mobiles public keys registered in this module. (cf <a href="./TTVP.html">Trusted Transaction Validation Protocol</a>)</p>
-<p>This pallet also register and manage all information related to the mobile TEE, security and identification of mobile devices when available. It includes the following  <a href="./HBMK.html">key and ID Attestation</a> and other hardware protected  features like  <a href="https://source.android.com/security/protected-confirmation">protected confirmation</a>, mobile app signing, etc...</p>
+<p>This pallet also register and manage all information related to the mobile hardware enclave TEE, security and identification of mobile devices when available. It includes the following  <a href="./HBMK.html">key and ID Attestation</a> and other hardware protected  features when avalaible like  <a href="https://source.android.com/security/protected-confirmation">protected confirmation</a>, mobile app signing, etc...</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mobile-wallet-demo-app"><a class="header" href="#mobile-wallet-demo-app">Mobile Wallet Demo App</a></h1>
 <p>The mobile wallet demo app include mainly a <a href="./TTVP_client.html">Trusted Transaction Validation Protocol client</a> that is securely linked with the blockchain through <a href="./Mobile_Registry.html">mobile registry</a></p>
 <p>It also includes a wallet UI to perform transactions</p>
@@ -1863,7 +1863,7 @@ As the purpose of the demo is only to demonstrate a part of the Transaction vali
 </li>
 </ul>
 <h2 id="code-documentation-2"><a class="header" href="#code-documentation-2">Code documentation</a></h2>
-<h2 id="mobile-tee-registry-1"><a class="header" href="#mobile-tee-registry-1">Mobile TEE Registry</a></h2>
+<h2 id="mobile-tee-registry"><a class="header" href="#mobile-tee-registry">Mobile TEE Registry</a></h2>
 <ul>
 <li><a href="./Mobile_Registry.html">Mobile Registry</a></li>
 </ul>
@@ -2070,7 +2070,7 @@ if the one-time-code was wrong</p>
 </ul>
 </li>
 </ul>
-<h2 id="mobile-tee-registry-2"><a class="header" href="#mobile-tee-registry-2">Mobile TEE Registry</a></h2>
+<h2 id="mobile-tee-registry-1"><a class="header" href="#mobile-tee-registry-1">Mobile TEE Registry</a></h2>
 <ul>
 <li><a href="./Mobile_Registry.html">Mobile Registry</a></li>
 </ul>
@@ -2233,7 +2233,7 @@ it MUST say &quot;callback_new_skcd_signed sent number : <strong>1</strong>&quot
 </ul>
 </li>
 </ul>
-<h2 id="mobile-tee-registry-3"><a class="header" href="#mobile-tee-registry-3">Mobile TEE Registry</a></h2>
+<h2 id="mobile-tee-registry-2"><a class="header" href="#mobile-tee-registry-2">Mobile TEE Registry</a></h2>
 <ul>
 <li><a href="./Mobile_Registry.html">Mobile Registry</a></li>
 </ul>
