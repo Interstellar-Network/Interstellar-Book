@@ -24,9 +24,8 @@
     - [TTVP Client](./TTVP_client.md)
         - [Hardware-backed Mobile Key](./HBMK.md)
 
-- [Testing](./Testing.md)
+- [Testing Phase 1](./Testing.md)
 
-   
 
     - [M1 Delivery](./M1.md)
         - [M1 Docker Demo Tutorial](./M1_demo_tutorial.md)
@@ -44,6 +43,10 @@
         - [M5 Docker Demo Tutorial](./M5_demo_tutorial.md)
            
            
-  
+  - [Testing Phase 2](./Testing.md)
+
+    - [M1 Delivery](./2M1.md)
+        - [M1 Docker Demo Tutorial](./2M1_demo_tutorial.md)
+
 
    
