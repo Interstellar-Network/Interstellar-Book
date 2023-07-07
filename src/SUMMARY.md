@@ -43,7 +43,7 @@
         - [M5 Docker Demo Tutorial](./M5_demo_tutorial.md)
            
            
-  - [Testing Phase 2](./Testing.md)
+- [Testing Phase 2](./Testing.md)
 
     - [M1 Delivery](./2M1.md)
         - [M1 Docker Demo Tutorial](./2M1_demo_tutorial.md)
