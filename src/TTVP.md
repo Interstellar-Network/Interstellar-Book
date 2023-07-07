@@ -4,7 +4,7 @@ The purpose of the Trusted Transaction Validation Protocol is to provide a decen
 
 ## Trusted Transaction Validation Protocol architecture - TTVP
 
-The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation protocol. 
+The following schema shows the main components of Interstellar blockchain including the modules related to Trusted Transaction Validation Protocol in both mobile device and in blockchain nodes.
 
 ![TTVP overview](./fig/Architecture-mobile-L1-L2-Signers.svg)
 
@@ -12,25 +12,24 @@ The following schema shows the main components of Interstellar blockchain includ
 
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
-### Secure UI Layer - GC Secure UI
+### GC (garbled Circuit)  Secure UI Layer 
 The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision. (cf [Visual Cryptography Display](./VC-GC.md) and [Trusted Authentication and User Interface](./TAUI.md))
 The generation of the logical circuit used to display the transaction validation screen is managed on the layer 1 and passed on the TEE layer 2 where this circuit is customized based on the transaction parameters, then randomized and garbled before it is sent to the mobile. 
 
 
-### Mobile Trusted Authentication - Mobile proxy Key Management
-A Public/Private key pair is generated in the mobile secure element. We call this  private key, the mobile proxy private key that is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
-The public Key is sent to the nodes and managed in the Mobile TEE registry (described below)
+### Mobile Proxy Private Key enables Trusted Hardware Based Authentication
+A Public/Private key pair is generated in the mobile hardware protected secure element. We call this  private key, the mobile proxy private key that is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
+The public Key is sent to the nodes and managed in the Mobile Registry (described below)
 
-Actually we replace the wallet private keys by a hardware protected proxy mobile private key. This protected key act as a proxy to all the keys owned by the user.
+Actually we replace the wallet private keys by a hardware protected proxy mobile private key. This protected key act as a proxy to all the wallet keys owned by the user.
 
-> It is securely tied to the user account. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Trusted Keys and Asset Management & Signers` module.
-
+> It is securely tied to the user account and Mobile Proxy Public Key. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Keys Management & Signers` module. 
 
 In order to prevent potential attacks on hardware enclaves down the road, we will also use at a later stage Multi Party Computation and especially Threshold Signature Scheme.
 
  
-### Mobile registry pallet
-The [substrate module](./Mobile_Registry.md) in charge of mobile device public key registration and mobile device management. 
+### Mobile Registry pallet
+The [substrate module](./Mobile_Registry.md) in charge of mobile device public key registration and mobile device management. The public key associated to the mobile proxy private key is also transmitted to Layer 2 to enable verification of signatures from the mobile.
 
 #### Attestation management (roadmap)
 
