@@ -12,23 +12,24 @@ The following schema shows the main components of Interstellar blockchain includ
 
 Those modules are based on Parity Substrate nodes and IntegriTEE workers.
 
-### Secure UI Layer - Transaction Screen Management
+### Secure UI Layer - GC Secure UI
 The mobile transaction screen is managed with Garbled Circuits that are computed on TEE nodes and provisioned on the mobile by the nodes. The one-time code secret and keypad topology cannot be accessed during Garbled Circuit execution to display the Visual Cryptography secret frames that appears only in the users' eyes.  Thanks to persistence of vision. (cf [Visual Cryptography Display](./VC-GC.md) and [Trusted Authentication and User Interface](./TAUI.md))
+The generation of the logical circuit used to display the transaction validation screen is managed on the layer 1 and passed on the TEE layer 2 where this circuit is customized based on the transaction parameters, then randomized and garbled before it is sent to the mobile. 
 
 
-### Mobile Trusted Authentication - Mobile Key Management
-A Public/Private key pair is generated in the mobile Hardware Enclave. The private key is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
+### Mobile Trusted Authentication - Mobile proxy Key Management
+A Public/Private key pair is generated in the mobile secure element. We call this  private key, the mobile proxy private key that is not accessible by anyone, even when the device is rooted. The signature is only triggered with the user's biometrics (also managed with TEE).
 The public Key is sent to the nodes and managed in the Mobile TEE registry (described below)
 
-Actually we replace the wallet private keys by a TEE protected mobile private key. This protected key act as a proxy to all the keys owned by the user.
+Actually we replace the wallet private keys by a hardware protected proxy mobile private key. This protected key act as a proxy to all the keys owned by the user.
 
 > It is securely tied to the user account. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Trusted Keys and Asset Management & Signers` module.
 
 
-In order to prevent potential attacks on hardware enclaves down the road, we will also use at later stage Multi Party Computation and especially Threshold Signature Scheme.
+In order to prevent potential attacks on hardware enclaves down the road, we will also use at a later stage Multi Party Computation and especially Threshold Signature Scheme.
 
  
-### Mobile TEE registry pallet
+### Mobile registry pallet
 The [substrate module](./Mobile_Registry.md) in charge of mobile device public key registration and mobile device management. 
 
 #### Attestation management (roadmap)
