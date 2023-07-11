@@ -17,11 +17,8 @@ So, to simplify and streamline the demo, we have compiled the app in an offline 
 
 
 #### 1.1 Retrieve the APK file
-Download: 
-- [APK file for device](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
-- [APK file for emulator](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
+Download the [APK file](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
 
-> 
 
 #### 1.2 Install the APK
 ##### 1.2.1 on an android device
