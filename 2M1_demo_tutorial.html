@@ -155,7 +155,13 @@
 <h2 id="demo-with-an-android-device-or-an-emulator"><a class="header" href="#demo-with-an-android-device-or-an-emulator">Demo with an android device or an emulator</a></h2>
 <h3 id="1-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator"><a class="header" href="#1-install-the-wallet-app-ie-apk-file-on-an-android-device-or-an-emulator">1. Install the wallet App i.e APK file on an android device or an emulator</a></h3>
 <h4 id="11-retrieve-the-apk-file"><a class="header" href="#11-retrieve-the-apk-file">1.1 Retrieve the APK file</a></h4>
-<p>Download the <a href="https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1">APK file</a></p>
+<p>Download: </p>
+<ul>
+<li><a href="https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1">APK file for device</a></li>
+<li><a href="https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1">APK file for emulator</a></li>
+</ul>
+<blockquote>
+</blockquote>
 <h4 id="12-install-the-apk"><a class="header" href="#12-install-the-apk">1.2 Install the APK</a></h4>
 <h5 id="121-on-an-android-device"><a class="header" href="#121-on-an-android-device">1.2.1 on an android device</a></h5>
 <p><a href="https://www.lifewire.com/install-apk-on-android-4177185">How to install an APK on Android</a></p>
@@ -180,6 +186,20 @@
 <p>if the app is installed on a device, connect your android device with usb or wifi (it is required to set-up develloper mode on the device) with android studio physical device to see the logs with logcat.</p>
 </blockquote>
 <p><img src="./fig/Android_device_connected.png" alt="Physical device connected" /></p>
+<p>FYI: examples of benchs with following desktop and devices:</p>
+<pre><code class="language-loop_times : [31  7  7  5  5  5  5  5  7  5  5  8  5  5  6  5  8  7  5  6  8  6  6  5  6  5  6  7  6  6  5  5  6  6  5  6  5  5  4  7  4  5  7  5  7  6  5  7  5  8]">- DESKTOP(min/max last 10)
+2023-07-11T10:08:46.840369Z  INFO bevy diagnostic: frame_time                      :   11.508194ms (avg 11.563993ms)
+2023-07-11T10:08:46.840408Z  INFO bevy diagnostic: fps                             :   88.479186   (avg 87.813755)
+2023-07-11T10:08:44.836915Z  INFO bevy diagnostic: frame_time                      :    9.832903ms (avg 9.908383ms)
+2023-07-11T10:08:44.836962Z  INFO bevy diagnostic: fps                             :  104.893714   (avg 103.809524)
+- DEVICE(last 3)
+07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   14.415149ms (avg 14.349391ms)
+07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   70.215818   (avg 70.413543)
+07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   15.271250ms (avg 14.889102ms)
+07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   65.985581   (avg 67.726191)
+07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   13.855163ms (avg 13.978516ms)
+07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   72.801836   (avg 72.240550)
+</code></pre>
 
                     </main>
 
