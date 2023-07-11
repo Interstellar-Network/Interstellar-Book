@@ -17,8 +17,11 @@ So, to simplify and streamline the demo, we have compiled the app in an offline 
 
 
 #### 1.1 Retrieve the APK file
-Download the [APK file](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
+Download: 
+- [APK file for device](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
+- [APK file for emulator](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
 
+> 
 
 #### 1.2 Install the APK
 ##### 1.2.1 on an android device
@@ -66,3 +69,25 @@ Use logcat on android studio and type "fps" string in the filter to see the aver
 > if the app is installed on a device, connect your android device with usb or wifi (it is required to set-up develloper mode on the device) with android studio physical device to see the logs with logcat.
 
 ![Physical device connected](./fig/Android_device_connected.png)
+
+
+
+FYI: examples of benchs with following desktop and devices:
+
+
+
+
+```loop_times : [31, 7, 7, 5, 5, 5, 5, 5, 7, 5, 5, 8, 5, 5, 6, 5, 8, 7, 5, 6, 8, 6, 6, 5, 6, 5, 6, 7, 6, 6, 5, 5, 6, 6, 5, 6, 5, 5, 4, 7, 4, 5, 7, 5, 7, 6, 5, 7, 5, 8]
+- DESKTOP(min/max last 10)
+2023-07-11T10:08:46.840369Z  INFO bevy diagnostic: frame_time                      :   11.508194ms (avg 11.563993ms)
+2023-07-11T10:08:46.840408Z  INFO bevy diagnostic: fps                             :   88.479186   (avg 87.813755)
+2023-07-11T10:08:44.836915Z  INFO bevy diagnostic: frame_time                      :    9.832903ms (avg 9.908383ms)
+2023-07-11T10:08:44.836962Z  INFO bevy diagnostic: fps                             :  104.893714   (avg 103.809524)
+- DEVICE(last 3)
+07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   14.415149ms (avg 14.349391ms)
+07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   70.215818   (avg 70.413543)
+07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   15.271250ms (avg 14.889102ms)
+07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   65.985581   (avg 67.726191)
+07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   13.855163ms (avg 13.978516ms)
+07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   72.801836   (avg 72.240550)
+```
