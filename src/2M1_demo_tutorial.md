@@ -72,7 +72,7 @@ Use logcat on android studio and type "fps" string in the filter to see the aver
 
 
 
-FYI: examples of benchs with following desktop and devices:
+Examples of benchs with following desktop and devices:
 
 
 
