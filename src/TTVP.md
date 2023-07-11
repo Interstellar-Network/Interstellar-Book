@@ -23,7 +23,7 @@ The public Key is sent to the nodes and managed in the Mobile Registry (describe
 
 Actually we replace the wallet private keys by a hardware protected proxy mobile private key. This protected key act as a proxy to all the wallet keys owned by the user.
 
-> It is securely tied to the user account and Mobile Proxy Public Key. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Keys Management & Signers` module. 
+> It is securely tied to the user account and Mobile Proxy Public Key. The wallet private keys associated with the user's assets are managed in the blockchain hardware enclave TEE nodes in `Keys & Signers Management` module. 
 
 In order to prevent potential attacks on hardware enclaves down the road, we will also use at a later stage Multi Party Computation and especially Threshold Signature Scheme.
 
