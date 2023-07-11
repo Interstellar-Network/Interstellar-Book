@@ -69,7 +69,7 @@ Use logcat on android studio and type "fps" string in the filter to see the aver
 
 
 
-Examples of benchs with a mobile device with an ARM [Snapdragon 870 5G](https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-870-5g-mobile-platform)
+Examples of mobile device benchs with a [Snapdragon 870 5G](https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-870-5g-mobile-platform)
 
 ```sh
 07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   14.415149ms (avg 14.349391ms)
