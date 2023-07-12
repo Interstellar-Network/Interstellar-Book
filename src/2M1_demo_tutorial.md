@@ -32,8 +32,9 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 [Install Android studio](https://developer.android.com/studio/)
 
-Install the pixel 5 API 31 emulator with Virtual Device Manager.
+[Install an Android Virtual Device](https://developer.android.com/studio/run/managing-avds#createavd)
 
+and chose the pixel 5 API 31 emulator with Virtual Device Manager.
 
 ![Launch pixel 5 API 31 emulator](./fig/Android_device_manager.png)
 
@@ -72,10 +73,12 @@ Use logcat on android studio and type "fps" string in the filter to see the aver
 Examples of mobile device benchs with a [Snapdragon 870 5G](https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-870-5g-mobile-platform)
 
 ```sh
+
 07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   14.415149ms (avg 14.349391ms)
 07-11 12:18:29.641 31983 32048 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   70.215818   (avg 70.413543)
 07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   15.271250ms (avg 14.889102ms)
 07-11 12:18:28.635 31983 32049 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   65.985581   (avg 67.726191)
 07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l frame_time                      :   13.855163ms (avg 13.978516ms)
 07-11 12:18:27.636 31983 32050 I event /home/pratn/.cargo/registry/src/github.com-1ecc6299db9ec823/bevy_diagnostic-0.10.1/src/l fps                             :   72.801836   (avg 72.240550)
+
 ```
