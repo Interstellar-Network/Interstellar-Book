@@ -453,23 +453,17 @@ std::string GenerateDisplaySkcd(
 }  // namespace circuits
 ```  
 
-### [5][6] Garbling
+### [5][6] Garbling (updated for Phase 2/M1)
 
-Pretty straitforward call to `lib_garble` library
+Pretty straitforward calls to [lib_garble.rs](https://github.com/Interstellar-Network/lib-garble-rs/tree/w3f-phase2-milestone1) library in Integritee (TEE protected pallet)
 
+including call to  `garble_internal`: [garbled internal](https://github.com/Interstellar-Network/lib-garble-rs/blob/w3f-phase2-milestone1/lib-garble-rs/src/new_garbling_scheme/garble.rs#L221)
+
+
+Deprecated - usage of JustGarble:
 `ParallelGarbledCircuit GarbleSkcd`: [lib_garble/src/justgarble/garble_helper.cpp:16](https://github.com/Interstellar-Network/lib_garble/blob/main/src/parallel_garbled_circuit/parallel_garbled_circuit.cpp)
 
->This part is related to the management of display circuit OTP related to M2/M3
 
-Technically garbling + “stripping” (i.e. generating the “pre-packmsg”).
-This is at this step that the pinpad/OTP randomness is introduced, i.e. the .skcd generated at the previous step CAN/SHOULD be reused (and it is) all the time (i.e. it is always reused, except when changing size or resolution).
-
-We can manage 2 modes: on the fly generation and pre-computation of randomized circuits ( with random pinpad and OTP) with whithout transaction message.
-The second mode will use “stripped circuits” sent to a device ahead of time and the “pre-packmsg” is stored in the DB.
-Then when creating a transaction, the “pre-packmsg” is used to generate the correct “packmsg” with the desired transaction  message (e.g. “Do you authorize sending X BTC to Y address”), and then send it to the Device.
-The Device then combines the “packmsg” and the “stripped circuits” and proceed to evaluate the circuits (= generating the final bitmap, one for each frame at the target 60+ FPS).
-
-Regarding Transaction Validation displays, sending the circuits ahead of time is no mandatory (i.e. the generation is fast enough, and the size small enough to be able to get them on the spot even on a mobile) although this feature can be used in some specific cases and for other use cases.
 
 
 ## Circuit Pipeline API
