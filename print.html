@@ -219,6 +219,7 @@
 <li>Each boolean operator is implemented in the circuit by an encrypted truth table, decrypted by its respective Garbled Values inputs.</li>
 </ul>
 <p><a href="https://www.cs.fsu.edu/~tvhoang/thesis.pdf">Foundation of Garbled Circuits, Viet Tung Hoang, B.S.</a></p>
+<p>we have develloped a new garbling scheme implementation, from scratch, based on the following whitepapers: <a href="https://www.esat.kuleuven.be/cosic/publications/article-3351.pdf">A New Framework for Garbled Circuits</a> and <a href="https://eprint.iacr.org/2021/739.pdf">A New Approach to Garbled Circuits</a>. This new scheme proven secure against PPT adversary, achieves a major performance improvement compared to the previous method i.e Fancy Garble and JustGarbled, while still incorporating the transaction message within the circuit. Our optimizations, including parallelization, free gates, and especially tight memory managment, contribute to this significant boost in performance.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="visual-cryptography-for-transaction-validation-screen"><a class="header" href="#visual-cryptography-for-transaction-validation-screen">Visual Cryptography for Transaction Validation Screen</a></h1>
 <p>Garbled Circuit &amp; Visual Cryptography Display</p>
 <h2 id="garbled-circuits-output-frames"><a class="header" href="#garbled-circuits-output-frames">Garbled Circuits output frames</a></h2>
@@ -2484,7 +2485,7 @@ on SEND screen.</p>
 <ul>
 <li><a href="./GCF.html">GCF generic pipeline for Garbled Circuit (GC) production</a>
 <ul>
-<li><a href="./GC.html">Basic GC structure</a></li>
+<li><a href="./GC.html">Basic GC structure</a> (updated)</li>
 <li><a href="./VC-GC.html">Visual Cryptography display principles</a></li>
 </ul>
 </li>
@@ -2510,6 +2511,10 @@ on SEND screen.</p>
 <li><a href="./HBMK.html">Hardware-backed Mobile Key</a></li>
 </ul>
 </li>
+</ul>
+<h2 id="new-garbling-scheme"><a class="header" href="#new-garbling-scheme">New Garbling Scheme</a></h2>
+<ul>
+<li><a href="./GC.html">Basic GC structure</a> (updated with new garbling scheme whitepapers)</li>
 </ul>
 <h2 id="garbling-pallet-in-tee"><a class="header" href="#garbling-pallet-in-tee">Garbling pallet in TEE</a></h2>
 <ul>
