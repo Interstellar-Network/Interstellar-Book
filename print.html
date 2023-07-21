@@ -994,8 +994,8 @@ We use extrinsic unsigned transactions with signed extensions to enable the veri
 ..
 <img src="./fig/Wallet_Send_White_Border.png" alt="wallet menu"  width="300"/>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trusted-transaction-validation-protocol-client"><a class="header" href="#trusted-transaction-validation-protocol-client">Trusted Transaction Validation Protocol client</a></h1>
-<p>This is the client software embedded in an app or browser in the future that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
-(cf <a href="./TTVP.html">Tusted Transaction Validation Protocol</a>)</p>
+<p>This is the client software embedded in an app (or browser in the future) that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
+(cf <a href="./TTVP.html">Trusted Transaction Validation Protocol</a>)</p>
 <p>It implements the <a href="./TAUI.html">Trusted Authentication and User Interface Layer</a> combined with <a href="./HBMK.html">Harware-backed Mobile Key</a> and is regsitered in the <a href="./Mobile_Registry.html">Mobile TEE Registry</a></p>
 <h2 id="architecture-and-security"><a class="header" href="#architecture-and-security">Architecture and Security</a></h2>
 <p><img src="./fig/App_architecture.svg" alt="App architecture" /></p>
@@ -1003,7 +1003,7 @@ We use extrinsic unsigned transactions with signed extensions to enable the veri
 <p>Green boxes are secure as well as garbled circuit evaluation in Dark Grey
 it prevents state of the art Banking trojan attacks on the mobile</p>
 </blockquote>
-<p>This client is based on a substrate client on the mobile to communicate through unsigned extrinsic with signed option and substrate events with the blockchain. It enables the mobile to be registered with the mobile TEE registry pallet. </p>
+<p>This client relies on a substrate client on the mobile to communicate through unsigned extrinsic with signed option and substrate events with the blockchain. It enables the mobile to be registered with the mobile registry pallet. </p>
 <p>It also include an IPFS client to retrieve the cid of the <a href="./VC-GC.html">Visual Cryptography Display</a> i.e the one-time <a href=",/GC.html">Garbled Circuit</a> program generated for each transaction  by the <a href="./GCF.html">Garbled Circuit Factory</a> managed by the blockchain.</p>
 <p>The previous circuit is used to compose the <a href="./TAUI.html">Trusted Authentication and User Interface Layer</a> i.e <code>Secure UI Screen</code> that evaluates and renders the circuit to enable the user to confirm a transaction/sensitive operation with a <code>one-time code</code></p>
 <p>This Secure UI layer relies on a garbled circuit evaluator and a renderer to display the result of its evaluation directly to the framebuffer.</p>
@@ -1041,7 +1041,10 @@ it prevents state of the art Banking trojan attacks on the mobile</p>
 ) 
 <span class="boring">}</span></code></pre></pre>
 <h3 id="garble-circuit-evaluator"><a class="header" href="#garble-circuit-evaluator">Garble Circuit Evaluator</a></h3>
-<p>This is the high level part in rust that encapsulated calls to lower level C++ evaluator</p>
+<blockquote>
+<p>DEPRECATED: Evaluator is now written in Rust although basic logic remains
+This is the high level part in rust that encapsulated calls to lower level C++ evaluator</p>
+</blockquote>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub use cxx;
@@ -2495,7 +2498,7 @@ on SEND screen.</p>
 <ul>
 <li><a href="./Mobile_Registry.html">Mobile Registry</a></li>
 </ul>
-<h2 id="mobile-wallet-app-demo-3"><a class="header" href="#mobile-wallet-app-demo-3">Mobile Wallet App Demo</a></h2>
+<h2 id="mobile-wallet-app"><a class="header" href="#mobile-wallet-app">Mobile Wallet App</a></h2>
 <ul>
 <li><a href="./Mobile_App.html">Mobile Wallet App</a>
 <ul>
