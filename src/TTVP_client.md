@@ -1,7 +1,7 @@
 # Trusted Transaction Validation Protocol client
 
-This is the client software embedded in an app or browser in the future that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
-(cf [Tusted Transaction Validation Protocol](./TTVP.md))
+This is the client software embedded in an app (or browser in the future) that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
+(cf [Trusted Transaction Validation Protocol](./TTVP.md))
 
 It implements the [Trusted Authentication and User Interface Layer](./TAUI.md) combined with [Harware-backed Mobile Key](./HBMK.md) and is regsitered in the [Mobile TEE Registry](./Mobile_Registry.md)
 
@@ -11,7 +11,7 @@ It implements the [Trusted Authentication and User Interface Layer](./TAUI.md) c
 > Green boxes are secure as well as garbled circuit evaluation in Dark Grey
 it prevents state of the art Banking trojan attacks on the mobile
 
-This client is based on a substrate client on the mobile to communicate through unsigned extrinsic with signed option and substrate events with the blockchain. It enables the mobile to be registered with the mobile TEE registry pallet. 
+This client relies on a substrate client on the mobile to communicate through unsigned extrinsic with signed option and substrate events with the blockchain. It enables the mobile to be registered with the mobile registry pallet. 
 
 
 It also include an IPFS client to retrieve the cid of the [Visual Cryptography Display](./VC-GC.md) i.e the one-time [Garbled Circuit](,/GC.md) program generated for each transaction  by the [Garbled Circuit Factory](./GCF.md) managed by the blockchain.
@@ -58,6 +58,8 @@ pub fn extrinsic_check_input(
 ```
 
 ### Garble Circuit Evaluator
+
+>DEPRECATED: Evaluator is now written in Rust although basic logic remains
 This is the high level part in rust that encapsulated calls to lower level C++ evaluator
 ```rust
 pub use cxx;
