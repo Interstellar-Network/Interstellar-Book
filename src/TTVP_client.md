@@ -1,6 +1,6 @@
 # Trusted Transaction Validation Protocol client
 
-This is the client software embedded in an app (or browser in the future) that  enables the secure confirmation of any transactions or sensitive operation with an hardware level security.
+This is the client software embedded in an app (or browser in the future) that  enables the secure confirmation of transactions or sensitive operations with an hardware level security.
 (cf [Trusted Transaction Validation Protocol](./TTVP.md))
 
 It implements the [Trusted Authentication and User Interface Layer](./TAUI.md) combined with [Harware-backed Mobile Key](./HBMK.md) and is regsitered in the [Mobile TEE Registry](./Mobile_Registry.md)
