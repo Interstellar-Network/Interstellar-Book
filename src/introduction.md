@@ -11,7 +11,7 @@
 
 The main pain points of non-custodial wallet solutions still are:
 
-- **User experience** | [How can Dapps attract and retain web3 newcomers](https://medium.com/@jlleleu/how-to-attract-and-retains-newcomers-10e5050ee5cb)
+- **User experience** | [How Dapps can attract and retain web3 newcomers](https://medium.com/@jlleleu/how-to-attract-and-retains-newcomers-10e5050ee5cb)
 
 - **Security** | [Are Cryptocurrency Wallets more at risk than ever?](https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7)
 
