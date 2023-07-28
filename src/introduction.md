@@ -11,7 +11,7 @@
 
 The main pain points of non-custodial wallet solutions still are:
 
-- **User experience** | [Can an easy to set-up Wallet be an efficient customer acquisition tool for Dapps and DeFi players?](https://medium.com/@jlleleu/can-be-an-easy-to-set-up-wallet-an-efficient-customer-acquisition-tool-for-defi-players-8600812fe01e)
+- **User experience** |[How can Dapps attract and retain web3 newcomers](https://medium.com/@jlleleu/how-to-attract-and-retains-newcomers-10e5050ee5cb)
 
 - **Security** | [Are Cryptocurrency Wallets more at risk than ever?](https://medium.com/@jlleleu/are-cryptocurrency-wallets-more-at-risk-than-ever-cf1ce9725de7)
 
