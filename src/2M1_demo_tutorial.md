@@ -34,7 +34,7 @@ Download the [APK file](https://github.com/Interstellar-Network/wallet-app/relea
 
 [Install an Android Virtual Device](https://developer.android.com/studio/run/managing-avds#createavd)
 
-and chose the pixel 5 API 31 emulator with Virtual Device Manager.
+Choose the pixel 5 API 31 emulator with Virtual Device Manager.
 
 ![Launch pixel 5 API 31 emulator](./fig/Android_device_manager.png)
 
