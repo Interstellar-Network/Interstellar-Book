@@ -48,5 +48,7 @@
     - [M1 Delivery](./2M1.md)
         - [M1 Demo Tutorial](./2M1_demo_tutorial.md)
 
-
+    - [M2 Delivery](./2M2.md)
+        - [M2 Demo Tutorial](./2M2_demo_tutorial.md)
+     
    
