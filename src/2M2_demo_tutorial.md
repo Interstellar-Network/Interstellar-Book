@@ -65,4 +65,6 @@ Following is an explicit video showing how to send a curency to a contact on SEN
 
 #### 3.3 Wait for the transaction validation screen to appear
 
-#### 3.4 Just check the UX and experience different cognitive loads required by the brain depending on the probability to display segments ON/OFF.
+#### 3.4 Check the validation screen user experience
+
+Each application will provide a distinct perception within the viewer's retinal eye, resulting from the superposition of visual cryptographic shares. This perception is contingent upon the probability of segments being displayed as "ON" for each frame. This factor significantly influences the cognitive load imposed on users' brains as they decode and recognize the digits over time, utilizing the persistence of vision.
