@@ -10,7 +10,7 @@ So, to simplify and streamline the demo, we have compiled differents apps in an 
 ## Demo with an android device or an emulator
 
 
-### 1. Install the wallet App i.e APK file on an android device or an emulator
+### 1. Install the wallet Apps i.e APK files on an android device or an emulator
 
 
 #### 1.1.2 Retrieve the APK files (segments ON with 0.9+ probabilities)
@@ -22,7 +22,7 @@ Download the [APK file 0.8](https://github.com/Interstellar-Network/wallet-app/r
 #### 1.1.2 Retrieve the APK files (segments ON with 0.5 probabilities)
 Download the [APK file 0.5](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
 
-for each APKs
+
 
 #### 1.2 Install the APK
 ##### 1.2.1 on an android device
@@ -44,7 +44,7 @@ Choose the pixel 5 API 31 emulator with Virtual Device Manager.
 
 Wait for the emulator to launch and emulated device to power on and drag and drop the APK file on the emulator to install the App.
 
-
+### For each APKs
 
 ### 2.Launch the Android App
 Swipe from bottom to top and click on `Wallet Interstellar`
@@ -64,3 +64,5 @@ Following is an explicit video showing how to send a curency to a contact on SEN
 #### 3.2 Click on the blue Check icon
 
 #### 3.3 Wait for the transaction validation screen to appear
+
+#### 3.4 Just check the UX and experience different cognitive loads required by the brain depending on the probability to display segments ON/OFF.
