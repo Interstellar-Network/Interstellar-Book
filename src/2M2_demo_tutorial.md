@@ -12,16 +12,15 @@ So, to simplify and streamline the demo, we have compiled differents apps in an 
 
 ### 1. Install the wallet Apps i.e APK files on an android device or an emulator
 
+#### 1.1.1 Retrieve the APK files for M2.1 (segments ON with 0.5 probabilities)
+Download the [APK file 0.5](https://github.com/Interstellar-Network/wallet-app/releases/download/w3f-phase2-milestone2/androidApp-arm64-release-40c90aa91ec8a81f010-proba-50.apk)
 
-#### 1.1.2 Retrieve the APK files (segments ON with 0.9+ probabilities)
-Download the [APK file 0.9+](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
+#### 1.1.2 Retrieve the APK files for M2.1 (segments ON with 0.7 probabilities)
+Download the [APK file 0.7](https://github.com/Interstellar-Network/wallet-app/releases/download/w3f-phase2-milestone2/androidApp-arm64-release-40c90aa91ec8a81f010-proba-default-70.apk)
 
-#### 1.1.2 Retrieve the APK files (segments ON with 0.8 probabilities)
-Download the [APK file 0.8](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
 
-#### 1.1.2 Retrieve the APK files (segments ON with 0.5 probabilities)
-Download the [APK file 0.5](https://github.com/Interstellar-Network/wallet-app/releases/tag/w3f-phase2-milestone1)
-
+#### 1.1.3 Retrieve the APK files for M2.2 (segments ON with 0.9 probabilities)
+Download the [APK file 0.9](https://github.com/Interstellar-Network/wallet-app/releases/download/w3f-phase2-milestone2/androidApp-arm64-release-40c90aa91ec8a81f010-proba-90.apk)
 
 
 #### 1.2 Install the APK
@@ -29,7 +28,11 @@ Download the [APK file 0.5](https://github.com/Interstellar-Network/wallet-app/r
 
 [How to install an APK on Android](https://www.lifewire.com/install-apk-on-android-4177185)
 
- WARNING: ensure that your device is configure for english.
+ > WARNING: ensure that your device is 64 bits/ARMv8: You can check using eg https://play.google.com/store/apps/details?id=com.finalwire.aida64&pcampaignid=web_share
+
+>Click on CPU
+The circled line MUST say 64 bits ARMv8 or something like that; it MUST NOT mention 32 bits or it will not be installable
+
 
 
 ##### 1.2.2 on an emulator
