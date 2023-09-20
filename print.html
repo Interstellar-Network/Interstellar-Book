@@ -288,7 +288,7 @@ simualtions based on <a href="https://github.com/psychopy/psychojs">PsychoJS lib
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
 <blockquote>
 <p>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
+The rest (display-main.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
 <h4 id="segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file"><a class="header" href="#segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file">Segment2pixel use drawable functions to create the verilog circuit based on 7(x)segs.png (configuration file)</a></h4>
