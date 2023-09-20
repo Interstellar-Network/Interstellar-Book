@@ -28,7 +28,7 @@ Overview :
 
 `[5] Garbling .skcd → .garbled`: using New Garbling scheme (update Phase 2 M1)
 
-`[6] Finalize/Serialize .garbled → .pgarbled`: Using internal code; allows for parallel eval of a Garbled Circuit
+`[6] Finalize/Serialize .garbled → .pgarbled`: Using internal code; allows for parallel evaluation of the Garbled Circuit
 
 
 ### [1] Generate “segment2pixel.v”
