@@ -34,7 +34,7 @@ Overview :
 ### [1] Generate “segment2pixel.v”
 
 >This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
+The rest (display-main.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
