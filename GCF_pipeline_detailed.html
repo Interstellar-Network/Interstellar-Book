@@ -148,27 +148,24 @@
                     <main>
                         <h1 id="detailed-pipeline-for-display-circuits-production"><a class="header" href="#detailed-pipeline-for-display-circuits-production">Detailed Pipeline for Display Circuits Production</a></h1>
 <p>This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.</p>
-<p>It illustrates the way Garbled Circuit Factory can be used with substrate OCWs for the production of the display garbled circuits used by Interstellar.</p>
+<p>It illustrates the way Garbled Circuit Factory can be used with substrate for the production of the display garbled circuits used by Interstellar.</p>
 <h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
 <blockquote>
 <p>The file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
 </blockquote>
 <p><strong>On the following schema, cached files are represented with red doted line</strong></p>
-<blockquote>
-<p><strong>The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF</strong></p>
-</blockquote>
 <p><img src="./fig/GC-Pipeline-Detailed.svg" alt="GC Pipeline Detailed" /></p>
 <p>Overview : </p>
 <p><code>[1] Generate~</code> “segment2pixel.v” using internal code [using e.g. 7segs.png]</p>
-<p><code>[2] Verilog  → .blif</code>: combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys</p>
+<p><code>[2] Verilog  → .blif</code>: combine/synth all Verilog modules i.e. display-main+LFSR_comb+BitCounter+rndswitch+segment2pixel using Yosys (update Phase 2 M2)</p>
 <p><code>[3] .blif → .blif.blif </code>: optimization /synthesis : using ABC</p>
 <p><code>[4] Parsing .blif → .skcd </code>: using internal code</p>
-<p><code>[5] Garbling .skcd → .garbled</code>: using JustGarble</p>
+<p><code>[5] Garbling .skcd → .garbled</code>: using New Garbling scheme (update Phase 2 M1)</p>
 <p><code>[6] Finalize/Serialize .garbled → .pgarbled</code>: Using internal code; allows for parallel eval of a Garbled Circuit</p>
 <h3 id="1-generate-segment2pixelv"><a class="header" href="#1-generate-segment2pixelv">[1] Generate “segment2pixel.v”</a></h3>
 <blockquote>
 <p>This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
+The rest (displaymain.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.</p>
 </blockquote>
 <p>This allows to cache the resulting .skcd of the whole pipeline (cf <code>CircuitPipeline::GenerateDisplaySkcd</code>) using <code>segment2pixel.v</code> <strong>content as cache key</strong>.</p>
 <h4 id="segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file"><a class="header" href="#segment2pixel-use-drawable-functions-to-create-the-verilog-circuit-based-on-7xsegspng-configuration-file">Segment2pixel use drawable functions to create the verilog circuit based on 7(x)segs.png (configuration file)</a></h4>
