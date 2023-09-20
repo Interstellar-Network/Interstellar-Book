@@ -2,7 +2,7 @@
 
 This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.
 
-It illustrates the way Garbled Circuit Factory can be used with substrate OCWs for the production of the display garbled circuits used by Interstellar.
+It illustrates the way Garbled Circuit Factory can be used with substrate for the production of the display garbled circuits used by Interstellar.
 
 ## Pipeline
 
@@ -12,8 +12,6 @@ It illustrates the way Garbled Circuit Factory can be used with substrate OCWs f
 
 **On the following schema, cached files are represented with red doted line**
 
->**The red arrow represents the command to lauch the circuit generation pipeline from OCW GCF**
-
 
 ![GC Pipeline Detailed](./fig/GC-Pipeline-Detailed.svg)
 
@@ -22,13 +20,13 @@ Overview :
 
 `[1] Generate~` “segment2pixel.v” using internal code [using e.g. 7segs.png]
 
-` [2] Verilog  → .blif `: combine all Verilog(displaymain+xorexpand+rndswitch+segment2pixel) using Yosys
+` [2] Verilog  → .blif `: combine/synth all Verilog modules i.e. display-main+LFSR_comb+BitCounter+rndswitch+segment2pixel using Yosys (update Phase 2 M2)
 
 `[3] .blif → .blif.blif `: optimization /synthesis : using ABC
 
 `[4] Parsing .blif → .skcd `: using internal code
 
-`[5] Garbling .skcd → .garbled`: using JustGarble
+`[5] Garbling .skcd → .garbled`: using New Garbling scheme (update Phase 2 M1)
 
 `[6] Finalize/Serialize .garbled → .pgarbled`: Using internal code; allows for parallel eval of a Garbled Circuit
 
@@ -36,7 +34,7 @@ Overview :
 ### [1] Generate “segment2pixel.v”
 
 >This is the only file in the pipeline that needs to be regenerated when changing size/resolution. 
-The rest (displaymain.v, xorexpand.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
+The rest (displaymain.v, LFSR_comb.v, and rndswitch.v) are static, and the size/resolution is handled by passing the appropriate “`define” to Yosys.
 
 This allows to cache the resulting .skcd of the whole pipeline (cf `CircuitPipeline::GenerateDisplaySkcd`) using `segment2pixel.v` **content as cache key**.
 
