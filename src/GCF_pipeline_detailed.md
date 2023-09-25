@@ -3,10 +3,9 @@
 This is the Garbled Circuits generation detailed pipeline for the Transaction/Sensitive operation Validation screen use case.
 
 It illustrates the way Garbled Circuit Factory works with substrate ocw palets:
- - `ocw-circuit`: logic circuit generation
- - `ocw-garble` : garble circuit generation 
+ - `ocw-circuit` -> logic circuit generation
+ - `ocw-garble` -> garble circuit generation 
  
-
 
 ## Pipeline
 
