@@ -147,8 +147,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="detailed-pipeline-for-display-circuits-production"><a class="header" href="#detailed-pipeline-for-display-circuits-production">Detailed Pipeline for Display Circuits Production</a></h1>
-<p>This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.</p>
-<p>It illustrates the way Garbled Circuit Factory can be used with substrate for the production of the display garbled circuits used by Interstellar.</p>
+<p>This is the Garbled Circuits generation detailed pipeline for the Transaction/Sensitive operation Validation screen use case.</p>
+<p>It illustrates the way Garbled Circuit Factory works with substrate ocw palets:</p>
+<ul>
+<li><code>ocw-circuit</code>: logic circuit generation</li>
+<li><code>ocw-garble</code> : garble circuit generation </li>
+</ul>
 <h2 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h2>
 <blockquote>
 <p>The file types are mentioned for clarity and to allow matching with calling the executables (e.g. Yosys or ABC) manually, but in practice after [2] all is done in memory, and cached.</p>
