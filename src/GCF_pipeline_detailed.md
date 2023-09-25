@@ -154,8 +154,7 @@ template std::vector<SegmentID> Draw<RelativeBBox>(
 }  //   namespace drawable
 ````
 
-`Segments2Pixels::Segments2Pixels`: [lib_circuits/src/segments2pixels/segments2pixels.cpp:137](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp)
-
+`Segments2Pixels::Segments2Pixels`
 
 
 ```cpp,editable
@@ -209,7 +208,6 @@ Segments2Pixels<DrawableWhereT>::Segments2Pixels(
 
 Then `segment2pixel.v` VHDL file is generated:
 
-`Segments2Pixels::GenerateVerilog`: [ lib_circuits/src/segments2pixels/segments2pixels.cpp:232](https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp#L137)
 
 A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
