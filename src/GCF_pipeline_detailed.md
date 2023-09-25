@@ -1,8 +1,12 @@
 # Detailed Pipeline for Display Circuits Production
 
-This is the Garbled Circuits generation detailed pipeline for the Transaction Validation screen use case.
+This is the Garbled Circuits generation detailed pipeline for the Transaction/Sensitive operation Validation screen use case.
 
-It illustrates the way Garbled Circuit Factory can be used with substrate for the production of the display garbled circuits used by Interstellar.
+It illustrates the way Garbled Circuit Factory works with substrate ocw palets:
+ - `ocw-circuit`: logic circuit generation
+ - `ocw-garble` : garble circuit generation 
+ 
+
 
 ## Pipeline
 
