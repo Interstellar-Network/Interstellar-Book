@@ -282,7 +282,7 @@ template std::vector&lt;SegmentID&gt; Draw&lt;RelativeBBox&gt;(
 
 }  //   namespace drawable
 </code></pre>
-<p><code>Segments2Pixels::Segments2Pixels</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp">lib_circuits/src/segments2pixels/segments2pixels.cpp:137</a></p>
+<p><code>Segments2Pixels::Segments2Pixels</code></p>
 <pre><code class="language-cpp editable">namespace interstellar {
 
 template &lt;typename DrawableWhereT&gt;
@@ -331,7 +331,6 @@ Segments2Pixels&lt;DrawableWhereT&gt;::Segments2Pixels(
 }
 </code></pre>
 <p>Then <code>segment2pixel.v</code> VHDL file is generated:</p>
-<p><code>Segments2Pixels::GenerateVerilog</code>: <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/src/segments2pixels/segments2pixels.cpp#L137"> lib_circuits/src/segments2pixels/segments2pixels.cpp:232</a></p>
 <p>A “bitmap” is generated with the correct number of digits at the correct positions [in relative coords]
 E.g. 2-4 digits in the center of the “message window”, and 10 digits vertically oriented for the “pinpad window”
 If there is an in-memory .skcd cached for this particular “segment2pixel.v” it is returned and that part is done</p>
