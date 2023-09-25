@@ -2614,12 +2614,17 @@ on SEND screen.</p>
 <blockquote>
 <p><code>lib_circuits</code> library has been refactored mainly in rust in <a href="https://github.com/Interstellar-Network/lib_circuits/tree/main/circuit-gen-rs/">lib-circuits-rs</a></p>
 </blockquote>
-<h2 id="testing-guide-5"><a class="header" href="#testing-guide-5">Testing Guide</a></h2>
-<p>Run Cargo test on <a href="https://github.com/Interstellar-Network/lib_circuits/tree/main/circuit-gen-rs/">lib-circuits-rs</a> repositories.</p>
-<p>use test_args: &quot;--features=eval_plain -- --ignored&quot;
-to test  &quot;test_generic_lfsr_comb_all_probas&quot;</p>
 <h2 id="demo-tutorial-1"><a class="header" href="#demo-tutorial-1">Demo tutorial</a></h2>
 <p><a href="./2M2_demo_tutorial.html">Demo tutorial</a></p>
+<h2 id="testing-guide-5"><a class="header" href="#testing-guide-5">Testing Guide</a></h2>
+<p>Run Cargo test on <a href="https://github.com/Interstellar-Network/lib_circuits/tree/main/">lib-circuits</a> repositories.</p>
+<blockquote>
+<p>use test_args: &quot;--features=eval_plain -- --ignored&quot;
+to test  &quot;test_generic_lfsr_comb_all_probas&quot;</p>
+</blockquote>
+<blockquote>
+<p>check <a href="https://github.com/Interstellar-Network/lib_circuits/blob/main/.github/workflows/rust.yml">CI</a> for build dependencies</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="m2-demo-tutorial-follow-up-phase-2"><a class="header" href="#m2-demo-tutorial-follow-up-phase-2">M2 Demo Tutorial (follow-up phase 2)</a></h1>
 <p>The goal of this demonstration is to showcase the new circuit design that incorporate new circuits modules LFSR_comb and bit counter to replace xorexpand. This enables to select probabilities to display the segments ON whithin a range of differents probabilities 0.5 to 0.9 and higher.</p>
 <p>So, to simplify and streamline the demo, we have compiled differents apps in an offline demo mode. This mode utilizes differents pre-computed test circuit generated with the new circuit design and does not require the app to connect with the blockchain like in M5.</p>
