@@ -74,11 +74,4 @@ Establishing a guarantee fund for individual and corporate users could be a sens
 
 With the multi-layer security system described earlier, it is easy to enable users to securely provide their mobile device forensic data in a simple manner to verify potential claims.
 
-### Some potential other improvements:
 
-- Filecoin may allow for the backup and retrieval of private keys using Shamir Secret Sharing.
-
-- Private scheme like stealth address can be added to the system
-
-
-- Enhancement of distributed HSM based on TEE with hardware HSM module on some nodes
