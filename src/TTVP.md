@@ -59,10 +59,6 @@ Targeted attacks with rootkit capabilities are highly elusive, as an attacker wi
 Despite the challenges presented by rootkit-enabled targeted attacks, we think that our security and authentication framework (decentralized & distributed) can be used to design a real-time targeted attack detection that focuses on our transaction validation/sensitive operation session. This is made possible by our use of hardware protected signature on mobile and the computation privacy and protection of inputs of garbled circuit evaluation. By leveraging these advanced security measures, we can enhance our ability to detect and prevent targeted attacks, even those with rootkit capabilities.
 
 
-**Research question/hypothesis**: Can we design an efficient and accurate machine learning (ML) malware detection model for rootkits, based on processor resource consumption during transaction validation sessions on mobile devices?
-
-During the transaction validation session, we aim to maximize processor resource consumption by designing a task based on evaluating garbled circuits to create an unalterable cryptographic dataset. This dataset can be used to train a machine learning model to detect malicious resource usage patterns. The task-based approach can be fine-tuned to detect subtle variations in resource consumption and is more likely to identify malicious behavior as the usage patterns for evaluating garbled circuits are unique compared to other tasks. Moreover, garbled circuits provide privacy and protection for computation and inputs, making it challenging for attackers to mimic normal behavior and evade detection.
-
 ### Future security framework
 The proposed system incorporates multiple security layers to increase the cost of targeted attacks on mobile user interface (UI) software.
 
@@ -70,17 +66,7 @@ The first layer focuses on the security of transaction confirmation, using featu
 
 The second layer adds an additional layer of security through behavioral biometrics, such as keypad pressure and input timestamps, making it difficult for attackers to replicate the user's input. [99% proven success rate model]( https://book.interstellar.gg/TTVP.html#behavioral-biometric-roadmap)
 
-The third layer uses garbled circuits to execute a recursive AES hashing function that maximizes resource consumption on the mobile processors: CPU, GPU, and ML engine. The evaluation of these circuits generates an unalterable secret sequence number, which is then embedded as a watermark in the frames displayed to the user. These frames are sent to nodes and regularly verified during the session, ensuring legitimate execution of the garbled circuits and limiting available resources for attackers.
-
-The system could then set up an ML model to detect attack attempts, especially if the sequence numbers are correlated with behavioral biometric inputs. This system can be initiated during the launch of the mainnet to manage the ML learning phase and establish normal usage patterns during transaction validation sessions on various ARM-based mobiles, including their GPU and ML processors.
-
-This proposed multi-layer security system is believed to effectively deter malicious actors. If attackers aim to exploit a highly expensive 0-day vulnerability or are unable to access information about the assets in the wallet, they are likely to target less secure wallets with more predictable returns in order to maximize their return on investment.
-
-If the research hypothesis is confirmed, we think that a high success rate in detecting targeted attack attempts can be achieved with sufficient diverse datasets and model refinement through simulated attacks. [Bittensor](https://bittensor.com/) in the Polkadot ecosystem could be a promising candidate for implementing the ML models.
-
 **Bug bounty program**: To encourage security researchers in conducting targeted attacks on our system. This will also train the model and improve its accuracy while also assisting developers in enhancing the system security framework.
-
-**Potential research lead in the future**: The way the display circuit is configured/tuned can affect the user's cognitive load when reading the display (i.e. time for the brain to process visual information) changing its behavior to improve our ML model. It is also potentially a new type of behavioral biometric that could discriminate a real human from an ML model used by the attackers.
 
 ### Potential Guarantee fund backed by reinsurance service
 
@@ -93,5 +79,6 @@ With the multi-layer security system described earlier, it is easy to enable use
 - Filecoin may allow for the backup and retrieval of private keys using Shamir Secret Sharing.
 
 - Private scheme like stealth address can be added to the system
+
 
 - Enhancement of distributed HSM based on TEE with hardware HSM module on some nodes
